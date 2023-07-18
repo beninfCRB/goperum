@@ -1,7 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Table } from 'antd';
+import { ColumnsType, TableProps } from 'antd/es/table';
 
-const columns = [
+interface DataType {
+    key: React.Key;
+    name: string;
+    nik: string;
+    address: string;
+}
+
+const columns: ColumnsType<DataType> = [
     {
         title: 'Name',
         dataIndex: 'name',
@@ -21,7 +29,7 @@ const columns = [
         ],
         filterMode: 'tree',
         filterSearch: true,
-        onFilter: (value: string, record: any) => record.name.startsWith(value),
+        onFilter: (value: string, record) => record.name.startsWith(value),
         width: '30%',
     },
     {
@@ -47,32 +55,33 @@ const columns = [
         width: '40%',
     },
 ];
-const onChange = (pagination: number, filters: string, sorter: string, extra: any) => {
+
+const onChange: TableProps<DataType>['onChange'] = (pagination, filters, sorter, extra) => {
     console.log('params', pagination, filters, sorter, extra);
 };
 
 const TableCustomer = () => {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(getCustomers())
-    }, [])
-    // const customerstate = useSelector((state) => state.customer);
-    // console.log(customerstate);
-    const data: any = [];
-    // for (let i = 0; i < customerstate; i++) {
-    //     if (customerstate[i].role !== "admin") {
-    //         data.push({
-    //             key: i + 1,
-    //             nik: customerstate[i].nik,
-    //             name: customerstate[i].name,
-    //             address: customerstate[i].address,
-    //             work: customerstate[i].work,
-    //             handphone: customerstate[i].handphone,
-    //         });
-    //     }
-    // }
-    // console.log(data);
+    // useEffect(() => {
+    //     dispatch(getCustomers())
+    // }, [])
+    // // const customerstate = useSelector((state) => state.customer);
+    // // console.log(customerstate);
+    // const data: any = [];
+    // // for (let i = 0; i < customerstate; i++) {
+    // //     if (customerstate[i].role !== "admin") {
+    // //         data.push({
+    // //             key: i + 1,
+    // //             nik: customerstate[i].nik,
+    // //             name: customerstate[i].name,
+    // //             address: customerstate[i].address,
+    // //             work: customerstate[i].work,
+    // //             handphone: customerstate[i].handphone,
+    // //         });
+    // //     }
+    // // }
+    // // console.log(data);
     return (
         <Table columns={columns} dataSource={data} onChange={onChange} />
     );

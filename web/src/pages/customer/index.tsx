@@ -1,5 +1,4 @@
-import TableCustomer from 'components/customer/table'
-import React from 'react'
+import TableCustomer from "../../components/customer/table"
 
 const CustomerIndex = () => {
     return (

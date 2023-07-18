@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React from 'react'
 import {
     MenuFoldOutlined,
     MenuUnfoldOutlined,
@@ -7,10 +7,12 @@ import {
     FolderOutlined,
     InsertRowAboveOutlined,
 } from '@ant-design/icons';
-import { Button, Layout, Menu, theme } from 'antd';
+import { Button, Layout, Menu, MenuProps, theme } from 'antd';
 import { useState } from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 const { Header, Sider, Content } = Layout;
+
+type MenuItem = Required<MenuProps>['items'][number];
 
 const MainLayout = () => {
     const [collapsed, setCollapsed] = useState(false);
@@ -18,7 +20,11 @@ const MainLayout = () => {
     const {
         token: { colorBgContainer },
     } = theme.useToken();
-    function getItem(label?: string, key?: string, icon?: ReactNode, children?: ReactNode) {
+    function getItem(
+        label: React.ReactNode,
+        key: React.Key,
+        icon?: React.ReactNode,
+        children?: MenuItem[],) {
         return {
             key,
             icon,

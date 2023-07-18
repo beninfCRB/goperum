@@ -1,18 +1,16 @@
 import { LockOutlined, MailOutlined } from '@ant-design/icons';
 import { Button, Form, Input, message } from 'antd'
-import useMessage from 'antd/es/message/useMessage';
-import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useStore } from 'zustand';
 
 const Login = () => {
     const [form] = Form.useForm()
     const navigate = useNavigate()
-    const login = useStore((state) => state.login)
-    const onSubmit = (values) => {
+    const login = useStore((state: any) => state.login)
+    const onSubmit = (values: any) => {
         form.validateFields().then((values) => {
             login(form).then(() => {
-                useMessage.success('Berhasil login')
+                message.success('Berhasil login')
                 navigate('/dashboard')
             })
         }).catch((errorInfo) => {
