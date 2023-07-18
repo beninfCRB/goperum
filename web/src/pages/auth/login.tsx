@@ -6,7 +6,7 @@ import { useStore } from 'zustand';
 const Login = () => {
     const [form] = Form.useForm()
     const navigate = useNavigate()
-    const login = useStore((state: any) => state.login)
+    const login = useStore((state) => state.login)
     const onSubmit = (values: any) => {
         form.validateFields().then((values) => {
             login(form).then(() => {

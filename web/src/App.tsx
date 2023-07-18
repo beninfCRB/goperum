@@ -1,6 +1,6 @@
 import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import MainLayout from './components/MainLayout'
+import MainLayout from './modules/MainLayout'
 import CustomerIndex from './pages/customer'
 import Dashboard from './pages/dashboard'
 import Login from './pages/auth/login'

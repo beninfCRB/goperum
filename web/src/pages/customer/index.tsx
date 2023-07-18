@@ -1,4 +1,4 @@
-import TableCustomer from "../../components/customer/table"
+import TableCustomer from "../../modules/customer/table"
 
 const CustomerIndex = () => {
     return (
