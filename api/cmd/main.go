@@ -30,6 +30,10 @@ func main() {
 	gin.DefaultWriter = io.MultiWriter(f)
 	r.Use(gin.Recovery(), util.Logger())
 
+	r.Use(middleware.CORS(middleware.CORSOptions{
+		Origin: "http://localhost:3000",
+	}))
+	
 	//routes
 	public := r.Group("/")
 	route.PublicRoutes(public)
@@ -39,7 +43,6 @@ func main() {
 
 	privateApi := r.Group("/api")
 	route.PrivateAPIRoutes(privateApi)
-	r.Use(middleware.CORS(middleware.CORSOptions{}))
 	//end routes
 
 	//set host & port
