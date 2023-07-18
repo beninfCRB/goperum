@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
     MenuFoldOutlined,
     MenuUnfoldOutlined,
@@ -8,15 +8,13 @@ import {
     InsertRowAboveOutlined,
 } from '@ant-design/icons';
 import { Button, Layout, Menu, MenuProps, theme } from 'antd';
-import { useState } from 'react';
-import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { AppProps } from 'next/app';
 const { Header, Sider, Content } = Layout;
 
 type MenuItem = Required<MenuProps>['items'][number];
 
-const MainLayout = () => {
+const MainLayout = (children: React.ReactNode) => {
     const [collapsed, setCollapsed] = useState(false);
-    const navigate = useNavigate()
     const {
         token: { colorBgContainer },
     } = theme.useToken();
@@ -43,7 +41,7 @@ const MainLayout = () => {
                     mode="inline"
                     defaultSelectedKeys={['']}
                     onClick={({ key }) => {
-                        navigate(key)
+                        // navigate(key)
                     }}
                     items={[
                         getItem('Dashboard', '', <PieChartOutlined />),
@@ -80,7 +78,7 @@ const MainLayout = () => {
                         background: colorBgContainer,
                     }}
                 >
-                    <Outlet />
+                    {children}
                 </Content>
             </Layout>
         </Layout>
