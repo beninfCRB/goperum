@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  #__next {
+      @apply h-full
+  }
+
+  body {
+      display: block;
+      margin: 0;
+  }
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -26,9 +37,9 @@
     rgb(var(--background-start-rgb));
 } */
 
-body{
+/* body{
   font-family: 'Roboto', sans-serif;
-}
+} */
 
 .trigger{
   padding: 0 24px;
@@ -48,11 +59,12 @@ body{
   background: rgba(255,255,255,0.3);
 }
 
-.ant-layout{
+/* .ant-layout{
   min-height: 100vh;
-}
+} */
 
 .ant-layout-sider{
+  min-height: 100vh;
   flex: 0 0 250px !important;
   max-width: 250px !important;
   min-width: 250px !important;

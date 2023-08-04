@@ -8,15 +8,15 @@ import {
     FolderOutlined,
     InsertRowAboveOutlined,
 } from '@ant-design/icons';
-import { Button, Layout, Menu, MenuProps, ThemeConfig, theme } from 'antd';
-import { useRouter } from 'next/navigation';
+import { Button, Layout, Menu, MenuProps, theme } from 'antd';
+import { Outlet, useNavigate } from 'react-router-dom';
 const { Header, Sider, Content } = Layout;
 
 type MenuItem = Required<MenuProps>['items'][number];
 
-const MainLayout = ({ children }: { children: React.ReactNode }) => {
+const MainLayout = () => {
     const [collapsed, setCollapsed] = useState(false);
-    const router = useRouter();
+    const router = useNavigate();
     const {
         token: { colorBgContainer },
     } = theme.useToken();
@@ -44,7 +44,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
                     mode="inline"
                     defaultSelectedKeys={['']}
                     onClick={({ key }) => {
-                        router.replace(key)
+                        router(key)
                     }}
                     items={[
                         getItem('Dashboard', 'dashboard', <PieChartOutlined />),
@@ -81,7 +81,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
                         background: colorBgContainer,
                     }}
                 >
-                    {children}
+                    <Outlet />
                 </Content>
             </Layout>
         </Layout>

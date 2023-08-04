@@ -6,19 +6,19 @@ import { useStore } from 'zustand';
 const Login = () => {
     const [form] = Form.useForm()
     const navigate = useNavigate()
-    const login = useStore((state) => state.login)
-    const onSubmit = (values: any) => {
-        form.validateFields().then((values) => {
-            login(form).then(() => {
-                message.success('Berhasil login')
-                navigate('/dashboard')
-            })
-        }).catch((errorInfo) => {
-            Object.keys(errorInfo.errorFields).map((error) => {
-                return form.scrollToField(errorInfo.errorFields[error].name[0])
-            })
-        });
-    };
+    // const login = useStore((state) => state.login)
+    // const onSubmit = (values: any) => {
+    //     form.validateFields().then((values) => {
+    //         login(form).then(() => {
+    //             message.success('Berhasil login')
+    //             navigate('/dashboard')
+    //         })
+    //     }).catch((errorInfo) => {
+    //         Object.keys(errorInfo.errorFields).map((error) => {
+    //             return form.scrollToField(errorInfo.errorFields[error].name[0])
+    //         })
+    //     });
+    // };
 
     return (
         <div>
@@ -63,9 +63,9 @@ const Login = () => {
                             </Form.Item>
 
                             <Form.Item className='text-center'>
-                                <Button type="primary" htmlType="submit" onClick={onSubmit}>
+                                {/* <Button type="primary" htmlType="submit" onClick={onSubmit}>
                                     Log in
-                                </Button>
+                                </Button> */}
                             </Form.Item>
                         </Form>
                     </div>

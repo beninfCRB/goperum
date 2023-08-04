@@ -1,9 +1,9 @@
 import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import MainLayout from './modules/MainLayout'
-import CustomerIndex from './pages/customer'
 import Dashboard from './pages/dashboard'
 import Login from './pages/auth/login'
+import MainLayout from './components/MainLayout'
+import CustomerIndex from './pages/customer'
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Login />} />
         <Route path='/admin' element={<MainLayout />}>
-          <Route index element={<Dashboard />}></Route>
+          <Route index path='dashboard' element={<Dashboard />}></Route>
           <Route path='customer' element={<CustomerIndex />}></Route>
         </Route>
       </Routes>
