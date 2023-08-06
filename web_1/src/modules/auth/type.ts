@@ -1,5 +1,6 @@
-export interface AuthType{
-    id?:string;
-    email?:string;
-    password?:string;
+export interface AuthType {
+    id?: string;
+    name?: string
+    email?: string;
+    password?: string;
 }

@@ -31,7 +31,7 @@ func main() {
 	r.Use(gin.Recovery(), util.Logger())
 
 	r.Use(middleware.CORS(middleware.CORSOptions{
-		Origin: "http://localhost:3000",
+		Origin: "*",
 	}))
 	
 	//routes

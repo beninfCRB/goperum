@@ -2,20 +2,19 @@ import axios from 'axios';
 import { config } from 'utils/axios_config';
 import { base_url } from 'utils/base_url';
 import { create } from 'zustand';
-import { AuthType } from '../../components/modules/auth/type';
 
 const module = `sessions`
 
-interface AuthState {
-    users: Array<AuthType>,
+const StateAuth = {
+    username, password
 }
 
-const AuthStore = create < AuthState > ((set) => ({
+const AuthStore = create((set) => ({
     users: [],
-    login: async (email: string, password: string) => {
+    login: async (StateAuth) => {
         const { data } = await axios.get(`${base_url}${module}`, StateAuth, config)
         set({
-            users: data.Data
+            users:data.Data
         })
     }
 }))

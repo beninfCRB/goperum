@@ -8,8 +8,9 @@ import {
     FolderOutlined,
     InsertRowAboveOutlined,
 } from '@ant-design/icons';
-import { Button, Layout, Menu, MenuProps, theme } from 'antd';
+import { Button, ConfigProvider, Layout, Menu, MenuProps, theme } from 'antd';
 import { Outlet, useNavigate } from 'react-router-dom';
+import customTheme from './theme/theme';
 const { Header, Sider, Content } = Layout;
 
 type MenuItem = Required<MenuProps>['items'][number];
@@ -34,57 +35,61 @@ const MainLayout = () => {
     }
 
     return (
-        <Layout>
-            <Sider trigger={null} collapsible collapsed={collapsed}>
-                <div className="logo grid place-content-center">
-                    <h2 className='text-white text-2xl'>GOPERUM</h2>
-                </div>
-                <Menu
-                    theme="dark"
-                    mode="inline"
-                    defaultSelectedKeys={['']}
-                    onClick={({ key }) => {
-                        router(key)
-                    }}
-                    items={[
-                        getItem('Dashboard', 'dashboard', <PieChartOutlined />),
-                        getItem('Master', 'sub1', <FolderOutlined />, [
-                            getItem('Pelanggan', 'customer', <UserOutlined />),
-                            getItem('Blok', 'area', <InsertRowAboveOutlined />),
-                        ])
-                    ]}
-                />
-            </Sider>
+        <ConfigProvider
+            theme={{ ...customTheme }}
+        >
             <Layout>
-                <Header
-                    style={{
-                        padding: 0,
-                        background: colorBgContainer,
-                    }}
-                >
-                    <Button
-                        type="text"
-                        icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-                        onClick={() => setCollapsed(!collapsed)}
-                        style={{
-                            fontSize: '16px',
-                            width: 64,
-                            height: 64,
+                <Sider trigger={null} collapsible collapsed={collapsed}>
+                    <div className="logo grid place-content-center">
+                        <h2 className='text-white text-2xl'>GOPERUM</h2>
+                    </div>
+                    <Menu
+                        theme="dark"
+                        mode="inline"
+                        defaultSelectedKeys={['']}
+                        onClick={({ key }) => {
+                            router(key)
                         }}
+                        items={[
+                            getItem('Dashboard', 'dashboard', <PieChartOutlined />),
+                            getItem('Master', 'sub1', <FolderOutlined />, [
+                                getItem('Pelanggan', 'customer', <UserOutlined />),
+                                getItem('Blok', 'area', <InsertRowAboveOutlined />),
+                            ])
+                        ]}
                     />
-                </Header>
-                <Content
-                    style={{
-                        margin: '24px 16px',
-                        padding: 24,
-                        minHeight: 280,
-                        background: colorBgContainer,
-                    }}
-                >
-                    <Outlet />
-                </Content>
+                </Sider>
+                <Layout>
+                    <Header
+                        style={{
+                            padding: 0,
+                            background: colorBgContainer,
+                        }}
+                    >
+                        <Button
+                            type="text"
+                            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+                            onClick={() => setCollapsed(!collapsed)}
+                            style={{
+                                fontSize: '16px',
+                                width: 64,
+                                height: 64,
+                            }}
+                        />
+                    </Header>
+                    <Content
+                        style={{
+                            margin: '24px 16px',
+                            padding: 24,
+                            minHeight: 280,
+                            background: colorBgContainer,
+                        }}
+                    >
+                        <Outlet />
+                    </Content>
+                </Layout>
             </Layout>
-        </Layout>
+        </ConfigProvider>
     );
 };
 

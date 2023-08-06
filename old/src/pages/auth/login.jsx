@@ -1,16 +1,20 @@
 import { LockOutlined, MailOutlined } from '@ant-design/icons';
-import { Button, Form, Input } from 'antd'
-// import { useNavigate } from 'react-router-dom';
-import AuthStore from '../../modules/auth/state';
-import { AuthType } from '../../modules/auth';
+import { Button, Form, Input, message } from 'antd'
+import useMessage from 'antd/es/message/useMessage';
+import React from 'react'
+import { useNavigate } from 'react-router-dom';
+import { useStore } from 'zustand';
 
 const Login = () => {
     const [form] = Form.useForm()
-    // const navigate = useNavigate()
-    const authStore = AuthStore()
-    const onSubmit = (values: AuthType) => {
+    const navigate = useNavigate()
+    const login = useStore((state) => state.login)
+    const onSubmit = (values) => {
         form.validateFields().then((values) => {
-            authStore.login(values)
+            login(form).then(() => {
+                useMessage.success('Berhasil login')
+                navigate('/dashboard')
+            })
         }).catch((errorInfo) => {
             Object.keys(errorInfo.errorFields).map((error) => {
                 return form.scrollToField(errorInfo.errorFields[error].name[0])
@@ -61,7 +65,7 @@ const Login = () => {
                             </Form.Item>
 
                             <Form.Item className='text-center'>
-                                <Button type="default" htmlType="submit" onClick={onSubmit}>
+                                <Button type="primary" htmlType="submit" onClick={onSubmit}>
                                     Log in
                                 </Button>
                             </Form.Item>
