@@ -1,16 +1,37 @@
+import { useEffect } from 'react';
 import { LockOutlined, MailOutlined } from '@ant-design/icons';
-import { Button, Form, Input } from 'antd'
-// import { useNavigate } from 'react-router-dom';
+import { Button, Form, Input, Spin, message } from 'antd'
 import AuthStore from '../../modules/auth/state';
-import { AuthType } from '../../modules/auth';
+import { AuthType, useLogin } from '../../modules/auth';
+import { useNavigate } from 'react-router-dom';
+import { getCookie, setCookie } from 'typescript-cookie'
 
 const Login = () => {
     const [form] = Form.useForm()
-    // const navigate = useNavigate()
-    const authStore = AuthStore()
+    const { login } = AuthStore()
+    const loginMutation = useLogin();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (getCookie('tk_a')) {
+            navigate('/admin')
+        }
+    })
+
+
     const onSubmit = (values: AuthType) => {
-        form.validateFields().then((values) => {
-            authStore.login(values)
+        form.validateFields().then(async (values) => {
+            try {
+                const { data } = await loginMutation.mutateAsync(values);
+                login()
+                if (data) {
+                    setCookie('tk_r', data.Data.refresh_token)
+                    setCookie('tk_a', data.Data.access_token)
+                    navigate('/admin')
+                }
+            } catch (error) {
+                message.error("Login Failed")
+            }
         }).catch((errorInfo) => {
             Object.keys(errorInfo.errorFields).map((error) => {
                 return form.scrollToField(errorInfo.errorFields[error].name[0])
@@ -18,12 +39,15 @@ const Login = () => {
         });
     };
 
+
     return (
-        <div>
-            <div className="min-h-screen flex flex-col items-center justify-center bg-gray-300">
-                <div className="flex flex-col bg-white shadow-md px-4 sm:px-6 md:px-8 lg:px-10 py-8 rounded-md w-full max-w-md">
-                    <div className="font-medium self-center text-xl sm:text-2xl uppercase text-gray-800">Login</div>
-                    <div className="mt-10">
+        <div className="min-h-screen flex flex-col items-center justify-center bg-gray-300">
+            <div className="flex flex-col bg-white shadow-md px-4 sm:px-6 md:px-8 lg:px-10 py-8 rounded-md w-full max-w-md">
+                <div className="font-medium self-center text-xl sm:text-2xl uppercase text-gray-800">Login</div>
+                <div className="mt-10">
+                    <Spin
+                        spinning={loginMutation.isLoading}
+                    >
                         <Form
                             form={form}
                             name="normal_login"
@@ -66,7 +90,7 @@ const Login = () => {
                                 </Button>
                             </Form.Item>
                         </Form>
-                    </div>
+                    </Spin>
                 </div>
             </div>
         </div>

@@ -1,28 +1,21 @@
-import axios from 'axios';
 import { create } from 'zustand';
-import { base_url } from '../../static/base_url';
-import { AuthType } from '.';
 
-const module = `sessions`
-
-interface AuthState {
-    users: AuthType,
-    login: (params: AuthState) => void
+export interface AuthState {
+    isAuthenticated: boolean,
+    login: () => void,
+    logout: () => void
 }
 
+
 const AuthStore = create<AuthState>((set) => ({
-    users: [],
-    login: async (params: any) => {
-        try {
-            const { data } = await axios.post(`${base_url}${module}`, params)
-            localStorage.setItem('user', JSON.stringify(data.Data))
-            set({
-                users: data.Data
-            })
-        } catch (error) {
-            return error
-        }
-    }
+    isAuthenticated: false,
+    user: null,
+    login: async () => set({
+        isAuthenticated: true
+    }),
+    logout: () => set({
+        isAuthenticated: false
+    })
 }))
 
-export default AuthStore
+export default AuthStore;

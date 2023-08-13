@@ -9,6 +9,7 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
+	"github.com/golang-jwt/jwt/v5"
 	"github.com/google/uuid"
 )
 
@@ -99,6 +100,47 @@ func (r *useController) Login(c *gin.Context) {
 
 	formatter := UserFormat(loggedinUser, accessToken, refreshToken)
 	response := util.Response("Successfully loggedin", http.StatusOK, "success", formatter)
+	c.JSON(http.StatusOK, response)
+}
+
+func (r *useController) RefreshToken(c *gin.Context){
+	var input RefreshTokenInput
+
+	err := c.ShouldBindJSON(&input)
+	if err != nil {
+		errors := util.ErrorValidation(err)
+		errorMessage := gin.H{"errors": errors}
+
+		response := util.Response("Renew access token", http.StatusUnprocessableEntity, "error", errorMessage)
+		c.JSON(http.StatusUnprocessableEntity, response)
+		return
+	}
+
+	token, err := r.authService.ValidateToken(input.RefreshToken)
+	if err != nil {
+		response := util.Response("Invalid token", http.StatusUnauthorized, "error", nil)
+		c.AbortWithStatusJSON(http.StatusUnauthorized, response)
+		return
+	}
+
+	claim, ok := token.Claims.(jwt.MapClaims)
+
+	if !ok || !token.Valid {
+		response := util.Response("Unauthorized", http.StatusUnauthorized, "error", nil)
+		c.AbortWithStatusJSON(http.StatusUnauthorized, response)
+		return
+	}
+
+	userID := uuid.MustParse(claim["user_id"].(string))
+
+	accessToken, err := r.authService.GenerateAccessToken(userID.String())
+	if err != nil {
+		response := util.Response("Login failed", http.StatusBadRequest, "error", nil)
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	response := util.Response("Renew access token successfully", http.StatusOK, "success", accessToken)
 	c.JSON(http.StatusOK, response)
 }
 

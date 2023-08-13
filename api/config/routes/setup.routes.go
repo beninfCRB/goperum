@@ -30,6 +30,7 @@ func PublicAPIRoutes(r *gin.RouterGroup) {
 	r.POST("/users", userController.RegisterUser)
 	r.POST("/email_checkers", userController.CheckEmailAvailability)
 	r.POST("/sessions", userController.Login)
+	r.POST("/refresh-token", userController.RefreshToken)
 }
 
 func PrivateAPIRoutes(r *gin.RouterGroup) {

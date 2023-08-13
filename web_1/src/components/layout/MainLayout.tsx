@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     MenuFoldOutlined,
     MenuUnfoldOutlined,
@@ -10,14 +10,15 @@ import {
 } from '@ant-design/icons';
 import { Button, ConfigProvider, Layout, Menu, MenuProps, theme } from 'antd';
 import { Outlet, useNavigate } from 'react-router-dom';
-import customTheme from './theme/theme';
+import customTheme from '../theme/theme';
 const { Header, Sider, Content } = Layout;
 
 type MenuItem = Required<MenuProps>['items'][number];
 
 const MainLayout = () => {
     const [collapsed, setCollapsed] = useState(false);
-    const router = useNavigate();
+    const navigate = useNavigate();
+
     const {
         token: { colorBgContainer },
     } = theme.useToken();
@@ -48,7 +49,7 @@ const MainLayout = () => {
                         mode="inline"
                         defaultSelectedKeys={['']}
                         onClick={({ key }) => {
-                            router(key)
+                            navigate(key)
                         }}
                         items={[
                             getItem('Dashboard', 'dashboard', <PieChartOutlined />),
@@ -89,6 +90,7 @@ const MainLayout = () => {
                     </Content>
                 </Layout>
             </Layout>
+            {/* <ReactQueryDevtools initialIsOpen={false} />' */}
         </ConfigProvider>
     );
 };

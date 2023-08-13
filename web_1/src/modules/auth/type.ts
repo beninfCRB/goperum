@@ -3,4 +3,6 @@ export interface AuthType {
     name?: string
     email?: string;
     password?: string;
+    access_token?: string,
+    refresh_token?: string
 }

@@ -1,10 +1,13 @@
+import { Card } from "antd"
 import TableCustomer from "../../modules/customer/table"
 
 const CustomerIndex = () => {
     return (
-        <div>
+        <Card
+            title='DATA CUSTOMER'
+        >
             <TableCustomer />
-        </div>
+        </Card>
     )
 }
 
