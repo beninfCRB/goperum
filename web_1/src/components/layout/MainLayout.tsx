@@ -40,7 +40,7 @@ const MainLayout = () => {
             theme={{ ...customTheme }}
         >
             <Layout>
-                <Sider trigger={null} collapsible collapsed={collapsed}>
+                <Sider breakpoint='lg' collapsedWidth={0} trigger={null} collapsible collapsed={collapsed}>
                     <div className="logo grid place-content-center">
                         <h2 className='text-white text-2xl'>GOPERUM</h2>
                     </div>

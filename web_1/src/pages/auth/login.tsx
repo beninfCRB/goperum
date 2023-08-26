@@ -2,9 +2,9 @@ import { useEffect } from 'react';
 import { LockOutlined, MailOutlined } from '@ant-design/icons';
 import { Button, Form, Input, Spin, message } from 'antd'
 import AuthStore from '../../modules/auth/state';
-import { AuthType, useLogin } from '../../modules/auth';
+import { useLogin } from '../../modules/auth';
 import { useNavigate } from 'react-router-dom';
-import { getCookie, setCookie } from 'typescript-cookie'
+import { getCookie } from 'typescript-cookie'
 
 const Login = () => {
     const [form] = Form.useForm()
@@ -18,15 +18,16 @@ const Login = () => {
         }
     })
 
+    console.log(getCookie('tk_a'));
 
-    const onSubmit = (values: AuthType) => {
+
+
+    const onSubmit = () => {
         form.validateFields().then(async (values) => {
             try {
                 const { data } = await loginMutation.mutateAsync(values);
                 login()
                 if (data) {
-                    setCookie('tk_r', data.Data.refresh_token)
-                    setCookie('tk_a', data.Data.access_token)
                     navigate('/admin')
                 }
             } catch (error) {

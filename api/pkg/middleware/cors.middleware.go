@@ -10,7 +10,7 @@ type CORSOptions struct {
 
 func CORS(options CORSOptions) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		c.Writer.Header().Set("Access-Control-Allow-Origin", "*") 
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
 		if options.Origin != "" {
 			c.Writer.Header().Set("Access-Control-Allow-Origin", options.Origin)
 		}

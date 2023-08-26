@@ -16,6 +16,7 @@ type User struct {
 	Email          string         `gorm:"type:varchar(50);unique" json:"email"`
 	PasswordHash   string         `gorm:"type:text" json:"password"`
 	AvatarFileName string         `gorm:"type:text" json:"avatar"`
+	RefreshToken   string         `gorm:"type:text" json:"refresh_token"`
 	Role           string         `gorm:"type:varchar(10)" json:"role"`
 
 	CreatedCustomer []Customer `gorm:"foreignKey:CreatedBy;references:ID"`

@@ -14,6 +14,8 @@ type Service interface {
 	IsEmailAvailable(input CheckEmailInput) (bool, error)
 	SaveAvatar(ID uuid.UUID, fileLocation string) (entity.User, error)
 	GetUserByID(ID uuid.UUID) (entity.User, error)
+	UpdateRefreshToken(ID uuid.UUID, input string) (entity.User, error)
+	GetRefreshToken(refreshToken string) (entity.User, error)
 }
 
 type service struct {
@@ -102,6 +104,31 @@ func (s *service) GetUserByID(ID uuid.UUID) (entity.User, error) {
 
 	if user.ID == uuid.Nil {
 		return user, errors.New("no user founc on with that ID")
+	}
+
+	return user, nil
+}
+
+func (s *service) UpdateRefreshToken(ID uuid.UUID, input string) (entity.User, error) {
+	user, err := s.repository.FindByID(ID)
+	if err != nil {
+		return user, err
+	}
+
+	user.RefreshToken = input
+
+	update, err := s.repository.Update(user)
+	if err != nil {
+		return update, err
+	}
+
+	return update, nil
+}
+
+func (s *service) GetRefreshToken(refreshToken string) (entity.User, error) {
+	user, err := s.repository.FindByRefresToken(refreshToken)
+	if err != nil {
+		return user, err
 	}
 
 	return user, nil

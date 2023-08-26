@@ -4,71 +4,6 @@ import { ColumnsType, TableProps } from 'antd/es/table';
 import { CustomerType, useCustomerAll } from '.';
 import CustomerStore from './state';
 
-
-const columns: ColumnsType<CustomerType> = [
-    {
-        title: 'Name',
-        dataIndex: 'name',
-        // filters: [
-        //     {
-        //         text: 'Joe',
-        //         value: 'Joe',
-        //     },
-        //     {
-        //         text: 'Category 1',
-        //         value: 'Category 1',
-        //     },
-        //     {
-        //         text: 'Category 2',
-        //         value: 'Category 2',
-        //     },
-        // ],
-        // filterMode: 'tree',
-        filterSearch: true,
-        // onFilter: (value: string, record) => record.name.startsWith(value),
-        width: '30%',
-    },
-    {
-        title: 'Nik',
-        dataIndex: 'nik',
-        sorter: (a: any, b: any) => a.age - b.age,
-    },
-    {
-        title: 'Address',
-        dataIndex: 'address',
-        // filters: [
-        //     {
-        //         text: 'London',
-        //         value: 'London',
-        //     },
-        //     {
-        //         text: 'New York',
-        //         value: 'New York',
-        //     },
-        // ],
-        // onFilter: (value: string, record: any) => record.address.startsWith(value),
-        filterSearch: true,
-        width: '40%',
-    },
-    {
-        title: 'Handphone',
-        dataIndex: 'handphone',
-        // filters: [
-        //     {
-        //         text: 'London',
-        //         value: 'London',
-        //     },
-        //     {
-        //         text: 'New York',
-        //         value: 'New York',
-        //     },
-        // ],
-        // onFilter: (value: string, record: any) => record.address.startsWith(value),
-        filterSearch: true,
-        width: '40%',
-    },
-];
-
 const onChange: TableProps<CustomerType>['onChange'] = (pagination, filters, sorter, extra) => {
     console.log('params', pagination, filters, sorter, extra);
 };
@@ -78,6 +13,44 @@ const TableCustomer = () => {
     const { data } = useCustomerAll()
     const { multiple, getAll } = CustomerStore()
 
+    const columns: ColumnsType<CustomerType> = [
+        {
+            key: 'name',
+            title: 'Name',
+            dataIndex: 'name',
+            width: '30%',
+            sorter: (a: any, b: any) => a.name - b.name,
+        },
+        {
+            key: 'nik',
+            title: 'Nik',
+            dataIndex: 'nik',
+            sorter: (a: any, b: any) => a.nik - b.nik,
+        },
+        {
+            key: 'address',
+            title: 'Address',
+            dataIndex: 'address',
+            width: '40%',
+            sorter: (a: any, b: any) => a.adrress - b.address,
+        },
+        {
+            key: 'handphone',
+            title: 'Handphone',
+            dataIndex: 'handphone',
+            width: '40%',
+            sorter: (a: any, b: any) => a.handphone - b.handphone,
+        },
+        {
+            key: 'work',
+            title: 'Pekerjaan',
+            dataIndex: 'work',
+            width: '40%',
+            sorter: (a: any, b: any) => a.work - b.work,
+        },
+    ];
+
+
     useEffect(() => {
         if (data) {
             getAll(data)
@@ -85,7 +58,7 @@ const TableCustomer = () => {
     }, [data])
 
     return (
-        <Table columns={columns} dataSource={multiple} onChange={onChange} />
+        <Table rowKey={'id'} columns={columns} dataSource={multiple} onChange={onChange} />
     );
 }
 

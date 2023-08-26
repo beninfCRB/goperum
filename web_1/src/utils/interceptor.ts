@@ -1,14 +1,19 @@
 import axios from 'axios';
 import AuthStore from '../modules/auth/state';
 import { getCookie, removeCookie, setCookie } from 'typescript-cookie';
+import { base_url } from '../static/base_url';
 
 const axiosInstance = axios.create({
-    baseURL: import.meta.env.REACT_APP_API_KEY,
+    baseURL: base_url,
+    headers: {
+        'Content-Type': 'application/json'
+    },
 });
 
 axiosInstance.interceptors.request.use(
     (config) => {
         const accessToken = getCookie('tk_a');
+        config.withCredentials = true;
         if (accessToken) {
             config.headers['Authorization'] = `Bearer ${accessToken}`;
         }
@@ -26,7 +31,7 @@ axiosInstance.interceptors.response.use(
         const refreshToken = getCookie('tk_r');
 
         if (
-            error.response.status === 401 && // Unauthorized
+            error.response.status === 401 &&
             refreshToken &&
             !originalRequest._retry
         ) {
@@ -36,7 +41,7 @@ axiosInstance.interceptors.response.use(
                     refreshToken,
                 });
 
-                const { accessToken } = response.data;
+                const accessToken = response.data.Data;
 
                 setCookie('tk_a', accessToken);
                 setCookie('tk_r', refreshToken)
@@ -45,6 +50,7 @@ axiosInstance.interceptors.response.use(
 
                 return axiosInstance(originalRequest);
             } catch (refreshError) {
+                console.log('errror sini');
 
                 removeCookie('tk_a')
                 removeCookie('tk_r')

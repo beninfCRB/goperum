@@ -31,9 +31,9 @@ func main() {
 	r.Use(gin.Recovery(), util.Logger())
 
 	r.Use(middleware.CORS(middleware.CORSOptions{
-		Origin: "*",
+		Origin: os.Getenv("URL_CLIENT"),
 	}))
-	
+
 	//routes
 	public := r.Group("/")
 	route.PublicRoutes(public)

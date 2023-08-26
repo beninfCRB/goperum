@@ -7,6 +7,7 @@ import (
 	"gostartup/pkg/util"
 	"net/http"
 	"os"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
@@ -24,6 +25,7 @@ func UserController(userService Service, authService auth.Service) *useControlle
 
 func (r *useController) RegisterUser(c *gin.Context) {
 	var input RegisterUserInput
+	duration, _ := strconv.Atoi(os.Getenv("COOKIE_EXPIRED"))
 
 	err := c.ShouldBindJSON(&input)
 	if err != nil {
@@ -56,6 +58,15 @@ func (r *useController) RegisterUser(c *gin.Context) {
 		return
 	}
 
+	_, err = r.useService.UpdateRefreshToken(user.ID, refreshToken)
+	if err != nil {
+		response := util.Response("Register has been failed", http.StatusBadRequest, "error", nil)
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	c.SetCookie("tk_r", refreshToken, 3600*duration, "/", os.Getenv("DOMAIN_COOKIE"), true, true)
+
 	formatter := UserFormat(user, accessToken, refreshToken)
 	response := util.Response("Account has been registered", http.StatusCreated, "success", formatter)
 	c.JSON(http.StatusCreated, response)
@@ -63,6 +74,7 @@ func (r *useController) RegisterUser(c *gin.Context) {
 
 func (r *useController) Login(c *gin.Context) {
 	var input LoginUserInput
+	duration, _ := strconv.Atoi(os.Getenv("COOKIE_EXPIRED"))
 
 	err := c.ShouldBindJSON(&input)
 	if err != nil {
@@ -98,25 +110,77 @@ func (r *useController) Login(c *gin.Context) {
 		return
 	}
 
+	_, err = r.useService.UpdateRefreshToken(loggedinUser.ID, refreshToken)
+	if err != nil {
+		response := util.Response("Login failed", http.StatusBadRequest, "error", nil)
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	c.SetCookie("tk_r", refreshToken, 3600*duration, "/", os.Getenv("DOMAIN_COOKIE"), true, true)
+
 	formatter := UserFormat(loggedinUser, accessToken, refreshToken)
 	response := util.Response("Successfully loggedin", http.StatusOK, "success", formatter)
 	c.JSON(http.StatusOK, response)
 }
 
-func (r *useController) RefreshToken(c *gin.Context){
-	var input RefreshTokenInput
-
-	err := c.ShouldBindJSON(&input)
+func (r *useController) Logout(c *gin.Context) {
+	input, err := c.Cookie("tk_r")
 	if err != nil {
 		errors := util.ErrorValidation(err)
 		errorMessage := gin.H{"errors": errors}
 
-		response := util.Response("Renew access token", http.StatusUnprocessableEntity, "error", errorMessage)
+		response := util.Response("Invalid renew access token", http.StatusUnprocessableEntity, "error", errorMessage)
 		c.JSON(http.StatusUnprocessableEntity, response)
 		return
 	}
 
-	token, err := r.authService.ValidateToken(input.RefreshToken)
+	user, err := r.useService.GetRefreshToken(input)
+	if err != nil {
+		errors := util.ErrorValidation(err)
+		errorMessage := gin.H{"errors": errors}
+
+		response := util.Response("Token not found", http.StatusUnprocessableEntity, "error", errorMessage)
+		c.JSON(http.StatusUnprocessableEntity, response)
+		return
+	}
+
+	_, err = r.useService.UpdateRefreshToken(user.ID, "")
+	if err != nil {
+		response := util.Response("Logout failed", http.StatusBadRequest, "error", nil)
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	c.SetCookie("tk_r", "", -1, "/", "", false, true)
+
+	response := util.Response("Logout successfully", http.StatusOK, "success", nil)
+	c.JSON(http.StatusOK, response)
+}
+
+func (r *useController) RefreshToken(c *gin.Context) {
+	input, err := c.Cookie("tk_r")
+
+	if err != nil {
+		errors := util.ErrorValidation(err)
+		errorMessage := gin.H{"errors": errors}
+
+		response := util.Response("Invalid refresh token", http.StatusUnprocessableEntity, "error", errorMessage)
+		c.JSON(http.StatusUnprocessableEntity, response)
+		return
+	}
+
+	_, err = r.useService.GetRefreshToken(input)
+	if err != nil {
+		errors := util.ErrorValidation(err)
+		errorMessage := gin.H{"errors": errors}
+
+		response := util.Response("Token not found", http.StatusUnprocessableEntity, "error", errorMessage)
+		c.JSON(http.StatusUnprocessableEntity, response)
+		return
+	}
+
+	token, err := r.authService.ValidateToken(input)
 	if err != nil {
 		response := util.Response("Invalid token", http.StatusUnauthorized, "error", nil)
 		c.AbortWithStatusJSON(http.StatusUnauthorized, response)
