@@ -1,96 +1,43 @@
 "use client"
-import React, { useEffect, useState } from 'react'
-import {
-    MenuFoldOutlined,
-    MenuUnfoldOutlined,
-    UserOutlined,
-    PieChartOutlined,
-    FolderOutlined,
-    InsertRowAboveOutlined,
-} from '@ant-design/icons';
-import { Button, ConfigProvider, Layout, Menu, MenuProps, theme } from 'antd';
-import { Outlet, useNavigate } from 'react-router-dom';
+import React, { Suspense, useEffect, useState } from 'react'
+import { ConfigProvider, Layout, Spin, theme } from 'antd';
+import { Outlet } from 'react-router-dom';
 import customTheme from '../theme/theme';
-const { Header, Sider, Content } = Layout;
-
-type MenuItem = Required<MenuProps>['items'][number];
+import Sidebar from './sidebar';
+import MenuItem from './menuItem';
+import Navbar from './navbar';
+const { Content } = Layout;
 
 const MainLayout = () => {
-    const [collapsed, setCollapsed] = useState(false);
-    const navigate = useNavigate();
-
     const {
         token: { colorBgContainer },
     } = theme.useToken();
-    function getItem(
-        label: React.ReactNode,
-        key: React.Key,
-        icon?: React.ReactNode,
-        children?: MenuItem[],) {
-        return {
-            key,
-            icon,
-            children,
-            label,
-        };
-    }
 
     return (
         <ConfigProvider
             theme={{ ...customTheme }}
         >
-            <Layout>
-                <Sider breakpoint='lg' collapsedWidth={0} trigger={null} collapsible collapsed={collapsed}>
-                    <div className="logo grid place-content-center">
-                        <h2 className='text-white text-2xl'>GOPERUM</h2>
-                    </div>
-                    <Menu
-                        theme="dark"
-                        mode="inline"
-                        defaultSelectedKeys={['']}
-                        onClick={({ key }) => {
-                            navigate(key)
-                        }}
-                        items={[
-                            getItem('Dashboard', 'dashboard', <PieChartOutlined />),
-                            getItem('Master', 'sub1', <FolderOutlined />, [
-                                getItem('Pelanggan', 'customer', <UserOutlined />),
-                                getItem('Blok', 'area', <InsertRowAboveOutlined />),
-                            ])
-                        ]}
-                    />
-                </Sider>
+            <Suspense fallback={<Spin size='large' />}>
+                <Navbar menu={<MenuItem />} />
                 <Layout>
-                    <Header
-                        style={{
-                            padding: 0,
-                            background: colorBgContainer,
-                        }}
-                    >
-                        <Button
-                            type="text"
-                            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-                            onClick={() => setCollapsed(!collapsed)}
+                    <Sidebar
+                        menu={<MenuItem />}
+                    />
+                    <Layout>
+                        <Content
+                            className="content"
                             style={{
-                                fontSize: '16px',
-                                width: 64,
-                                height: 64,
+                                margin: '24px 16px',
+                                padding: 24,
+                                minHeight: 280,
+                                background: colorBgContainer,
                             }}
-                        />
-                    </Header>
-                    <Content
-                        style={{
-                            margin: '24px 16px',
-                            padding: 24,
-                            minHeight: 280,
-                            background: colorBgContainer,
-                        }}
-                    >
-                        <Outlet />
-                    </Content>
+                        >
+                            <Outlet />
+                        </Content>
+                    </Layout>
                 </Layout>
-            </Layout>
-            {/* <ReactQueryDevtools initialIsOpen={false} />' */}
+            </Suspense>
         </ConfigProvider>
     );
 };

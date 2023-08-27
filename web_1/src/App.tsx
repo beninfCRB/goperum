@@ -2,10 +2,10 @@ import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Dashboard from './pages/dashboard'
 import Login from './pages/auth/login'
-import MainLayout from './components/layout/MainLayout'
 import CustomerIndex from './pages/customer'
-import { ProtectedRoute } from './components/layout/ProtectedRoute'
-import PageNotFound from './components/layout/PageNotFound'
+import MainLayout from './components/layout/mainLayout'
+import PageNotFound from './components/layout/pageNotFound'
+import { ProtectedRoute } from './components/layout/protectedRoute'
 
 function App() {
   return (

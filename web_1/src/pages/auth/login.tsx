@@ -1,37 +1,27 @@
 import { useEffect } from 'react';
 import { LockOutlined, MailOutlined } from '@ant-design/icons';
 import { Button, Form, Input, Spin, message } from 'antd'
-import AuthStore from '../../modules/auth/state';
 import { useLogin } from '../../modules/auth';
 import { useNavigate } from 'react-router-dom';
-import { getCookie } from 'typescript-cookie'
 
 const Login = () => {
     const [form] = Form.useForm()
-    const { login } = AuthStore()
     const loginMutation = useLogin();
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (getCookie('tk_a')) {
-            navigate('/admin')
+        if (localStorage.getItem('authorize')) {
+            message.success("Berhasil login")
+            navigate('/admin/dashboard')
         }
     })
-
-    console.log(getCookie('tk_a'));
-
-
 
     const onSubmit = () => {
         form.validateFields().then(async (values) => {
             try {
-                const { data } = await loginMutation.mutateAsync(values);
-                login()
-                if (data) {
-                    navigate('/admin')
-                }
+                await loginMutation.mutateAsync(values)
             } catch (error) {
-                message.error("Login Failed")
+                message.error("Login gagal")
             }
         }).catch((errorInfo) => {
             Object.keys(errorInfo.errorFields).map((error) => {
@@ -43,7 +33,7 @@ const Login = () => {
 
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-gray-300">
-            <div className="flex flex-col bg-white shadow-md px-4 sm:px-6 md:px-8 lg:px-10 py-8 rounded-md w-full max-w-md">
+            <div className="flex flex-col bg-white shadow-md px-4 sm:px-6 md:px-8 lg:px-10 py-8 rounded-md w-full max-w-xs">
                 <div className="font-medium self-center text-xl sm:text-2xl uppercase text-gray-800">Login</div>
                 <div className="mt-10">
                     <Spin
@@ -86,7 +76,7 @@ const Login = () => {
                             </Form.Item>
 
                             <Form.Item className='text-center'>
-                                <Button type="default" htmlType="submit" onClick={onSubmit}>
+                                <Button type="primary" htmlType="submit" onClick={onSubmit}>
                                     Log in
                                 </Button>
                             </Form.Item>

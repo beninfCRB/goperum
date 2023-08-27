@@ -1,38 +1,34 @@
 import { useMutation, useQuery } from "react-query";
-import { base_url } from "../../static/base_url";
+import { base_url } from "../../static/config";
 import AuthStore from "./state";
 import axiosInstance from "../../utils/interceptor";
 
-const module = `sessions`
+const login = `sessions`
+const logout = `logout`
+const user = `users`
 
 export const useLogin = () => {
     return useMutation((formData: any) =>
-        axiosInstance.post(`${base_url}${module}`, formData), {
+        axiosInstance.post(`${base_url}${login}`, formData), {
         onSuccess: (res: any) => {
+            localStorage.setItem('authorize', res.data.Data.access_token)
             return res.data.Data
         }
     });
 };
 
-// export const useLogoutMutation = () => {
-//     const queryClient = useQueryClient();
-
-//     return useMutation(() => {
-
-//     }, {
-//         onSuccess: () => {
-//             AuthStore.getState().logout()
-//             localStorage.removeItem('user');
-//             queryClient.invalidateQueries('userData');
-//         },
-//     });
-// };
+export const useLogout = () => {
+    axiosInstance.post(`${base_url}${logout}`)
+    localStorage.removeItem('authorize')
+};
 
 export const useUserData = () => {
     return useQuery('userData', async () => {
-        const response = await axiosInstance.get(`${base_url}${'users'}`);
-        return response.data.Data;
+        await axiosInstance.get(`${base_url}${user}`);
     }, {
+        onSuccess: (res: any) => {
+            return res.data.Data
+        },
         enabled: AuthStore.getState().isAuthenticated,
     });
 };

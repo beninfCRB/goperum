@@ -65,7 +65,7 @@ func (r *useController) RegisterUser(c *gin.Context) {
 		return
 	}
 
-	c.SetCookie("tk_r", refreshToken, 3600*duration, "/", os.Getenv("DOMAIN_COOKIE"), true, true)
+	c.SetCookie("tk_r", refreshToken, 3600*duration, "/", os.Getenv("COOKIE_DOMAIN"), true, true)
 
 	formatter := UserFormat(user, accessToken, refreshToken)
 	response := util.Response("Account has been registered", http.StatusCreated, "success", formatter)
@@ -117,7 +117,7 @@ func (r *useController) Login(c *gin.Context) {
 		return
 	}
 
-	c.SetCookie("tk_r", refreshToken, 3600*duration, "/", os.Getenv("DOMAIN_COOKIE"), true, true)
+	c.SetCookie("tk_r", refreshToken, 3600*duration, "/", os.Getenv("COOKIE_DOMAIN"), true, true)
 
 	formatter := UserFormat(loggedinUser, accessToken, refreshToken)
 	response := util.Response("Successfully loggedin", http.StatusOK, "success", formatter)

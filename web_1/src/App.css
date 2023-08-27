@@ -1,8 +1,8 @@
-body{
+/* body{
   font-family: 'Roboto', sans-serif;
-}
+} */
 
-.trigger{
+/* .trigger{
   padding: 0 24px;
   font-size: 18px;
   line-height: 64px;
@@ -12,12 +12,6 @@ body{
 
 .trigger:hover{
   color: #1890ff;
-}
-
-.logo{
-  height: 64px;
-  margin: 0;
-  background: rgba(255,255,255,0.3);
 }
 
 .ant-layout{
@@ -43,12 +37,51 @@ body{
 .ant-menu-vertical-right .ant-menu-item::after,
 .ant-menu-inline .ant-menu-item::after {
   border-right: 0px;
-}
+} */
 
-main{
+/* main{
   overflow-y: scroll;
-}
+} */
+
+/* .ant-table-thead .ant-table-cell {
+  background-color: #001529 !important;
+  } */
+
+  
 
 .ant-btn-primary {
   background-color:#757575;
 }
+
+.sidebar {
+  height: 100vh;
+  margin-right: 24px;
+}
+
+.navbar {
+  padding-left: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+@media (min-width: 992px) {
+  .menu {
+    display: none;
+  }
+}
+
+.logo {
+  height: 32px;
+  margin-left: 1rem;
+}
+
+.App {
+  margin: 0;
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+}
+
+.content {
+  padding: 1rem;
+  padding-right: 2rem;
+}
+

@@ -5,6 +5,7 @@ const CustomerIndex = () => {
     return (
         <Card
             title='DATA CUSTOMER'
+            bodyStyle={{ padding: "0" }}
         >
             <TableCustomer />
         </Card>

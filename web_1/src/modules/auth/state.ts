@@ -9,7 +9,6 @@ export interface AuthState {
 
 const AuthStore = create<AuthState>((set) => ({
     isAuthenticated: false,
-    user: null,
     login: async () => set({
         isAuthenticated: true
     }),

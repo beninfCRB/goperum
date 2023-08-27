@@ -34,7 +34,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
     }
 
     return (
-        <Layout>
+        <Layout style={{ flexDirection: 'initial' }}>
             <Sider trigger={null} collapsible collapsed={collapsed}>
                 <div className="logo grid place-content-center">
                     <h2 className='text-white text-2xl'>GOPERUM</h2>

@@ -3,7 +3,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import StyledComponentsRegistry from '@/app/lib/registery'
-import { ConfigProvider } from "./lib/antd";
+import { ConfigProvider, Spin } from "./lib/antd";
 import theme from './theme/theme'
 import { Suspense } from 'react'
 import Loading from '@/components/layout/Loading'
@@ -23,10 +23,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ConfigProvider>
+        <ConfigProvider
+          theme={theme}
+        >
           <StyledComponentsRegistry>
             <MainLayout>
-              <Suspense fallback={<Loading />}>
+              <Suspense fallback={<Spin />}>
                 {children}
               </Suspense>
             </MainLayout>

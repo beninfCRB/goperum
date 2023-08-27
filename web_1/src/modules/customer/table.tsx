@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Table } from 'antd';
+import { Spin, Table } from 'antd';
 import { ColumnsType, TableProps } from 'antd/es/table';
 import { CustomerType, useCustomerAll } from '.';
 import CustomerStore from './state';
@@ -10,7 +10,7 @@ const onChange: TableProps<CustomerType>['onChange'] = (pagination, filters, sor
 
 const TableCustomer = () => {
 
-    const { data } = useCustomerAll()
+    const { data, isLoading } = useCustomerAll()
     const { multiple, getAll } = CustomerStore()
 
     const columns: ColumnsType<CustomerType> = [
@@ -20,12 +20,15 @@ const TableCustomer = () => {
             dataIndex: 'name',
             width: '30%',
             sorter: (a: any, b: any) => a.name - b.name,
+            sortDirections: ['descend'],
         },
         {
             key: 'nik',
             title: 'Nik',
             dataIndex: 'nik',
             sorter: (a: any, b: any) => a.nik - b.nik,
+            sortDirections: ['descend'],
+            responsive: ['md'],
         },
         {
             key: 'address',
@@ -33,6 +36,8 @@ const TableCustomer = () => {
             dataIndex: 'address',
             width: '40%',
             sorter: (a: any, b: any) => a.adrress - b.address,
+            sortDirections: ['descend'],
+            responsive: ['md'],
         },
         {
             key: 'handphone',
@@ -40,6 +45,8 @@ const TableCustomer = () => {
             dataIndex: 'handphone',
             width: '40%',
             sorter: (a: any, b: any) => a.handphone - b.handphone,
+            sortDirections: ['descend'],
+            responsive: ['md'],
         },
         {
             key: 'work',
@@ -47,6 +54,8 @@ const TableCustomer = () => {
             dataIndex: 'work',
             width: '40%',
             sorter: (a: any, b: any) => a.work - b.work,
+            sortDirections: ['descend'],
+            responsive: ['md'],
         },
     ];
 
@@ -58,7 +67,9 @@ const TableCustomer = () => {
     }, [data])
 
     return (
-        <Table rowKey={'id'} columns={columns} dataSource={multiple} onChange={onChange} />
+        <Spin spinning={isLoading}>
+            <Table rowKey={'id'} columns={columns} dataSource={multiple} onChange={onChange} />
+        </Spin>
     );
 }
 
