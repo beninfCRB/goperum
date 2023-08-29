@@ -1,6 +1,5 @@
 import { create } from 'zustand';
 import { CustomerType } from '.';
-import AuthStore from '../auth/state';
 
 export interface CustomerState {
     single: CustomerType,

@@ -6,11 +6,7 @@ const module = `customers`
 
 export const useAddCustomer = () => {
     return useMutation((formData: any) =>
-        axiosInstance.post(`${base_url}${module}`, formData), {
-        onSuccess: (res: any) => {
-            return res.data.Data
-        }
-    });
+        axiosInstance.post(`${base_url}${module}`, formData));
 };
 
 export const useCustomerAll = () => {
@@ -20,25 +16,19 @@ export const useCustomerAll = () => {
     });
 };
 
-export const useCustomer = (id?: string) => {
-    return useQuery('customerData', async () => {
-        const response = await axiosInstance.get(`${base_url}${module}/${id}`);
-        return response.data.Data;
-    });
+export const useCustomer = () => {
+    return useMutation((id: string) =>
+        axiosInstance.get(`${base_url}${module}/${id}`));
 };
 
 export const useUpdateCustomer = () => {
-    return useMutation((props: { id: string, formData: any }) =>
-        axiosInstance.post(`${base_url}${module}/${props.id}`, props.formData), {
-        onSuccess: (res: any) => {
-            return res.data.Data
-        }
-    });
+    return useMutation((formData: any) =>
+        axiosInstance.patch(`${base_url}${module}/${formData?.id}`, formData));
 };
 
 export const useDeleteCustomer = () => {
     return useMutation((id: string) =>
-        axiosInstance.delete(`${base_url}${module}/${id}`), {
+        axiosInstance.delete(`${base_url}${module} /${id}`), {
         onSuccess: (res: any) => {
             return res.data.Data
         }

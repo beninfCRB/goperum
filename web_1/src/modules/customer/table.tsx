@@ -1,34 +1,33 @@
-import React, { useEffect, useState } from 'react';
-import { Spin, Table } from 'antd';
+import { Button, Spin, Table, Tooltip } from 'antd';
 import { ColumnsType, TableProps } from 'antd/es/table';
-import { CustomerType, useCustomerAll } from '.';
-import CustomerStore from './state';
+import { CustomerType } from '.';
+import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 
-const onChange: TableProps<CustomerType>['onChange'] = (pagination, filters, sorter, extra) => {
-    console.log('params', pagination, filters, sorter, extra);
-};
+export interface tableCustomerProps {
+    data: Array<CustomerType>;
+    onLoading: boolean;
+    onEdit: (id: string) => void;
+    onDelete: (id: string) => void;
+}
 
-const TableCustomer = () => {
-
-    const { data, isLoading } = useCustomerAll()
-    const { multiple, getAll } = CustomerStore()
-
+const TableCustomer = (props: tableCustomerProps) => {
     const columns: ColumnsType<CustomerType> = [
         {
             key: 'name',
             title: 'Name',
             dataIndex: 'name',
             width: '30%',
-            sorter: (a: any, b: any) => a.name - b.name,
-            sortDirections: ['descend'],
+            filterMode: 'tree',
+            filterSearch: true,
+            onFilter: (value: any, record: any) => record.name.startsWith(value),
         },
         {
             key: 'nik',
             title: 'Nik',
             dataIndex: 'nik',
+            width: '40%',
             sorter: (a: any, b: any) => a.nik - b.nik,
             sortDirections: ['descend'],
-            responsive: ['md'],
         },
         {
             key: 'address',
@@ -37,7 +36,6 @@ const TableCustomer = () => {
             width: '40%',
             sorter: (a: any, b: any) => a.adrress - b.address,
             sortDirections: ['descend'],
-            responsive: ['md'],
         },
         {
             key: 'handphone',
@@ -46,7 +44,6 @@ const TableCustomer = () => {
             width: '40%',
             sorter: (a: any, b: any) => a.handphone - b.handphone,
             sortDirections: ['descend'],
-            responsive: ['md'],
         },
         {
             key: 'work',
@@ -55,20 +52,38 @@ const TableCustomer = () => {
             width: '40%',
             sorter: (a: any, b: any) => a.work - b.work,
             sortDirections: ['descend'],
-            responsive: ['md'],
+        },
+        {
+            key: '',
+            title: 'Action',
+            dataIndex: '',
+            width: '40%',
+            render: (value: any) =>
+                <div className='flex items-stretch gap-x-2'>
+                    <Tooltip title='Ubah Data'>
+                        <Button className='bg-slate-400 border-black hover:bg-red-400' size='small' shape='circle' onClick={() => props.onEdit(value.id)}><EditOutlined /></Button>
+                    </Tooltip>
+                    <Tooltip title='Hapus Data'>
+                        <Button className='bg-red-600  border-black hover:bg-red-400' size='small' shape='circle' onClick={() => props.onDelete(value.id)}><DeleteOutlined /></Button>
+                    </Tooltip>
+                </div>
         },
     ];
 
-
-    useEffect(() => {
-        if (data) {
-            getAll(data)
-        }
-    }, [data])
+    const onChange: TableProps<CustomerType>['onChange'] = (pagination, filters, sorter, extra) => {
+        console.log('params', pagination, filters, sorter, extra);
+    };
 
     return (
-        <Spin spinning={isLoading}>
-            <Table rowKey={'id'} columns={columns} dataSource={multiple} onChange={onChange} />
+        <Spin
+            spinning={props.onLoading}>
+            <Table
+                rowKey={'id'}
+                columns={columns}
+                dataSource={props.data}
+                onChange={onChange}
+                scroll={{ x: 'max-content' }}
+            />
         </Spin>
     );
 }

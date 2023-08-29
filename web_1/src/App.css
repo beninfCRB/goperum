@@ -47,7 +47,7 @@
   background-color: #001529 !important;
   } */
 
-  
+  .ant-table-body { overflow-x: auto !important} 
 
 .ant-btn-primary {
   background-color:#757575;
@@ -60,8 +60,8 @@
 
 .navbar {
   padding-left: 2rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.25rem;
 }
 
 @media (min-width: 992px) {
@@ -75,13 +75,14 @@
   margin-left: 1rem;
 }
 
-.App {
+/* .App {
   margin: 0;
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
-}
+} */
 
 .content {
   padding: 1rem;
   padding-right: 2rem;
 }
+
 
