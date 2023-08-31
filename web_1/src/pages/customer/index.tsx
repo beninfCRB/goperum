@@ -57,25 +57,23 @@ const CustomerIndex = () => {
     }
 
     return (
-        <>
-            <Card
-                title='DATA PELANGGAN'
-                bodyStyle={{ padding: "0" }}
-                extra={
-                    <Tooltip title='Tambah Data'>
-                        <Button type="primary" shape="circle" onClick={showModal}>
-                            <PlusCircleOutlined />
-                        </Button>
-                    </Tooltip>
-                }
-            >
-                <TableCustomer
-                    data={customerState.multiple}
-                    onLoading={customerGetAllMutation.isLoading}
-                    onEdit={onEdit}
-                    onDelete={onDelete}
-                />
-            </Card>
+        <Card
+            title='DATA PELANGGAN'
+            bodyStyle={{ padding: "0" }}
+            extra={
+                <Tooltip title='Tambah Data'>
+                    <Button type="primary" shape="circle" onClick={showModal}>
+                        <PlusCircleOutlined />
+                    </Button>
+                </Tooltip>
+            }
+        >
+            <TableCustomer
+                data={customerState.multiple}
+                onLoading={customerGetAllMutation.isLoading}
+                onEdit={onEdit}
+                onDelete={onDelete}
+            />
             <AddCustomer
                 modal={isModalAddOpen}
                 onCancel={onCancel}
@@ -85,7 +83,7 @@ const CustomerIndex = () => {
                 modal={isModalEditOpen}
                 onCancel={onCancel}
             />
-        </>
+        </Card>
     )
 }
 

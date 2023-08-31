@@ -8,7 +8,7 @@ export interface sideBarProps {
 const Sidebar = (props: sideBarProps) => {
     return (
         <Sider
-            className="sidebar"
+            className="sidebar shadow overflow-y-auto overflow-x-hidden"
             breakpoint={"lg"}
             theme="light"
             collapsedWidth={0}

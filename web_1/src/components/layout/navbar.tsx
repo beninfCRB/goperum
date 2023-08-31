@@ -45,7 +45,7 @@ const Navbar = (props: navbarProps) => {
             <div className="grid">
                 <div className="col-start-1 flex">
                     <Button
-                        className="menu"
+                        className="lg:hidden"
                         type="primary"
                         icon={<MenuOutlined />}
                         onClick={() => setVisible(true)}
@@ -53,10 +53,9 @@ const Navbar = (props: navbarProps) => {
                     <Drawer
                         title="Menu"
                         placement="left"
-                        onClick={() => setVisible(false)}
                         onClose={() => setVisible(false)}
                         getContainer={false}
-                        visible={visible}
+                        open={visible}
                     >
                         {props.menu}
                     </Drawer>
@@ -72,7 +71,7 @@ const Navbar = (props: navbarProps) => {
                     >
                         <a onClick={(e) => e.preventDefault()}>
                             <Space className='hover:text-red-400'>
-                                <Avatar size={'large'} icon={<UserOutlined />} />
+                                <Avatar size={'default'} icon={<UserOutlined />} />
                                 Hover me
                             </Space>
                         </a>

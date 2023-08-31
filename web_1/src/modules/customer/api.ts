@@ -28,9 +28,5 @@ export const useUpdateCustomer = () => {
 
 export const useDeleteCustomer = () => {
     return useMutation((id: string) =>
-        axiosInstance.delete(`${base_url}${module} /${id}`), {
-        onSuccess: (res: any) => {
-            return res.data.Data
-        }
-    });
+        axiosInstance.delete(`${base_url}${module}/${id}`));
 };

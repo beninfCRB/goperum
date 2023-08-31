@@ -8,10 +8,12 @@ import (
 	"net/http"
 	"os"
 	"strconv"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/google/uuid"
+	"github.com/thanhpk/randstr"
 )
 
 type useController struct {
@@ -26,6 +28,11 @@ func UserController(userService Service, authService auth.Service) *useControlle
 func (r *useController) RegisterUser(c *gin.Context) {
 	var input RegisterUserInput
 	duration, _ := strconv.Atoi(os.Getenv("COOKIE_EXPIRED"))
+	code := randstr.String(20)
+
+	verification_code := util.Encode(code)
+
+	input.VerificationCode = verification_code
 
 	err := c.ShouldBindJSON(&input)
 	if err != nil {
@@ -64,6 +71,21 @@ func (r *useController) RegisterUser(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, response)
 		return
 	}
+
+	var firstName = user.Name
+
+	if strings.Contains(firstName, " ") {
+		firstName = strings.Split(firstName, " ")[1]
+	}
+
+	// ? Send Email
+	emailData := util.EmailData{
+		URL:       os.Getenv("URL_CLIENT") + "/verifyemail/" + code,
+		FirstName: firstName,
+		Subject:   "Your account verification code",
+	}
+
+	util.SendEmail(&user, &emailData)
 
 	c.SetCookie("tk_r", refreshToken, 3600*duration, "/", os.Getenv("COOKIE_DOMAIN"), true, true)
 
