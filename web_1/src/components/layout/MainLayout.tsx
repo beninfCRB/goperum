@@ -19,7 +19,7 @@ const MainLayout = () => {
         >
             <Suspense fallback={<Spin size='large' />}>
                 <Navbar menu={<MenuItem />} />
-                <Layout>
+                <Layout style={{ flexDirection: 'initial' }}>
                     <Sidebar
                         menu={<MenuItem />}
                     />
@@ -27,7 +27,7 @@ const MainLayout = () => {
                         <Content
                             className="content"
                             style={{
-                                margin: '24px 16px',
+                                margin: '16px 16px',
                                 padding: 24,
                                 minHeight: 280,
                                 background: colorBgContainer,

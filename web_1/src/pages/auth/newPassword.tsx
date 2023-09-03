@@ -1,27 +1,22 @@
-import { useEffect } from 'react';
 import { Form, Spin, message } from 'antd'
-import { useLogin } from '../../modules/auth';
-import { useNavigate } from 'react-router-dom';
-import { fetch } from '../../utils/reponse';
-import { FormLogin } from '../../modules/auth/form';
-import { UserType } from '../../modules/profile';
+import React, { useEffect } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import { fetch } from '../../utils/reponse'
+import { FormNewPassword } from '../../modules/auth/form'
+import { useNewPassword } from '../../modules/auth'
 
-const Login = () => {
+const NewPassword = () => {
     const [form] = Form.useForm()
-    const {isError,isSuccess,error,isLoading,mutateAsync} = useLogin();
-    const navigate = useNavigate();
-    const user: UserType = JSON.parse(localStorage.getItem('user') as string)
+    const { reset_code } = useParams()
+    const { isSuccess, isError, error, isLoading, mutateAsync } = useNewPassword()
+    const navigate = useNavigate()
     const _fetch = new fetch()
 
     useEffect(() => {
-        if (localStorage.getItem('authorize')) {
-            navigate('/admin/dashboard')
-        }
-    })
-
-    useEffect(() => {
         if (isSuccess) {
-            message.success("Login successfully")
+            form.resetFields()
+            navigate('/')
+            message.success("New password has been applied")
         }
         if (isError) {
             message.error(_fetch.getAxiosMessage(error))
@@ -30,7 +25,7 @@ const Login = () => {
 
     const onSubmit = () => {
         form.validateFields().then(async (values) => {
-            await mutateAsync(values)
+            await mutateAsync({ reset_code, ...values })
         }).catch((errorInfo) => {
             Object.keys(errorInfo.errorFields).map((error) => {
                 return form.scrollToField(errorInfo.errorFields[error].name[0])
@@ -38,18 +33,16 @@ const Login = () => {
         });
     };
 
-
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-gray-300">
             <div className="flex flex-col bg-white shadow-md px-4 sm:px-6 md:px-8 lg:px-10 py-8 rounded-md w-full max-w-xs">
-                <div className="font-medium self-center text-xl sm:text-2xl uppercase text-gray-800">Login</div>
-                <div className="mt-10">
+                <div className="font-medium self-center text-xl sm:text-2xl uppercase text-gray-800">Buat Kata Sandi Baru</div>
+                <div className="mt-10 text-center">
                     <Spin
                         spinning={isLoading}
                     >
-                        <FormLogin
+                        <FormNewPassword
                             form={form}
-                            user={user}
                             onSubmit={onSubmit}
                         />
                     </Spin>
@@ -59,4 +52,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default NewPassword

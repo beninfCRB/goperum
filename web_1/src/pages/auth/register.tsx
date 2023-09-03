@@ -1,27 +1,21 @@
-import { useEffect } from 'react';
-import { Form, Spin, message } from 'antd'
-import { useLogin } from '../../modules/auth';
-import { useNavigate } from 'react-router-dom';
+import { Form, Spin, message } from 'antd';
+import React, { useEffect } from 'react'
+import { useRegister } from '../../modules/auth';
 import { fetch } from '../../utils/reponse';
-import { FormLogin } from '../../modules/auth/form';
-import { UserType } from '../../modules/profile';
+import { FormRegister } from '../../modules/auth/form';
+import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const Register = () => {
     const [form] = Form.useForm()
-    const {isError,isSuccess,error,isLoading,mutateAsync} = useLogin();
-    const navigate = useNavigate();
-    const user: UserType = JSON.parse(localStorage.getItem('user') as string)
+    const {isError,isSuccess,error,isLoading,mutateAsync} = useRegister();
+    const navigate = useNavigate()
     const _fetch = new fetch()
 
     useEffect(() => {
-        if (localStorage.getItem('authorize')) {
-            navigate('/admin/dashboard')
-        }
-    })
-
-    useEffect(() => {
         if (isSuccess) {
-            message.success("Login successfully")
+            form.resetFields()
+            navigate('/welldone-verify-email')
+            message.success("Verification code email have been sent, please check email")
         }
         if (isError) {
             message.error(_fetch.getAxiosMessage(error))
@@ -42,14 +36,13 @@ const Login = () => {
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-gray-300">
             <div className="flex flex-col bg-white shadow-md px-4 sm:px-6 md:px-8 lg:px-10 py-8 rounded-md w-full max-w-xs">
-                <div className="font-medium self-center text-xl sm:text-2xl uppercase text-gray-800">Login</div>
+                <div className="font-medium self-center text-xl sm:text-2xl uppercase text-gray-800">Registrasi</div>
                 <div className="mt-10">
                     <Spin
                         spinning={isLoading}
                     >
-                        <FormLogin
+                        <FormRegister
                             form={form}
-                            user={user}
                             onSubmit={onSubmit}
                         />
                     </Spin>
@@ -59,4 +52,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default Register

@@ -14,6 +14,7 @@ const CustomerForm = (props: customerFormProps) => {
             <Form.Item
                 label='Nik'
                 name={'nik'}
+                hasFeedback
                 rules={[
                     {
                         required: true,
@@ -29,6 +30,7 @@ const CustomerForm = (props: customerFormProps) => {
             <Form.Item
                 label='Nama Lengkap'
                 name={'name'}
+                hasFeedback
                 rules={[
                     {
                         required: true,
@@ -43,6 +45,7 @@ const CustomerForm = (props: customerFormProps) => {
             <Form.Item
                 label='Alamat'
                 name={'address'}
+                hasFeedback
                 rules={[
                     {
                         required: true,
@@ -58,8 +61,10 @@ const CustomerForm = (props: customerFormProps) => {
             <Form.Item
                 label='Nomor Telepon'
                 name={'handphone'}
+                hasFeedback
                 rules={[
                     {
+                        min: 11,
                         required: true,
                         message: 'Masukan nomor telepone'
                     }
@@ -73,6 +78,7 @@ const CustomerForm = (props: customerFormProps) => {
             <Form.Item
                 label='Pekerjaan'
                 name={'work'}
+                hasFeedback
                 rules={[
                     {
                         required: true,

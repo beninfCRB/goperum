@@ -4,6 +4,7 @@ import (
 	"gostartup/cmd/area"
 	"gostartup/cmd/auth"
 	"gostartup/cmd/customer"
+	"gostartup/cmd/password_reset"
 	"gostartup/cmd/user"
 	"gostartup/config/database"
 	"gostartup/pkg/middleware"
@@ -13,10 +14,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-var userRepo = user.UserRepository(database.NewDatabase())
-var userService = user.UserService(userRepo)
-var authService = auth.AuthService()
-var userController = user.UserController(userService, authService)
+var userModule = user.UserModule()
+var passwordResetModule = password_reset.PasswordServiceModule()
 
 func PublicRoutes(r *gin.RouterGroup) {
 	r.GET("/", func(c *gin.Context) {
@@ -27,20 +26,24 @@ func PublicRoutes(r *gin.RouterGroup) {
 }
 
 func PublicAPIRoutes(r *gin.RouterGroup) {
-	r.POST("/users", userController.RegisterUser)
-	r.POST("/email_checkers", userController.CheckEmailAvailability)
-	r.POST("/sessions", userController.Login)
-	r.POST("/refresh-token", userController.RefreshToken)
-	r.POST("/logout", userController.Logout)
+	r.POST("/users", userModule.RegisterUser)
+	r.POST("/email_checkers", userModule.CheckEmailAvailability)
+	r.POST("/sessions", userModule.Login)
+	r.POST("/refresh-token", userModule.RefreshToken)
+	r.POST("/logout", userModule.Logout)
+	r.POST("/verify-email/:verification_code", userModule.VerifyEmail)
+	r.POST("/forgot-password", passwordResetModule.ForgotPassword)
+	r.POST("/new-password/:reset_code", passwordResetModule.NewPassword)
 }
 
 func PrivateAPIRoutes(r *gin.RouterGroup) {
 	//user region
-
-	auth := middleware.AuthMiddleware(authService, userService)
+	userRepo := user.UserRepository(database.NewDatabase())
+	userService := user.UserService(userRepo)
+	auth := middleware.AuthMiddleware(auth.AuthService(), userService)
 	r.Use(auth)
 
-	r.POST("/avatars", userController.UploadAvatar)
+	r.POST("/avatars", userModule.UploadAvatar)
 	//===============================================================
 
 	//customer region

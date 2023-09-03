@@ -1,25 +1,11 @@
 import { PieChartOutlined, FolderOutlined, UserOutlined, InsertRowAboveOutlined } from '@ant-design/icons';
 import { Menu, MenuProps } from 'antd'
-import React from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
 const MenuItem = () => {
     const navigate = useNavigate();
-
-    function getItem(
-        label: React.ReactNode,
-        key: React.Key,
-        icon?: React.ReactNode,
-        children?: MenuItem[],) {
-        return {
-            key,
-            icon,
-            children,
-            label,
-        };
-    }
 
     return (
         <Menu
@@ -29,14 +15,25 @@ const MenuItem = () => {
             onClick={({ key }) => {
                 navigate(key)
             }}
-            items={[
-                getItem('Dashboard', 'dashboard', <PieChartOutlined />),
-                getItem('Master', 'sub1', <FolderOutlined />, [
-                    getItem('Pelanggan', 'customer', <UserOutlined />),
-                    getItem('Blok', 'area', <InsertRowAboveOutlined />),
-                ])
-            ]}
-        />
+        >
+            <Menu.Item key={'dashboard'} className='hover:scale-110' icon={<PieChartOutlined />}>
+                <Link to={'dashboard'}>
+                    Dashboard
+                </Link>
+            </Menu.Item>
+            <Menu.SubMenu key={'sub1'} title='Master' className='hover:scale-110' icon={<FolderOutlined />}>
+                <Menu.Item key={'customer'} className='hover:scale-110' icon={<UserOutlined />}>
+                    <Link to={'customer'}>
+                        Pelanggan
+                    </Link>
+                </Menu.Item>
+                <Menu.Item key={'area'} className='hover:scale-110' icon={<InsertRowAboveOutlined />}>
+                    <Link to={'area'}>
+                        Pelanggan
+                    </Link>
+                </Menu.Item>
+            </Menu.SubMenu>
+        </Menu>
     )
 }
 

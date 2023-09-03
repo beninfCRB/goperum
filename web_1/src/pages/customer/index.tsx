@@ -6,6 +6,7 @@ import CustomerForm from "../../modules/customer/form"
 import { useAddCustomer, useCustomer, useCustomerAll, useDeleteCustomer, useUpdateCustomer } from "../../modules/customer"
 import CustomerStore from "../../modules/customer/state"
 import { MESSAGE_TEXT } from "../../static/text"
+import { fetch } from "../../utils/reponse"
 
 const CustomerIndex = () => {
     const [isModalAddOpen, setIsModalAddOpen] = useState<boolean>(false);
@@ -14,6 +15,7 @@ const CustomerIndex = () => {
     const customerGetAllMutation = useCustomerAll()
     const customerDeleteMutation = useDeleteCustomer()
     const customerState = CustomerStore()
+    const _fetch = new fetch()
 
     useEffect(() => {
         if (customerGetAllMutation.data) {
@@ -24,10 +26,10 @@ const CustomerIndex = () => {
     useEffect(() => {
         if (customerDeleteMutation.isSuccess) {
             customerGetAllMutation.refetch()
-            message.success(MESSAGE_TEXT.CRUD.IND.SUCCESS.DELETE)
+            message.success(MESSAGE_TEXT.CRUD.ENG.SUCCESS.DELETE)
         }
         if (customerDeleteMutation.isError) {
-            message.success(MESSAGE_TEXT.CRUD.IND.ERROR.DELETE)
+            message.success(_fetch.getAxiosMessage(customerDeleteMutation.error))
         }
         return () => {
             customerGetAllMutation.refetch()
@@ -96,6 +98,7 @@ const AddCustomer = (props: {
     const [form] = Form.useForm()
     const addCustomer = useAddCustomer()
     const customerMutation = useCustomerAll()
+    const _fetch = new fetch()
 
     const onSubmit = () => {
         form.validateFields().then(async (values) => {
@@ -109,11 +112,11 @@ const AddCustomer = (props: {
 
     useEffect(() => {
         if (addCustomer.isSuccess) {
-            message.success(MESSAGE_TEXT.CRUD.IND.SUCCESS.ADD)
+            message.success(MESSAGE_TEXT.CRUD.ENG.SUCCESS.ADD)
             props.onCancel()
         }
         if (addCustomer.isError) {
-            message.error(MESSAGE_TEXT.CRUD.IND.ERROR.ADD)
+            message.error(_fetch.getAxiosMessage(addCustomer.error))
             props.onCancel()
         }
         return () => {
@@ -145,6 +148,7 @@ const EditCustomer = (props: {
     const customerGetMutation = useCustomer()
     const editCustomer = useUpdateCustomer()
     const customerMutation = useCustomerAll()
+    const _fetch = new fetch()
 
     const onSubmit = () => {
         form.validateFields().then(async (values) => {
@@ -175,11 +179,11 @@ const EditCustomer = (props: {
 
     useEffect(() => {
         if (editCustomer.isSuccess) {
-            message.success(MESSAGE_TEXT.CRUD.IND.SUCCESS.EDIT)
+            message.success(MESSAGE_TEXT.CRUD.ENG.SUCCESS.EDIT)
             props.onCancel()
         }
         if (editCustomer.isError) {
-            message.error(MESSAGE_TEXT.CRUD.IND.ERROR.EDIT)
+            message.error(_fetch.getAxiosMessage(editCustomer.error))
             props.onCancel()
         }
         return () => {

@@ -13,6 +13,7 @@ type Respository interface {
 	FindByID(ID uuid.UUID) (entity.User, error)
 	Update(user entity.User) (entity.User, error)
 	FindByRefresToken(refreshToken string) (entity.User, error)
+	FindVerificationCode(code string) (entity.User, error)
 }
 
 type repository struct {
@@ -64,6 +65,15 @@ func (r *repository) Update(user entity.User) (entity.User, error) {
 func (r *repository) FindByRefresToken(refreshToken string) (entity.User, error) {
 	var user entity.User
 	err := r.db.Where("refresh_token=?", refreshToken).Find(&user).Error
+	if err != nil {
+		return user, err
+	}
+	return user, nil
+}
+
+func (r *repository) FindVerificationCode(code string) (entity.User, error) {
+	var user entity.User
+	err := r.db.Where("verification_code=?", code).Find(&user).Error
 	if err != nil {
 		return user, err
 	}

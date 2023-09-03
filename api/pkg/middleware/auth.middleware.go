@@ -49,6 +49,12 @@ func AuthMiddleware(authService auth.Service, userService user.Service) gin.Hand
 			return
 		}
 
+		if !user.IsVerify {
+			response := util.Response("User not verified", http.StatusUnauthorized, "error", nil)
+			c.AbortWithStatusJSON(http.StatusUnauthorized, response)
+			return
+		}
+
 		c.Set("currentUser", user)
 		c.Next()
 	}

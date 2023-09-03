@@ -5,6 +5,7 @@ import React, { useState } from 'react'
 import logo from "../../assets/react.svg";
 import { useLogout } from '../../modules/auth';
 import { Link, useNavigate } from 'react-router-dom';
+import { UserType } from '../../modules/profile';
 
 export interface navbarProps {
     menu: JSX.Element
@@ -13,10 +14,11 @@ export interface navbarProps {
 const Navbar = (props: navbarProps) => {
     const [visible, setVisible] = useState<boolean>(false);
     const navigate = useNavigate()
+    const user: UserType = JSON.parse(localStorage.getItem("user") as string)
 
     const onLogout = () => {
         useLogout()
-        message.success('Berhasil log out')
+        message.success('Log out successfully')
         navigate('/')
     }
 
@@ -59,7 +61,7 @@ const Navbar = (props: navbarProps) => {
                     >
                         {props.menu}
                     </Drawer>
-                    <a href="/"><img src={logo} className="logo" alt="logo" /></a>
+                    <a href="/"><img src={logo} className="logo hover:scale-110" alt="logo" /></a>
                 </div>
                 <div
                     className='col-end-7 text-white text-right mr-4'
@@ -70,9 +72,9 @@ const Navbar = (props: navbarProps) => {
                         trigger={['click']}
                     >
                         <a onClick={(e) => e.preventDefault()}>
-                            <Space className='hover:text-red-400'>
+                            <Space className='hover:text-red-400 hover:scale-110'>
                                 <Avatar size={'default'} icon={<UserOutlined />} />
-                                Hover me
+                                {user.name}
                             </Space>
                         </a>
                     </Dropdown>

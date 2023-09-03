@@ -60,11 +60,11 @@ const TableCustomer = (props: tableCustomerProps) => {
             width: '40%',
             render: (value: any) =>
                 <div className='flex items-stretch gap-x-2'>
-                    <Tooltip title='Ubah Data'>
-                        <Button className='bg-slate-400 border-black hover:bg-red-400' size='small' shape='circle' onClick={() => props.onEdit(value.id)}><EditOutlined /></Button>
+                    <Tooltip title='Ubah Data' placement='left'>
+                        <Button className='bg-slate-400 border-black hover:scale-150' size='small' shape='circle' onClick={() => props.onEdit(value.id)}><EditOutlined style={{ color: 'white' }} /></Button>
                     </Tooltip>
                     <Tooltip title='Hapus Data'>
-                        <Button className='bg-red-600  border-black hover:bg-red-400' size='small' shape='circle' onClick={() => props.onDelete(value.id)}><DeleteOutlined /></Button>
+                        <Button className='bg-red-600  border-black hover:scale-150' size='small' shape='circle' onClick={() => props.onDelete(value.id)}><DeleteOutlined style={{ color: 'white' }} /></Button>
                     </Tooltip>
                 </div>
         },

@@ -13,6 +13,20 @@ export const MESSAGE_TEXT = {
                 GET: `Gagal menampilkan data`,
                 DELETE: `Gagal menghapus data`
             }
+        },
+        ENG: {
+            SUCCESS: {
+                ADD: `Add data successfully`,
+                EDIT: `Edit data successfully`,
+                GET: `Get data successfully`,
+                DELETE: `Delete data successfully`
+            },
+            ERROR: {
+                ADD: `Add data failed`,
+                EDIT: `Edit data failed`,
+                GET: `Get data failed`,
+                DELETE: `Delete data failed`
+            }
         }
     }
 }

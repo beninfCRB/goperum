@@ -30,9 +30,7 @@ func (r *useController) RegisterUser(c *gin.Context) {
 	duration, _ := strconv.Atoi(os.Getenv("COOKIE_EXPIRED"))
 	code := randstr.String(20)
 
-	verification_code := util.Encode(code)
-
-	input.VerificationCode = verification_code
+	input.VerificationCode = util.Encode(code)
 
 	err := c.ShouldBindJSON(&input)
 	if err != nil {
@@ -78,9 +76,8 @@ func (r *useController) RegisterUser(c *gin.Context) {
 		firstName = strings.Split(firstName, " ")[1]
 	}
 
-	// ? Send Email
 	emailData := util.EmailData{
-		URL:       os.Getenv("URL_CLIENT") + "/verifyemail/" + code,
+		URL:       os.Getenv("URL_CLIENT") + "/verify-email/" + code,
 		FirstName: firstName,
 		Subject:   "Your account verification code",
 	}
@@ -115,6 +112,12 @@ func (r *useController) Login(c *gin.Context) {
 
 		response := util.Response("Login failed", http.StatusUnprocessableEntity, "error", errorMessage)
 		c.JSON(http.StatusUnprocessableEntity, response)
+		return
+	}
+
+	if !loggedinUser.IsVerify {
+		response := util.Response("User not verified", http.StatusUnauthorized, "error", nil)
+		c.AbortWithStatusJSON(http.StatusUnauthorized, response)
 		return
 	}
 
@@ -309,3 +312,21 @@ func (r *useController) UploadAvatar(c *gin.Context) {
 	response := util.Response("avatar successfully uploaded", http.StatusCreated, "success", data)
 	c.JSON(http.StatusCreated, response)
 }
+
+func (r *useController) VerifyEmail(c *gin.Context) {
+	param := c.Param("verification_code")
+	code := util.Encode(param)
+
+	_, err := r.useService.VerifyEmail(code)
+	if err != nil {
+		errorMessage := gin.H{"errors": "Server error"}
+
+		response := util.Response("Verify email failed", http.StatusUnprocessableEntity, "error", errorMessage)
+		c.JSON(http.StatusUnprocessableEntity, response)
+		return
+	}
+
+	response := util.Response("Verify email successfully", http.StatusOK, "success", nil)
+	c.JSON(http.StatusOK, response)
+}
+

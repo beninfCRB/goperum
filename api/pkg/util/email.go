@@ -68,7 +68,6 @@ func SendEmail(user *entity.User, data *EmailData) {
 	d := gomail.NewDialer(smtpHost, smtpPort, smtpUser, smtpPass)
 	d.TLSConfig = &tls.Config{InsecureSkipVerify: true}
 
-	// Send Email
 	if err := d.DialAndSend(m); err != nil {
 		log.Fatal("Could not send email: ", err)
 	}
