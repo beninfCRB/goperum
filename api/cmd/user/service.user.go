@@ -17,7 +17,7 @@ type Service interface {
 	UpdateUser(ID uuid.UUID, input NewPasswordInput) (entity.User, error)
 	UpdateRefreshToken(ID uuid.UUID, input string) (entity.User, error)
 	GetRefreshToken(refreshToken string) (entity.User, error)
-	VerifyEmail(code string) (entity.User, error)
+	// VerifyEmail(code string) (entity.User, error)
 	GetEmail(email string) (entity.User, error)
 }
 
@@ -33,7 +33,7 @@ func (s *service) RegisterUser(input RegisterUserInput) (entity.User, error) {
 	user := entity.User{}
 	user.Name = input.Name
 	user.Email = input.Email
-	user.VerificationCode = input.VerificationCode
+	// user.VerificationCode = input.VerificationCode
 
 	if input.Password != input.ConfirmPassword {
 		return user, errors.New("password not match")
@@ -179,20 +179,20 @@ func (s *service) GetRefreshToken(refreshToken string) (entity.User, error) {
 	return user, nil
 }
 
-func (s *service) VerifyEmail(code string) (entity.User, error) {
-	user, err := s.repository.FindVerificationCode(code)
-	if err != nil {
-		return user, err
-	}
+// func (s *service) VerifyEmail(code string) (entity.User, error) {
+// 	user, err := s.repository.FindVerificationCode(code)
+// 	if err != nil {
+// 		return user, err
+// 	}
 
-	user.IsVerify = true
-	update, err := s.repository.Update(user)
-	if err != nil {
-		return update, err
-	}
+// 	user.IsVerify = true
+// 	update, err := s.repository.Update(user)
+// 	if err != nil {
+// 		return update, err
+// 	}
 
-	return update, nil
-}
+// 	return update, nil
+// }
 
 func (s *service) GetEmail(email string) (entity.User, error) {
 	user, err := s.repository.FindByEmail(email)
@@ -201,7 +201,7 @@ func (s *service) GetEmail(email string) (entity.User, error) {
 	}
 
 	if user.ID == uuid.Nil {
-		return user, nil
+		return user, errors.New("email not found")
 	}
 
 	return user, nil

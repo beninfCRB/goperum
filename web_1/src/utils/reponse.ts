@@ -41,6 +41,10 @@ export class fetch {
         return data.data.Data
     }
 
+    getData(){
+        return this.data
+    }
+
     getSuccessMessage() {
         return this.message
     }

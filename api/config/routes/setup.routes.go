@@ -6,6 +6,7 @@ import (
 	"gostartup/cmd/customer"
 	"gostartup/cmd/password_reset"
 	"gostartup/cmd/user"
+	"gostartup/cmd/verification_user"
 	"gostartup/config/database"
 	"gostartup/pkg/middleware"
 	"net/http"
@@ -15,6 +16,7 @@ import (
 )
 
 var userModule = user.UserModule()
+var verificatioUserModule = verification_user.VerificationUserModule()
 var passwordResetModule = password_reset.PasswordServiceModule()
 
 func PublicRoutes(r *gin.RouterGroup) {
@@ -31,7 +33,7 @@ func PublicAPIRoutes(r *gin.RouterGroup) {
 	r.POST("/sessions", userModule.Login)
 	r.POST("/refresh-token", userModule.RefreshToken)
 	r.POST("/logout", userModule.Logout)
-	r.POST("/verify-email/:verification_code", userModule.VerifyEmail)
+	r.POST("/verify-email/:verification_code", verificatioUserModule.VerificationUser)
 	r.POST("/forgot-password", passwordResetModule.ForgotPassword)
 	r.POST("/new-password/:reset_code", passwordResetModule.NewPassword)
 }

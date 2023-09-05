@@ -3,12 +3,14 @@ package user
 import (
 	"fmt"
 	"gostartup/cmd/auth"
+	"gostartup/cmd/verification_user"
 	"gostartup/config/database/entity"
 	"gostartup/pkg/util"
 	"net/http"
 	"os"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
@@ -17,12 +19,13 @@ import (
 )
 
 type useController struct {
-	useService  Service
-	authService auth.Service
+	useService          Service
+	authService         auth.Service
+	verificationService verification_user.Service
 }
 
-func UserController(userService Service, authService auth.Service) *useController {
-	return &useController{userService, authService}
+func UserController(userService Service, authService auth.Service, verificationService verification_user.Service) *useController {
+	return &useController{userService, authService, verificationService}
 }
 
 func (r *useController) RegisterUser(c *gin.Context) {
@@ -30,7 +33,7 @@ func (r *useController) RegisterUser(c *gin.Context) {
 	duration, _ := strconv.Atoi(os.Getenv("COOKIE_EXPIRED"))
 	code := randstr.String(20)
 
-	input.VerificationCode = util.Encode(code)
+	verification_code := util.Encode(code)
 
 	err := c.ShouldBindJSON(&input)
 	if err != nil {
@@ -66,6 +69,28 @@ func (r *useController) RegisterUser(c *gin.Context) {
 	_, err = r.useService.UpdateRefreshToken(user.ID, refreshToken)
 	if err != nil {
 		response := util.Response("Register has been failed", http.StatusBadRequest, "error", nil)
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	var inputVerification verification_user.VerificationUserInput
+	inputVerification.Email = user.Email
+	inputVerification.VerificationCode = verification_code
+	inputVerification.ExpiredAt = time.Now().Add(5 * time.Minute)
+
+	// err = c.ShouldBind(&inputVerification)
+	// if err != nil {
+	// 	errors := util.ErrorValidation(err)
+	// 	errorMessage := gin.H{"errors": errors}
+
+	// 	response := util.Response("Verification code has been failed", http.StatusUnprocessableEntity, "error", errorMessage)
+	// 	c.JSON(http.StatusUnprocessableEntity, response)
+	// 	return
+	// }
+
+	_, err = r.verificationService.SaveVerificationUser(inputVerification)
+	if err != nil {
+		response := util.Response("Verification code has been failed", http.StatusBadRequest, "error", nil)
 		c.JSON(http.StatusBadRequest, response)
 		return
 	}
@@ -313,20 +338,19 @@ func (r *useController) UploadAvatar(c *gin.Context) {
 	c.JSON(http.StatusCreated, response)
 }
 
-func (r *useController) VerifyEmail(c *gin.Context) {
-	param := c.Param("verification_code")
-	code := util.Encode(param)
+// func (r *useController) VerifyEmail(c *gin.Context) {
+// 	param := c.Param("verification_code")
+// 	code := util.Encode(param)
 
-	_, err := r.useService.VerifyEmail(code)
-	if err != nil {
-		errorMessage := gin.H{"errors": "Server error"}
+// 	_, err := r.useService.VerifyEmail(code)
+// 	if err != nil {
+// 		errorMessage := gin.H{"errors": "Server error"}
 
-		response := util.Response("Verify email failed", http.StatusUnprocessableEntity, "error", errorMessage)
-		c.JSON(http.StatusUnprocessableEntity, response)
-		return
-	}
+// 		response := util.Response("Verify email failed", http.StatusUnprocessableEntity, "error", errorMessage)
+// 		c.JSON(http.StatusUnprocessableEntity, response)
+// 		return
+// 	}
 
-	response := util.Response("Verify email successfully", http.StatusOK, "success", nil)
-	c.JSON(http.StatusOK, response)
-}
-
+// 	response := util.Response("Verify email successfully", http.StatusOK, "success", nil)
+// 	c.JSON(http.StatusOK, response)
+// }

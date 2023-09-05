@@ -5,8 +5,6 @@ type RegisterUserInput struct {
 	Email           string `json:"email" binding:"required,email"`
 	Password        string `json:"password" binding:"required"`
 	ConfirmPassword string `json:"confirm_password" binding:"required"`
-
-	VerificationCode string `json:"verification_code" binding:"required"`
 }
 
 type LoginUserInput struct {

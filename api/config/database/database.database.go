@@ -31,7 +31,5 @@ func NewDatabase() *gorm.DB {
 		panic("Database connection failed!!")
 	}
 
-	fmt.Println("\nDatabase connected")
-
 	return db
 }

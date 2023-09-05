@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/thanhpk/randstr"
@@ -24,6 +25,7 @@ func (r *useController) ForgotPassword(c *gin.Context) {
 	var input PasswordResetInput
 	code := randstr.String(20)
 	input.ResetCode = util.Encode(code)
+	input.ExpiredAt = time.Now().Add(5 * time.Minute)
 
 	err := c.ShouldBindJSON(&input)
 	if err != nil {
@@ -37,10 +39,7 @@ func (r *useController) ForgotPassword(c *gin.Context) {
 
 	user, err := r.userService.GetEmail(input.Email)
 	if err != nil {
-		errors := util.ErrorValidation(err)
-		errorMessage := gin.H{"errors": errors}
-
-		response := util.Response("Reset password has been failed", http.StatusUnprocessableEntity, "error", errorMessage)
+		response := util.Response("Email not found", http.StatusUnprocessableEntity, "error", nil)
 		c.JSON(http.StatusUnprocessableEntity, response)
 		return
 	}
@@ -92,6 +91,15 @@ func (r *useController) NewPassword(c *gin.Context) {
 		errorMessage := gin.H{"errors": errors}
 
 		response := util.Response("Email not found", http.StatusUnprocessableEntity, "error", errorMessage)
+		c.JSON(http.StatusUnprocessableEntity, response)
+		return
+	}
+
+	expiredAt := email.ExpiredAt
+	currrentTime := time.Now()
+
+	if expiredAt.Before(currrentTime) {
+		response := util.Response("Code has been expired", http.StatusUnprocessableEntity, "error", nil)
 		c.JSON(http.StatusUnprocessableEntity, response)
 		return
 	}

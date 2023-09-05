@@ -7,14 +7,15 @@ import (
 	"gorm.io/gorm"
 )
 
-type Password_reset struct {
-	ID        uuid.UUID `gorm:"primaryKey;type:char(36);default:(UUID())" json:"id"`
-	Email     string    `gorm:"type:varchar(50)" json:"email"`
-	ResetCode string    `gorm:"type:text" json:"reset_code"`
-	CreatedAt time.Time `json:"created_at"`
+type PasswordReset struct {
+	ID        uuid.UUID  `gorm:"primaryKey;type:char(36);default:(UUID())" json:"id"`
+	Email     string     `gorm:"type:varchar(50)" json:"email"`
+	ResetCode string     `gorm:"type:text" json:"reset_code"`
+	ExpiredAt *time.Time `json:"expired_at"`
+	CreatedAt time.Time  `json:"created_at"`
 }
 
-func (u *Password_reset) BeforeCreate(tx *gorm.DB) (err error) {
+func (u *PasswordReset) BeforeCreate(tx *gorm.DB) (err error) {
 	u.ID = uuid.New()
 	return
 }

@@ -16,6 +16,7 @@ interface registerFormType {
 
 interface forgotPasswordFormType {
     form: FormInstance;
+    success: boolean;
     onSubmit: () => void;
 }
 
@@ -168,7 +169,7 @@ export const FormForgotPassword = (props: forgotPasswordFormType) => {
     return (
         <Form
             form={props.form}
-            layout='horizontal'
+            layout='vertical'
             name="normal_forgotpassword"
             className="login-form box"
             initialValues={{
@@ -187,13 +188,13 @@ export const FormForgotPassword = (props: forgotPasswordFormType) => {
                     },
                 ]}
             >
-                <Input prefix={<MailOutlined className="site-form-item-icon" />} placeholder="Email" />
+                <Input disabled={props.success} prefix={<MailOutlined className="site-form-item-icon" />} placeholder="Email" />
             </Form.Item>
 
 
             <Form.Item className='text-center'>
                 <Button type="primary" htmlType="submit" onClick={props.onSubmit}>
-                    Submit
+                    {props.success ? 'Resend' : 'Submit'}
                 </Button>
             </Form.Item>
         </Form>
