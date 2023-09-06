@@ -1,37 +1,18 @@
 package util
 
-import (
-	"strings"
-	"time"
+import "net"
 
-	"github.com/gin-gonic/gin"
-)
-
-func GetClientIP(c *gin.Context) string {
-	// first check the X-Forwarded-For header
-	requester := c.Request.Header.Get("X-Forwarded-For")
-	// if empty, check the Real-IP header
-	if len(requester) == 0 {
-		requester = c.Request.Header.Get("X-Real-IP")
+func getMacAddr() ([]string, error) {
+	ifas, err := net.Interfaces()
+	if err != nil {
+		return nil, err
 	}
-	// if the requester is still empty, use the hard-coded address from the socket
-	if len(requester) == 0 {
-		requester = c.Request.RemoteAddr
+	var as []string
+	for _, ifa := range ifas {
+		a := ifa.HardwareAddr.String()
+		if a != "" {
+			as = append(as, a)
+		}
 	}
-
-	// if requester is a comma delimited list, take the first one
-	// (this happens when proxied via elastic load balancer then again through nginx)
-	if strings.Contains(requester, ",") {
-		requester = strings.Split(requester, ",")[0]
-	}
-
-	return requester
-}
-
-func GetDurationInMillseconds(start time.Time) float64 {
-	end := time.Now()
-	duration := end.Sub(start)
-	milliseconds := float64(duration) / float64(time.Millisecond)
-	rounded := float64(int(milliseconds*100+.5)) / 100
-	return rounded
+	return as, nil
 }
