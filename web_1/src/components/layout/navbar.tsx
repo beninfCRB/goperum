@@ -14,6 +14,7 @@ export interface navbarProps {
 const Navbar = (props: navbarProps) => {
     const [visible, setVisible] = useState<boolean>(false);
     const navigate = useNavigate()
+    const locale = JSON.parse(localStorage.getItem("user") as string)
     const user: UserType = JSON.parse(localStorage.getItem("user") as string)
 
     const onLogout = () => {
@@ -73,7 +74,11 @@ const Navbar = (props: navbarProps) => {
                     >
                         <a onClick={(e) => e.preventDefault()}>
                             <Space className='hover:text-red-400 hover:scale-110'>
-                                <Avatar size={'default'} icon={<UserOutlined />} />
+                                {
+                                    locale.avatar ?
+                                        <Avatar size={'default'} icon={<UserOutlined />} /> :
+                                        <Avatar size={'default'} icon={<UserOutlined />} />
+                                }
                                 {user.name}
                             </Space>
                         </a>

@@ -8,7 +8,7 @@ import { UserType } from '../../modules/profile';
 
 const Login = () => {
     const [form] = Form.useForm()
-    const {isError,isSuccess,error,isLoading,mutateAsync} = useLogin();
+    const { isError, isSuccess, error, isLoading, mutateAsync } = useLogin();
     const navigate = useNavigate();
     const user: UserType = JSON.parse(localStorage.getItem('user') as string)
     const _fetch = new fetch()
@@ -40,9 +40,12 @@ const Login = () => {
 
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center bg-gray-300">
+        <div className="min-h-screen flex flex-col items-center justify-center bg-gray-300 bg-[url('../../public/image/bg-login.jpeg')] bg-cover bg-center">
             <div className="flex flex-col bg-white shadow-md px-4 sm:px-6 md:px-8 lg:px-10 py-8 rounded-md w-full max-w-xs">
-                <div className="font-medium self-center text-xl sm:text-2xl uppercase text-gray-800">Login</div>
+                <div className="font-medium self-center text-xl sm:text-2xl uppercase text-gray-800 text-center">
+                    SELAMAT DATANG
+                    <p className='text-xs'>silahkan masuk ke akun</p>
+                </div>
                 <div className="mt-10">
                     <Spin
                         spinning={isLoading}

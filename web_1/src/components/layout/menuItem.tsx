@@ -29,7 +29,7 @@ const MenuItem = () => {
                 </Menu.Item>
                 <Menu.Item key={'area'} className='hover:scale-110' icon={<InsertRowAboveOutlined />}>
                     <Link to={'area'}>
-                        Pelanggan
+                        Area
                     </Link>
                 </Menu.Item>
             </Menu.SubMenu>

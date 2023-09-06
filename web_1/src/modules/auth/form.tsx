@@ -63,13 +63,13 @@ export const FormLogin = (props: loginFormType) => {
                 />
             </Form.Item>
             <div className='mt-0 text-right'>
-                <Link to={'forgot-password'}>Lupa password?</Link>
+                <Link to={'forgot-password'}><small>Lupa kata sandi?</small></Link>
             </div>
 
 
             <Form.Item className='text-center mt-4'>
                 <Button type="primary" htmlType="submit" onClick={props.onSubmit}>
-                    Log in
+                    MASUK
                 </Button>
             </Form.Item>
         </Form>
@@ -158,7 +158,7 @@ export const FormRegister = (props: registerFormType) => {
 
             <Form.Item className='text-center'>
                 <Button type="primary" htmlType="submit" onClick={props.onSubmit}>
-                    Register
+                    DAFTAR
                 </Button>
             </Form.Item>
         </Form>
@@ -194,7 +194,7 @@ export const FormForgotPassword = (props: forgotPasswordFormType) => {
 
             <Form.Item className='text-center'>
                 <Button type="primary" htmlType="submit" onClick={props.onSubmit}>
-                    {props.success ? 'Resend' : 'Submit'}
+                    {props.success ? 'KIRIM ULANG' : 'KIRIM'}
                 </Button>
             </Form.Item>
         </Form>
@@ -256,7 +256,7 @@ export const FormNewPassword = (props: newPasswordFormType) => {
 
             <Form.Item className='text-center'>
                 <Button type="primary" htmlType="submit" onClick={props.onSubmit}>
-                    Submit
+                    KIRIM
                 </Button>
             </Form.Item>
         </Form>

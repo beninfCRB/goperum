@@ -78,6 +78,7 @@ const TableCustomer = (props: tableCustomerProps) => {
         <Spin
             spinning={props.onLoading}>
             <Table
+                className='shadow-2xl'
                 rowKey={'id'}
                 columns={columns}
                 dataSource={props.data}

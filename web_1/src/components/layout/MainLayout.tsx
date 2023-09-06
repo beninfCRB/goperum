@@ -23,9 +23,11 @@ const MainLayout = () => {
                     <Sidebar
                         menu={<MenuItem />}
                     />
-                    <Layout>
+                    <Layout
+                        className="bg-[url('../../public/image/bg-login.jpeg')] bg-cover bg-center"
+                    >
                         <Content
-                            className="content"
+                            className="content opacity-95"
                             style={{
                                 margin: '16px 16px',
                                 padding: 24,
