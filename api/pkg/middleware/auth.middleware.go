@@ -40,6 +40,15 @@ func AuthMiddleware(authService auth.Service, userService user.Service) gin.Hand
 		}
 
 		userID := uuid.MustParse(claim["user_id"].(string))
+		claimMac := claim["mac"].(string)
+
+		mac, _ := util.GetMacAddr()
+
+		if claimMac != mac {
+			response := util.Response("Unauthorized", http.StatusUnauthorized, "error", nil)
+			c.AbortWithStatusJSON(http.StatusUnauthorized, response)
+			return
+		}
 
 		user, err := userService.GetUserByID(userID)
 

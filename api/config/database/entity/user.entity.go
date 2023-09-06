@@ -20,7 +20,8 @@ type User struct {
 	RefreshToken        string         `gorm:"type:text" json:"refresh_token"`
 	Role                string         `gorm:"type:varchar(10)" json:"role"`
 	IsVerify            bool           `gorm:"default:false" json:"is_verify"`
-	// VerificationCode    string         `gorm:"type:text" json:"verification_code"`
+
+	MacDevice []MacDevice `gorm:"foreignKey:UserId;references:ID"`
 
 	CreatedCustomer []Customer `gorm:"foreignKey:CreatedBy;references:ID"`
 	UpdatedCustomer []Customer `gorm:"foreignKey:UpdatedBy;references:ID"`

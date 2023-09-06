@@ -3,6 +3,7 @@ package user
 import (
 	"fmt"
 	"gostartup/cmd/auth"
+	"gostartup/cmd/mac_device"
 	"gostartup/cmd/verification_user"
 	"gostartup/config/database/entity"
 	"gostartup/pkg/util"
@@ -22,10 +23,11 @@ type useController struct {
 	useService          Service
 	authService         auth.Service
 	verificationService verification_user.Service
+	macDeviceService    mac_device.Service
 }
 
-func UserController(userService Service, authService auth.Service, verificationService verification_user.Service) *useController {
-	return &useController{userService, authService, verificationService}
+func UserController(userService Service, authService auth.Service, verificationService verification_user.Service, macDeviceService mac_device.Service) *useController {
+	return &useController{userService, authService, verificationService, macDeviceService}
 }
 
 func (r *useController) RegisterUser(c *gin.Context) {
@@ -78,16 +80,6 @@ func (r *useController) RegisterUser(c *gin.Context) {
 	inputVerification.VerificationCode = verification_code
 	inputVerification.ExpiredAt = time.Now().Add(5 * time.Minute)
 
-	// err = c.ShouldBind(&inputVerification)
-	// if err != nil {
-	// 	errors := util.ErrorValidation(err)
-	// 	errorMessage := gin.H{"errors": errors}
-
-	// 	response := util.Response("Verification code has been failed", http.StatusUnprocessableEntity, "error", errorMessage)
-	// 	c.JSON(http.StatusUnprocessableEntity, response)
-	// 	return
-	// }
-
 	_, err = r.verificationService.SaveVerificationUser(inputVerification)
 	if err != nil {
 		response := util.Response("Verification code has been failed", http.StatusBadRequest, "error", nil)
@@ -131,12 +123,18 @@ func (r *useController) Login(c *gin.Context) {
 	}
 
 	loggedinUser, err := r.useService.LoginUser(input)
-
 	if err != nil {
 		errorMessage := gin.H{"errors": err.Error()}
 
 		response := util.Response("Login failed", http.StatusUnprocessableEntity, "error", errorMessage)
 		c.JSON(http.StatusUnprocessableEntity, response)
+		return
+	}
+
+	multi, err := r.macDeviceService.CountUser(loggedinUser.ID)
+	if err != nil && multi {
+		response := util.Response(err.Error(), http.StatusUnauthorized, "error", nil)
+		c.AbortWithStatusJSON(http.StatusUnauthorized, response)
 		return
 	}
 
@@ -167,6 +165,13 @@ func (r *useController) Login(c *gin.Context) {
 		return
 	}
 
+	_, err = r.macDeviceService.SaveMacDevice(loggedinUser.ID)
+	if err != nil {
+		response := util.Response("Login failed", http.StatusBadRequest, "error", nil)
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+
 	c.SetCookie("tk_r", refreshToken, 3600*duration, "/", os.Getenv("COOKIE_DOMAIN"), true, true)
 
 	formatter := UserFormat(loggedinUser, accessToken, refreshToken)
@@ -180,7 +185,7 @@ func (r *useController) Logout(c *gin.Context) {
 		errors := util.ErrorValidation(err)
 		errorMessage := gin.H{"errors": errors}
 
-		response := util.Response("Invalid renew access token", http.StatusUnprocessableEntity, "error", errorMessage)
+		response := util.Response("Invalid cookie access token", http.StatusUnprocessableEntity, "error", errorMessage)
 		c.JSON(http.StatusUnprocessableEntity, response)
 		return
 	}
@@ -196,6 +201,13 @@ func (r *useController) Logout(c *gin.Context) {
 	}
 
 	_, err = r.useService.UpdateRefreshToken(user.ID, "")
+	if err != nil {
+		response := util.Response("Logout failed", http.StatusBadRequest, "error", nil)
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	_, err = r.macDeviceService.DeleteMacDevice(user.ID)
 	if err != nil {
 		response := util.Response("Logout failed", http.StatusBadRequest, "error", nil)
 		c.JSON(http.StatusBadRequest, response)
@@ -337,20 +349,3 @@ func (r *useController) UploadAvatar(c *gin.Context) {
 	response := util.Response("avatar successfully uploaded", http.StatusCreated, "success", data)
 	c.JSON(http.StatusCreated, response)
 }
-
-// func (r *useController) VerifyEmail(c *gin.Context) {
-// 	param := c.Param("verification_code")
-// 	code := util.Encode(param)
-
-// 	_, err := r.useService.VerifyEmail(code)
-// 	if err != nil {
-// 		errorMessage := gin.H{"errors": "Server error"}
-
-// 		response := util.Response("Verify email failed", http.StatusUnprocessableEntity, "error", errorMessage)
-// 		c.JSON(http.StatusUnprocessableEntity, response)
-// 		return
-// 	}
-
-// 	response := util.Response("Verify email successfully", http.StatusOK, "success", nil)
-// 	c.JSON(http.StatusOK, response)
-// }

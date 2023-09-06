@@ -39,7 +39,7 @@ func (r *useController) ForgotPassword(c *gin.Context) {
 
 	user, err := r.userService.GetEmail(input.Email)
 	if err != nil {
-		response := util.Response("Email not found", http.StatusUnprocessableEntity, "error", nil)
+		response := util.Response(err.Error(), http.StatusUnprocessableEntity, "error", nil)
 		c.JSON(http.StatusUnprocessableEntity, response)
 		return
 	}
@@ -109,7 +109,7 @@ func (r *useController) NewPassword(c *gin.Context) {
 		errors := util.ErrorValidation(err)
 		errorMessage := gin.H{"errors": errors}
 
-		response := util.Response("Email not found", http.StatusUnprocessableEntity, "error", errorMessage)
+		response := util.Response(err.Error(), http.StatusUnprocessableEntity, "error", errorMessage)
 		c.JSON(http.StatusUnprocessableEntity, response)
 		return
 	}

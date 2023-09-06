@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func Main(r *gin.RouterGroup) {
+func CustomerModule(r *gin.RouterGroup) {
 	repo := AreaRepository(database.NewDatabase())
 	service := AreaService(repo)
 	controller := AreaController(service)

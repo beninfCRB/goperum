@@ -1,11 +1,14 @@
 package util
 
-import "net"
+import (
+	"net"
+	"strings"
+)
 
-func getMacAddr() ([]string, error) {
+func GetMacAddr() (string, error) {
 	ifas, err := net.Interfaces()
 	if err != nil {
-		return nil, err
+		return "", err
 	}
 	var as []string
 	for _, ifa := range ifas {
@@ -14,5 +17,6 @@ func getMacAddr() ([]string, error) {
 			as = append(as, a)
 		}
 	}
-	return as, nil
+	result := strings.Join(as, "")
+	return result, nil
 }

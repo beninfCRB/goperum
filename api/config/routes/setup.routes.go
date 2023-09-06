@@ -49,6 +49,6 @@ func PrivateAPIRoutes(r *gin.RouterGroup) {
 	//===============================================================
 
 	//customer region
-	customer.Main(r)
-	area.Main(r)
+	customer.CustomerModule(r)
+	area.CustomerModule(r)
 }
