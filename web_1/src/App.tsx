@@ -3,14 +3,14 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Dashboard from './pages/dashboard'
 import Login from './pages/auth/login'
 import CustomerIndex from './pages/customer'
-import MainLayout from './components/layout/mainLayout'
-import PageNotFound from './components/layout/pageNotFound'
-import { ProtectedRoute } from './components/layout/protectedRoute'
 import Register from './pages/auth/register'
 import VerifyEmail from './pages/auth/verifyEmail'
 import WellDone from './components/layout/welldone'
 import ForgotPassword from './pages/auth/forgotPassword'
 import NewPassword from './pages/auth/newPassword'
+import MainLayout from './components/layout/MainLayout'
+import PageNotFound from './components/layout/PageNotFound'
+import { ProtectedRoute } from './components/layout/ProtectedRoute'
 
 function App() {
   return (

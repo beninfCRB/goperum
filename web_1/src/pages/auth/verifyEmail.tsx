@@ -1,11 +1,11 @@
 import { Button, message } from 'antd'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useVerifyEmail } from '../../modules/auth'
 import { useNavigate, useParams } from 'react-router-dom'
 import { fetch } from '../../utils/reponse'
 
 const VerifyEmail = () => {
-    const {isSuccess,isError,error,isLoading,mutateAsync} = useVerifyEmail()
+    const { isSuccess, isError, error, mutateAsync } = useVerifyEmail()
     const { verification_code } = useParams()
     const navigate = useNavigate()
     const _fetch = new fetch()

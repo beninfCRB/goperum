@@ -1,7 +1,6 @@
 import { useMutation, useQuery } from "react-query";
 import { base_url } from "../../static/config";
 import axiosInstance from "../../utils/interceptor";
-import { fetch } from "../../utils/reponse";
 
 const login = `sessions`
 const logout = `logout`
@@ -9,8 +8,6 @@ const user = `users`
 const verifyEmail = `verify-email`
 const forgotPassword = `forgot-password`
 const newPassword = `new-password`
-
-const _fetch = new fetch()
 
 export const useLogin = () => {
     return useMutation((values: any) =>

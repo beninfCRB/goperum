@@ -1,5 +1,5 @@
 "use client"
-import React, { Suspense, useEffect, useState } from 'react'
+import { Suspense } from 'react'
 import { ConfigProvider, Layout, Spin, theme } from 'antd';
 import { Outlet } from 'react-router-dom';
 import customTheme from '../theme/theme';
@@ -24,7 +24,7 @@ const MainLayout = () => {
                         menu={<MenuItem />}
                     />
                     <Layout
-                        className="bg-[url('../../public/image/bg-login.jpeg')] bg-cover bg-center"
+                        className="bg-[url('assets/image/bg-login.jpeg')] bg-cover bg-center"
                     >
                         <Content
                             className="content opacity-95"

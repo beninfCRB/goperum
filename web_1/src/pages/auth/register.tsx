@@ -1,5 +1,5 @@
 import { Form, Spin, message } from 'antd';
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useRegister } from '../../modules/auth';
 import { fetch } from '../../utils/reponse';
 import { FormRegister } from '../../modules/auth/form';
@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
     const [form] = Form.useForm()
-    const {isError,isSuccess,error,isLoading,mutateAsync} = useRegister();
+    const { isError, isSuccess, error, isLoading, mutateAsync } = useRegister();
     const navigate = useNavigate()
     const _fetch = new fetch()
 

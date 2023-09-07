@@ -1,6 +1,6 @@
 import { LogoutOutlined, MenuOutlined, UserOutlined } from '@ant-design/icons';
 import { Avatar, Button, Drawer, Dropdown, MenuProps, Space, message } from 'antd';
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 import logo from "../../assets/react.svg";
 import { useLogout } from '../../modules/auth';

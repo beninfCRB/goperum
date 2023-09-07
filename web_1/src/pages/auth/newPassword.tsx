@@ -1,5 +1,5 @@
 import { Form, Spin, message } from 'antd'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { fetch } from '../../utils/reponse'
 import { FormNewPassword } from '../../modules/auth/form'
