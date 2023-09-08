@@ -16,8 +16,8 @@ const VerifyEmail = () => {
 
     useEffect(() => {
         if (isSuccess) {
-            message.success("Verify email successfully")
             navigate('/')
+            message.success("Verify email successfully")
         }
         if (isError) {
             message.error(_fetch.getAxiosMessage(error))

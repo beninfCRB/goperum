@@ -9,8 +9,8 @@ import WellDone from './components/layout/welldone'
 import ForgotPassword from './pages/auth/forgotPassword'
 import NewPassword from './pages/auth/newPassword'
 import MainLayout from './components/layout/MainLayout'
-import PageNotFound from './components/layout/PageNotFound'
-import { ProtectedRoute } from './components/layout/ProtectedRoute'
+import PageNotFound from './components/layout/pageNotFound'
+import { ProtectedRoute } from './components/layout/protectedRoute'
 
 function App() {
   return (
@@ -23,7 +23,6 @@ function App() {
         <Route path='new-password/:reset_code' element={<NewPassword />} />
         <Route path='verify-email/:verification_code' element={<VerifyEmail />} />
         <Route path='welldone-verify-email' element={<WellDone content="Selamat! 1 langkah lagi untuk menyelesaikan pendaftaran dengan verifikasi email mu. mohon cek email dari sekarang...." />} />
-        <Route path='welldone-forgot-password' element={<WellDone content="Selamat! 1 langkah lagi untuk atur ulang kata sandi mu. mohon cek email dari sekarang...." />} />
         <Route path='/admin' element={
           <ProtectedRoute>
             <MainLayout />

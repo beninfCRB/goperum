@@ -20,6 +20,13 @@ export const useUpdateUser = () => {
     });
 };
 
+export const useDownloadAvatar = () => {
+    return useQuery('avatar', async (dir: any) => {
+        const response = await axiosInstance.get(`${base_url}${dir}`)
+        return response
+    })
+}
+
 export const useUploadAvatar = () => {
     return useMutation((formData: any) =>
         axiosInstance.post(`${base_url}${module}`, formData), {

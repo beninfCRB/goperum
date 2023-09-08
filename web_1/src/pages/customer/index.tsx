@@ -194,7 +194,7 @@ const EditCustomer = (props: {
 
     return (
         <Modal
-            title="TAMBAH PELANGGAN"
+            title="UBAH PELANGGAN"
             open={props.modal}
             forceRender={true}
             onCancel={props.onCancel}

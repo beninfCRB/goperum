@@ -19,8 +19,8 @@ const Navbar = (props: navbarProps) => {
 
     const onLogout = () => {
         useLogout()
-        message.success('Log out successfully')
         navigate('/')
+        message.success('Log out successfully')
     }
 
     const items: MenuProps['items'] = [
