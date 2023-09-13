@@ -1,8 +1,8 @@
 package password_reset
 
 import (
-	"gostartup/cmd/user"
 	"gostartup/config/database"
+	"gostartup/internal/user"
 )
 
 func PasswordServiceModule() *useController {

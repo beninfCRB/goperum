@@ -11,6 +11,8 @@ import NewPassword from './pages/auth/newPassword'
 import MainLayout from './components/layout/MainLayout'
 import PageNotFound from './components/layout/pageNotFound'
 import { ProtectedRoute } from './components/layout/protectedRoute'
+import AreaIndex from './pages/area'
+import ResendVerficationEmail from './pages/auth/ResendVerificationEmail'
 
 function App() {
   return (
@@ -21,14 +23,15 @@ function App() {
         <Route path='register' element={<Register />} />
         <Route path='forgot-password' element={<ForgotPassword />} />
         <Route path='new-password/:reset_code' element={<NewPassword />} />
-        <Route path='verify-email/:verification_code' element={<VerifyEmail />} />
-        <Route path='welldone-verify-email' element={<WellDone content="Selamat! 1 langkah lagi untuk menyelesaikan pendaftaran dengan verifikasi email mu. mohon cek email dari sekarang...." />} />
+        <Route path='verify-email' element={<VerifyEmail />} />
+        <Route path='re-verify-email' element={<ResendVerficationEmail />} />
         <Route path='/admin' element={
           <ProtectedRoute>
             <MainLayout />
           </ProtectedRoute>}>
           <Route index path='dashboard' element={<Dashboard />}></Route>
           <Route path='customer' element={<CustomerIndex />}></Route>
+          <Route path='area' element={<AreaIndex />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>

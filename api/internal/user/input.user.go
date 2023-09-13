@@ -20,6 +20,10 @@ type ForgotPasswordInput struct {
 	Email string `json:"email" binding:"required,email"`
 }
 
+type VerificationEmailInput struct {
+	Email string `json:"email" binding:"required,email"`
+}
+
 type NewPasswordInput struct {
 	Password        string `json:"password" binding:"required"`
 	ConfirmPassword string `json:"confirm_password" binding:"required"`

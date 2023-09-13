@@ -3,7 +3,7 @@ run:
 dev:
 	go run cmd/main.go
 migrate:
-	go run config/database/migration/migrate.database.go
+	go run cmd/migrate/migrate.database.go
 docker-build:
 	docker build -t go-startup-image .
 docker-run:

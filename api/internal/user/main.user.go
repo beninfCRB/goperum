@@ -1,10 +1,10 @@
 package user
 
 import (
-	"gostartup/cmd/auth"
-	"gostartup/cmd/mac_device"
-	"gostartup/cmd/verification_user"
 	"gostartup/config/database"
+	"gostartup/internal/auth"
+	"gostartup/internal/mac_device"
+	"gostartup/internal/verification_user"
 )
 
 func UserModule() *useController {

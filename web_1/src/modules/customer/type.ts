@@ -3,5 +3,6 @@ export interface CustomerType {
     nik?: string,
     name?: string,
     address?: string,
-    handphone?: string
+    handphone?: string,
+    work?: string,
 }

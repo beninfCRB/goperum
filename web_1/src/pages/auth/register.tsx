@@ -14,7 +14,7 @@ const Register = () => {
     useEffect(() => {
         if (isSuccess) {
             form.resetFields()
-            navigate('/welldone-verify-email')
+            navigate('/verify-email')
             message.success("Verification code email have been sent, please check email")
         }
         if (isError) {

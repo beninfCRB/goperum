@@ -1,13 +1,13 @@
 package route
 
 import (
-	"gostartup/cmd/area"
-	"gostartup/cmd/auth"
-	"gostartup/cmd/customer"
-	"gostartup/cmd/password_reset"
-	"gostartup/cmd/user"
-	"gostartup/cmd/verification_user"
 	"gostartup/config/database"
+	"gostartup/internal/area"
+	"gostartup/internal/auth"
+	"gostartup/internal/customer"
+	"gostartup/internal/password_reset"
+	"gostartup/internal/user"
+	"gostartup/internal/verification_user"
 	"gostartup/pkg/middleware"
 	"net/http"
 	"os"
@@ -33,7 +33,8 @@ func PublicAPIRoutes(r *gin.RouterGroup) {
 	r.POST("/sessions", userModule.Login)
 	r.POST("/refresh-token", userModule.RefreshToken)
 	r.POST("/logout", userModule.Logout)
-	r.POST("/verify-email/:verification_code", verificatioUserModule.VerificationUser)
+	r.POST("/verify-email", verificatioUserModule.VerificationUser)
+	r.POST("/re-verify-email", userModule.ResendCodeVerification)
 	r.POST("/forgot-password", passwordResetModule.ForgotPassword)
 	r.POST("/new-password/:reset_code", passwordResetModule.NewPassword)
 }

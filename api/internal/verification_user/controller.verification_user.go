@@ -17,8 +17,19 @@ func ResetPasswordController(passwordResetService Service) *useController {
 }
 
 func (r *useController) VerificationUser(c *gin.Context) {
-	param := c.Param("verification_code")
-	code := util.Encode(param)
+	var input VerificationEmailInput
+
+	err := c.ShouldBindJSON(&input)
+	if err != nil {
+		errors := util.ErrorValidation(err)
+		errorMessage := gin.H{"errors": errors}
+
+		response := util.Response("Verifiaction code not validated", http.StatusUnprocessableEntity, "error", errorMessage)
+		c.JSON(http.StatusUnprocessableEntity, response)
+		return
+	}
+
+	code := util.Encode(input.VerificationCode)
 
 	email, err := r.useService.GetEmailNewPassword(code)
 	if err != nil {

@@ -26,8 +26,13 @@ export const useRegister = () => {
 };
 
 export const useVerifyEmail = () => {
-    return useMutation((code: any) =>
-        axiosInstance.post(`${base_url}${verifyEmail}/${code}`));
+    return useMutation((values: any) =>
+        axiosInstance.post(`${base_url}${verifyEmail}`, values));
+};
+
+export const useReVerifyEmail = () => {
+    return useMutation((values: any) =>
+        axiosInstance.post(`${base_url}re-${verifyEmail}`, values));
 };
 
 export const useForgotPassword = () => {

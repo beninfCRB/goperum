@@ -1,18 +1,15 @@
-import { Button, message } from 'antd'
+import { Form, Spin, message } from 'antd'
 import { useEffect } from 'react'
 import { useVerifyEmail } from '../../modules/auth'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { fetch } from '../../utils/reponse'
+import { FormVerificationEmail } from '../../modules/auth/form'
 
 const VerifyEmail = () => {
-    const { isSuccess, isError, error, mutateAsync } = useVerifyEmail()
-    const { verification_code } = useParams()
+    const [form] = Form.useForm()
+    const { isLoading, isSuccess, isError, error, mutateAsync } = useVerifyEmail()
     const navigate = useNavigate()
     const _fetch = new fetch()
-
-    const verify = () => {
-        mutateAsync(verification_code)
-    }
 
     useEffect(() => {
         if (isSuccess) {
@@ -24,12 +21,29 @@ const VerifyEmail = () => {
         }
     }, [isSuccess, isError])
 
+    const onSubmit = () => {
+        form.validateFields().then(async (values) => {
+            await mutateAsync(values)
+        }).catch((errorInfo) => {
+            Object.keys(errorInfo.errorFields).map((error) => {
+                return form.scrollToField(errorInfo.errorFields[error].name[0])
+            })
+        });
+    };
+
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-gray-300">
             <div className="flex flex-col bg-white shadow-md px-4 sm:px-6 md:px-8 lg:px-10 py-8 rounded-md w-full max-w-xs">
                 <div className="font-medium self-center text-xl sm:text-2xl uppercase text-gray-800">Verifikasi Email</div>
                 <div className="mt-10 text-center">
-                    <Button type='primary' onClick={verify}>Verifikasi</Button>
+                    <Spin
+                        spinning={isLoading}
+                    >
+                        <FormVerificationEmail
+                            form={form}
+                            onSubmit={onSubmit}
+                        />
+                    </Spin>
                 </div>
             </div>
         </div>

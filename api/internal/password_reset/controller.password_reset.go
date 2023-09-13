@@ -1,7 +1,7 @@
 package password_reset
 
 import (
-	"gostartup/cmd/user"
+	"gostartup/internal/user"
 	"gostartup/pkg/util"
 	"net/http"
 	"os"
@@ -59,6 +59,8 @@ func (r *useController) ForgotPassword(c *gin.Context) {
 
 	emailData := util.EmailData{
 		URL:       os.Getenv("URL_CLIENT") + "/new-password/" + code,
+		Title: "reset your account",
+		Code: code,
 		FirstName: firstName,
 		Subject:   "Your reset code",
 	}

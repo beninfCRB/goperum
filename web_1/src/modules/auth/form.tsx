@@ -1,4 +1,4 @@
-import { MailOutlined, LockOutlined } from '@ant-design/icons';
+import { MailOutlined, LockOutlined, KeyOutlined } from '@ant-design/icons';
 import { Button, Form, FormInstance, Input } from 'antd'
 import { UserType } from '../profile';
 import { Link } from 'react-router-dom';
@@ -22,6 +22,18 @@ interface forgotPasswordFormType {
 
 interface newPasswordFormType {
     form: FormInstance;
+    onSubmit: () => void;
+}
+
+interface verificationEmailFormType {
+    form: FormInstance;
+    onSubmit: () => void;
+}
+
+
+interface reverificationEmailFormType {
+    form: FormInstance;
+    success: boolean;
     onSubmit: () => void;
 }
 
@@ -257,6 +269,82 @@ export const FormNewPassword = (props: newPasswordFormType) => {
             <Form.Item className='text-center'>
                 <Button type="primary" htmlType="submit" onClick={props.onSubmit}>
                     KIRIM
+                </Button>
+            </Form.Item>
+        </Form>
+    )
+}
+
+
+export const FormVerificationEmail = (props: verificationEmailFormType) => {
+    return (
+        <Form
+            form={props.form}
+            layout='vertical'
+            name="normal_verificationEmail"
+            className="login-form box"
+            initialValues={{
+                remember: true,
+            }}
+        >
+            <Form.Item
+                name="verification_code"
+                label='Kode'
+                hasFeedback
+                rules={[
+                    {
+                        required: true,
+                        message: 'Masukan Kode!',
+                    },
+                ]}
+            >
+                <Input prefix={<KeyOutlined className="site-form-item-icon" />} placeholder="Kode" />
+            </Form.Item>
+            <div className='mt-0 text-right'>
+                <Link to={'/re-verify-email'}><small>Kirim ulang kode verifikasi</small></Link>
+            </div>
+
+            <Form.Item className='text-center mt-4'>
+                <Button type="primary" htmlType="submit" onClick={props.onSubmit}>
+                    KIRIM
+                </Button>
+            </Form.Item>
+        </Form>
+    )
+}
+
+export const FormReVerificationEmail = (props: reverificationEmailFormType) => {
+    return (
+        <Form
+            form={props.form}
+            layout='vertical'
+            name="normal_reverificationEmail"
+            className="login-form box"
+            initialValues={{
+                remember: true,
+            }}
+        >
+            <Form.Item
+                name="email"
+                label='Email'
+                hasFeedback
+                rules={[
+                    {
+                        type: "email",
+                        required: true,
+                        message: 'Masukan Email!',
+                    },
+                ]}
+            >
+                <Input disabled={props.success} prefix={<MailOutlined className="site-form-item-icon" />} placeholder="Email" />
+            </Form.Item>
+            <div className='mt-0 text-right'>
+                <Link to={'/verify-email'}><small>Udah punya kode verifikasi email ?</small></Link>
+            </div>
+
+            <Form.Item className='text-center mt-4'>
+                <Button type="primary" htmlType="submit" onClick={props.onSubmit}>
+                    {props.success ? 'KIRIM ULANG' : 'KIRIM'}
                 </Button>
             </Form.Item>
         </Form>

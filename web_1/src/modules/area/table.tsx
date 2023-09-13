@@ -1,79 +1,65 @@
 import { Button, Spin, Table, Tooltip } from 'antd';
 import { ColumnsType } from 'antd/es/table';
-import { CustomerType } from '.';
+import { AreaType } from '.';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 
-export interface tableCustomerProps {
-    data: Array<CustomerType>;
+export interface tableAreaProps {
+    data: Array<AreaType>;
     onLoading: boolean;
     onEdit: (id: string) => void;
     onDelete: (id: string) => void;
 }
 
-const TableCustomer = (props: tableCustomerProps) => {
-    const columns: ColumnsType<CustomerType> = [
+const TableArea = (props: tableAreaProps) => {
+    const columns: ColumnsType<AreaType> = [
         {
-            key: 'name',
-            title: 'Name',
-            dataIndex: 'name',
-            width: '30%',
+            key: 'blok',
+            title: 'Blok',
+            dataIndex: 'blok',
+            width: '40%',
             sorter: {
-                compare: (a: any, b: any) => a.name - b.name,
+                compare: (a: any, b: any) => a.blok - b.blok,
                 multiple: 1
-            },
-            sortDirections: ['descend'],
-        },
-        {
-            key: 'nik',
-            title: 'Nik',
-            dataIndex: 'nik',
-            width: '30%',
-            sorter: {
-                compare: (a: any, b: any) => a.nik - b.nik,
-                multiple: 2
-            },
-            sortDirections: ['descend'],
-        },
-        {
-            key: 'address',
-            title: 'Address',
-            dataIndex: 'address',
-            width: '40%',
-            sorter: {
-                compare: (a: any, b: any) => a.adrress - b.address,
-                multiple: 3
-            },
-            sortDirections: ['descend'],
-        },
-        {
-            key: 'handphone',
-            title: 'Handphone',
-            dataIndex: 'handphone',
-            width: '30%',
-            sorter: {
-                compare: (a: any, b: any) => a.handphone - b.handphone,
-                multiple: 4
-            },
-            sortDirections: ['descend'],
-        },
-        {
-            key: 'work',
-            title: 'Pekerjaan',
-            dataIndex: 'work',
-            width: '40%',
-            sorter: {
-                compare: (a: any, b: any) => a.work - b.work,
-                multiple: 5
             },
             sortDirections: ['descend'],
             filters:
                 props.data.map((value) => {
-                    return { text: String(value.work), value: String(value.work) }
+                    return { text: String(value.blok), value: String(value.blok) }
                 })
             ,
             filterMode: 'tree',
             filterSearch: true,
-            onFilter: (value: any, record: any) => record.work.startsWith(value),
+            onFilter: (value: any, record: any) => record.blok.startsWith(value),
+        },
+        {
+            key: 'kavling',
+            title: 'Kavling',
+            dataIndex: 'kavling',
+            width: '40%',
+            sorter: {
+                compare: (a: any, b: any) => a.kavling - b.kavling,
+                multiple: 2
+            },
+            sortDirections: ['descend'],
+            filters:
+                props.data.map((value) => {
+                    return { text: String(value.kavling), value: String(value.kavling) }
+                })
+            ,
+            filterMode: 'tree',
+            filterSearch: true,
+            onFilter: (value: any, record: any) => record.kavling.startsWith(value),
+        },
+        {
+            key: 'sertifikat',
+            title: 'Sertifikat',
+            dataIndex: 'sertifikat',
+            width: '40%',
+            sorter: {
+                compare: (a: any, b: any) => a.sertifikat - b.sertifikat,
+                multiple: 3
+            },
+            sortDirections: ['descend'],
         },
         {
             key: '',
@@ -107,4 +93,4 @@ const TableCustomer = (props: tableCustomerProps) => {
     );
 }
 
-export default TableCustomer
+export default TableArea

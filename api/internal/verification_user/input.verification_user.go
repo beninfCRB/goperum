@@ -7,3 +7,7 @@ type VerificationUserInput struct {
 	VerificationCode string    `json:"verification_code" binding:"required"`
 	ExpiredAt        time.Time `json:"expired_at" binding:"required"`
 }
+
+type VerificationEmailInput struct{
+	VerificationCode string    `json:"verification_code" binding:"required"`
+}

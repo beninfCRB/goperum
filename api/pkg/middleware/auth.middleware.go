@@ -1,8 +1,8 @@
 package middleware
 
 import (
-	"gostartup/cmd/auth"
-	"gostartup/cmd/user"
+	"gostartup/internal/auth"
+	"gostartup/internal/user"
 	"gostartup/pkg/util"
 	"net/http"
 	"strings"

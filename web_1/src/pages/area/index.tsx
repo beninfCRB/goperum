@@ -1,43 +1,43 @@
 import { Button, Card, Form, Modal, Tooltip, message } from "antd"
-import TableCustomer from "../../modules/customer/table"
+import TableArea from "../../modules/area/table"
 import { PlusCircleOutlined } from "@ant-design/icons"
 import { useEffect, useState } from "react"
-import CustomerForm from "../../modules/customer/form"
-import { useAddCustomer, useCustomer, useCustomerAll, useDeleteCustomer, useUpdateCustomer } from "../../modules/customer"
-import CustomerStore from "../../modules/customer/state"
+import AreaForm from "../../modules/area/form"
+import { useAddArea, useArea, useAreaAll, useDeleteArea, useUpdateArea } from "../../modules/area"
+import AreaStore from "../../modules/area/state"
 import { MESSAGE_TEXT } from "../../static/text"
 import { fetch } from "../../utils/reponse"
 
-const CustomerIndex = () => {
+const AreaIndex = () => {
     const [isModalAddOpen, setIsModalAddOpen] = useState<boolean>(false);
     const [isModalEditOpen, setIsModalEditOpen] = useState<boolean>(false);
     const [_id, setId] = useState<string>('')
-    const customerGetAllMutation = useCustomerAll()
-    const customerDeleteMutation = useDeleteCustomer()
-    const customerState = CustomerStore()
+    const AreaGetAllMutation = useAreaAll()
+    const AreaDeleteMutation = useDeleteArea()
+    const AreaState = AreaStore()
     const _fetch = new fetch()
 
     useEffect(() => {
-        if (customerGetAllMutation.data) {
-            getData(customerGetAllMutation.data)
+        if (AreaGetAllMutation.data) {
+            getData(AreaGetAllMutation.data)
         }
-    }, [customerGetAllMutation.data])
+    }, [AreaGetAllMutation.data])
 
     useEffect(() => {
-        if (customerDeleteMutation.isSuccess) {
-            customerGetAllMutation.refetch()
-            message.success(customerDeleteMutation?.data?.data?.Meta?.Message)
+        if (AreaDeleteMutation.isSuccess) {
+            AreaGetAllMutation.refetch()
+            message.success(AreaDeleteMutation.data?.data?.Meta?.Message)
         }
-        if (customerDeleteMutation.isError) {
-            message.success(_fetch.getAxiosMessage(customerDeleteMutation.error))
+        if (AreaDeleteMutation.isError) {
+            message.success(_fetch.getAxiosMessage(AreaDeleteMutation.error))
         }
         return () => {
-            customerGetAllMutation.refetch()
+            AreaGetAllMutation.refetch()
         }
-    }, [customerDeleteMutation.isSuccess])
+    }, [AreaDeleteMutation.isSuccess])
 
     const getData = (data: any) => {
-        customerState.getAll(data)
+        AreaState.getAll(data)
     }
 
     const onEdit = (id: string) => {
@@ -46,7 +46,7 @@ const CustomerIndex = () => {
     }
 
     const onDelete = (id: string) => {
-        customerDeleteMutation.mutateAsync(id)
+        AreaDeleteMutation.mutateAsync(id)
     }
 
     const showModal = () => {
@@ -70,17 +70,17 @@ const CustomerIndex = () => {
                 </Tooltip>
             }
         >
-            <TableCustomer
-                data={customerState.multiple}
-                onLoading={customerGetAllMutation.isLoading}
+            <TableArea
+                data={AreaState.multiple}
+                onLoading={AreaGetAllMutation.isLoading}
                 onEdit={onEdit}
                 onDelete={onDelete}
             />
-            <AddCustomer
+            <AddArea
                 modal={isModalAddOpen}
                 onCancel={onCancel}
             />
-            <EditCustomer
+            <EditArea
                 id={_id}
                 modal={isModalEditOpen}
                 onCancel={onCancel}
@@ -89,20 +89,20 @@ const CustomerIndex = () => {
     )
 }
 
-export default CustomerIndex
+export default AreaIndex
 
-const AddCustomer = (props: {
+const AddArea = (props: {
     modal: boolean;
     onCancel: () => void;
 }) => {
     const [form] = Form.useForm()
-    const addCustomer = useAddCustomer()
-    const customerMutation = useCustomerAll()
+    const addArea = useAddArea()
+    const AreaMutation = useAreaAll()
     const _fetch = new fetch()
 
     const onSubmit = () => {
         form.validateFields().then(async (values) => {
-            await addCustomer.mutateAsync(values)
+            await addArea.mutateAsync(values)
         }).catch((errorInfo) => {
             Object.keys(errorInfo.errorFields).map((error) => {
                 return form.scrollToField(errorInfo.errorFields[error].name[0])
@@ -111,19 +111,19 @@ const AddCustomer = (props: {
     };
 
     useEffect(() => {
-        if (addCustomer.isSuccess) {
-            message.success(addCustomer.data?.data?.Meta?.Message)
+        if (addArea.isSuccess) {
+            message.success(addArea?.data?.data?.Meta?.Message)
             props.onCancel()
         }
-        if (addCustomer.isError) {
-            message.error(_fetch.getAxiosMessage(addCustomer.error))
+        if (addArea.isError) {
+            message.error(_fetch.getAxiosMessage(addArea.error))
             props.onCancel()
         }
         return () => {
-            customerMutation.refetch()
+            AreaMutation.refetch()
             form.resetFields()
         }
-    }, [addCustomer.isSuccess, addCustomer.isError])
+    }, [addArea.isSuccess, addArea.isError])
 
     return (
         <Modal
@@ -133,28 +133,28 @@ const AddCustomer = (props: {
             onCancel={props.onCancel}
             onOk={onSubmit}
         >
-            <CustomerForm
+            <AreaForm
                 form={form}
             />
         </Modal>
     )
 }
-const EditCustomer = (props: {
+const EditArea = (props: {
     id: string;
     modal: boolean;
     onCancel: () => void;
 }) => {
     const [form] = Form.useForm()
-    const customerGetMutation = useCustomer()
-    const editCustomer = useUpdateCustomer()
-    const customerMutation = useCustomerAll()
+    const AreaGetMutation = useArea()
+    const editArea = useUpdateArea()
+    const AreaMutation = useAreaAll()
     const _fetch = new fetch()
 
     const onSubmit = () => {
         form.validateFields().then(async (values) => {
             console.log(props.id);
 
-            await editCustomer.mutateAsync({
+            await editArea.mutateAsync({
                 ...values,
                 id: props.id
             })
@@ -167,29 +167,29 @@ const EditCustomer = (props: {
 
     useEffect(() => {
         if (props.id) {
-            customerGetMutation.mutateAsync(props.id)
+            AreaGetMutation.mutateAsync(props.id)
         }
     }, [props.id])
 
     useEffect(() => {
-        if (customerGetMutation.data) {
-            form.setFieldsValue(customerGetMutation.data?.data?.Data)
+        if (AreaGetMutation.data) {
+            form.setFieldsValue(AreaGetMutation.data?.data?.Data)
         }
-    }, [customerGetMutation.data])
+    }, [AreaGetMutation.data])
 
     useEffect(() => {
-        if (editCustomer.isSuccess) {
-            message.success(editCustomer.data?.data?.Meta?.Message)
+        if (editArea.isSuccess) {
+            message.success(editArea?.data?.data?.Meta?.Message)
             props.onCancel()
         }
-        if (editCustomer.isError) {
-            message.error(_fetch.getAxiosMessage(editCustomer.error))
+        if (editArea.isError) {
+            message.error(_fetch.getAxiosMessage(editArea.error))
             props.onCancel()
         }
         return () => {
-            customerMutation.refetch()
+            AreaMutation.refetch()
         }
-    }, [editCustomer.isSuccess, editCustomer.isError])
+    }, [editArea.isSuccess, editArea.isError])
 
     return (
         <Modal
@@ -199,7 +199,7 @@ const EditCustomer = (props: {
             onCancel={props.onCancel}
             onOk={onSubmit}
         >
-            <CustomerForm
+            <AreaForm
                 form={form}
             />
         </Modal>

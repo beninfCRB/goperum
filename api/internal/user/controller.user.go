@@ -2,10 +2,10 @@ package user
 
 import (
 	"fmt"
-	"gostartup/cmd/auth"
-	"gostartup/cmd/mac_device"
-	"gostartup/cmd/verification_user"
 	"gostartup/config/database/entity"
+	"gostartup/internal/auth"
+	"gostartup/internal/mac_device"
+	"gostartup/internal/verification_user"
 	"gostartup/pkg/util"
 	"net/http"
 	"os"
@@ -94,7 +94,9 @@ func (r *useController) RegisterUser(c *gin.Context) {
 	}
 
 	emailData := util.EmailData{
-		URL:       os.Getenv("URL_CLIENT") + "/verify-email/" + code,
+		URL:       os.Getenv("URL_CLIENT") + "/verify-email",
+		Title: "verification account",
+		Code: code,
 		FirstName: firstName,
 		Subject:   "Your account verification code",
 	}
@@ -105,6 +107,64 @@ func (r *useController) RegisterUser(c *gin.Context) {
 
 	formatter := UserFormat(user, accessToken, refreshToken)
 	response := util.Response("Account has been registered", http.StatusCreated, "success", formatter)
+	c.JSON(http.StatusCreated, response)
+}
+
+func (r *useController) ResendCodeVerification(c *gin.Context) {
+	var input VerificationEmailInput
+	code := randstr.String(20)
+
+	verification_code := util.Encode(code)
+
+	err := c.ShouldBindJSON(&input)
+	if err != nil {
+		errors := util.ErrorValidation(err)
+		errorMessage := gin.H{"errors": errors}
+
+		response := util.Response("Login failed", http.StatusUnprocessableEntity, "error", errorMessage)
+		c.JSON(http.StatusUnprocessableEntity, response)
+		return
+	}
+
+	user, err := r.useService.GetEmail(input.Email)
+	if err != nil {
+		errorMessage := gin.H{"errors": err.Error()}
+
+		response := util.Response("Login failed", http.StatusUnprocessableEntity, "error", errorMessage)
+		c.JSON(http.StatusUnprocessableEntity, response)
+		return
+	}
+
+	var inputVerification verification_user.VerificationUserInput
+	inputVerification.Email = user.Email
+	inputVerification.VerificationCode = verification_code
+	inputVerification.ExpiredAt = time.Now().Add(5 * time.Minute)
+
+	save, err := r.verificationService.SaveVerificationUser(inputVerification)
+	if err != nil {
+		response := util.Response("Verification code has been failed", http.StatusBadRequest, "error", nil)
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	var firstName = user.Name
+
+	if strings.Contains(firstName, " ") {
+		firstName = strings.Split(firstName, " ")[1]
+	}
+
+	emailData := util.EmailData{
+		URL:       os.Getenv("URL_CLIENT") + "/verify-email",
+		Title: "verification account",
+		Code: code,
+		FirstName: firstName,
+		Subject:   "Your account verification code",
+	}
+
+	util.SendEmail(&user, &emailData)
+
+	formatter := verification_user.VerificationUserFormat(save)
+	response := util.Response("Verification code sent", http.StatusCreated, "success", formatter)
 	c.JSON(http.StatusCreated, response)
 }
 
