@@ -5,20 +5,24 @@ import Login from './pages/auth/login'
 import CustomerIndex from './pages/customer'
 import Register from './pages/auth/register'
 import VerifyEmail from './pages/auth/verifyEmail'
-import WellDone from './components/layout/welldone'
 import ForgotPassword from './pages/auth/forgotPassword'
 import NewPassword from './pages/auth/newPassword'
 import MainLayout from './components/layout/MainLayout'
 import PageNotFound from './components/layout/pageNotFound'
-import { ProtectedRoute } from './components/layout/protectedRoute'
 import AreaIndex from './pages/area'
-import ResendVerficationEmail from './pages/auth/ResendVerificationEmail'
+import ResendVerficationEmail from './pages/auth/resendVerificationEmail'
+import Switcher from './components/layout/switcher'
+import { ProtectedRoute } from './components/layout/ProtectedRoute'
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Login />} />
+      <Switcher>
+        <Route path='/' element={
+          <ProtectedRoute>
+            <Login />
+          </ProtectedRoute>
+        } />
         <Route path='*' element={<PageNotFound />} />
         <Route path='register' element={<Register />} />
         <Route path='forgot-password' element={<ForgotPassword />} />
@@ -33,7 +37,7 @@ function App() {
           <Route path='customer' element={<CustomerIndex />}></Route>
           <Route path='area' element={<AreaIndex />}></Route>
         </Route>
-      </Routes>
+      </Switcher>
     </BrowserRouter>
   )
 }

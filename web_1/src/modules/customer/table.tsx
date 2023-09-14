@@ -2,6 +2,7 @@ import { Button, Spin, Table, Tooltip } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import { CustomerType } from '.';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import { removeDuplicates } from '../../utils/filterable';
 
 export interface tableCustomerProps {
     data: Array<CustomerType>;
@@ -11,6 +12,10 @@ export interface tableCustomerProps {
 }
 
 const TableCustomer = (props: tableCustomerProps) => {
+    const work = props.data.map(({ work }) => {
+        return { text: work, value: work };
+    })
+
     const columns: ColumnsType<CustomerType> = [
         {
             key: 'name',
@@ -66,11 +71,7 @@ const TableCustomer = (props: tableCustomerProps) => {
                 multiple: 5
             },
             sortDirections: ['descend'],
-            filters:
-                props.data.map((value) => {
-                    return { text: String(value.work), value: String(value.work) }
-                })
-            ,
+            filters: removeDuplicates(work),
             filterMode: 'tree',
             filterSearch: true,
             onFilter: (value: any, record: any) => record.work.startsWith(value),

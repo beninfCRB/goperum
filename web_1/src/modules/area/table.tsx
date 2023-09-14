@@ -2,6 +2,7 @@ import { Button, Spin, Table, Tooltip } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import { AreaType } from '.';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import { removeDuplicates } from '../../utils/filterable';
 
 export interface tableAreaProps {
     data: Array<AreaType>;
@@ -11,6 +12,13 @@ export interface tableAreaProps {
 }
 
 const TableArea = (props: tableAreaProps) => {
+    const blok = props.data.map(({ blok }) => {
+        return { text: blok, value: blok }
+    })
+    const kavling = props.data.map(({ kavling }) => {
+        return { text: kavling, value: kavling }
+    })
+
     const columns: ColumnsType<AreaType> = [
         {
             key: 'blok',
@@ -22,11 +30,7 @@ const TableArea = (props: tableAreaProps) => {
                 multiple: 1
             },
             sortDirections: ['descend'],
-            filters:
-                props.data.map((value) => {
-                    return { text: String(value.blok), value: String(value.blok) }
-                })
-            ,
+            filters: removeDuplicates(blok),
             filterMode: 'tree',
             filterSearch: true,
             onFilter: (value: any, record: any) => record.blok.startsWith(value),
@@ -41,11 +45,7 @@ const TableArea = (props: tableAreaProps) => {
                 multiple: 2
             },
             sortDirections: ['descend'],
-            filters:
-                props.data.map((value) => {
-                    return { text: String(value.kavling), value: String(value.kavling) }
-                })
-            ,
+            filters: removeDuplicates(kavling),
             filterMode: 'tree',
             filterSearch: true,
             onFilter: (value: any, record: any) => record.kavling.startsWith(value),

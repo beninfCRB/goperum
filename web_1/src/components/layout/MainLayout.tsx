@@ -1,6 +1,6 @@
 "use client"
-import { Suspense } from 'react'
-import { ConfigProvider, Layout, Spin, theme } from 'antd';
+
+import { ConfigProvider, Layout, theme } from 'antd';
 import { Outlet } from 'react-router-dom';
 import customTheme from '../theme/theme';
 import Sidebar from './sidebar';
@@ -17,29 +17,27 @@ const MainLayout = () => {
         <ConfigProvider
             theme={{ ...customTheme }}
         >
-            <Suspense fallback={<Spin size='large' />}>
-                <Navbar menu={<MenuItem />} />
-                <Layout style={{ flexDirection: 'initial' }}>
-                    <Sidebar
-                        menu={<MenuItem />}
-                    />
-                    <Layout
-                        className="bg-[url('assets/image/bg-login.jpeg')] bg-cover bg-center"
+            <Navbar menu={<MenuItem />} />
+            <Layout style={{ flexDirection: 'initial' }}>
+                <Sidebar
+                    menu={<MenuItem />}
+                />
+                <Layout
+                    className="bg-[url('assets/image/bg-login.jpeg')] bg-cover bg-center"
+                >
+                    <Content
+                        className="content opacity-95"
+                        style={{
+                            margin: '16px 16px',
+                            padding: 24,
+                            minHeight: 280,
+                            background: colorBgContainer,
+                        }}
                     >
-                        <Content
-                            className="content opacity-95"
-                            style={{
-                                margin: '16px 16px',
-                                padding: 24,
-                                minHeight: 280,
-                                background: colorBgContainer,
-                            }}
-                        >
-                            <Outlet />
-                        </Content>
-                    </Layout>
+                        <Outlet />
+                    </Content>
                 </Layout>
-            </Suspense>
+            </Layout>
         </ConfigProvider>
     );
 };
