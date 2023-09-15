@@ -70,7 +70,7 @@ func (r *useController) RegisterUser(c *gin.Context) {
 
 	_, err = r.useService.UpdateRefreshToken(user.ID, refreshToken)
 	if err != nil {
-		response := util.Response("Register has been failed", http.StatusBadRequest, "error", nil)
+		response := util.Response("Store token has been failed", http.StatusBadRequest, "error", nil)
 		c.JSON(http.StatusBadRequest, response)
 		return
 	}
@@ -95,8 +95,8 @@ func (r *useController) RegisterUser(c *gin.Context) {
 
 	emailData := util.EmailData{
 		URL:       os.Getenv("URL_CLIENT") + "/verify-email",
-		Title: "verification account",
-		Code: code,
+		Title:     "verification account",
+		Code:      code,
 		FirstName: firstName,
 		Subject:   "Your account verification code",
 	}
@@ -121,7 +121,7 @@ func (r *useController) ResendCodeVerification(c *gin.Context) {
 		errors := util.ErrorValidation(err)
 		errorMessage := gin.H{"errors": errors}
 
-		response := util.Response("Login failed", http.StatusUnprocessableEntity, "error", errorMessage)
+		response := util.Response("Login has been failed", http.StatusUnprocessableEntity, "error", errorMessage)
 		c.JSON(http.StatusUnprocessableEntity, response)
 		return
 	}
@@ -130,7 +130,7 @@ func (r *useController) ResendCodeVerification(c *gin.Context) {
 	if err != nil {
 		errorMessage := gin.H{"errors": err.Error()}
 
-		response := util.Response("Login failed", http.StatusUnprocessableEntity, "error", errorMessage)
+		response := util.Response("Login has been failed", http.StatusUnprocessableEntity, "error", errorMessage)
 		c.JSON(http.StatusUnprocessableEntity, response)
 		return
 	}
@@ -155,8 +155,8 @@ func (r *useController) ResendCodeVerification(c *gin.Context) {
 
 	emailData := util.EmailData{
 		URL:       os.Getenv("URL_CLIENT") + "/verify-email",
-		Title: "verification account",
-		Code: code,
+		Title:     "verification account",
+		Code:      code,
 		FirstName: firstName,
 		Subject:   "Your account verification code",
 	}
@@ -177,7 +177,7 @@ func (r *useController) Login(c *gin.Context) {
 		errors := util.ErrorValidation(err)
 		errorMessage := gin.H{"errors": errors}
 
-		response := util.Response("Login failed", http.StatusUnprocessableEntity, "error", errorMessage)
+		response := util.Response("Email or password is incorrect", http.StatusUnprocessableEntity, "error", errorMessage)
 		c.JSON(http.StatusUnprocessableEntity, response)
 		return
 	}
@@ -186,7 +186,7 @@ func (r *useController) Login(c *gin.Context) {
 	if err != nil {
 		errorMessage := gin.H{"errors": err.Error()}
 
-		response := util.Response("Login failed", http.StatusUnprocessableEntity, "error", errorMessage)
+		response := util.Response("Email not registered", http.StatusUnprocessableEntity, "error", errorMessage)
 		c.JSON(http.StatusUnprocessableEntity, response)
 		return
 	}
@@ -206,28 +206,28 @@ func (r *useController) Login(c *gin.Context) {
 
 	accessToken, err := r.authService.GenerateAccessToken(loggedinUser.ID.String())
 	if err != nil {
-		response := util.Response("Login failed", http.StatusBadRequest, "error", nil)
+		response := util.Response("Login has been failed", http.StatusBadRequest, "error", nil)
 		c.JSON(http.StatusBadRequest, response)
 		return
 	}
 
 	refreshToken, err := r.authService.GenerateRefreshToken(loggedinUser.ID.String())
 	if err != nil {
-		response := util.Response("Login failed", http.StatusBadRequest, "error", nil)
+		response := util.Response("Login has been failed", http.StatusBadRequest, "error", nil)
 		c.JSON(http.StatusBadRequest, response)
 		return
 	}
 
 	_, err = r.useService.UpdateRefreshToken(loggedinUser.ID, refreshToken)
 	if err != nil {
-		response := util.Response("Login failed", http.StatusBadRequest, "error", nil)
+		response := util.Response("Store token has been failed", http.StatusBadRequest, "error", nil)
 		c.JSON(http.StatusBadRequest, response)
 		return
 	}
 
 	_, err = r.macDeviceService.SaveMacDevice(loggedinUser.ID)
 	if err != nil {
-		response := util.Response("Login failed", http.StatusBadRequest, "error", nil)
+		response := util.Response("Store mac device has been failed", http.StatusBadRequest, "error", nil)
 		c.JSON(http.StatusBadRequest, response)
 		return
 	}
@@ -262,14 +262,14 @@ func (r *useController) Logout(c *gin.Context) {
 
 	_, err = r.useService.UpdateRefreshToken(user.ID, "")
 	if err != nil {
-		response := util.Response("Logout failed", http.StatusBadRequest, "error", nil)
+		response := util.Response("Logout has been failed", http.StatusBadRequest, "error", nil)
 		c.JSON(http.StatusBadRequest, response)
 		return
 	}
 
 	_, err = r.macDeviceService.DeleteMacDevice(user.ID)
 	if err != nil {
-		response := util.Response("Logout failed", http.StatusBadRequest, "error", nil)
+		response := util.Response("Logout has been failed", http.StatusBadRequest, "error", nil)
 		c.JSON(http.StatusBadRequest, response)
 		return
 	}

@@ -46,7 +46,7 @@ func (r *useController) ForgotPassword(c *gin.Context) {
 
 	save, err := r.useService.SavePasswordReset(input)
 	if err != nil {
-		response := util.Response("Reset password has been failed", http.StatusUnprocessableEntity, "error", nil)
+		response := util.Response("Store new password has been failed", http.StatusUnprocessableEntity, "error", nil)
 		c.JSON(http.StatusUnprocessableEntity, response)
 		return
 	}
@@ -59,8 +59,8 @@ func (r *useController) ForgotPassword(c *gin.Context) {
 
 	emailData := util.EmailData{
 		URL:       os.Getenv("URL_CLIENT") + "/new-password/" + code,
-		Title: "reset your account",
-		Code: code,
+		Title:     "reset your account",
+		Code:      code,
 		FirstName: firstName,
 		Subject:   "Your reset code",
 	}
@@ -68,7 +68,7 @@ func (r *useController) ForgotPassword(c *gin.Context) {
 	util.SendEmail(&user, &emailData)
 
 	formatter := PasswordResetFormat(save)
-	response := util.Response("Reset code has been sent", http.StatusCreated, "success", formatter)
+	response := util.Response("Reset code sent", http.StatusCreated, "success", formatter)
 	c.JSON(http.StatusCreated, response)
 }
 
