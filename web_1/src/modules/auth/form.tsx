@@ -75,7 +75,7 @@ export const FormLogin = (props: loginFormType) => {
                 />
             </Form.Item>
             <div className='mt-0 text-right'>
-                <Link to={'forgot-password'}><small>Lupa kata sandi?</small></Link>
+                <Link to={'forgot-password'}><small>lupa kata sandi?</small></Link>
             </div>
 
 
@@ -202,6 +202,9 @@ export const FormForgotPassword = (props: forgotPasswordFormType) => {
             >
                 <Input disabled={props.success} prefix={<MailOutlined className="site-form-item-icon" />} placeholder="Email" />
             </Form.Item>
+            <div className='mt-0 text-right'>
+                <Link to={'/'}><small>kembali ke login</small></Link>
+            </div>
 
 
             <Form.Item className='text-center'>
@@ -301,7 +304,7 @@ export const FormVerificationEmail = (props: verificationEmailFormType) => {
                 <Input prefix={<KeyOutlined className="site-form-item-icon" />} placeholder="Kode" />
             </Form.Item>
             <div className='mt-0 text-right'>
-                <Link to={'/re-verify-email'}><small>Kirim ulang kode verifikasi</small></Link>
+                <Link to={'/re-verify-email'}><small>kirim ulang kode verifikasi</small></Link>
             </div>
 
             <Form.Item className='text-center mt-4'>
@@ -339,7 +342,7 @@ export const FormReVerificationEmail = (props: reverificationEmailFormType) => {
                 <Input disabled={props.success} prefix={<MailOutlined className="site-form-item-icon" />} placeholder="Email" />
             </Form.Item>
             <div className='mt-0 text-right'>
-                <Link to={'/verify-email'}><small>Udah punya kode verifikasi email ?</small></Link>
+                <Link to={'/verify-email'}><small>sudah punya kode verifikasi email ?</small></Link>
             </div>
 
             <Form.Item className='text-center mt-4'>
