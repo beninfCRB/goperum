@@ -1,0 +1,8 @@
+# Logs
+logs
+*.log
+gin.log*
+
+#environtment
+.env*.local
+.env

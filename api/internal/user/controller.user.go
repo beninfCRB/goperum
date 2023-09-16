@@ -186,7 +186,7 @@ func (r *useController) Login(c *gin.Context) {
 	if err != nil {
 		errorMessage := gin.H{"errors": err.Error()}
 
-		response := util.Response("Email not registered", http.StatusUnprocessableEntity, "error", errorMessage)
+		response := util.Response("Email or password is incorrect", http.StatusUnprocessableEntity, "error", errorMessage)
 		c.JSON(http.StatusUnprocessableEntity, response)
 		return
 	}
