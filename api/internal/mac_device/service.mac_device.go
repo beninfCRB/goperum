@@ -27,7 +27,7 @@ func MacDeviceService(repository Respository) *service {
 func (s *service) SaveMacDevice(input uuid.UUID) (entity.MacDevice, error) {
 	mac, _ := util.GetMacAddr()
 	MacDevice := entity.MacDevice{}
-	MacDevice.UserId = input
+	MacDevice.UserID = input
 	MacDevice.MacAddress = mac
 	MacDevice.IsActive = true
 

@@ -9,7 +9,16 @@ import (
 func main() {
 	auto := database.NewDatabase()
 
-	mg := auto.AutoMigrate(&entity.User{}, &entity.Customer{}, &entity.Area{}, &entity.PasswordReset{}, &entity.VerificationUser{}, &entity.MacDevice{})
+	mg := auto.AutoMigrate(
+		&entity.RoleUser{},
+		&entity.User{},
+		&entity.Customer{},
+		&entity.Product{},
+		&entity.PasswordReset{},
+		&entity.VerificationUser{},
+		&entity.MacDevice{},
+		&entity.Marketing{},
+	)
 
 	if mg != nil {
 		fmt.Println("Migration Failed")

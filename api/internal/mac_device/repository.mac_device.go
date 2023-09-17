@@ -12,9 +12,6 @@ type Respository interface {
 	FindByMacAddress(userID uuid.UUID, macAddress string) (entity.MacDevice, error)
 	Count(userID uuid.UUID) (int64, error)
 	Delete(macDevice entity.MacDevice) (entity.MacDevice, error)
-	// FindByCode(code string) (entity.MacDevice, error)
-	// FindByEmail(email string) (entity.User, error)
-	// UpdateUser(user entity.User) (entity.User, error)
 }
 
 type repository struct {
@@ -58,31 +55,3 @@ func (r *repository) Count(userID uuid.UUID) (int64, error) {
 
 	return count.RowsAffected, nil
 }
-
-// func (r *repository) FindByCode(code string) (entity.MacDevice, error) {
-// 	var password entity.MacDevice
-// 	err := r.db.Where("verification_code=?", code).Find(&password).Error
-// 	if err != nil {
-// 		return password, err
-// 	}
-// 	return password, nil
-// }
-
-// func (r *repository) FindByEmail(email string) (entity.User, error) {
-// 	var user entity.User
-// 	err := r.db.Where("email=?", email).Find(&user).Error
-// 	if err != nil {
-// 		return user, err
-// 	}
-// 	return user, nil
-// }
-
-// func (r *repository) UpdateUser(user entity.User) (entity.User, error) {
-// 	err := r.db.Save(&user).Error
-
-// 	if err != nil {
-// 		return user, err
-// 	}
-
-// 	return user, nil
-// }

@@ -1,14 +1,14 @@
-package area
+package product
 
 import (
 	"github.com/google/uuid"
 )
 
-type AreaParamId struct {
+type ProductParamId struct {
 	ID uuid.UUID `uri:"id" binding:"required"`
 }
 
-type AreaInput struct {
+type ProductInput struct {
 	Blok       string `json:"blok" binding:"required"`
 	Kavling    string `json:"kavling" binding:"required"`
 	Sertifikat string `json:"sertifikat" binding:"required"`

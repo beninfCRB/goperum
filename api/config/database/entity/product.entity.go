@@ -2,7 +2,7 @@ package entity
 
 import "gostartup/config/database"
 
-type Area struct {
+type Product struct {
 	database.Base
 	Blok       string `gorm:"type:varchar(50)" json:"blok"`
 	Kavling    string `gorm:"type:varchar(50)" json:"kavling"`

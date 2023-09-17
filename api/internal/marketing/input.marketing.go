@@ -1,14 +1,14 @@
-package customer
+package marketing
 
 import (
 	"github.com/google/uuid"
 )
 
-type CustomerParamId struct {
+type MarketingParamId struct {
 	ID uuid.UUID `uri:"id" binding:"required"`
 }
 
-type CustomerInput struct {
+type MarketingInput struct {
 	Nik       string `json:"nik" binding:"required"`
 	Name      string `json:"name" binding:"required"`
 	Address   string `json:"address" binding:"required"`

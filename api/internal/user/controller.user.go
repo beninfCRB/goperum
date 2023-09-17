@@ -5,6 +5,7 @@ import (
 	"gostartup/config/database/entity"
 	"gostartup/internal/auth"
 	"gostartup/internal/mac_device"
+	"gostartup/internal/role_user"
 	"gostartup/internal/verification_user"
 	"gostartup/pkg/util"
 	"net/http"
@@ -24,20 +25,30 @@ type useController struct {
 	authService         auth.Service
 	verificationService verification_user.Service
 	macDeviceService    mac_device.Service
+	roleUserService     role_user.Service
 }
 
-func UserController(userService Service, authService auth.Service, verificationService verification_user.Service, macDeviceService mac_device.Service) *useController {
-	return &useController{userService, authService, verificationService, macDeviceService}
+func UserController(userService Service, authService auth.Service, verificationService verification_user.Service, macDeviceService mac_device.Service, roleUserService role_user.Service) *useController {
+	return &useController{userService, authService, verificationService, macDeviceService, roleUserService}
 }
 
 func (r *useController) RegisterUser(c *gin.Context) {
 	var input RegisterUserInput
 	duration, _ := strconv.Atoi(os.Getenv("COOKIE_EXPIRED"))
-	code := randstr.String(20)
 
+	code := randstr.String(20)
 	verification_code := util.Encode(code)
 
-	err := c.ShouldBindJSON(&input)
+	roleUser, err := r.roleUserService.FindRoleUserByCode("user")
+	if err != nil {
+		response := util.Response("Error to get role_user", http.StatusBadRequest, "error", nil)
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	input.RoleID = roleUser.ID
+
+	err = c.ShouldBindJSON(&input)
 	if err != nil {
 		errors := util.ErrorValidation(err)
 		errorMessage := gin.H{"errors": errors}
@@ -287,6 +298,7 @@ func (r *useController) RefreshToken(c *gin.Context) {
 		errors := util.ErrorValidation(err)
 		errorMessage := gin.H{"errors": errors}
 
+		r.Logout(c)
 		response := util.Response("Invalid refresh token", http.StatusUnprocessableEntity, "error", errorMessage)
 		c.JSON(http.StatusUnprocessableEntity, response)
 		return

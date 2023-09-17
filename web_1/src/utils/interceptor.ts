@@ -44,7 +44,6 @@ axiosInstance.interceptors.response.use(
 
                 return axiosInstance(originalRequest);
             } catch (refreshError) {
-                axiosInstance.post(`${base_url}logout`)
                 localStorage.removeItem('authorize')
                 localStorage.removeItem('user')
                 AuthStore.getState().isAuthenticated = false

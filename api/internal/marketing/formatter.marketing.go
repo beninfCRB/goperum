@@ -1,4 +1,4 @@
-package customer
+package marketing
 
 import (
 	"gostartup/config/database/entity"
@@ -6,7 +6,7 @@ import (
 	"github.com/google/uuid"
 )
 
-type customerFormat struct {
+type marketingFormat struct {
 	ID        uuid.UUID   `json:"id"`
 	Nik       string      `json:"nik"`
 	Name      string      `json:"name"`
@@ -16,15 +16,15 @@ type customerFormat struct {
 	User      interface{} `json:"user"`
 }
 
-func CustomerFormat(customer entity.Customer) customerFormat {
-	formatter := customerFormat{
-		ID:        customer.ID,
-		Nik:       customer.Nik,
-		Name:      customer.Name,
-		Address:   customer.Address,
-		Work:      customer.Work,
-		Handphone: customer.Handphone,
-		User:      customer.User,
+func MarketingFormat(marketing entity.Marketing) marketingFormat {
+	formatter := marketingFormat{
+		ID:        marketing.ID,
+		Nik:       marketing.Nik,
+		Name:      marketing.Name,
+		Address:   marketing.Address,
+		Work:      marketing.Work,
+		Handphone: marketing.Handphone,
+		User:      marketing.User,
 	}
 	return formatter
 }

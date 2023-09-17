@@ -1,4 +1,4 @@
-package area
+package product
 
 import (
 	"gostartup/config/database/entity"
@@ -6,19 +6,19 @@ import (
 	"github.com/google/uuid"
 )
 
-type areaFormat struct {
+type productFormat struct {
 	ID         uuid.UUID `json:"id"`
 	Blok       string    `json:"blok"`
 	Kavling    string    `json:"kavling"`
 	Sertifikat string    `json:"sertifikat"`
 }
 
-func AreaFormat(area entity.Area) areaFormat {
-	formatter := areaFormat{
-		ID:         area.ID,
-		Blok:       area.Blok,
-		Kavling:    area.Kavling,
-		Sertifikat: area.Sertifikat,
+func ProductFormat(product entity.Product) productFormat {
+	formatter := productFormat{
+		ID:         product.ID,
+		Blok:       product.Blok,
+		Kavling:    product.Kavling,
+		Sertifikat: product.Sertifikat,
 	}
 	return formatter
 }

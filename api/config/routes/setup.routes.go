@@ -2,10 +2,12 @@ package route
 
 import (
 	"gostartup/config/database"
-	"gostartup/internal/area"
 	"gostartup/internal/auth"
 	"gostartup/internal/customer"
+	"gostartup/internal/marketing"
 	"gostartup/internal/password_reset"
+	"gostartup/internal/product"
+	"gostartup/internal/role_user"
 	"gostartup/internal/user"
 	"gostartup/internal/verification_user"
 	"gostartup/pkg/middleware"
@@ -49,7 +51,9 @@ func PrivateAPIRoutes(r *gin.RouterGroup) {
 	r.POST("/avatars", userModule.UploadAvatar)
 	//===============================================================
 
-	//customer region
+	//region
+	role_user.RoleUserModule(r)
+	product.ProductModule(r)
 	customer.CustomerModule(r)
-	area.CustomerModule(r)
+	marketing.MarketingModule(r)
 }

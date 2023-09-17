@@ -5,6 +5,7 @@ import (
 
 	"github.com/google/uuid"
 	"gorm.io/gorm"
+	"gorm.io/gorm/clause"
 )
 
 type Respository interface {
@@ -35,21 +36,23 @@ func (r *repository) Save(user entity.User) (entity.User, error) {
 }
 
 func (r *repository) FindByEmail(email string) (entity.User, error) {
-	var user entity.User
-	err := r.db.Where("email=?", email).Find(&user).Error
+	var users entity.User
+	err := r.db.Where("email=?", email).Preload(clause.Associations).Find(&users).Error
+
 	if err != nil {
-		return user, err
+		return users, err
 	}
-	return user, nil
+
+	return users, nil
 }
 
 func (r *repository) FindByID(ID uuid.UUID) (entity.User, error) {
-	var user entity.User
-	err := r.db.Where("id=?", ID).Find(&user).Error
+	var users entity.User
+	err := r.db.Where("id=?", ID).Preload(clause.Associations).Find(&users).Error
 	if err != nil {
-		return user, err
+		return users, err
 	}
-	return user, nil
+	return users, nil
 }
 
 func (r *repository) Update(user entity.User) (entity.User, error) {

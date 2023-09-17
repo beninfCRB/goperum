@@ -32,6 +32,7 @@ func (s *service) RegisterUser(input RegisterUserInput) (entity.User, error) {
 	user := entity.User{}
 	user.Name = input.Name
 	user.Email = input.Email
+	user.RoleID = input.RoleID
 
 	if input.Password != input.ConfirmPassword {
 		return user, errors.New("password not match")
@@ -49,7 +50,6 @@ func (s *service) RegisterUser(input RegisterUserInput) (entity.User, error) {
 
 	user.PasswordHash = string(PasswordHash)
 	user.ConfirmPasswordHash = string(ConfirmPasswordHash)
-	user.Role = "user"
 
 	save, err := s.repository.Save(user)
 	if err != nil {

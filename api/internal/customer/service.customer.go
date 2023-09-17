@@ -28,6 +28,7 @@ func (s *service) CreateCustomer(input CustomerInput) (entity.Customer, error) {
 	customer.Name = input.Name
 	customer.Address = input.Address
 	customer.Work = input.Work
+	customer.UserID = input.UserID
 	customer.Handphone = input.Handphone
 	customer.CreatedBy = input.CreatedBy
 	customer.UpdatedBy = input.UpdatedBy

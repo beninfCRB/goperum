@@ -19,6 +19,7 @@ func CustomerController(customerService Service) *controller {
 
 func (r *controller) PostCustomer(c *gin.Context) {
 	var input CustomerInput
+	input.UserID = entity.AutoGenereteUserBy(c)
 	input.CreatedBy = entity.AutoGenereteUserBy(c)
 	input.UpdatedBy = entity.AutoGenereteUserBy(c)
 
@@ -51,6 +52,7 @@ func (r *controller) GetCustomer(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, response)
 		return
 	}
+
 	response := util.Response("List of customer", http.StatusOK, "success", customer)
 	c.JSON(http.StatusOK, response)
 }

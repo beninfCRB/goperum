@@ -18,16 +18,10 @@ type User struct {
 	ConfirmPasswordHash string         `gorm:"type:text" json:"confirm_password"`
 	AvatarFileName      string         `gorm:"type:text" json:"avatar"`
 	RefreshToken        string         `gorm:"type:text" json:"refresh_token"`
-	Role                string         `gorm:"type:varchar(10)" json:"role"`
+	RoleID              uuid.UUID      `gorm:"type:char(36)" json:"role_id"`
 	IsVerify            bool           `gorm:"default:false" json:"is_verify"`
 
-	MacDevice []MacDevice `gorm:"foreignKey:UserId;references:ID"`
-
-	CreatedCustomer []Customer `gorm:"foreignKey:CreatedBy;references:ID"`
-	UpdatedCustomer []Customer `gorm:"foreignKey:UpdatedBy;references:ID"`
-
-	CreatedArea []Area `gorm:"foreignKey:CreatedBy;references:ID"`
-	UpdatedArea []Area `gorm:"foreignKey:UpdatedBy;references:ID"`
+	RoleUser RoleUser `gorm:"foreignKey:RoleID;references:ID"`
 }
 
 func (u *User) BeforeCreate(tx *gorm.DB) (err error) {
