@@ -25,6 +25,7 @@ func MarketingService(repository Respository) *service {
 func (s *service) CreateMarketing(input MarketingInput) (entity.Marketing, error) {
 	marketing := entity.Marketing{}
 	marketing.Nik = input.Nik
+	marketing.Numbemployee = input.Numbemployee
 	marketing.Name = input.Name
 	marketing.Address = input.Address
 	marketing.Work = input.Work
@@ -65,6 +66,7 @@ func (s *service) UpdateMarketing(ID uuid.UUID, input MarketingInput) (entity.Ma
 	}
 
 	marketing.Nik = input.Nik
+	marketing.Numbemployee = input.Numbemployee
 	marketing.Name = input.Name
 	marketing.Address = input.Address
 	marketing.Work = input.Work

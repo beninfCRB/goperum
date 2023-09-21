@@ -18,6 +18,9 @@ func main() {
 		&entity.VerificationUser{},
 		&entity.MacDevice{},
 		&entity.Marketing{},
+		&entity.TypeDownPayment{},
+		&entity.TransactionStatus{},
+		&entity.ApprovalStatus{},
 	)
 
 	if mg != nil {

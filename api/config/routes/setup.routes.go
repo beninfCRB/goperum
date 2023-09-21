@@ -2,12 +2,15 @@ package route
 
 import (
 	"gostartup/config/database"
+	"gostartup/internal/approval_status"
 	"gostartup/internal/auth"
 	"gostartup/internal/customer"
 	"gostartup/internal/marketing"
 	"gostartup/internal/password_reset"
 	"gostartup/internal/product"
 	"gostartup/internal/role_user"
+	"gostartup/internal/transaction_status"
+	"gostartup/internal/type_down_payment"
 	"gostartup/internal/user"
 	"gostartup/internal/verification_user"
 	"gostartup/pkg/middleware"
@@ -56,4 +59,7 @@ func PrivateAPIRoutes(r *gin.RouterGroup) {
 	product.ProductModule(r)
 	customer.CustomerModule(r)
 	marketing.MarketingModule(r)
+	type_down_payment.TypeDownPaymentModule((r))
+	transaction_status.TransactionStatusModule(r)
+	approval_status.ApprovalStatusModule(r)
 }

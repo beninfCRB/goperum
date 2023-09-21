@@ -11,10 +11,10 @@ func RoleUserModule(r *gin.RouterGroup) {
 	service := RoleUserService(repo)
 	controller := RoleUserController(service)
 
-	r.POST("/role_users", controller.PostRoleUser)
-	r.GET("/role_users", controller.GetRoleUser)
-	r.GET("/role_users/:id", controller.GetRoleUserID)
-	r.PATCH("/role_users/:id", controller.UpdateRoleUser)
-	r.DELETE("/role_users/:id", controller.DeleteRoleUser)
-	r.DELETE("/role_users/code", controller.GetRoleUserByCode)
+	r.POST("/role-users", controller.PostRoleUser)
+	r.GET("/role-users", controller.GetRoleUser)
+	r.GET("/role-users/:id", controller.GetRoleUserID)
+	r.PATCH("/role-users/:id", controller.UpdateRoleUser)
+	r.DELETE("/role-users/:id", controller.DeleteRoleUser)
+	r.DELETE("/role-users/code", controller.GetRoleUserByCode)
 }

@@ -24,9 +24,15 @@ func ProductService(repository Respository) *service {
 
 func (s *service) CreateProduct(input ProductInput) (entity.Product, error) {
 	product := entity.Product{}
+	product.Name = input.Name
+	product.Model = input.Model
+	product.Type = input.Type
 	product.Blok = input.Blok
 	product.Kavling = input.Kavling
 	product.Sertifikat = input.Sertifikat
+	product.Price = input.Price
+	product.Description = input.Description
+	product.Stock = input.Stock
 	product.CreatedBy = input.CreatedBy
 	product.UpdatedBy = input.UpdatedBy
 
@@ -61,9 +67,15 @@ func (s *service) UpdateProduct(ID uuid.UUID, input ProductInput) (entity.Produc
 		return product, err
 	}
 
+	product.Name = input.Name
+	product.Model = input.Model
+	product.Type = input.Type
 	product.Blok = input.Blok
 	product.Kavling = input.Kavling
 	product.Sertifikat = input.Sertifikat
+	product.Price = input.Price
+	product.Description = input.Description
+	product.Stock = input.Stock
 	product.UpdatedBy = input.UpdatedBy
 
 	update, err := s.repository.Update(product)
