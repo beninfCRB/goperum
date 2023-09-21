@@ -37,9 +37,12 @@ func (s *service) SaveMacDevice(input uuid.UUID) (entity.MacDevice, error) {
 	}
 
 	limit, _ := strconv.ParseInt(os.Getenv("LIMIT_SIGNIN_USER"), 10, 64)
+	protect := os.Getenv("PROTECTION_LIMIT")
 
-	if count >= limit {
-		return MacDevice, errors.New("user limited access")
+	if protect == "true" {
+		if count >= limit {
+			return MacDevice, errors.New("user limited access")
+		}
 	}
 
 	save, err := s.repository.Save(MacDevice)
@@ -57,9 +60,12 @@ func (s *service) CountUser(input uuid.UUID) (bool, error) {
 	}
 
 	limit, _ := strconv.ParseInt(os.Getenv("LIMIT_SIGNIN_USER"), 10, 64)
+	protect := os.Getenv("PROTECTION_LIMIT")
 
-	if count >= limit {
-		return true, errors.New("user limited access")
+	if protect == "true" {
+		if count >= limit {
+			return true, errors.New("user limited access")
+		}
 	}
 
 	return false, nil

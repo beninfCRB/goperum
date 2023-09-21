@@ -4,10 +4,13 @@ import (
 	"gostartup/config/database"
 	"gostartup/internal/approval_status"
 	"gostartup/internal/auth"
+	"gostartup/internal/bank"
 	"gostartup/internal/customer"
 	"gostartup/internal/marketing"
 	"gostartup/internal/password_reset"
+	"gostartup/internal/payment_method"
 	"gostartup/internal/product"
+	"gostartup/internal/purchase_method"
 	"gostartup/internal/role_user"
 	"gostartup/internal/transaction_status"
 	"gostartup/internal/type_down_payment"
@@ -62,4 +65,7 @@ func PrivateAPIRoutes(r *gin.RouterGroup) {
 	type_down_payment.TypeDownPaymentModule((r))
 	transaction_status.TransactionStatusModule(r)
 	approval_status.ApprovalStatusModule(r)
+	payment_method.PaymentMethodModule(r)
+	bank.BankModule(r)
+	purchase_method.PurchaseMethodModule(r)
 }

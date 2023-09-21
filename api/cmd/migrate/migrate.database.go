@@ -21,6 +21,11 @@ func main() {
 		&entity.TypeDownPayment{},
 		&entity.TransactionStatus{},
 		&entity.ApprovalStatus{},
+		&entity.PaymentMethod{},
+		&entity.Bank{},
+		&entity.Transaction{},
+		&entity.PurchaseMethod{},
+		&entity.Payment{},
 	)
 
 	if mg != nil {
