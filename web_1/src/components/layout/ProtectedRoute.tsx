@@ -4,12 +4,12 @@ export const ProtectedRoute = ({ children }: { children: JSX.Element | JSX.Eleme
     const token = localStorage.getItem('authorize');
     const location = useLocation()
 
-    if (!token && location.pathname !== '/') {
-        return <Navigate to="/" />;
+    if (!token && location.pathname !== '/login') {
+        return <Navigate replace={true} to="login" />;
     }
 
-    if (token && location.pathname === '/') {
-        return <Navigate to={'admin/dashboard'} />
+    if (token && location.pathname === 'login') {
+        return <Navigate replace={true} to={'admin/dashboard'} />
     }
 
     return children;

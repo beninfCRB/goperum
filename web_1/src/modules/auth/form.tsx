@@ -75,7 +75,7 @@ export const FormLogin = (props: loginFormType) => {
                 />
             </Form.Item>
             <div className='mt-0 text-right'>
-                <Link to={'forgot-password'}><small>lupa kata sandi?</small></Link>
+                <Link replace to={'/forgot-password'}><small>lupa kata sandi?</small></Link>
             </div>
 
 
@@ -167,6 +167,9 @@ export const FormRegister = (props: registerFormType) => {
                     prefix={<LockOutlined className="site-form-item-icon" />}
                 />
             </Form.Item>
+            <div className='mt-0 text-right'>
+                <Link replace to={'/login'}><small>sudah punya akun?</small></Link>
+            </div>
 
             <Form.Item className='text-center'>
                 <Button type="primary" htmlType="submit" onClick={props.onSubmit}>
@@ -203,7 +206,7 @@ export const FormForgotPassword = (props: forgotPasswordFormType) => {
                 <Input disabled={props.success} prefix={<MailOutlined className="site-form-item-icon" />} placeholder="Email" />
             </Form.Item>
             <div className='mt-0 text-right'>
-                <Link to={'/'}><small>kembali ke login</small></Link>
+                <Link to={'/login'}><small>kembali ke login</small></Link>
             </div>
 
 

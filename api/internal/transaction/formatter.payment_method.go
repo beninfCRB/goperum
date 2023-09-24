@@ -7,20 +7,20 @@ import (
 )
 
 type transactionFormat struct {
-	ID                   uuid.UUID              `json:"id"`
-	Code                 string                 `json:"code"`
-	Customer             entity.Customer        `json:"customer"`
-	Marketing            entity.Marketing       `json:"marketing"`
-	Product              entity.Product         `json:"product"`
-	PurchaseMethod       entity.PurchaseMethod  `json:"purchase_method"`
-	DownPayment          uint64                 `json:"down_payment"`
-	TypeDownPayment      entity.TypeDownPayment `json:"type_down_payment"`
-	LengthInstallmentDP  uint64                 `json:"length_installments_dp"`
-	MonthlyInstallmentDP uint64                 `json:"monthly_installments_dp"`
-	Principal            uint64                 `json:"principal"`
-	LengthPrincipal      uint64                 `json:"length_principal"`
-	MonthlyPrincipal     uint64                 `json:"monthly_principal"`
-	TotalBill            uint64                 `json:"total_bill"`
+	ID                   uuid.UUID   `json:"id"`
+	Code                 string      `json:"code"`
+	Customer             interface{} `json:"customer"`
+	Marketing            interface{} `json:"marketing"`
+	Product              interface{} `json:"product"`
+	PurchaseMethod       interface{} `json:"purchase_method"`
+	DownPayment          uint64      `json:"down_payment"`
+	TypeDownPayment      interface{} `json:"type_down_payment"`
+	LengthInstallmentDP  uint64      `json:"length_installments_dp"`
+	MonthlyInstallmentDP uint64      `json:"monthly_installments_dp"`
+	Principal            uint64      `json:"principal"`
+	LengthPrincipal      uint64      `json:"length_principal"`
+	MonthlyPrincipal     uint64      `json:"monthly_principal"`
+	TotalBill            uint64      `json:"total_bill"`
 }
 
 func TransactionFormat(transaction entity.Transaction) transactionFormat {

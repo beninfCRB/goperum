@@ -1,63 +1,66 @@
 import { Form, FormInstance, Input } from 'antd'
-export interface AreaFormProps {
+import { FunctionComponent } from 'react';
+import SelectRoleUser from '../role-user/select';
+
+export interface TransactionStatusFormProps {
     form: FormInstance;
 }
 
-const AreaForm = (props: AreaFormProps) => {
+const TransactionStatusForm: FunctionComponent<TransactionStatusFormProps> = (props) => {
     return (
         <Form
-            key={'AreaForm'}
+            key={'TransactionStatusForm'}
             layout='vertical'
             form={props.form}
             initialValues={{ layout: 'vertical' }}
         >
             <Form.Item
-                label='Blok'
-                name={'blok'}
+                label='Kode'
+                name={'code'}
                 hasFeedback
                 rules={[
                     {
                         required: true,
-                        message: 'Masukan Blok'
+                        message: 'Masukan Kode'
                     }
                 ]}
             >
                 <Input
-                    placeholder='Masukan Blok'
+                    placeholder='Masukan Kode'
                 />
             </Form.Item>
             <Form.Item
-                label='Kavling'
-                name={'kavling'}
+                label='Nama'
+                name={'name'}
                 hasFeedback
                 rules={[
                     {
                         required: true,
-                        message: 'Masukan Kavling'
+                        message: 'Masukan Nama'
                     }
                 ]}
             >
                 <Input
-                    placeholder='Masukan Kavling'
+                    placeholder='Masukan Nama'
                 />
             </Form.Item>
             <Form.Item
-                label='No Sertifikat'
-                name={'sertifikat'}
+                label='Assign'
+                name={'role_user_id'}
                 hasFeedback
                 rules={[
                     {
                         required: true,
-                        message: 'Masukan No Sertifikat'
+                        message: 'Masukan Assign'
                     }
                 ]}
             >
-                <Input
-                    placeholder='Masukan No Sertifikat'
+                <SelectRoleUser
+                    placeholder='Masukan Nama'
                 />
             </Form.Item>
         </Form>
     )
 }
 
-export default AreaForm
+export default TransactionStatusForm

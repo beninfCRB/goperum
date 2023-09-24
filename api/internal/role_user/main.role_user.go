@@ -16,5 +16,5 @@ func RoleUserModule(r *gin.RouterGroup) {
 	r.GET("/role-users/:id", controller.GetRoleUserID)
 	r.PATCH("/role-users/:id", controller.UpdateRoleUser)
 	r.DELETE("/role-users/:id", controller.DeleteRoleUser)
-	r.DELETE("/role-users/code", controller.GetRoleUserByCode)
+	r.GET("/role-users/code", controller.GetRoleUserByCode)
 }

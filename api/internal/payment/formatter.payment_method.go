@@ -8,19 +8,19 @@ import (
 )
 
 type paymentFormat struct {
-	ID                uuid.UUID             `json:"id"`
-	Code              string                `json:"code"`
-	ConfirmDate       time.Time             `json:"confirm_date"`
-	Transaction       entity.Transaction    `json:"transaction"`
-	TotalPayment      uint64                `json:"total_payment"`
-	Information       string                `json:"information"`
-	ApprovalStatus    entity.ApprovalStatus `json:"approval_status"`
-	PaymentMethod     entity.PaymentMethod  `json:"payment_method"`
-	Bank              entity.Bank           `json:"bank"`
-	AccountName       string                `json:"account_name"`
-	AccountNumber     string                `json:"account_number"`
-	AccountReceivable string                `json:"account_receivable"`
-	ProfPayment       string                `json:"prof_payment"`
+	ID                uuid.UUID   `json:"id"`
+	Code              string      `json:"code"`
+	ConfirmDate       time.Time   `json:"confirm_date"`
+	Transaction       interface{} `json:"transaction"`
+	TotalPayment      uint64      `json:"total_payment"`
+	Information       string      `json:"information"`
+	ApprovalStatus    interface{} `json:"approval_status"`
+	PaymentMethod     interface{} `json:"payment_method"`
+	Bank              interface{} `json:"bank"`
+	AccountName       string      `json:"account_name"`
+	AccountNumber     string      `json:"account_number"`
+	AccountReceivable string      `json:"account_receivable"`
+	ProfPayment       string      `json:"prof_payment"`
 }
 
 func PaymentFormat(payment entity.Payment) paymentFormat {

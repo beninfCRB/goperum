@@ -5,14 +5,15 @@ import (
 
 	"github.com/google/uuid"
 	"gorm.io/gorm"
+	"gorm.io/gorm/clause"
 )
 
 type Respository interface {
-	Create(approvalStatus entity.ApprovalStatus) (entity.ApprovalStatus, error)
-	FindAll() ([]entity.ApprovalStatus, error)
-	FindOne(ID uuid.UUID) (entity.ApprovalStatus, error)
-	Update(approvalStatus entity.ApprovalStatus) (entity.ApprovalStatus, error)
-	Delete(approvalStatus entity.ApprovalStatus) (entity.ApprovalStatus, error)
+	Create(approvalStatus entity.TarnsactionStatus) (entity.TarnsactionStatus, error)
+	FindAll() ([]entity.TarnsactionStatus, error)
+	FindOne(ID uuid.UUID) (entity.TarnsactionStatus, error)
+	Update(approvalStatus entity.TarnsactionStatus) (entity.TarnsactionStatus, error)
+	Delete(approvalStatus entity.TarnsactionStatus) (entity.TarnsactionStatus, error)
 }
 
 type repository struct {
@@ -23,7 +24,7 @@ func ApprovalStatusRepository(db *gorm.DB) *repository {
 	return &repository{db}
 }
 
-func (r *repository) Create(approvalStatus entity.ApprovalStatus) (entity.ApprovalStatus, error) {
+func (r *repository) Create(approvalStatus entity.TarnsactionStatus) (entity.TarnsactionStatus, error) {
 	err := r.db.Create(&approvalStatus).Error
 
 	if err != nil {
@@ -33,25 +34,25 @@ func (r *repository) Create(approvalStatus entity.ApprovalStatus) (entity.Approv
 	return approvalStatus, err
 }
 
-func (r *repository) FindAll() ([]entity.ApprovalStatus, error) {
-	var approvalStatuss []entity.ApprovalStatus
-	err := r.db.Find(&approvalStatuss).Error
+func (r *repository) FindAll() ([]entity.TarnsactionStatus, error) {
+	var approvalStatuss []entity.TarnsactionStatus
+	err := r.db.Preload(clause.Associations).Find(&approvalStatuss).Error
 	if err != nil {
 		return approvalStatuss, err
 	}
 	return approvalStatuss, nil
 }
 
-func (r *repository) FindOne(ID uuid.UUID) (entity.ApprovalStatus, error) {
-	var approvalStatus entity.ApprovalStatus
-	err := r.db.Where("id=?", ID).Find(&approvalStatus).Error
+func (r *repository) FindOne(ID uuid.UUID) (entity.TarnsactionStatus, error) {
+	var approvalStatus entity.TarnsactionStatus
+	err := r.db.Preload(clause.Associations).Where("id=?", ID).Find(&approvalStatus).Error
 	if err != nil {
 		return approvalStatus, err
 	}
 	return approvalStatus, nil
 }
 
-func (r *repository) Update(approvalStatus entity.ApprovalStatus) (entity.ApprovalStatus, error) {
+func (r *repository) Update(approvalStatus entity.TarnsactionStatus) (entity.TarnsactionStatus, error) {
 	err := r.db.Save(&approvalStatus).Error
 
 	if err != nil {
@@ -61,7 +62,7 @@ func (r *repository) Update(approvalStatus entity.ApprovalStatus) (entity.Approv
 	return approvalStatus, nil
 }
 
-func (r *repository) Delete(approvalStatus entity.ApprovalStatus) (entity.ApprovalStatus, error) {
+func (r *repository) Delete(approvalStatus entity.TarnsactionStatus) (entity.TarnsactionStatus, error) {
 	err := r.db.Delete(&approvalStatus)
 	if err != nil {
 		return approvalStatus, err.Error

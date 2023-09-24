@@ -17,7 +17,7 @@ const VerifyEmail = () => {
             if (localStorage.getItem(StorageName.VerificationEmail)) {
                 localStorage.removeItem(StorageName.VerificationEmail)
             }
-            navigate('/')
+            navigate('/login')
             message.success("Verify email successfully")
         }
         if (isError) {

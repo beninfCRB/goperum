@@ -5,6 +5,7 @@ import (
 
 	"github.com/google/uuid"
 	"gorm.io/gorm"
+	"gorm.io/gorm/clause"
 )
 
 type Respository interface {
@@ -35,7 +36,7 @@ func (r *repository) Create(transaction entity.Transaction) (entity.Transaction,
 
 func (r *repository) FindAll() ([]entity.Transaction, error) {
 	var transactions []entity.Transaction
-	err := r.db.Find(&transactions).Error
+	err := r.db.Preload(clause.Associations).Find(&transactions).Error
 	if err != nil {
 		return transactions, err
 	}
@@ -44,7 +45,7 @@ func (r *repository) FindAll() ([]entity.Transaction, error) {
 
 func (r *repository) FindOne(ID uuid.UUID) (entity.Transaction, error) {
 	var transaction entity.Transaction
-	err := r.db.Where("id=?", ID).Find(&transaction).Error
+	err := r.db.Preload(clause.Associations).Where("id=?", ID).Find(&transaction).Error
 	if err != nil {
 		return transaction, err
 	}

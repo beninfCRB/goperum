@@ -12,8 +12,8 @@ type userFormat struct {
 	Email          string    `json:"email"`
 	AvatarFileName string    `json:"avatar"`
 	AccessToken    string    `json:"access_token"`
-	RefreshToken   string    `json:"refresh_token"`
-	Role           string    `json:"role"`
+	// RefreshToken   string    `json:"refresh_token"`
+	Role string `json:"role"`
 }
 
 func UserFormat(user entity.User, accessToken string, refreshToken string) userFormat {
@@ -23,8 +23,8 @@ func UserFormat(user entity.User, accessToken string, refreshToken string) userF
 		Email:          user.Email,
 		AvatarFileName: user.AvatarFileName,
 		AccessToken:    accessToken,
-		RefreshToken:   refreshToken,
-		Role:           user.RoleUser.Code,
+		// RefreshToken:   refreshToken,
+		Role: user.RoleUser.Code,
 	}
 	return formatter
 }

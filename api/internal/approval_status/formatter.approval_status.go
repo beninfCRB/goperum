@@ -12,7 +12,7 @@ type approvalStatusFormat struct {
 	Name string    `json:"name"`
 }
 
-func ApprovalStatusFormat(approvalStatus entity.ApprovalStatus) approvalStatusFormat {
+func ApprovalStatusFormat(approvalStatus entity.TarnsactionStatus) approvalStatusFormat {
 	formatter := approvalStatusFormat{
 		ID:   approvalStatus.ID,
 		Code: approvalStatus.Code,

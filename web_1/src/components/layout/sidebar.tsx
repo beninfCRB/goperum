@@ -1,11 +1,13 @@
 import Sider from 'antd/es/layout/Sider'
+import { FunctionComponent } from 'react'
+
 
 
 export interface sideBarProps {
     menu: JSX.Element
 }
 
-const Sidebar = (props: sideBarProps) => {
+const Sidebar: FunctionComponent<sideBarProps> = (props) => {
     return (
         <Sider
             className="sidebar shadow overflow-y-auto overflow-x-hidden"

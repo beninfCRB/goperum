@@ -1,6 +1,6 @@
 import { LogoutOutlined, MenuOutlined, UserOutlined } from '@ant-design/icons';
 import { Avatar, Button, Drawer, Dropdown, MenuProps, Space, message } from 'antd';
-import { useState } from 'react'
+import { useState, FunctionComponent } from 'react'
 
 import logo from "../../assets/react.svg";
 import { useLogout } from '../../modules/auth';
@@ -11,7 +11,7 @@ export interface navbarProps {
     menu: JSX.Element
 }
 
-const Navbar = (props: navbarProps) => {
+const Navbar: FunctionComponent<navbarProps> = (props) => {
     const [visible, setVisible] = useState<boolean>(false);
     const navigate = useNavigate()
     const locale = JSON.parse(localStorage.getItem("user") as string)
@@ -19,7 +19,7 @@ const Navbar = (props: navbarProps) => {
 
     const onLogout = () => {
         useLogout()
-        navigate('/')
+        navigate('/login')
         message.success('Log out successfully')
     }
 

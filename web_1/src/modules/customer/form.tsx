@@ -1,9 +1,10 @@
 import { Form, FormInstance, Input } from 'antd'
+import { FunctionComponent } from 'react';
 export interface customerFormProps {
     form: FormInstance;
 }
 
-const CustomerForm = (props: customerFormProps) => {
+const CustomerForm: FunctionComponent<customerFormProps> = (props) => {
     return (
         <Form
             key={'customerForm'}

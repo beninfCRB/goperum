@@ -1,17 +1,17 @@
 import { create } from 'zustand';
-import { AreaType } from '.';
+import { ProductType } from '.';
 
-export interface AreaState {
-    single: AreaType,
-    multiple: Array<AreaType>,
-    getAll: (data: Array<AreaType>) => void,
-    getOne: (data: AreaType) => void,
-    add: (data: AreaType) => void,
-    update: (data: AreaType) => void,
+export interface ProductState {
+    single: ProductType,
+    multiple: Array<ProductType>,
+    getAll: (data: Array<ProductType>) => void,
+    getOne: (data: ProductType) => void,
+    add: (data: ProductType) => void,
+    update: (data: ProductType) => void,
     delete: () => void
 }
 
-const AreaStore = create<AreaState>((set) => ({
+const ProductStore = create<ProductState>((set) => ({
     single: {},
     multiple: [],
     getAll: (data) => set({
@@ -33,4 +33,4 @@ const AreaStore = create<AreaState>((set) => ({
     })
 }))
 
-export default AreaStore
+export default ProductStore

@@ -63,6 +63,7 @@ func (s *service) UpdateTransactionStatus(ID uuid.UUID, input TransactionStatusI
 
 	transactionStatus.Code = input.Code
 	transactionStatus.Name = input.Name
+	transactionStatus.RoleUserID = input.RoleUserID
 	transactionStatus.UpdatedBy = input.UpdatedBy
 
 	update, err := s.repository.Update(transactionStatus)

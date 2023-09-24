@@ -7,11 +7,11 @@ import (
 )
 
 type Service interface {
-	CreateApprovalStatus(input ApprovalStatusInput) (entity.ApprovalStatus, error)
-	FindApprovalStatus() ([]entity.ApprovalStatus, error)
-	FindOneApprovalStatus(ID uuid.UUID) (entity.ApprovalStatus, error)
-	UpdateApprovalStatus(ID uuid.UUID, input ApprovalStatusInput) (entity.ApprovalStatus, error)
-	DeleteApprovalStatus(ID uuid.UUID) (entity.ApprovalStatus, error)
+	CreateApprovalStatus(input ApprovalStatusInput) (entity.TarnsactionStatus, error)
+	FindApprovalStatus() ([]entity.TarnsactionStatus, error)
+	FindOneApprovalStatus(ID uuid.UUID) (entity.TarnsactionStatus, error)
+	UpdateApprovalStatus(ID uuid.UUID, input ApprovalStatusInput) (entity.TarnsactionStatus, error)
+	DeleteApprovalStatus(ID uuid.UUID) (entity.TarnsactionStatus, error)
 }
 
 type service struct {
@@ -22,8 +22,8 @@ func ApprovalStatusService(repository Respository) *service {
 	return &service{repository}
 }
 
-func (s *service) CreateApprovalStatus(input ApprovalStatusInput) (entity.ApprovalStatus, error) {
-	approvalStatus := entity.ApprovalStatus{}
+func (s *service) CreateApprovalStatus(input ApprovalStatusInput) (entity.TarnsactionStatus, error) {
+	approvalStatus := entity.TarnsactionStatus{}
 	approvalStatus.Code = input.Code
 	approvalStatus.Name = input.Name
 	approvalStatus.RoleUserID = input.RoleUserID
@@ -37,7 +37,7 @@ func (s *service) CreateApprovalStatus(input ApprovalStatusInput) (entity.Approv
 	return newApprovalStatus, nil
 }
 
-func (s *service) FindOneApprovalStatus(ID uuid.UUID) (entity.ApprovalStatus, error) {
+func (s *service) FindOneApprovalStatus(ID uuid.UUID) (entity.TarnsactionStatus, error) {
 	approvalStatus, err := s.repository.FindOne(ID)
 	if err != nil {
 		return approvalStatus, err
@@ -46,7 +46,7 @@ func (s *service) FindOneApprovalStatus(ID uuid.UUID) (entity.ApprovalStatus, er
 	return approvalStatus, nil
 }
 
-func (s *service) FindApprovalStatus() ([]entity.ApprovalStatus, error) {
+func (s *service) FindApprovalStatus() ([]entity.TarnsactionStatus, error) {
 	approvalStatus, err := s.repository.FindAll()
 	if err != nil {
 		return approvalStatus, err
@@ -55,7 +55,7 @@ func (s *service) FindApprovalStatus() ([]entity.ApprovalStatus, error) {
 	return approvalStatus, nil
 }
 
-func (s *service) UpdateApprovalStatus(ID uuid.UUID, input ApprovalStatusInput) (entity.ApprovalStatus, error) {
+func (s *service) UpdateApprovalStatus(ID uuid.UUID, input ApprovalStatusInput) (entity.TarnsactionStatus, error) {
 	approvalStatus, err := s.repository.FindOne(ID)
 	if err != nil {
 		return approvalStatus, err
@@ -73,7 +73,7 @@ func (s *service) UpdateApprovalStatus(ID uuid.UUID, input ApprovalStatusInput) 
 	return update, nil
 }
 
-func (s *service) DeleteApprovalStatus(ID uuid.UUID) (entity.ApprovalStatus, error) {
+func (s *service) DeleteApprovalStatus(ID uuid.UUID) (entity.TarnsactionStatus, error) {
 	approvalStatus, err := s.repository.FindOne(ID)
 	if err != nil {
 		return approvalStatus, err

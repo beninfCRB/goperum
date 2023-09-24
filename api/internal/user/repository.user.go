@@ -37,7 +37,7 @@ func (r *repository) Save(user entity.User) (entity.User, error) {
 
 func (r *repository) FindByEmail(email string) (entity.User, error) {
 	var users entity.User
-	err := r.db.Where("email=?", email).Preload(clause.Associations).Find(&users).Error
+	err := r.db.Preload(clause.Associations).Where("email=?", email).Find(&users).Error
 
 	if err != nil {
 		return users, err
@@ -48,7 +48,7 @@ func (r *repository) FindByEmail(email string) (entity.User, error) {
 
 func (r *repository) FindByID(ID uuid.UUID) (entity.User, error) {
 	var users entity.User
-	err := r.db.Where("id=?", ID).Preload(clause.Associations).Find(&users).Error
+	err := r.db.Preload(clause.Associations).Where("id=?", ID).Find(&users).Error
 	if err != nil {
 		return users, err
 	}

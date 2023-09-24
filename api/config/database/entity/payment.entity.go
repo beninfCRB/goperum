@@ -22,8 +22,8 @@ type Payment struct {
 	AccountReceivable string    `gorm:"type:varchar(50)" json:"account_receivable"`
 	ProfPayment       string    `gorm:"type:varchar(50)" json:"prof_payment"`
 
-	Transaction    Transaction    `gorm:"foreignKey:TransactionID;references:ID"`
-	ApprovalStatus ApprovalStatus `gorm:"foreignKey:ApprovalStatusID;references:ID"`
-	PaymentMethod  PaymentMethod  `gorm:"foreignKey:PaymentMethodID;references:ID"`
-	Bank           Bank           `gorm:"foreignKey:BankID;references:ID"`
+	Transaction    Transaction       `gorm:"foreignKey:TransactionID;references:ID"`
+	ApprovalStatus TarnsactionStatus `gorm:"foreignKey:ApprovalStatusID;references:ID"`
+	PaymentMethod  PaymentMethod     `gorm:"foreignKey:PaymentMethodID;references:ID"`
+	Bank           Bank              `gorm:"foreignKey:BankID;references:ID"`
 }

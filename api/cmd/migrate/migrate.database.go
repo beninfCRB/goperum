@@ -20,7 +20,7 @@ func main() {
 		&entity.Marketing{},
 		&entity.TypeDownPayment{},
 		&entity.TransactionStatus{},
-		&entity.ApprovalStatus{},
+		&entity.TarnsactionStatus{},
 		&entity.PaymentMethod{},
 		&entity.Bank{},
 		&entity.Transaction{},

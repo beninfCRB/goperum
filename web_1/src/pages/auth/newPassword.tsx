@@ -19,7 +19,7 @@ const NewPassword = () => {
             if (localStorage.getItem(StorageName.ForgotPassword)) {
                 localStorage.removeItem(StorageName.ForgotPassword)
             }
-            navigate('/')
+            navigate('/login')
             message.success("New password has been applied")
         }
         if (isError) {

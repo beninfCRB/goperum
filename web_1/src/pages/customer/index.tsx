@@ -5,7 +5,6 @@ import { useEffect, useState } from "react"
 import CustomerForm from "../../modules/customer/form"
 import { useAddCustomer, useCustomer, useCustomerAll, useDeleteCustomer, useUpdateCustomer } from "../../modules/customer"
 import CustomerStore from "../../modules/customer/state"
-import { MESSAGE_TEXT } from "../../static/text"
 import { fetch } from "../../utils/reponse"
 
 const CustomerIndex = () => {
@@ -152,8 +151,6 @@ const EditCustomer = (props: {
 
     const onSubmit = () => {
         form.validateFields().then(async (values) => {
-            console.log(props.id);
-
             await editCustomer.mutateAsync({
                 ...values,
                 id: props.id

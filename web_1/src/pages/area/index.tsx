@@ -5,7 +5,6 @@ import { useEffect, useState } from "react"
 import AreaForm from "../../modules/area/form"
 import { useAddArea, useArea, useAreaAll, useDeleteArea, useUpdateArea } from "../../modules/area"
 import AreaStore from "../../modules/area/state"
-import { MESSAGE_TEXT } from "../../static/text"
 import { fetch } from "../../utils/reponse"
 
 const AreaIndex = () => {
