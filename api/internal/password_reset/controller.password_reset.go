@@ -116,7 +116,7 @@ func (r *useController) NewPassword(c *gin.Context) {
 		return
 	}
 
-	_, err = r.userService.UpdateUser(user.ID, input)
+	_, err = r.userService.UpdateUserNewPassword(user.ID, input)
 	if err != nil {
 		errors := util.ErrorValidation(err)
 		errorMessage := gin.H{"errors": errors}

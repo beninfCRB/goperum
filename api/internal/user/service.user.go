@@ -13,11 +13,13 @@ type Service interface {
 	LoginUser(input LoginUserInput) (entity.User, error)
 	IsEmailAvailable(input CheckEmailInput) (bool, error)
 	SaveAvatar(ID uuid.UUID, fileLocation string) (entity.User, error)
-	GetUserByID(ID uuid.UUID) (entity.User, error)
-	UpdateUser(ID uuid.UUID, input NewPasswordInput) (entity.User, error)
+	UpdateUserNewPassword(ID uuid.UUID, input NewPasswordInput) (entity.User, error)
 	UpdateRefreshToken(ID uuid.UUID, input string) (entity.User, error)
 	GetRefreshToken(refreshToken string) (entity.User, error)
 	GetEmail(email string) (entity.User, error)
+	GetUserByID(ID uuid.UUID) (entity.User, error)
+	FindUser() ([]entity.User, error)
+	UpdateUser(ID uuid.UUID, input UserInput) (entity.User, error)
 }
 
 type service struct {
@@ -122,6 +124,33 @@ func (s *service) GetUserByID(ID uuid.UUID) (entity.User, error) {
 	return user, nil
 }
 
+func (s *service) FindUser() ([]entity.User, error) {
+	user, err := s.repository.FindAll()
+	if err != nil {
+		return user, err
+	}
+
+	return user, nil
+}
+
+func (s *service) UpdateUser(ID uuid.UUID, input UserInput) (entity.User, error) {
+	user, err := s.repository.FindByID(ID)
+	if err != nil {
+		return user, err
+	}
+
+	user.Name = input.Name
+	user.Email = input.Email
+	user.RoleID = input.RoleID
+
+	update, err := s.repository.Update(user)
+	if err != nil {
+		return update, err
+	}
+
+	return update, nil
+}
+
 func (s *service) UpdateRefreshToken(ID uuid.UUID, input string) (entity.User, error) {
 	user, err := s.repository.FindByID(ID)
 	if err != nil {
@@ -138,7 +167,7 @@ func (s *service) UpdateRefreshToken(ID uuid.UUID, input string) (entity.User, e
 	return update, nil
 }
 
-func (s *service) UpdateUser(ID uuid.UUID, input NewPasswordInput) (entity.User, error) {
+func (s *service) UpdateUserNewPassword(ID uuid.UUID, input NewPasswordInput) (entity.User, error) {
 	user, err := s.repository.FindByID(ID)
 	if err != nil {
 		return user, err

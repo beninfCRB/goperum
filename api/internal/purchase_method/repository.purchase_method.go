@@ -2,6 +2,7 @@ package purchase_method
 
 import (
 	"gostartup/config/database/entity"
+	"gostartup/pkg/util"
 
 	"github.com/google/uuid"
 	"gorm.io/gorm"
@@ -24,6 +25,7 @@ func PurchaseMethodRepository(db *gorm.DB) *repository {
 }
 
 func (r *repository) Create(purchaseMethod entity.PurchaseMethod) (entity.PurchaseMethod, error) {
+	purchaseMethod.ID = util.UUID()
 	err := r.db.Create(&purchaseMethod).Error
 
 	if err != nil {
@@ -52,7 +54,7 @@ func (r *repository) FindOne(ID uuid.UUID) (entity.PurchaseMethod, error) {
 }
 
 func (r *repository) Update(purchaseMethod entity.PurchaseMethod) (entity.PurchaseMethod, error) {
-	err := r.db.Save(&purchaseMethod).Error
+	err := r.db.Updates(&purchaseMethod).Error
 
 	if err != nil {
 		return purchaseMethod, err

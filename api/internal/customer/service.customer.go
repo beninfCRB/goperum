@@ -12,6 +12,7 @@ type Service interface {
 	FindOneCustomer(ID uuid.UUID) (entity.Customer, error)
 	UpdateCustomer(ID uuid.UUID, input CustomerInput) (entity.Customer, error)
 	DeleteCustomer(ID uuid.UUID) (entity.Customer, error)
+	FindOneCustomerByUser(ID uuid.UUID) (entity.Customer, error)
 }
 
 type service struct {
@@ -91,4 +92,13 @@ func (s *service) DeleteCustomer(ID uuid.UUID) (entity.Customer, error) {
 	}
 
 	return delete, nil
+}
+
+func (s *service) FindOneCustomerByUser(ID uuid.UUID) (entity.Customer, error) {
+	customer, err := s.repository.FindOneByUser(ID)
+	if err != nil {
+		return customer, err
+	}
+
+	return customer, nil
 }

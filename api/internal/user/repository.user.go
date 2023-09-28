@@ -2,6 +2,7 @@ package user
 
 import (
 	"gostartup/config/database/entity"
+	"gostartup/pkg/util"
 
 	"github.com/google/uuid"
 	"gorm.io/gorm"
@@ -11,6 +12,7 @@ import (
 type Respository interface {
 	Save(user entity.User) (entity.User, error)
 	FindByEmail(email string) (entity.User, error)
+	FindAll() ([]entity.User, error)
 	FindByID(ID uuid.UUID) (entity.User, error)
 	Update(user entity.User) (entity.User, error)
 	FindByRefresToken(refreshToken string) (entity.User, error)
@@ -26,6 +28,7 @@ func UserRepository(db *gorm.DB) *repository {
 }
 
 func (r *repository) Save(user entity.User) (entity.User, error) {
+	user.ID = util.UUID()
 	err := r.db.Create(&user).Error
 
 	if err != nil {
@@ -46,6 +49,15 @@ func (r *repository) FindByEmail(email string) (entity.User, error) {
 	return users, nil
 }
 
+func (r *repository) FindAll() ([]entity.User, error) {
+	var users []entity.User
+	err := r.db.Find(&users).Error
+	if err != nil {
+		return users, err
+	}
+	return users, nil
+}
+
 func (r *repository) FindByID(ID uuid.UUID) (entity.User, error) {
 	var users entity.User
 	err := r.db.Preload(clause.Associations).Where("id=?", ID).Find(&users).Error
@@ -56,7 +68,7 @@ func (r *repository) FindByID(ID uuid.UUID) (entity.User, error) {
 }
 
 func (r *repository) Update(user entity.User) (entity.User, error) {
-	err := r.db.Save(&user).Error
+	err := r.db.Updates(&user).Error
 
 	if err != nil {
 		return user, err

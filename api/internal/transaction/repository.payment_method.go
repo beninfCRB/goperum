@@ -2,6 +2,7 @@ package transaction
 
 import (
 	"gostartup/config/database/entity"
+	"gostartup/pkg/util"
 
 	"github.com/google/uuid"
 	"gorm.io/gorm"
@@ -25,6 +26,7 @@ func TransactionRepository(db *gorm.DB) *repository {
 }
 
 func (r *repository) Create(transaction entity.Transaction) (entity.Transaction, error) {
+	transaction.ID = util.UUID()
 	err := r.db.Create(&transaction).Error
 
 	if err != nil {
@@ -53,7 +55,7 @@ func (r *repository) FindOne(ID uuid.UUID) (entity.Transaction, error) {
 }
 
 func (r *repository) Update(transaction entity.Transaction) (entity.Transaction, error) {
-	err := r.db.Save(&transaction).Error
+	err := r.db.Updates(&transaction).Error
 
 	if err != nil {
 		return transaction, err

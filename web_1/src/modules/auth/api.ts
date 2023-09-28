@@ -20,7 +20,7 @@ export const useLogin = () => {
     });
 };
 
-export const useRegister = () => {
+export const useRegisterPublic = () => {
     return useMutation((values: any) =>
         axiosInstance.post(`${base_url}${user}`, values));
 };
@@ -50,10 +50,4 @@ export const useLogout = () => {
     axiosInstance.post(`${base_url}${logout}`)
     localStorage.removeItem('authorize')
     localStorage.removeItem('user')
-};
-
-export const useUserData = () => {
-    return useQuery('userData', async () => {
-        await axiosInstance.get(`${base_url}${user}`);
-    });
 };

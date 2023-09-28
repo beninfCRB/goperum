@@ -18,12 +18,12 @@ func PasswordResetService(repository Respository) *service {
 }
 
 func (s *service) SavePasswordReset(input PasswordResetInput) (entity.PasswordReset, error) {
-	password_reset := entity.PasswordReset{}
-	password_reset.Email = input.Email
-	password_reset.ResetCode = input.ResetCode
-	password_reset.ExpiredAt = &input.ExpiredAt
+	passwordReset := entity.PasswordReset{}
+	passwordReset.Email = input.Email
+	passwordReset.ResetCode = input.ResetCode
+	passwordReset.ExpiredAt = &input.ExpiredAt
 
-	save, err := s.repository.Save(password_reset)
+	save, err := s.repository.Save(passwordReset)
 	if err != nil {
 		return save, err
 	}

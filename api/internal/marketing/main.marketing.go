@@ -16,4 +16,5 @@ func MarketingModule(r *gin.RouterGroup) {
 	r.GET("/marketings/:id", controller.GetMarketingID)
 	r.PATCH("/marketings/:id", controller.UpdateMarketing)
 	r.DELETE("/marketings/:id", controller.DeleteMarketing)
+	r.GET("/marketings/user/:userid", controller.GetCustomerByUser)
 }

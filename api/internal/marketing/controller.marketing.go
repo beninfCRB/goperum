@@ -107,3 +107,15 @@ func (r *controller) DeleteMarketing(c *gin.Context) {
 	response := util.Response("Delete marketing", http.StatusOK, "success", marketing)
 	c.JSON(http.StatusOK, response)
 }
+
+func (r *controller) GetCustomerByUser(c *gin.Context) {
+	ID := uuid.MustParse(c.Param("userid"))
+	marketing, err := r.useService.FindOneMarketingByUser(ID)
+	if err != nil {
+		response := util.Response("Error to get marketing", http.StatusBadRequest, "error", nil)
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+	response := util.Response("Get of marketing by user id", http.StatusOK, "success", marketing)
+	c.JSON(http.StatusOK, response)
+}

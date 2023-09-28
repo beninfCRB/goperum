@@ -32,7 +32,7 @@ func UserController(userService Service, authService auth.Service, verificationS
 	return &useController{userService, authService, verificationService, macDeviceService, roleUserService}
 }
 
-func (r *useController) RegisterUser(c *gin.Context) {
+func (r *useController) RegisterUserPublic(c *gin.Context) {
 	var input RegisterUserInput
 	duration, _ := strconv.Atoi(os.Getenv("COOKIE_EXPIRED"))
 
@@ -419,5 +419,79 @@ func (r *useController) UploadAvatar(c *gin.Context) {
 		"is_uploaded": true,
 	}
 	response := util.Response("avatar successfully uploaded", http.StatusCreated, "success", data)
+	c.JSON(http.StatusCreated, response)
+}
+
+func (r useController) PostUser(c *gin.Context) {
+	var input RegisterUserInput
+
+	err := c.ShouldBindJSON(&input)
+	if err != nil {
+		errors := util.ErrorValidation(err)
+		errorMessage := gin.H{"errors": errors}
+
+		response := util.Response("Add user has been failed", http.StatusUnprocessableEntity, "error", errorMessage)
+		c.JSON(http.StatusUnprocessableEntity, response)
+		return
+	}
+
+	user, err := r.useService.RegisterUser(input)
+	if err != nil {
+		response := util.Response("Add user has been failed", http.StatusBadRequest, "error", nil)
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	formatter := UserUpdateFormat(user)
+	response := util.Response("User has been created", http.StatusCreated, "success", formatter)
+	c.JSON(http.StatusCreated, response)
+}
+
+func (r *useController) GetUserID(c *gin.Context) {
+	ID := uuid.MustParse(c.Param("id"))
+	user, err := r.useService.GetUserByID(ID)
+	if err != nil {
+		response := util.Response("Error to get user", http.StatusBadRequest, "error", nil)
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+	response := util.Response("Get of user by id", http.StatusOK, "success", user)
+	c.JSON(http.StatusOK, response)
+}
+
+func (r *useController) GetUser(c *gin.Context) {
+	user, err := r.useService.FindUser()
+	if err != nil {
+		response := util.Response("Error to get user", http.StatusBadRequest, "error", nil)
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+	response := util.Response("List of user", http.StatusOK, "success", user)
+	c.JSON(http.StatusOK, response)
+}
+
+func (r *useController) UpdateUser(c *gin.Context) {
+	var input UserInput
+	ID := uuid.MustParse(c.Param("id"))
+
+	err := c.ShouldBindJSON(&input)
+	if err != nil {
+		errors := util.ErrorValidation(err)
+		errorMessage := gin.H{"errors": errors}
+
+		response := util.Response("Update user has been failed", http.StatusUnprocessableEntity, "error", errorMessage)
+		c.JSON(http.StatusUnprocessableEntity, response)
+		return
+	}
+
+	user, err := r.useService.UpdateUser(ID, input)
+	if err != nil {
+		response := util.Response("Update user has been failed", http.StatusBadRequest, "error", nil)
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	formatter := UserUpdateFormat(user)
+	response := util.Response("User has been updated", http.StatusCreated, "success", formatter)
 	c.JSON(http.StatusCreated, response)
 }

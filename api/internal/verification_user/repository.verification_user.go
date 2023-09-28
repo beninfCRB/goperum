@@ -2,6 +2,7 @@ package verification_user
 
 import (
 	"gostartup/config/database/entity"
+	"gostartup/pkg/util"
 
 	"github.com/google/uuid"
 	"gorm.io/gorm"
@@ -24,6 +25,7 @@ func VerificationUserRepository(db *gorm.DB) *repository {
 }
 
 func (r *repository) Save(verification entity.VerificationUser) (entity.VerificationUser, error) {
+	verification.ID = util.UUID()
 	err := r.db.Create(&verification).Error
 
 	if err != nil {
@@ -61,7 +63,7 @@ func (r *repository) FindByID(ID uuid.UUID) (entity.User, error) {
 }
 
 func (r *repository) UpdateUser(user entity.User) (entity.User, error) {
-	err := r.db.Save(&user).Error
+	err := r.db.Updates(&user).Error
 
 	if err != nil {
 		return user, err

@@ -4,16 +4,14 @@ import axiosInstance from "../../utils/interceptor";
 
 const module = `users`
 
-export const useUser = (id?: string) => {
-    return useQuery('UserData', async () => {
-        const response = await axiosInstance.get(`${base_url}${module}/${id}`);
-        return response.data.Data;
-    });
+export const useUser = () => {
+    return useMutation((id: string) =>
+        axiosInstance.get(`${base_url}${module}/private/${id}`));
 };
 
 export const useUpdateUser = () => {
     return useMutation((props: { id: string, formData: any }) =>
-        axiosInstance.post(`${base_url}${module}/${props.id}`, props.formData), {
+        axiosInstance.post(`${base_url}${module}/private/${props.id}`, props.formData), {
         onSuccess: (res: any) => {
             return res.data.Data
         }

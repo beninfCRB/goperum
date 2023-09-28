@@ -30,3 +30,8 @@ export const useDeleteCustomer = () => {
     return useMutation((id: string) =>
         axiosInstance.delete(`${base_url}${module}/${id}`));
 };
+
+export const useCustomerByUser = () => {
+    return useMutation((userid: string) =>
+        axiosInstance.get(`${base_url}${module}/user/${userid}`));
+};

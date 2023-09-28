@@ -27,31 +27,31 @@ func (r *controller) PostTransactionStatus(c *gin.Context) {
 		errors := util.ErrorValidation(err)
 		errorMessage := gin.H{"errors": errors}
 
-		response := util.Response("Add transactionStatus has been failed", http.StatusUnprocessableEntity, "error", errorMessage)
+		response := util.Response("Add transaction status has been failed", http.StatusUnprocessableEntity, "error", errorMessage)
 		c.JSON(http.StatusUnprocessableEntity, response)
 		return
 	}
 
 	transactionStatus, err := r.useService.CreateTransactionStatus(input)
 	if err != nil {
-		response := util.Response("Add transactionStatus has been failed", http.StatusBadRequest, "error", nil)
+		response := util.Response("Add transaction status has been failed", http.StatusBadRequest, "error", nil)
 		c.JSON(http.StatusBadRequest, response)
 		return
 	}
 
 	formatter := TransactionStatusFormat(transactionStatus)
-	response := util.Response("TransactionStatus has been created", http.StatusCreated, "success", formatter)
+	response := util.Response("Transaction status has been created", http.StatusCreated, "success", formatter)
 	c.JSON(http.StatusCreated, response)
 }
 
 func (r *controller) GetTransactionStatus(c *gin.Context) {
 	transactionStatus, err := r.useService.FindTransactionStatus()
 	if err != nil {
-		response := util.Response("Error to get transactionStatus", http.StatusBadRequest, "error", nil)
+		response := util.Response("Error to get transaction status", http.StatusBadRequest, "error", nil)
 		c.JSON(http.StatusBadRequest, response)
 		return
 	}
-	response := util.Response("List of transactionStatus", http.StatusOK, "success", transactionStatus)
+	response := util.Response("List of transaction status", http.StatusOK, "success", transactionStatus)
 	c.JSON(http.StatusOK, response)
 }
 
@@ -59,11 +59,11 @@ func (r *controller) GetTransactionStatusID(c *gin.Context) {
 	ID := uuid.MustParse(c.Param("id"))
 	transactionStatus, err := r.useService.FindOneTransactionStatus(ID)
 	if err != nil {
-		response := util.Response("Error to get transactionStatus", http.StatusBadRequest, "error", nil)
+		response := util.Response("Error to get transaction status", http.StatusBadRequest, "error", nil)
 		c.JSON(http.StatusBadRequest, response)
 		return
 	}
-	response := util.Response("Get of transactionStatus by id", http.StatusOK, "success", transactionStatus)
+	response := util.Response("Get of transaction status by id", http.StatusOK, "success", transactionStatus)
 	c.JSON(http.StatusOK, response)
 }
 
@@ -77,20 +77,20 @@ func (r *controller) UpdateTransactionStatus(c *gin.Context) {
 		errors := util.ErrorValidation(err)
 		errorMessage := gin.H{"errors": errors}
 
-		response := util.Response("Update transactionStatus has been failed", http.StatusUnprocessableEntity, "error", errorMessage)
+		response := util.Response("Update transaction status has been failed", http.StatusUnprocessableEntity, "error", errorMessage)
 		c.JSON(http.StatusUnprocessableEntity, response)
 		return
 	}
 
 	transactionStatus, err := r.useService.UpdateTransactionStatus(ID, input)
 	if err != nil {
-		response := util.Response("Update transactionStatus has been failed", http.StatusBadRequest, "error", nil)
+		response := util.Response("Update transaction status has been failed", http.StatusBadRequest, "error", nil)
 		c.JSON(http.StatusBadRequest, response)
 		return
 	}
 
 	formatter := TransactionStatusFormat(transactionStatus)
-	response := util.Response("TransactionStatus has been updated", http.StatusCreated, "success", formatter)
+	response := util.Response("Transaction status has been updated", http.StatusCreated, "success", formatter)
 	c.JSON(http.StatusCreated, response)
 }
 
@@ -98,10 +98,10 @@ func (r *controller) DeleteTransactionStatus(c *gin.Context) {
 	ID := uuid.MustParse(c.Param("id"))
 	transactionStatus, err := r.useService.DeleteTransactionStatus(ID)
 	if err != nil {
-		response := util.Response("Error to delete transactionStatus", http.StatusBadRequest, "error", nil)
+		response := util.Response("Error to delete transaction status", http.StatusBadRequest, "error", nil)
 		c.JSON(http.StatusBadRequest, response)
 		return
 	}
-	response := util.Response("Delete transactionStatus", http.StatusOK, "success", transactionStatus)
+	response := util.Response("Delete transaction status", http.StatusOK, "success", transactionStatus)
 	c.JSON(http.StatusOK, response)
 }

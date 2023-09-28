@@ -2,6 +2,7 @@ package product
 
 import (
 	"gostartup/config/database/entity"
+	"gostartup/pkg/util"
 
 	"github.com/google/uuid"
 	"gorm.io/gorm"
@@ -24,6 +25,7 @@ func ProductRepository(db *gorm.DB) *repository {
 }
 
 func (r *repository) Create(product entity.Product) (entity.Product, error) {
+	product.ID = util.UUID()
 	err := r.db.Create(&product).Error
 
 	if err != nil {
@@ -52,7 +54,7 @@ func (r *repository) FindOne(ID uuid.UUID) (entity.Product, error) {
 }
 
 func (r *repository) Update(product entity.Product) (entity.Product, error) {
-	err := r.db.Save(&product).Error
+	err := r.db.Updates(&product).Error
 
 	if err != nil {
 		return product, err

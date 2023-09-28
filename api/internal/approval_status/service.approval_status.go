@@ -63,6 +63,7 @@ func (s *service) UpdateApprovalStatus(ID uuid.UUID, input ApprovalStatusInput) 
 
 	approvalStatus.Code = input.Code
 	approvalStatus.Name = input.Name
+	approvalStatus.RoleUserID = input.RoleUserID
 	approvalStatus.UpdatedBy = input.UpdatedBy
 
 	update, err := s.repository.Update(approvalStatus)

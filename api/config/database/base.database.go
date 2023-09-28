@@ -16,7 +16,7 @@ type Base struct {
 	UpdatedBy uuid.UUID      `gorm:"type:char(36)" json:"updated_by"`
 }
 
-func (u *Base) BeforeCreate(tx *gorm.DB) (err error) {
-	u.ID = uuid.New()
-	return
-}
+// func (u *Base) BeforeCreate(tx *gorm.DB) (err error) {
+// 	u.ID = uuid.New()
+// 	return
+// }

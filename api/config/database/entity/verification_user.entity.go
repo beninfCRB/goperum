@@ -4,7 +4,6 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"gorm.io/gorm"
 )
 
 type VerificationUser struct {
@@ -15,7 +14,7 @@ type VerificationUser struct {
 	CreatedAt        time.Time  `json:"created_at"`
 }
 
-func (u *VerificationUser) BeforeCreate(tx *gorm.DB) (err error) {
-	u.ID = uuid.New()
-	return
-}
+// func (u *VerificationUser) BeforeCreate(tx *gorm.DB) (err error) {
+// 	u.ID = uuid.New()
+// 	return
+// }

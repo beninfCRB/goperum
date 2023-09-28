@@ -24,7 +24,7 @@ func (r *useController) VerificationUser(c *gin.Context) {
 		errors := util.ErrorValidation(err)
 		errorMessage := gin.H{"errors": errors}
 
-		response := util.Response("Verifiaction code not validated", http.StatusUnprocessableEntity, "error", errorMessage)
+		response := util.Response("Verification code not validated", http.StatusUnprocessableEntity, "error", errorMessage)
 		c.JSON(http.StatusUnprocessableEntity, response)
 		return
 	}

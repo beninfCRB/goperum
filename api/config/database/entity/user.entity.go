@@ -24,7 +24,7 @@ type User struct {
 	RoleUser RoleUser `gorm:"foreignKey:RoleID;references:ID"`
 }
 
-func (u *User) BeforeCreate(tx *gorm.DB) (err error) {
-	u.ID = uuid.New()
-	return
-}
+// func (u *User) BeforeCreate(tx *gorm.DB) (err error) {
+// 	u.ID = uuid.New()
+// 	return
+// }

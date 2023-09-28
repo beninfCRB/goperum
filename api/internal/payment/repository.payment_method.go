@@ -2,6 +2,7 @@ package payment
 
 import (
 	"gostartup/config/database/entity"
+	"gostartup/pkg/util"
 
 	"github.com/google/uuid"
 	"gorm.io/gorm"
@@ -25,6 +26,7 @@ func PaymentRepository(db *gorm.DB) *repository {
 }
 
 func (r *repository) Create(payment entity.Payment) (entity.Payment, error) {
+	payment.ID = util.UUID()
 	err := r.db.Create(&payment).Error
 
 	if err != nil {
@@ -53,7 +55,7 @@ func (r *repository) FindOne(ID uuid.UUID) (entity.Payment, error) {
 }
 
 func (r *repository) Update(payment entity.Payment) (entity.Payment, error) {
-	err := r.db.Save(&payment).Error
+	err := r.db.Updates(&payment).Error
 
 	if err != nil {
 		return payment, err

@@ -4,7 +4,6 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"gorm.io/gorm"
 )
 
 type MacDevice struct {
@@ -18,7 +17,7 @@ type MacDevice struct {
 	User User `gorm:"foreignKey:UserID;references:ID"`
 }
 
-func (u *MacDevice) BeforeCreate(tx *gorm.DB) (err error) {
-	u.ID = uuid.New()
-	return
-}
+// func (u *MacDevice) BeforeCreate(tx *gorm.DB) (err error) {
+// 	u.ID = uuid.New()
+// 	return
+// }

@@ -5,4 +5,5 @@ export interface CustomerType {
     address?: string,
     handphone?: string,
     work?: string,
+    user_id?: string
 }

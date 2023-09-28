@@ -36,7 +36,7 @@ func PublicRoutes(r *gin.RouterGroup) {
 }
 
 func PublicAPIRoutes(r *gin.RouterGroup) {
-	r.POST("/users", userModule.RegisterUser)
+	r.POST("/users", userModule.RegisterUserPublic)
 	r.POST("/email_checkers", userModule.CheckEmailAvailability)
 	r.POST("/sessions", userModule.Login)
 	r.POST("/refresh-token", userModule.RefreshToken)
@@ -55,6 +55,10 @@ func PrivateAPIRoutes(r *gin.RouterGroup) {
 	r.Use(auth)
 
 	r.POST("/avatars", userModule.UploadAvatar)
+	r.POST("/users/private", userModule.PostUser)
+	r.GET("/users/private/:id", userModule.GetUserID)
+	r.GET("/users/private", userModule.GetUser)
+	r.PATCH("/users/private/:id", userModule.UpdateUser)
 	//===============================================================
 
 	//region

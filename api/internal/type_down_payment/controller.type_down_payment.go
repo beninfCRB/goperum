@@ -27,20 +27,20 @@ func (r *controller) PostTypeDownPayment(c *gin.Context) {
 		errors := util.ErrorValidation(err)
 		errorMessage := gin.H{"errors": errors}
 
-		response := util.Response("Add typeDownPayment has been failed", http.StatusUnprocessableEntity, "error", errorMessage)
+		response := util.Response("Add type down payment has been failed", http.StatusUnprocessableEntity, "error", errorMessage)
 		c.JSON(http.StatusUnprocessableEntity, response)
 		return
 	}
 
 	typeDownPayment, err := r.useService.CreateTypeDownPayment(input)
 	if err != nil {
-		response := util.Response("Add typeDownPayment has been failed", http.StatusBadRequest, "error", nil)
+		response := util.Response("Add type down payment has been failed", http.StatusBadRequest, "error", nil)
 		c.JSON(http.StatusBadRequest, response)
 		return
 	}
 
 	formatter := TypeDownPaymentFormat(typeDownPayment)
-	response := util.Response("TypeDownPayment has been created", http.StatusCreated, "success", formatter)
+	response := util.Response("Type down payment has been created", http.StatusCreated, "success", formatter)
 	c.JSON(http.StatusCreated, response)
 }
 
@@ -51,7 +51,7 @@ func (r *controller) GetTypeDownPayment(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, response)
 		return
 	}
-	response := util.Response("List of typeDownPayment", http.StatusOK, "success", typeDownPayment)
+	response := util.Response("List of type down payment", http.StatusOK, "success", typeDownPayment)
 	c.JSON(http.StatusOK, response)
 }
 
@@ -59,11 +59,11 @@ func (r *controller) GetTypeDownPaymentID(c *gin.Context) {
 	ID := uuid.MustParse(c.Param("id"))
 	typeDownPayment, err := r.useService.FindOneTypeDownPayment(ID)
 	if err != nil {
-		response := util.Response("Error to get typeDownPayment", http.StatusBadRequest, "error", nil)
+		response := util.Response("Error to get type down payment", http.StatusBadRequest, "error", nil)
 		c.JSON(http.StatusBadRequest, response)
 		return
 	}
-	response := util.Response("Get of typeDownPayment by id", http.StatusOK, "success", typeDownPayment)
+	response := util.Response("Get of type down payment by id", http.StatusOK, "success", typeDownPayment)
 	c.JSON(http.StatusOK, response)
 }
 
@@ -77,20 +77,20 @@ func (r *controller) UpdateTypeDownPayment(c *gin.Context) {
 		errors := util.ErrorValidation(err)
 		errorMessage := gin.H{"errors": errors}
 
-		response := util.Response("Update typeDownPayment has been failed", http.StatusUnprocessableEntity, "error", errorMessage)
+		response := util.Response("Update type down payment has been failed", http.StatusUnprocessableEntity, "error", errorMessage)
 		c.JSON(http.StatusUnprocessableEntity, response)
 		return
 	}
 
 	typeDownPayment, err := r.useService.UpdateTypeDownPayment(ID, input)
 	if err != nil {
-		response := util.Response("Update typeDownPayment has been failed", http.StatusBadRequest, "error", nil)
+		response := util.Response("Update type down payment has been failed", http.StatusBadRequest, "error", nil)
 		c.JSON(http.StatusBadRequest, response)
 		return
 	}
 
 	formatter := TypeDownPaymentFormat(typeDownPayment)
-	response := util.Response("TypeDownPayment has been updated", http.StatusCreated, "success", formatter)
+	response := util.Response("Type down payment has been updated", http.StatusCreated, "success", formatter)
 	c.JSON(http.StatusCreated, response)
 }
 
@@ -98,10 +98,10 @@ func (r *controller) DeleteTypeDownPayment(c *gin.Context) {
 	ID := uuid.MustParse(c.Param("id"))
 	typeDownPayment, err := r.useService.DeleteTypeDownPayment(ID)
 	if err != nil {
-		response := util.Response("Error to delete typeDownPayment", http.StatusBadRequest, "error", nil)
+		response := util.Response("Error to delete type down payment", http.StatusBadRequest, "error", nil)
 		c.JSON(http.StatusBadRequest, response)
 		return
 	}
-	response := util.Response("Delete typeDownPayment", http.StatusOK, "success", typeDownPayment)
+	response := util.Response("Delete type down payment", http.StatusOK, "success", typeDownPayment)
 	c.JSON(http.StatusOK, response)
 }

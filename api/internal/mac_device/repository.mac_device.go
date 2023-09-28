@@ -2,6 +2,7 @@ package mac_device
 
 import (
 	"gostartup/config/database/entity"
+	"gostartup/pkg/util"
 
 	"github.com/google/uuid"
 	"gorm.io/gorm"
@@ -23,6 +24,7 @@ func MacDeviceRepository(db *gorm.DB) *repository {
 }
 
 func (r *repository) Save(macDevice entity.MacDevice) (entity.MacDevice, error) {
+	macDevice.ID = util.UUID()
 	err := r.db.Create(&macDevice).Error
 
 	if err != nil {

@@ -16,7 +16,7 @@ type RoleUser struct {
 	Name      string         `gorm:"type:varchar(50)" json:"name"`
 }
 
-func (u *RoleUser) BeforeCreate(tx *gorm.DB) (err error) {
-	u.ID = uuid.New()
-	return
-}
+// func (u *RoleUser) BeforeCreate(tx *gorm.DB) (err error) {
+// 	u.ID = uuid.New()
+// 	return
+// }

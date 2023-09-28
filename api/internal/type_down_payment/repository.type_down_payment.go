@@ -2,6 +2,7 @@ package type_down_payment
 
 import (
 	"gostartup/config/database/entity"
+	"gostartup/pkg/util"
 
 	"github.com/google/uuid"
 	"gorm.io/gorm"
@@ -24,6 +25,7 @@ func TypeDownPaymentRepository(db *gorm.DB) *repository {
 }
 
 func (r *repository) Create(typeDownPayment entity.TypeDownPayment) (entity.TypeDownPayment, error) {
+	typeDownPayment.ID = util.UUID()
 	err := r.db.Create(&typeDownPayment).Error
 
 	if err != nil {
@@ -52,7 +54,7 @@ func (r *repository) FindOne(ID uuid.UUID) (entity.TypeDownPayment, error) {
 }
 
 func (r *repository) Update(typeDownPayment entity.TypeDownPayment) (entity.TypeDownPayment, error) {
-	err := r.db.Save(&typeDownPayment).Error
+	err := r.db.Updates(&typeDownPayment).Error
 
 	if err != nil {
 		return typeDownPayment, err

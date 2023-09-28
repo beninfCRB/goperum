@@ -5,7 +5,7 @@ export const ProtectedRoute = ({ children }: { children: JSX.Element | JSX.Eleme
     const location = useLocation()
 
     if (!token && location.pathname !== '/login') {
-        return <Navigate replace={true} to="login" />;
+        return <Navigate replace={true} to="/login" />;
     }
 
     if (token && location.pathname === 'login') {

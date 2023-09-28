@@ -28,3 +28,22 @@ func UserFormat(user entity.User, accessToken string, refreshToken string) userF
 	}
 	return formatter
 }
+
+type userUpdateFormat struct {
+	ID       uuid.UUID   `json:"id"`
+	Name     string      `json:"name"`
+	Email    string      `json:"email"`
+	RoleID   uuid.UUID   `json:"role_id"`
+	RoleUser interface{} `json:"role_user"`
+}
+
+func UserUpdateFormat(user entity.User) userUpdateFormat {
+	formatter := userUpdateFormat{
+		ID:       user.ID,
+		Name:     user.Name,
+		Email:    user.Email,
+		RoleID:   user.RoleID,
+		RoleUser: user.RoleUser,
+	}
+	return formatter
+}

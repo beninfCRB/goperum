@@ -2,6 +2,7 @@ package bank
 
 import (
 	"gostartup/config/database/entity"
+	"gostartup/pkg/util"
 
 	"github.com/google/uuid"
 	"gorm.io/gorm"
@@ -24,6 +25,7 @@ func BankRepository(db *gorm.DB) *repository {
 }
 
 func (r *repository) Create(bank entity.Bank) (entity.Bank, error) {
+	bank.ID = util.UUID()
 	err := r.db.Create(&bank).Error
 
 	if err != nil {
@@ -52,7 +54,7 @@ func (r *repository) FindOne(ID uuid.UUID) (entity.Bank, error) {
 }
 
 func (r *repository) Update(bank entity.Bank) (entity.Bank, error) {
-	err := r.db.Save(&bank).Error
+	err := r.db.Updates(&bank).Error
 
 	if err != nil {
 		return bank, err

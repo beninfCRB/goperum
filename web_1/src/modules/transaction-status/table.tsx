@@ -19,11 +19,8 @@ const TableTransactionStatus = (props: tableTransactionStatusProps) => {
         return { text: name, value: name }
     })
 
-    console.log(props.data);
-
     const RoleUser = props.data.map(({ RoleUser }) => {
         return { text: RoleUser?.name, value: RoleUser?.name }
-
     })
 
     const columns: ColumnsType<TransactionStatusType> = [

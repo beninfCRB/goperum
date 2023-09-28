@@ -2,6 +2,7 @@ package approval_status
 
 import (
 	"gostartup/config/database/entity"
+	"gostartup/pkg/util"
 
 	"github.com/google/uuid"
 	"gorm.io/gorm"
@@ -25,6 +26,7 @@ func ApprovalStatusRepository(db *gorm.DB) *repository {
 }
 
 func (r *repository) Create(approvalStatus entity.TarnsactionStatus) (entity.TarnsactionStatus, error) {
+	approvalStatus.ID = util.UUID()
 	err := r.db.Create(&approvalStatus).Error
 
 	if err != nil {
@@ -53,7 +55,7 @@ func (r *repository) FindOne(ID uuid.UUID) (entity.TarnsactionStatus, error) {
 }
 
 func (r *repository) Update(approvalStatus entity.TarnsactionStatus) (entity.TarnsactionStatus, error) {
-	err := r.db.Save(&approvalStatus).Error
+	err := r.db.Updates(&approvalStatus).Error
 
 	if err != nil {
 		return approvalStatus, err

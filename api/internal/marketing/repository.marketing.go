@@ -2,6 +2,7 @@ package marketing
 
 import (
 	"gostartup/config/database/entity"
+	"gostartup/pkg/util"
 
 	"github.com/google/uuid"
 	"gorm.io/gorm"
@@ -14,6 +15,7 @@ type Respository interface {
 	FindOne(ID uuid.UUID) (entity.Marketing, error)
 	Update(marketing entity.Marketing) (entity.Marketing, error)
 	Delete(marketing entity.Marketing) (entity.Marketing, error)
+	FindOneByUser(ID uuid.UUID) (entity.Marketing, error)
 }
 
 type repository struct {
@@ -25,6 +27,7 @@ func MarketingRepository(db *gorm.DB) *repository {
 }
 
 func (r *repository) Create(marketing entity.Marketing) (entity.Marketing, error) {
+	marketing.ID = util.UUID()
 	err := r.db.Create(&marketing).Error
 
 	if err != nil {
@@ -53,7 +56,7 @@ func (r *repository) FindOne(ID uuid.UUID) (entity.Marketing, error) {
 }
 
 func (r *repository) Update(marketing entity.Marketing) (entity.Marketing, error) {
-	err := r.db.Save(&marketing).Error
+	err := r.db.Updates(&marketing).Error
 
 	if err != nil {
 		return marketing, err
@@ -66,6 +69,15 @@ func (r *repository) Delete(marketing entity.Marketing) (entity.Marketing, error
 	err := r.db.Delete(&marketing)
 	if err != nil {
 		return marketing, err.Error
+	}
+	return marketing, nil
+}
+
+func (r *repository) FindOneByUser(ID uuid.UUID) (entity.Marketing, error) {
+	var marketing entity.Marketing
+	err := r.db.Preload(clause.Associations).Where("user_id=?", ID).First(&marketing).Error
+	if err != nil {
+		return marketing, err
 	}
 	return marketing, nil
 }

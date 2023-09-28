@@ -2,15 +2,20 @@ import { routerType } from ".";
 import MainLayout from "../components/layout/MainLayout";
 import { ProtectedRoute } from "../components/layout/ProtectedRoute";
 import PageNotFound from "../components/layout/pageNotFound";
+import ApprovalStatusIndex from "../pages/approval-status";
 import ForgotPassword from "../pages/auth/forgotPassword";
 import Login from "../pages/auth/login";
 import NewPassword from "../pages/auth/newPassword";
-import Register from "../pages/auth/register";
+import Register from "../pages/auth/registerCustomer";
 import ResendVerficationEmail from "../pages/auth/resendVerificationEmail";
 import VerifyEmail from "../pages/auth/verifyEmail";
+import BankIndex from "../pages/bank";
 import CustomerIndex from "../pages/customer";
 import Dashboard from "../pages/dashboard";
+import MarketingIndex from "../pages/marketing";
+import PaymentMethodIndex from "../pages/payment-method";
 import ProductIndex from "../pages/product";
+import ProfileIndex from "../pages/profile";
 import RoleUserIndex from "../pages/role-user";
 import TransactionStatusIndex from "../pages/transaction-status";
 import TypeDPIndex from "../pages/type-dp";
@@ -57,6 +62,11 @@ const Pages: routerType[] = [
             </ProtectedRoute>,
         children: [
             {
+                path: "profile",
+                element: <ProfileIndex />,
+                title: "Profile Akun"
+            },
+            {
                 path: "dashboard",
                 element: <Dashboard />,
                 title: "Dashboard"
@@ -67,9 +77,24 @@ const Pages: routerType[] = [
                 title: "Tipe DP"
             },
             {
+                path: "bank",
+                element: <BankIndex />,
+                title: "Bank"
+            },
+            {
+                path: "payment-method",
+                element: <PaymentMethodIndex />,
+                title: "Metode Pembayaran"
+            },
+            {
                 path: "transaction-status",
                 element: <TransactionStatusIndex />,
                 title: "Status Transaksi"
+            },
+            {
+                path: "approval-status",
+                element: <ApprovalStatusIndex />,
+                title: "Status Persetujuan"
             },
             {
                 path: "role-user",
@@ -82,10 +107,15 @@ const Pages: routerType[] = [
                 title: "Pelanggan"
             },
             {
+                path: "marketing",
+                element: <MarketingIndex />,
+                title: "Marketing"
+            },
+            {
                 path: "product",
                 element: <ProductIndex />,
                 title: "Produk"
-            }
+            },
         ],
         title: "Verifikasi Email Ulang"
     },

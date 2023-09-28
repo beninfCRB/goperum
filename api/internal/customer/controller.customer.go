@@ -1,6 +1,7 @@
 package customer
 
 import (
+	"fmt"
 	"gostartup/config/database/entity"
 	"gostartup/pkg/util"
 	"net/http"
@@ -60,6 +61,7 @@ func (r *controller) GetCustomer(c *gin.Context) {
 func (r *controller) GetCustomerID(c *gin.Context) {
 	ID := uuid.MustParse(c.Param("id"))
 	customer, err := r.useService.FindOneCustomer(ID)
+	fmt.Println(err)
 	if err != nil {
 		response := util.Response("Error to get customer", http.StatusBadRequest, "error", nil)
 		c.JSON(http.StatusBadRequest, response)
@@ -105,5 +107,17 @@ func (r *controller) DeleteCustomer(c *gin.Context) {
 		return
 	}
 	response := util.Response("Delete customer", http.StatusOK, "success", customer)
+	c.JSON(http.StatusOK, response)
+}
+
+func (r *controller) GetCustomerByUser(c *gin.Context) {
+	ID := uuid.MustParse(c.Param("userid"))
+	customer, err := r.useService.FindOneCustomerByUser(ID)
+	if err != nil {
+		response := util.Response("Error to get customer", http.StatusBadRequest, "error", nil)
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+	response := util.Response("Get of customer by user id", http.StatusOK, "success", customer)
 	c.JSON(http.StatusOK, response)
 }

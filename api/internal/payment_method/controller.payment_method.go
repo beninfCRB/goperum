@@ -27,31 +27,31 @@ func (r *controller) PostPaymentMethod(c *gin.Context) {
 		errors := util.ErrorValidation(err)
 		errorMessage := gin.H{"errors": errors}
 
-		response := util.Response("Add paymentMethod has been failed", http.StatusUnprocessableEntity, "error", errorMessage)
+		response := util.Response("Add payment method has been failed", http.StatusUnprocessableEntity, "error", errorMessage)
 		c.JSON(http.StatusUnprocessableEntity, response)
 		return
 	}
 
 	paymentMethod, err := r.useService.CreatePaymentMethod(input)
 	if err != nil {
-		response := util.Response("Add paymentMethod has been failed", http.StatusBadRequest, "error", nil)
+		response := util.Response("Add payment method has been failed", http.StatusBadRequest, "error", nil)
 		c.JSON(http.StatusBadRequest, response)
 		return
 	}
 
 	formatter := PaymentMethodFormat(paymentMethod)
-	response := util.Response("PaymentMethod has been created", http.StatusCreated, "success", formatter)
+	response := util.Response("Payment method has been created", http.StatusCreated, "success", formatter)
 	c.JSON(http.StatusCreated, response)
 }
 
 func (r *controller) GetPaymentMethod(c *gin.Context) {
 	paymentMethod, err := r.useService.FindPaymentMethod()
 	if err != nil {
-		response := util.Response("Error to get paymentMethod", http.StatusBadRequest, "error", nil)
+		response := util.Response("Error to get payment method", http.StatusBadRequest, "error", nil)
 		c.JSON(http.StatusBadRequest, response)
 		return
 	}
-	response := util.Response("List of paymentMethod", http.StatusOK, "success", paymentMethod)
+	response := util.Response("List of payment method", http.StatusOK, "success", paymentMethod)
 	c.JSON(http.StatusOK, response)
 }
 
@@ -59,11 +59,11 @@ func (r *controller) GetPaymentMethodID(c *gin.Context) {
 	ID := uuid.MustParse(c.Param("id"))
 	paymentMethod, err := r.useService.FindOnePaymentMethod(ID)
 	if err != nil {
-		response := util.Response("Error to get paymentMethod", http.StatusBadRequest, "error", nil)
+		response := util.Response("Error to get payment method", http.StatusBadRequest, "error", nil)
 		c.JSON(http.StatusBadRequest, response)
 		return
 	}
-	response := util.Response("Get of paymentMethod by id", http.StatusOK, "success", paymentMethod)
+	response := util.Response("Get of payment method by id", http.StatusOK, "success", paymentMethod)
 	c.JSON(http.StatusOK, response)
 }
 
@@ -77,20 +77,20 @@ func (r *controller) UpdatePaymentMethod(c *gin.Context) {
 		errors := util.ErrorValidation(err)
 		errorMessage := gin.H{"errors": errors}
 
-		response := util.Response("Update paymentMethod has been failed", http.StatusUnprocessableEntity, "error", errorMessage)
+		response := util.Response("Update payment method has been failed", http.StatusUnprocessableEntity, "error", errorMessage)
 		c.JSON(http.StatusUnprocessableEntity, response)
 		return
 	}
 
 	paymentMethod, err := r.useService.UpdatePaymentMethod(ID, input)
 	if err != nil {
-		response := util.Response("Update paymentMethod has been failed", http.StatusBadRequest, "error", nil)
+		response := util.Response("Update payment method has been failed", http.StatusBadRequest, "error", nil)
 		c.JSON(http.StatusBadRequest, response)
 		return
 	}
 
 	formatter := PaymentMethodFormat(paymentMethod)
-	response := util.Response("PaymentMethod has been updated", http.StatusCreated, "success", formatter)
+	response := util.Response("Payment method has been updated", http.StatusCreated, "success", formatter)
 	c.JSON(http.StatusCreated, response)
 }
 
@@ -98,10 +98,10 @@ func (r *controller) DeletePaymentMethod(c *gin.Context) {
 	ID := uuid.MustParse(c.Param("id"))
 	paymentMethod, err := r.useService.DeletePaymentMethod(ID)
 	if err != nil {
-		response := util.Response("Error to delete paymentMethod", http.StatusBadRequest, "error", nil)
+		response := util.Response("Error to delete payment method", http.StatusBadRequest, "error", nil)
 		c.JSON(http.StatusBadRequest, response)
 		return
 	}
-	response := util.Response("Delete paymentMethod", http.StatusOK, "success", paymentMethod)
+	response := util.Response("Delete payment method", http.StatusOK, "success", paymentMethod)
 	c.JSON(http.StatusOK, response)
 }

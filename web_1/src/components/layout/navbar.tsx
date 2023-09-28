@@ -6,6 +6,7 @@ import logo from "../../assets/react.svg";
 import { useLogout } from '../../modules/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserType } from '../../modules/profile';
+import { base_url } from '../../static/config';
 
 export interface navbarProps {
     menu: JSX.Element
@@ -27,7 +28,7 @@ const Navbar: FunctionComponent<navbarProps> = (props) => {
         {
             key: '1',
             label: (
-                <Link to={'/admin/customer'}>
+                <Link to={'/admin/profile'}>
                     <UserOutlined /> Profile
                 </Link>
             ),
@@ -42,6 +43,7 @@ const Navbar: FunctionComponent<navbarProps> = (props) => {
             ),
         },
     ];
+
 
     return (
         <nav className="navbar bg-sky-900">
@@ -75,9 +77,9 @@ const Navbar: FunctionComponent<navbarProps> = (props) => {
                         <a onClick={(e) => e.preventDefault()}>
                             <Space className='hover:text-red-400 hover:scale-110'>
                                 {
-                                    locale.avatar ?
+                                    !locale.avatar ?
                                         <Avatar size={'default'} icon={<UserOutlined />} /> :
-                                        <Avatar size={'default'} icon={<UserOutlined />} />
+                                        <Avatar size={'default'} src={window.URL.createObjectURL(new Blob([`${base_url}/${locale.avatar}`], { type: "image/jpeg" }))} />
                                 }
                                 {user.name}
                             </Space>

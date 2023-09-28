@@ -2,6 +2,7 @@ package role_user
 
 import (
 	"gostartup/config/database/entity"
+	"gostartup/pkg/util"
 
 	"github.com/google/uuid"
 	"gorm.io/gorm"
@@ -25,6 +26,7 @@ func RoleUserRepository(db *gorm.DB) *repository {
 }
 
 func (r *repository) Create(roleUser entity.RoleUser) (entity.RoleUser, error) {
+	roleUser.ID = util.UUID()
 	err := r.db.Create(&roleUser).Error
 
 	if err != nil {
@@ -53,7 +55,7 @@ func (r *repository) FindOne(ID uuid.UUID) (entity.RoleUser, error) {
 }
 
 func (r *repository) Update(roleUser entity.RoleUser) (entity.RoleUser, error) {
-	err := r.db.Save(&roleUser).Error
+	err := r.db.Updates(&roleUser).Error
 
 	if err != nil {
 		return roleUser, err

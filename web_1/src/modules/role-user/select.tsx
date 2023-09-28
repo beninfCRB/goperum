@@ -31,9 +31,9 @@ const SelectRoleUser: FunctionComponent<SelectRoleUserType> = (props) => {
             {
                 multiple.map((item, index) => {
                     return (
-                        <SelectItem key={index} value={item.id}>
+                        <SelectItem.Option key={index} value={item.id}>
                             {item.name}
-                        </SelectItem>
+                        </SelectItem.Option>
                     )
                 })
             }

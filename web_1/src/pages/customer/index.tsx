@@ -61,13 +61,13 @@ const CustomerIndex = () => {
         <Card
             title='DATA PELANGGAN'
             bodyStyle={{ padding: "0" }}
-            extra={
-                <Tooltip title='Tambah Data'>
-                    <Button type="primary" shape="circle" onClick={showModal}>
-                        <PlusCircleOutlined />
-                    </Button>
-                </Tooltip>
-            }
+        // extra={
+        //     <Tooltip title='Tambah Data'>
+        //         <Button type="primary" shape="circle" onClick={showModal}>
+        //             <PlusCircleOutlined />
+        //         </Button>
+        //     </Tooltip>
+        // }
         >
             <TableCustomer
                 data={customerState.multiple}

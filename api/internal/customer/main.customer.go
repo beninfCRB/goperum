@@ -16,4 +16,5 @@ func CustomerModule(r *gin.RouterGroup) {
 	r.GET("/customers/:id", controller.GetCustomerID)
 	r.PATCH("/customers/:id", controller.UpdateCustomer)
 	r.DELETE("/customers/:id", controller.DeleteCustomer)
+	r.GET("/customers/user/:userid", controller.GetCustomerByUser)
 }

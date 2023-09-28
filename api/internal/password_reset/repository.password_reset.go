@@ -2,6 +2,7 @@ package password_reset
 
 import (
 	"gostartup/config/database/entity"
+	"gostartup/pkg/util"
 
 	"gorm.io/gorm"
 )
@@ -19,14 +20,15 @@ func PasswordResetRepository(db *gorm.DB) *repository {
 	return &repository{db}
 }
 
-func (r *repository) Save(password_reset entity.PasswordReset) (entity.PasswordReset, error) {
-	err := r.db.Create(&password_reset).Error
+func (r *repository) Save(passwordReset entity.PasswordReset) (entity.PasswordReset, error) {
+	passwordReset.ID = util.UUID()
+	err := r.db.Create(&passwordReset).Error
 
 	if err != nil {
-		return password_reset, err
+		return passwordReset, err
 	}
 
-	return password_reset, err
+	return passwordReset, err
 }
 
 func (r *repository) FindByCode(code string) (entity.PasswordReset, error) {
