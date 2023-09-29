@@ -29,6 +29,22 @@ const MarketingForm: FunctionComponent<customerFormProps> = (props) => {
                 />
             </Form.Item>
             <Form.Item
+                label='Nomor Karyawan'
+                name={'numbemployee'}
+                hasFeedback
+                rules={[
+                    {
+                        required: true,
+                        message: 'Masukan nomor Karyawan'
+                    }
+                ]}
+                normalize={value => (value || '').replace(/[^0-9\.]+/g, '')}
+            >
+                <Input
+                    placeholder='Masukan nomor Karyawan'
+                />
+            </Form.Item>
+            <Form.Item
                 label='Nama Lengkap'
                 name={'name'}
                 hasFeedback

@@ -14,7 +14,7 @@ const DescriptionMarketing: FunctionComponent<DescriptionMarketingProps> = (prop
 
     return (
         <Descriptions
-            title="Infomasi Pelanggan"
+            title="Infomasi Marketing"
             bordered
             extra={
                 onEdit &&
@@ -30,6 +30,12 @@ const DescriptionMarketing: FunctionComponent<DescriptionMarketingProps> = (prop
                 label='Nomor Induk Kependudukan'
             >
                 {data.nik}
+            </DescriptionsItem>
+            <DescriptionsItem
+                span={3}
+                label='Nomor Karyawan'
+            >
+                {data.numbemployee}
             </DescriptionsItem>
             <DescriptionsItem
                 span={3}

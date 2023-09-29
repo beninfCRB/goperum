@@ -10,7 +10,7 @@ export const useAddMarketing = () => {
 };
 
 export const useMarketingAll = () => {
-    return useQuery('customerData', async () => {
+    return useQuery('MarketingData', async () => {
         const response = await axiosInstance.get(`${base_url}${module}`);
         return response.data.Data
     });

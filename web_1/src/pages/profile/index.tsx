@@ -11,10 +11,11 @@ import { fetch } from "../../utils/reponse"
 import { MarketingType, useAddMarketing, useMarketingAll, useMarketingByUser, useUpdateMarketing } from "../../modules/marketing"
 import MarketingStore from "../../modules/marketing/state"
 import MarketingForm from "../../modules/marketing/form"
+import DescriptionMarketing from "../../modules/marketing/description"
 
 const ProfileIndex = () => {
     const locale = JSON.parse(localStorage.getItem("user") as string)
-    const { data, mutateAsync } = useUser()
+    const { isLoading, data, mutateAsync } = useUser()
     const [reload, setReload] = useState<boolean>(false)
     const { getOne, single } = UserStore()
 
@@ -36,51 +37,46 @@ const ProfileIndex = () => {
     }
 
     const ViewCustomer = () => {
-        if (locale.role === 'user') {
-            return (
-                <CustomerInfo
-                    userid={locale.id}
-                    header={
-                        <Col
-                            {...span}
-                        >
-                            <DescriptionProfile
-                                data={single}
-                            />
-                        </Col>
-                    }
-                    onReload={setReload}
-                />
-            )
-        }
+        return (
+            <CustomerInfo
+                userid={locale.id}
+                header={
+                    <Col
+                        {...span}
+                    >
+                        <DescriptionProfile
+                            data={single}
+                        />
+                    </Col>
+                }
+                onReload={setReload}
+            />
+        )
     }
 
     const ViewMarketing = () => {
-        if (locale.role === 'marketing') {
-            return (
-                <MarketingInfo
-                    userid={locale.id}
-                    header={
-                        <Col
-                            {...span}
-                        >
-                            <DescriptionProfile
-                                data={single}
-                            />
-                        </Col>
-                    }
-                    onReload={setReload}
-                />
-            )
-        }
+        return (
+            <MarketingInfo
+                userid={locale.id}
+                header={
+                    <Col
+                        {...span}
+                    >
+                        <DescriptionProfile
+                            data={single}
+                        />
+                    </Col>
+                }
+                onReload={setReload}
+            />
+        )
     }
 
 
     return (
-
         <>
-            <ViewCustomer />
-            <ViewMarketing />
+            {locale.role === 'user' && <ViewCustomer />}
+            {locale.role === 'mkt' && <ViewMarketing />}
             {
                 locale.role == 'admin' &&
                 <DescriptionProfile
@@ -139,6 +135,7 @@ const MarketingInfo = (props: {
     return (
         <Card
             title='LIHAT AKUN'
+            loading={mutationMarketing.isLoading}
         >
             <Row gutter={[10, 10]}>
                 {
@@ -147,7 +144,7 @@ const MarketingInfo = (props: {
                 <Col
                     {...span}
                 >
-                    <DescriptionCustomer
+                    <DescriptionMarketing
                         data={storeMarketing.single}
                         onAdd={showModal}
                     />
@@ -317,6 +314,7 @@ const CustomerInfo = (props: {
     return (
         <Card
             title='LIHAT AKUN'
+            loading={mutationCustomer.isLoading}
         >
             <Row gutter={[10, 10]}>
                 {
