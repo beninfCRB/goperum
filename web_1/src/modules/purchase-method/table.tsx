@@ -1,65 +1,54 @@
 import { Button, Spin, Table, Tooltip } from 'antd';
 import { ColumnsType } from 'antd/es/table';
-import { AreaType } from '.';
+import { PurchaseMethodType } from '.';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { removeDuplicates } from '../../utils/filterable';
 
-export interface tableAreaProps {
-    data: Array<AreaType>;
+export interface tablePurchaseMethodProps {
+    data: Array<PurchaseMethodType>;
     onLoading: boolean;
     onEdit: (id: string) => void;
     onDelete: (id: string) => void;
 }
 
-const TableArea = (props: tableAreaProps) => {
-    const blok = props.data.map(({ blok }) => {
-        return { text: blok, value: blok }
+const TablePurchaseMethod = (props: tablePurchaseMethodProps) => {
+    const code = props.data.map(({ code }) => {
+        return { text: code, value: code }
     })
-    const kavling = props.data.map(({ kavling }) => {
-        return { text: kavling, value: kavling }
+    const name = props.data.map(({ name }) => {
+        return { text: name, value: name }
     })
 
-    const columns: ColumnsType<AreaType> = [
+    const columns: ColumnsType<PurchaseMethodType> = [
         {
-            key: 'blok',
-            title: 'Blok',
-            dataIndex: 'blok',
+            key: 'code',
+            title: 'Kode',
+            dataIndex: 'code',
             width: '40%',
             sorter: {
-                compare: (a: any, b: any) => a.blok - b.blok,
+                compare: (a: any, b: any) => a.code - b.code,
                 multiple: 1
             },
             sortDirections: ['descend'],
-            filters: removeDuplicates(blok),
+            filters: removeDuplicates(code),
             filterMode: 'tree',
             filterSearch: true,
-            onFilter: (value: any, record: any) => record.blok.startsWith(value),
+            onFilter: (value: any, record: any) => record.code.startsWith(value),
         },
         {
-            key: 'kavling',
-            title: 'Kavling',
-            dataIndex: 'kavling',
+            key: 'name',
+            title: 'Nama',
+            dataIndex: 'name',
             width: '40%',
             sorter: {
-                compare: (a: any, b: any) => a.kavling - b.kavling,
+                compare: (a: any, b: any) => a.name - b.name,
                 multiple: 2
             },
             sortDirections: ['descend'],
-            filters: removeDuplicates(kavling),
+            filters: removeDuplicates(name),
             filterMode: 'tree',
             filterSearch: true,
-            onFilter: (value: any, record: any) => record.kavling.startsWith(value),
-        },
-        {
-            key: 'sertifikat',
-            title: 'Sertifikat',
-            dataIndex: 'sertifikat',
-            width: '40%',
-            sorter: {
-                compare: (a: any, b: any) => a.sertifikat - b.sertifikat,
-                multiple: 3
-            },
-            sortDirections: ['descend'],
+            onFilter: (value: any, record: any) => record.name.startsWith(value),
         },
         {
             key: '',
@@ -93,4 +82,4 @@ const TableArea = (props: tableAreaProps) => {
     );
 }
 
-export default TableArea
+export default TablePurchaseMethod

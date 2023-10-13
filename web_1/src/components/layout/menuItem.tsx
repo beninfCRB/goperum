@@ -1,12 +1,65 @@
 import { PieChartOutlined, FolderOutlined, UserOutlined, InsertRowAboveOutlined } from '@ant-design/icons';
 import { Menu, MenuProps } from 'antd'
-import { FunctionComponent } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { FunctionComponent, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
 const MenuItem: FunctionComponent<MenuProps> = (props) => {
+    const user = JSON.parse(localStorage.getItem("user") as string)
     const navigate = useNavigate();
+    const [_menu, setMenu] = useState<Array<{
+        label: React.ReactNode,
+        key: React.Key,
+        icon?: React.ReactNode,
+        children?: MenuItem[]
+    }>>()
+
+    function getItem(
+        label: React.ReactNode,
+        key: React.Key,
+        icon?: React.ReactNode,
+        children?: MenuItem[],) {
+        return {
+            key,
+            icon,
+            children,
+            label,
+        };
+    }
+
+    const MenuMaster = [
+        getItem('Master', 'sub1', <FolderOutlined />, [
+            getItem('Bank', 'bank', <InsertRowAboveOutlined />),
+            getItem('Tipe DP', 'type-dp', <InsertRowAboveOutlined />),
+            getItem('Metode Pembelian', 'purchase-method', <InsertRowAboveOutlined />),
+            getItem('Metode Pembayaran', 'payment-method', <InsertRowAboveOutlined />),
+            getItem('Status Transaksi', 'transaction-status', <InsertRowAboveOutlined />),
+            getItem('Status Persetujuan', 'approval-status', <InsertRowAboveOutlined />),
+            getItem('Jenis Pengguna', 'role-user', <InsertRowAboveOutlined />),
+        ])
+    ]
+
+    useEffect(() => {
+        if (user.role === 'admin') {
+            setMenu([
+                getItem('Dashboard', 'dashboard', <PieChartOutlined />),
+                ...MenuMaster,
+                getItem('Pelanggan', 'customer', <UserOutlined />),
+                getItem('Marketing', 'marketing', <UserOutlined />),
+                getItem('Produk', 'product', <UserOutlined />),
+                getItem('Transaksi', 'transaction', <InsertRowAboveOutlined />),
+            ])
+        }
+        if (user.role === 'mkt') {
+            setMenu([
+                getItem('Dashboard', 'dashboard', <PieChartOutlined />),
+                getItem('Marketing', 'marketing', <UserOutlined />),
+                getItem('Produk', 'product', <InsertRowAboveOutlined />),
+                getItem('Transaksi', 'transaction', <InsertRowAboveOutlined />),
+            ])
+        }
+    }, [user.role])
 
     return (
         <Menu
@@ -16,60 +69,8 @@ const MenuItem: FunctionComponent<MenuProps> = (props) => {
             onClick={({ key }) => {
                 navigate(key)
             }}
-        >
-            <Menu.Item key={'dashboard'} className='hover:scale-110' icon={<PieChartOutlined />}>
-                <Link to={'dashboard'}>
-                    Dashboard
-                </Link>
-            </Menu.Item>
-            <Menu.SubMenu key={'sub1'} title='Master' className='hover:scale-110' icon={<FolderOutlined />}>
-                <Menu.Item key={'bank'} className='hover:scale-110' icon={<InsertRowAboveOutlined />}>
-                    <Link to={'bank'}>
-                        Bank
-                    </Link>
-                </Menu.Item>
-                <Menu.Item key={'type-dp'} className='hover:scale-110' icon={<InsertRowAboveOutlined />}>
-                    <Link to={'type-dp'}>
-                        Tipe DP
-                    </Link>
-                </Menu.Item>
-                <Menu.Item key={'payment-method'} className='hover:scale-110' icon={<InsertRowAboveOutlined />}>
-                    <Link to={'payment-method'}>
-                        Metode Pembayaran
-                    </Link>
-                </Menu.Item>
-                <Menu.Item key={'transaction-status'} className='hover:scale-110' icon={<InsertRowAboveOutlined />}>
-                    <Link to={'transaction-status'}>
-                        Status Transaksi
-                    </Link>
-                </Menu.Item>
-                <Menu.Item key={'approval-status'} className='hover:scale-110' icon={<InsertRowAboveOutlined />}>
-                    <Link to={'approval-status'}>
-                        Status Persetujuan
-                    </Link>
-                </Menu.Item>
-                <Menu.Item key={'role-user'} className='hover:scale-110' icon={<InsertRowAboveOutlined />}>
-                    <Link to={'role-user'}>
-                        Jenis Pengguna
-                    </Link>
-                </Menu.Item>
-            </Menu.SubMenu>
-            <Menu.Item key={'customer'} className='hover:scale-110' icon={<UserOutlined />}>
-                <Link to={'customer'}>
-                    Pelanggan
-                </Link>
-            </Menu.Item>
-            <Menu.Item key={'marketing'} className='hover:scale-110' icon={<UserOutlined />}>
-                <Link to={'marketing'}>
-                    Marketing
-                </Link>
-            </Menu.Item>
-            <Menu.Item key={'product'} className='hover:scale-110' icon={<InsertRowAboveOutlined />}>
-                <Link to={'product'}>
-                    Produk
-                </Link>
-            </Menu.Item>
-        </Menu>
+            items={_menu}
+        />
     )
 }
 

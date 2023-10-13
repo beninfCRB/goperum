@@ -1,42 +1,42 @@
 import { Button, Card, Form, Modal, Tooltip, message } from "antd"
-import TableArea from "../../modules/area/table"
+import TableTransaction from "../../modules/transaction/table"
 import { PlusCircleOutlined } from "@ant-design/icons"
 import { useEffect, useState } from "react"
-import AreaForm from "../../modules/area/form"
-import { useAddArea, useArea, useAreaAll, useDeleteArea, useUpdateArea } from "../../modules/area"
-import AreaStore from "../../modules/area/state"
+import TransactionForm from "../../modules/transaction/form"
+import { useAddTransaction, useTransaction, useTransactionAll, useDeleteTransaction, useUpdateTransaction } from "../../modules/transaction"
+import TransactionStore from "../../modules/transaction/state"
 import { fetch } from "../../utils/reponse"
 
-const AreaIndex = () => {
+const TransactionIndex = () => {
     const [isModalAddOpen, setIsModalAddOpen] = useState<boolean>(false);
     const [isModalEditOpen, setIsModalEditOpen] = useState<boolean>(false);
     const [_id, setId] = useState<string>('')
-    const AreaGetAllMutation = useAreaAll()
-    const AreaDeleteMutation = useDeleteArea()
-    const AreaState = AreaStore()
+    const TransactionGetAllMutation = useTransactionAll()
+    const TransactionDeleteMutation = useDeleteTransaction()
+    const TransactionState = TransactionStore()
     const _fetch = new fetch()
 
     useEffect(() => {
-        if (AreaGetAllMutation.data) {
-            getData(AreaGetAllMutation.data)
+        if (TransactionGetAllMutation.data) {
+            getData(TransactionGetAllMutation.data)
         }
-    }, [AreaGetAllMutation.data])
+    }, [TransactionGetAllMutation.data])
 
     useEffect(() => {
-        if (AreaDeleteMutation.isSuccess) {
-            AreaGetAllMutation.refetch()
-            message.success(AreaDeleteMutation.data?.data?.Meta?.Message)
+        if (TransactionDeleteMutation.isSuccess) {
+            TransactionGetAllMutation.refetch()
+            message.success(TransactionDeleteMutation.data?.data?.Meta?.Message)
         }
-        if (AreaDeleteMutation.isError) {
-            message.success(_fetch.getAxiosMessage(AreaDeleteMutation.error))
+        if (TransactionDeleteMutation.isError) {
+            message.success(_fetch.getAxiosMessage(TransactionDeleteMutation.error))
         }
         return () => {
-            AreaGetAllMutation.refetch()
+            TransactionGetAllMutation.refetch()
         }
-    }, [AreaDeleteMutation.isSuccess])
+    }, [TransactionDeleteMutation.isSuccess])
 
     const getData = (data: any) => {
-        AreaState.getAll(data)
+        TransactionState.getAll(data)
     }
 
     const onEdit = (id: string) => {
@@ -45,7 +45,7 @@ const AreaIndex = () => {
     }
 
     const onDelete = (id: string) => {
-        AreaDeleteMutation.mutateAsync(id)
+        TransactionDeleteMutation.mutateAsync(id)
     }
 
     const showModal = () => {
@@ -59,7 +59,7 @@ const AreaIndex = () => {
 
     return (
         <Card
-            title='DATA PELANGGAN'
+            title='DATA TRANSAKSI'
             bodyStyle={{ padding: "0" }}
             extra={
                 <Tooltip title='Tambah Data'>
@@ -69,17 +69,17 @@ const AreaIndex = () => {
                 </Tooltip>
             }
         >
-            <TableArea
-                data={AreaState.multiple}
-                onLoading={AreaGetAllMutation.isLoading}
+            <TableTransaction
+                data={TransactionState.multiple}
+                onLoading={TransactionGetAllMutation.isLoading}
                 onEdit={onEdit}
                 onDelete={onDelete}
             />
-            <AddArea
+            <AddTransaction
                 modal={isModalAddOpen}
                 onCancel={onCancel}
             />
-            <EditArea
+            <EditTransaction
                 id={_id}
                 modal={isModalEditOpen}
                 onCancel={onCancel}
@@ -88,20 +88,20 @@ const AreaIndex = () => {
     )
 }
 
-export default AreaIndex
+export default TransactionIndex
 
-const AddArea = (props: {
+const AddTransaction = (props: {
     modal: boolean;
     onCancel: () => void;
 }) => {
     const [form] = Form.useForm()
-    const addArea = useAddArea()
-    const AreaMutation = useAreaAll()
+    const addTransaction = useAddTransaction()
+    const TransactionMutation = useTransactionAll()
     const _fetch = new fetch()
 
     const onSubmit = () => {
         form.validateFields().then(async (values) => {
-            await addArea.mutateAsync(values)
+            await addTransaction.mutateAsync(values)
         }).catch((errorInfo) => {
             Object.keys(errorInfo.errorFields).map((error) => {
                 return form.scrollToField(errorInfo.errorFields[error].name[0])
@@ -110,50 +110,51 @@ const AddArea = (props: {
     };
 
     useEffect(() => {
-        if (addArea.isSuccess) {
-            message.success(addArea?.data?.data?.Meta?.Message)
+        if (addTransaction.isSuccess) {
+            message.success(addTransaction?.data?.data?.Meta?.Message)
             props.onCancel()
         }
-        if (addArea.isError) {
-            message.error(_fetch.getAxiosMessage(addArea.error))
+        if (addTransaction.isError) {
+            message.error(_fetch.getAxiosMessage(addTransaction.error))
             props.onCancel()
         }
         return () => {
-            AreaMutation.refetch()
+            TransactionMutation.refetch()
             form.resetFields()
         }
-    }, [addArea.isSuccess, addArea.isError])
+    }, [addTransaction.isSuccess, addTransaction.isError])
 
     return (
         <Modal
-            title="TAMBAH PELANGGAN"
+            title="TAMBAH TRANSAKSI"
+            width={'75%'}
             open={props.modal}
             forceRender={true}
             onCancel={props.onCancel}
             onOk={onSubmit}
         >
-            <AreaForm
+            <TransactionForm
                 form={form}
             />
         </Modal>
     )
 }
-const EditArea = (props: {
+const EditTransaction = (props: {
     id: string;
     modal: boolean;
     onCancel: () => void;
 }) => {
     const [form] = Form.useForm()
-    const AreaGetMutation = useArea()
-    const editArea = useUpdateArea()
-    const AreaMutation = useAreaAll()
+    const TransactionGetMutation = useTransaction()
+    const editTransaction = useUpdateTransaction()
+    const TransactionMutation = useTransactionAll()
     const _fetch = new fetch()
 
     const onSubmit = () => {
         form.validateFields().then(async (values) => {
             console.log(props.id);
 
-            await editArea.mutateAsync({
+            await editTransaction.mutateAsync({
                 ...values,
                 id: props.id
             })
@@ -166,39 +167,40 @@ const EditArea = (props: {
 
     useEffect(() => {
         if (props.id) {
-            AreaGetMutation.mutateAsync(props.id)
+            TransactionGetMutation.mutateAsync(props.id)
         }
     }, [props.id])
 
     useEffect(() => {
-        if (AreaGetMutation.data) {
-            form.setFieldsValue(AreaGetMutation.data?.data?.Data)
+        if (TransactionGetMutation.data) {
+            form.setFieldsValue(TransactionGetMutation.data?.data?.Data)
         }
-    }, [AreaGetMutation.data])
+    }, [TransactionGetMutation.data])
 
     useEffect(() => {
-        if (editArea.isSuccess) {
-            message.success(editArea?.data?.data?.Meta?.Message)
+        if (editTransaction.isSuccess) {
+            message.success(editTransaction?.data?.data?.Meta?.Message)
             props.onCancel()
         }
-        if (editArea.isError) {
-            message.error(_fetch.getAxiosMessage(editArea.error))
+        if (editTransaction.isError) {
+            message.error(_fetch.getAxiosMessage(editTransaction.error))
             props.onCancel()
         }
         return () => {
-            AreaMutation.refetch()
+            TransactionMutation.refetch()
         }
-    }, [editArea.isSuccess, editArea.isError])
+    }, [editTransaction.isSuccess, editTransaction.isError])
 
     return (
         <Modal
             title="UBAH PELANGGAN"
+            width={'75%'}
             open={props.modal}
             forceRender={true}
             onCancel={props.onCancel}
             onOk={onSubmit}
         >
-            <AreaForm
+            <TransactionForm
                 form={form}
             />
         </Modal>

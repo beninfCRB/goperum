@@ -15,7 +15,7 @@ import DescriptionMarketing from "../../modules/marketing/description"
 
 const ProfileIndex = () => {
     const locale = JSON.parse(localStorage.getItem("user") as string)
-    const { isLoading, data, mutateAsync } = useUser()
+    const { data, mutateAsync } = useUser()
     const [reload, setReload] = useState<boolean>(false)
     const { getOne, single } = UserStore()
 
@@ -78,7 +78,7 @@ const ProfileIndex = () => {
             {locale.role === 'user' && <ViewCustomer />}
             {locale.role === 'mkt' && <ViewMarketing />}
             {
-                locale.role == 'admin' &&
+                locale.role != 'mkt' && locale.role != 'user' &&
                 <DescriptionProfile
                     data={single}
                 />

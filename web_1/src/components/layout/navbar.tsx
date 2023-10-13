@@ -15,7 +15,6 @@ export interface navbarProps {
 const Navbar: FunctionComponent<navbarProps> = (props) => {
     const [visible, setVisible] = useState<boolean>(false);
     const navigate = useNavigate()
-    const locale = JSON.parse(localStorage.getItem("user") as string)
     const user: UserType = JSON.parse(localStorage.getItem("user") as string)
 
     const onLogout = () => {
@@ -77,9 +76,9 @@ const Navbar: FunctionComponent<navbarProps> = (props) => {
                         <a onClick={(e) => e.preventDefault()}>
                             <Space className='hover:text-red-400 hover:scale-110'>
                                 {
-                                    !locale.avatar ?
+                                    !user.avatar ?
                                         <Avatar size={'default'} icon={<UserOutlined />} /> :
-                                        <Avatar size={'default'} src={window.URL.createObjectURL(new Blob([`${base_url}/${locale.avatar}`], { type: "image/jpeg" }))} />
+                                        <Avatar size={'default'} src={window.URL.createObjectURL(new Blob([`${base_url}/${user.avatar}`], { type: "image/jpeg" }))} />
                                 }
                                 {user.name}
                             </Space>

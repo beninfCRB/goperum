@@ -13,14 +13,14 @@ type Transaction struct {
 	MarketingID          uuid.UUID `gorm:"type:varchar(36)" json:"marketing_id"`
 	ProductID            uuid.UUID `gorm:"type:varchar(36)" json:"product_id"`
 	PurchaseMethodID     uuid.UUID `gorm:"type:varchar(36)" json:"purchase_method_id"`
-	DownPayment          uint64    `gorm:"type:float(12)" json:"down_payment"`
+	DownPayment          uint64    `gorm:"type:bigint(12)" json:"down_payment"`
 	TypeDownPaymentID    uuid.UUID `gorm:"type:varchar(36)" json:"type_down_payment_id"`
-	LengthInstallmentDP  uint64    `gorm:"type:float(12)" json:"length_installments_dp"`
-	MonthlyInstallmentDP uint64    `gorm:"type:float(12)" json:"monthly_installments_dp"`
-	Principal            uint64    `gorm:"type:float(12)" json:"principal"`
-	LengthPrincipal      uint64    `gorm:"type:float(12)" json:"length_principal"`
-	MonthlyPrincipal     uint64    `gorm:"type:float(12)" json:"monthly_principal"`
-	TotalBill            uint64    `gorm:"type:float(12)" json:"total_bill"`
+	LengthInstallmentDP  uint64    `gorm:"type:bigint(12)" json:"length_installments_dp"`
+	MonthlyInstallmentDP uint64    `gorm:"type:bigint(12)" json:"monthly_installments_dp"`
+	Principal            uint64    `gorm:"type:bigint(12)" json:"principal"`
+	LengthPrincipal      uint64    `gorm:"type:bigint(12)" json:"length_principal"`
+	MonthlyPrincipal     uint64    `gorm:"type:bigint(12)" json:"monthly_principal"`
+	TotalBill            uint64    `gorm:"type:bigint(12)" json:"total_bill"`
 
 	Customer        Customer        `gorm:"foreignKey:CustomerID;references:ID"`
 	Marketing       Marketing       `gorm:"foreignKey:MarketingID;references:ID"`

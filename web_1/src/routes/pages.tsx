@@ -16,7 +16,9 @@ import MarketingIndex from "../pages/marketing";
 import PaymentMethodIndex from "../pages/payment-method";
 import ProductIndex from "../pages/product";
 import ProfileIndex from "../pages/profile";
+import PurchaseMethodIndex from "../pages/purchase-method";
 import RoleUserIndex from "../pages/role-user";
+import TransactionIndex from "../pages/area";
 import TransactionStatusIndex from "../pages/transaction-status";
 import TypeDPIndex from "../pages/type-dp";
 
@@ -87,6 +89,11 @@ const Pages: routerType[] = [
                 title: "Metode Pembayaran"
             },
             {
+                path: "purchase-method",
+                element: <PurchaseMethodIndex />,
+                title: "Metode Pembelian"
+            },
+            {
                 path: "transaction-status",
                 element: <TransactionStatusIndex />,
                 title: "Status Transaksi"
@@ -115,6 +122,11 @@ const Pages: routerType[] = [
                 path: "product",
                 element: <ProductIndex />,
                 title: "Produk"
+            },
+            {
+                path: "transaction",
+                element: <TransactionIndex />,
+                title: "Transaksi"
             },
         ],
         title: "Verifikasi Email Ulang"

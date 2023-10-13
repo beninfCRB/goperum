@@ -1,0 +1,210 @@
+[GIN-debug] GET    /                         --> gostartup/config/routes.PublicRoutes.func1 (4 handlers)
+[GIN-debug] POST   /api/users                --> gostartup/internal/user.(*useController).RegisterUserPublic-fm (4 handlers)
+[GIN-debug] POST   /api/email_checkers       --> gostartup/internal/user.(*useController).CheckEmailAvailability-fm (4 handlers)
+[GIN-debug] POST   /api/sessions             --> gostartup/internal/user.(*useController).Login-fm (4 handlers)
+[GIN-debug] POST   /api/refresh-token        --> gostartup/internal/user.(*useController).RefreshToken-fm (4 handlers)
+[GIN-debug] POST   /api/logout               --> gostartup/internal/user.(*useController).Logout-fm (4 handlers)
+[GIN-debug] POST   /api/verify-email         --> gostartup/internal/verification_user.(*useController).VerificationUser-fm (4 handlers)
+[GIN-debug] POST   /api/re-verify-email      --> gostartup/internal/user.(*useController).ResendCodeVerification-fm (4 handlers)
+[GIN-debug] POST   /api/forgot-password      --> gostartup/internal/password_reset.(*useController).ForgotPassword-fm (4 handlers)
+[GIN-debug] POST   /api/new-password/:reset_code --> gostartup/internal/password_reset.(*useController).NewPassword-fm (4 handlers)
+[GIN-debug] POST   /api/avatars              --> gostartup/internal/user.(*useController).UploadAvatar-fm (5 handlers)
+[GIN-debug] POST   /api/users/private        --> gostartup/internal/user.useController.PostUser-fm (5 handlers)
+[GIN-debug] GET    /api/users/private/:id    --> gostartup/internal/user.(*useController).GetUserID-fm (5 handlers)
+[GIN-debug] GET    /api/users/private        --> gostartup/internal/user.(*useController).GetUser-fm (5 handlers)
+[GIN-debug] PATCH  /api/users/private/:id    --> gostartup/internal/user.(*useController).UpdateUser-fm (5 handlers)
+[GIN-debug] POST   /api/role-users           --> gostartup/internal/role_user.(*controller).PostRoleUser-fm (5 handlers)
+[GIN-debug] GET    /api/role-users           --> gostartup/internal/role_user.(*controller).GetRoleUser-fm (5 handlers)
+[GIN-debug] GET    /api/role-users/:id       --> gostartup/internal/role_user.(*controller).GetRoleUserID-fm (5 handlers)
+[GIN-debug] PATCH  /api/role-users/:id       --> gostartup/internal/role_user.(*controller).UpdateRoleUser-fm (5 handlers)
+[GIN-debug] DELETE /api/role-users/:id       --> gostartup/internal/role_user.(*controller).DeleteRoleUser-fm (5 handlers)
+[GIN-debug] GET    /api/role-users/code      --> gostartup/internal/role_user.(*controller).GetRoleUserByCode-fm (5 handlers)
+[GIN-debug] POST   /api/products             --> gostartup/internal/product.(*controller).PostProduct-fm (5 handlers)
+[GIN-debug] GET    /api/products             --> gostartup/internal/product.(*controller).GetProduct-fm (5 handlers)
+[GIN-debug] GET    /api/products/:id         --> gostartup/internal/product.(*controller).GetProductID-fm (5 handlers)
+[GIN-debug] PATCH  /api/products/:id         --> gostartup/internal/product.(*controller).UpdateProduct-fm (5 handlers)
+[GIN-debug] DELETE /api/products/:id         --> gostartup/internal/product.(*controller).DeleteProduct-fm (5 handlers)
+[GIN-debug] POST   /api/customers            --> gostartup/internal/customer.(*controller).PostCustomer-fm (5 handlers)
+[GIN-debug] GET    /api/customers            --> gostartup/internal/customer.(*controller).GetCustomer-fm (5 handlers)
+[GIN-debug] GET    /api/customers/:id        --> gostartup/internal/customer.(*controller).GetCustomerID-fm (5 handlers)
+[GIN-debug] PATCH  /api/customers/:id        --> gostartup/internal/customer.(*controller).UpdateCustomer-fm (5 handlers)
+[GIN-debug] DELETE /api/customers/:id        --> gostartup/internal/customer.(*controller).DeleteCustomer-fm (5 handlers)
+[GIN-debug] GET    /api/customers/user/:userid --> gostartup/internal/customer.(*controller).GetCustomerByUser-fm (5 handlers)
+[GIN-debug] POST   /api/marketings           --> gostartup/internal/marketing.(*controller).PostMarketing-fm (5 handlers)
+[GIN-debug] GET    /api/marketings           --> gostartup/internal/marketing.(*controller).GetMarketing-fm (5 handlers)
+[GIN-debug] GET    /api/marketings/:id       --> gostartup/internal/marketing.(*controller).GetMarketingID-fm (5 handlers)
+[GIN-debug] PATCH  /api/marketings/:id       --> gostartup/internal/marketing.(*controller).UpdateMarketing-fm (5 handlers)
+[GIN-debug] DELETE /api/marketings/:id       --> gostartup/internal/marketing.(*controller).DeleteMarketing-fm (5 handlers)
+[GIN-debug] GET    /api/marketings/user/:userid --> gostartup/internal/marketing.(*controller).GetCustomerByUser-fm (5 handlers)
+[GIN-debug] POST   /api/type-down-payments   --> gostartup/internal/type_down_payment.(*controller).PostTypeDownPayment-fm (5 handlers)
+[GIN-debug] GET    /api/type-down-payments   --> gostartup/internal/type_down_payment.(*controller).GetTypeDownPayment-fm (5 handlers)
+[GIN-debug] GET    /api/type-down-payments/:id --> gostartup/internal/type_down_payment.(*controller).GetTypeDownPaymentID-fm (5 handlers)
+[GIN-debug] PATCH  /api/type-down-payments/:id --> gostartup/internal/type_down_payment.(*controller).UpdateTypeDownPayment-fm (5 handlers)
+[GIN-debug] DELETE /api/type-down-payments/:id --> gostartup/internal/type_down_payment.(*controller).DeleteTypeDownPayment-fm (5 handlers)
+[GIN-debug] POST   /api/transaction-status   --> gostartup/internal/transaction_status.(*controller).PostTransactionStatus-fm (5 handlers)
+[GIN-debug] GET    /api/transaction-status   --> gostartup/internal/transaction_status.(*controller).GetTransactionStatus-fm (5 handlers)
+[GIN-debug] GET    /api/transaction-status/:id --> gostartup/internal/transaction_status.(*controller).GetTransactionStatusID-fm (5 handlers)
+[GIN-debug] PATCH  /api/transaction-status/:id --> gostartup/internal/transaction_status.(*controller).UpdateTransactionStatus-fm (5 handlers)
+[GIN-debug] DELETE /api/transaction-status/:id --> gostartup/internal/transaction_status.(*controller).DeleteTransactionStatus-fm (5 handlers)
+[GIN-debug] POST   /api/approval-status      --> gostartup/internal/approval_status.(*controller).PostApprovalStatus-fm (5 handlers)
+[GIN-debug] GET    /api/approval-status      --> gostartup/internal/approval_status.(*controller).GetApprovalStatus-fm (5 handlers)
+[GIN-debug] GET    /api/approval-status/:id  --> gostartup/internal/approval_status.(*controller).GetApprovalStatusID-fm (5 handlers)
+[GIN-debug] PATCH  /api/approval-status/:id  --> gostartup/internal/approval_status.(*controller).UpdateApprovalStatus-fm (5 handlers)
+[GIN-debug] DELETE /api/approval-status/:id  --> gostartup/internal/approval_status.(*controller).DeleteApprovalStatus-fm (5 handlers)
+[GIN-debug] POST   /api/payment-methods      --> gostartup/internal/payment_method.(*controller).PostPaymentMethod-fm (5 handlers)
+[GIN-debug] GET    /api/payment-methods      --> gostartup/internal/payment_method.(*controller).GetPaymentMethod-fm (5 handlers)
+[GIN-debug] GET    /api/payment-methods/:id  --> gostartup/internal/payment_method.(*controller).GetPaymentMethodID-fm (5 handlers)
+[GIN-debug] PATCH  /api/payment-methods/:id  --> gostartup/internal/payment_method.(*controller).UpdatePaymentMethod-fm (5 handlers)
+[GIN-debug] DELETE /api/payment-methods/:id  --> gostartup/internal/payment_method.(*controller).DeletePaymentMethod-fm (5 handlers)
+[GIN-debug] POST   /api/banks                --> gostartup/internal/bank.(*controller).PostBank-fm (5 handlers)
+[GIN-debug] GET    /api/banks                --> gostartup/internal/bank.(*controller).GetBank-fm (5 handlers)
+[GIN-debug] GET    /api/banks/:id            --> gostartup/internal/bank.(*controller).GetBankID-fm (5 handlers)
+[GIN-debug] PATCH  /api/banks/:id            --> gostartup/internal/bank.(*controller).UpdateBank-fm (5 handlers)
+[GIN-debug] DELETE /api/banks/:id            --> gostartup/internal/bank.(*controller).DeleteBank-fm (5 handlers)
+[GIN-debug] POST   /api/purchase-methods     --> gostartup/internal/purchase_method.(*controller).PostPurchaseMethod-fm (5 handlers)
+[GIN-debug] GET    /api/purchase-methods     --> gostartup/internal/purchase_method.(*controller).GetPurchaseMethod-fm (5 handlers)
+[GIN-debug] GET    /api/purchase-methods/:id --> gostartup/internal/purchase_method.(*controller).GetPurchaseMethodID-fm (5 handlers)
+[GIN-debug] PATCH  /api/purchase-methods/:id --> gostartup/internal/purchase_method.(*controller).UpdatePurchaseMethod-fm (5 handlers)
+[GIN-debug] DELETE /api/purchase-methods/:id --> gostartup/internal/purchase_method.(*controller).DeletePurchaseMethod-fm (5 handlers)
+[GIN-debug] POST   /api/transactions         --> gostartup/internal/transaction.(*controller).PostTransaction-fm (5 handlers)
+[GIN-debug] GET    /api/transactions         --> gostartup/internal/transaction.(*controller).GetTransaction-fm (5 handlers)
+[GIN-debug] GET    /api/transactions/:id     --> gostartup/internal/transaction.(*controller).GetTransactionID-fm (5 handlers)
+[GIN-debug] PATCH  /api/transactions/:id     --> gostartup/internal/transaction.(*controller).UpdateTransaction-fm (5 handlers)
+[GIN-debug] DELETE /api/transactions/:id     --> gostartup/internal/transaction.(*controller).DeleteTransaction-fm (5 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8000
+::1 - [Fri, 13 Oct 2023 22:02:17 +07] "OPTIONS /api/banks HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 22:02:17 +07] "GET /api/banks HTTP/1.1 401 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 22:02:17 +07] "OPTIONS /api/refresh-token HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 22:02:18 +07] "GET /api/banks HTTP/1.1 401 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 22:02:20 +07] "GET /api/banks HTTP/1.1 401 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 22:02:24 +07] "GET /api/banks HTTP/1.1 401 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 22:40:26 +07] "OPTIONS /api/sessions HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 22:40:26 +07] "POST /api/sessions HTTP/1.1 200 340.8788ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 22:46:19 +07] "OPTIONS /api/marketings HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 22:46:19 +07] "GET /api/marketings HTTP/1.1 200 43.4606ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 22:46:20 +07] "OPTIONS /api/products HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 22:46:20 +07] "GET /api/marketings HTTP/1.1 200 40.0217ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 22:46:20 +07] "GET /api/products HTTP/1.1 200 75.261ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 22:46:21 +07] "OPTIONS /api/customers HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 22:46:21 +07] "OPTIONS /api/purchase-methods HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 22:46:21 +07] "OPTIONS /api/type-down-payments HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 22:46:21 +07] "OPTIONS /api/transactions HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 22:46:21 +07] "GET /api/products HTTP/1.1 200 22.2181ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 22:46:21 +07] "GET /api/marketings HTTP/1.1 200 20.7187ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 22:46:21 +07] "GET /api/customers HTTP/1.1 200 42.7428ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 22:46:21 +07] "GET /api/transactions HTTP/1.1 200 34.587ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 22:46:21 +07] "GET /api/purchase-methods HTTP/1.1 200 41.3449ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 22:46:21 +07] "GET /api/type-down-payments HTTP/1.1 200 45.3289ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 22:46:23 +07] "GET /api/transactions HTTP/1.1 200 17.2522ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 22:46:23 +07] "GET /api/customers HTTP/1.1 200 17.7849ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 22:46:26 +07] "GET /api/customers HTTP/1.1 200 18.0966ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 22:46:36 +07] "GET /api/banks HTTP/1.1 200 27.9362ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 22:46:38 +07] "GET /api/purchase-methods HTTP/1.1 200 15.7377ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 22:46:38 +07] "GET /api/banks HTTP/1.1 200 15.7377ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 22:46:41 +07] "GET /api/purchase-methods HTTP/1.1 200 15.6768ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 22:46:41 +07] "GET /api/banks HTTP/1.1 200 15.6768ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 22:46:43 +07] "GET /api/type-down-payments HTTP/1.1 200 15.1216ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 22:46:43 +07] "GET /api/banks HTTP/1.1 200 16.1783ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 22:46:45 +07] "GET /api/type-down-payments HTTP/1.1 200 16.7086ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 22:46:45 +07] "GET /api/purchase-methods HTTP/1.1 200 16.7086ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 22:46:56 +07] "GET /api/purchase-methods HTTP/1.1 200 24.3446ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:08:30 +07] "GET /api/purchase-methods HTTP/1.1 401 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:08:31 +07] "POST /api/refresh-token HTTP/1.1 200 39.084ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:08:31 +07] "GET /api/purchase-methods HTTP/1.1 200 35.3783ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:08:34 +07] "GET /api/purchase-methods HTTP/1.1 200 33.2471ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:08:34 +07] "GET /api/banks HTTP/1.1 200 37.1361ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:08:35 +07] "GET /api/banks HTTP/1.1 200 27.5645ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:08:35 +07] "GET /api/type-down-payments HTTP/1.1 200 28.1537ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:08:37 +07] "GET /api/type-down-payments HTTP/1.1 200 58.2739ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:08:37 +07] "GET /api/purchase-methods HTTP/1.1 200 57.8803ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:08:39 +07] "GET /api/purchase-methods HTTP/1.1 200 26.0734ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:08:39 +07] "GET /api/banks HTTP/1.1 200 25.6339ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:08:41 +07] "GET /api/purchase-methods HTTP/1.1 200 29.9056ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:08:41 +07] "GET /api/banks HTTP/1.1 200 31.9809ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:08:43 +07] "OPTIONS /api/payment-methods HTTP/1.1 200 62.9µs "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:08:43 +07] "GET /api/purchase-methods HTTP/1.1 200 46.0005ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:08:43 +07] "GET /api/payment-methods HTTP/1.1 200 68.9883ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:08:45 +07] "OPTIONS /api/transaction-status HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:08:45 +07] "GET /api/payment-methods HTTP/1.1 200 30.9278ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:08:45 +07] "GET /api/customers HTTP/1.1 200 33.0328ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:08:45 +07] "GET /api/transaction-status HTTP/1.1 200 68.5913ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:08:58 +07] "GET /api/transaction-status HTTP/1.1 200 38.349ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:08:58 +07] "GET /api/type-down-payments HTTP/1.1 200 41.3137ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:09:00 +07] "GET /api/type-down-payments HTTP/1.1 200 32.922ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:09:00 +07] "GET /api/banks HTTP/1.1 200 31.8546ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:09:03 +07] "OPTIONS /api/role-users HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:09:03 +07] "GET /api/banks HTTP/1.1 200 26.9532ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:09:04 +07] "GET /api/role-users HTTP/1.1 200 1.0697708s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:09:05 +07] "OPTIONS /api/approval-status HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:09:05 +07] "GET /api/role-users HTTP/1.1 200 63.2483ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:09:05 +07] "GET /api/customers HTTP/1.1 200 64.7145ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:09:05 +07] "GET /api/approval-status HTTP/1.1 200 116.5036ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:09:14 +07] "GET /api/customers HTTP/1.1 200 116.9488ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:09:14 +07] "GET /api/approval-status HTTP/1.1 200 132.0007ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:09:14 +07] "GET /api/customers HTTP/1.1 200 44.5452ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:09:14 +07] "GET /api/approval-status HTTP/1.1 200 43.5792ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:09:16 +07] "GET /api/customers HTTP/1.1 200 44.8474ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:09:16 +07] "GET /api/approval-status HTTP/1.1 200 58.0787ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:49:42 +07] "GET /api/customers HTTP/1.1 401 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:49:42 +07] "GET /api/approval-status HTTP/1.1 401 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:49:42 +07] "POST /api/refresh-token HTTP/1.1 200 28.5719ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:49:42 +07] "POST /api/refresh-token HTTP/1.1 200 22.0243ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:49:42 +07] "GET /api/customers HTTP/1.1 200 37.2536ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:49:42 +07] "GET /api/approval-status HTTP/1.1 200 46.0431ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:49:42 +07] "GET /api/approval-status HTTP/1.1 200 45.3547ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:49:42 +07] "GET /api/customers HTTP/1.1 200 45.9532ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:49:45 +07] "GET /api/approval-status HTTP/1.1 200 32.8479ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:49:45 +07] "GET /api/transaction-status HTTP/1.1 200 31.8023ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:49:45 +07] "GET /api/customers HTTP/1.1 200 53.9196ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:50:04 +07] "GET /api/transaction-status HTTP/1.1 200 54.4501ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:50:04 +07] "GET /api/role-users HTTP/1.1 200 57.0183ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:50:07 +07] "GET /api/role-users HTTP/1.1 200 54.6838ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:50:07 +07] "GET /api/customers HTTP/1.1 200 58.5341ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:50:07 +07] "GET /api/approval-status HTTP/1.1 200 84.8992ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:50:10 +07] "GET /api/approval-status HTTP/1.1 200 68.1056ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:50:10 +07] "GET /api/customers HTTP/1.1 200 66.0036ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:50:10 +07] "GET /api/transaction-status HTTP/1.1 200 96.4255ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:50:25 +07] "GET /api/customers HTTP/1.1 200 62.8276ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:50:25 +07] "GET /api/transaction-status HTTP/1.1 200 60.1907ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:50:36 +07] "GET /api/transaction-status HTTP/1.1 200 67.4948ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:50:39 +07] "GET /api/customers HTTP/1.1 200 73.2389ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:50:39 +07] "GET /api/approval-status HTTP/1.1 200 71.8782ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:50:48 +07] "GET /api/customers HTTP/1.1 200 57.9896ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:50:48 +07] "GET /api/approval-status HTTP/1.1 200 63.3984ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:50:53 +07] "GET /api/approval-status HTTP/1.1 200 61.4229ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:50:53 +07] "GET /api/customers HTTP/1.1 200 63.5838ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:52:57 +07] "GET /api/customers HTTP/1.1 200 75.1691ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:52:57 +07] "GET /api/approval-status HTTP/1.1 200 60.7713ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:53:32 +07] "GET /api/customers HTTP/1.1 200 57.157ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:53:32 +07] "GET /api/approval-status HTTP/1.1 200 58.4198ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:53:43 +07] "GET /api/customers HTTP/1.1 200 72.4296ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:53:43 +07] "GET /api/approval-status HTTP/1.1 200 73.9322ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+127.0.0.1 - [Fri, 13 Oct 2023 23:54:23 +07] "GET /api/role-users HTTP/1.1 401 1.1148ms "insomnia/2023.5.8" "
+::1 - [Fri, 13 Oct 2023 23:54:23 +07] "GET /api/customers HTTP/1.1 200 114.7052ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:54:23 +07] "GET /api/approval-status HTTP/1.1 200 111.6998ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:54:25 +07] "GET /api/customers HTTP/1.1 200 40.5279ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:54:25 +07] "GET /api/approval-status HTTP/1.1 200 42.0728ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+127.0.0.1 - [Fri, 13 Oct 2023 23:54:49 +07] "GET /api/role-users HTTP/1.1 200 22.3926ms "insomnia/2023.5.8" "
+::1 - [Fri, 13 Oct 2023 23:54:56 +07] "GET /api/approval-status HTTP/1.1 200 196.1657ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:54:56 +07] "GET /api/customers HTTP/1.1 200 191.6656ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:54:56 +07] "GET /api/approval-status HTTP/1.1 200 22.6118ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:55:51 +07] "GET /api/approval-status HTTP/1.1 200 55.9102ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:55:51 +07] "GET /api/customers HTTP/1.1 200 53.8058ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:55:54 +07] "GET /api/approval-status HTTP/1.1 200 57.0016ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:55:54 +07] "GET /api/customers HTTP/1.1 200 54.8752ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:57:09 +07] "GET /api/approval-status HTTP/1.1 200 70.1699ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:57:09 +07] "GET /api/customers HTTP/1.1 200 60.8353ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:57:17 +07] "GET /api/approval-status HTTP/1.1 200 25.1912ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:57:17 +07] "GET /api/role-users HTTP/1.1 200 26.5938ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:57:17 +07] "GET /api/transaction-status HTTP/1.1 200 45.8925ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:57:32 +07] "GET /api/transaction-status HTTP/1.1 200 40.7435ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:57:32 +07] "GET /api/customers HTTP/1.1 200 44.0492ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:57:32 +07] "GET /api/approval-status HTTP/1.1 200 61.3266ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:57:53 +07] "GET /api/approval-status HTTP/1.1 200 22.0388ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:58:00 +07] "GET /api/role-users HTTP/1.1 200 31.7148ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:58:00 +07] "GET /api/approval-status HTTP/1.1 200 33.7087ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:58:02 +07] "GET /api/approval-status HTTP/1.1 200 161.4844ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:58:02 +07] "GET /api/role-users HTTP/1.1 200 168.8835ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "
+::1 - [Fri, 13 Oct 2023 23:58:02 +07] "GET /api/approval-status HTTP/1.1 200 43.6172ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" "

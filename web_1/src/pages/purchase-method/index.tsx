@@ -1,42 +1,42 @@
 import { Button, Card, Form, Modal, Tooltip, message } from "antd"
-import TableProduct from "../../modules/product/table"
+import TablePurchaseMethod from "../../modules/purchase-method/table"
 import { PlusCircleOutlined } from "@ant-design/icons"
 import { useEffect, useState } from "react"
-import ProductForm from "../../modules/product/form"
-import { useAddProduct, useProduct, useProductAll, useDeleteProduct, useUpdateProduct } from "../../modules/product"
-import ProductStore from "../../modules/product/state"
+import PurchaseMethodForm from "../../modules/purchase-method/form"
+import { useAddPurchaseMethod, usePurchaseMethod, usePurchaseMethodAll, useDeletePurchaseMethod, useUpdatePurchaseMethod } from "../../modules/purchase-method"
+import PurchaseMethodStore from "../../modules/purchase-method/state"
 import { fetch } from "../../utils/reponse"
 
-const ProductIndex = () => {
+const PurchaseMethodIndex = () => {
     const [isModalAddOpen, setIsModalAddOpen] = useState<boolean>(false);
     const [isModalEditOpen, setIsModalEditOpen] = useState<boolean>(false);
     const [_id, setId] = useState<string>('')
-    const ProductGetAllMutation = useProductAll()
-    const ProductDeleteMutation = useDeleteProduct()
-    const ProductState = ProductStore()
+    const PurchaseMethodGetAllMutation = usePurchaseMethodAll()
+    const PurchaseMethodDeleteMutation = useDeletePurchaseMethod()
+    const PurchaseMethodState = PurchaseMethodStore()
     const _fetch = new fetch()
 
     useEffect(() => {
-        if (ProductGetAllMutation.data) {
-            getData(ProductGetAllMutation.data)
+        if (PurchaseMethodGetAllMutation.data) {
+            getData(PurchaseMethodGetAllMutation.data)
         }
-    }, [ProductGetAllMutation.data])
+    }, [PurchaseMethodGetAllMutation.data])
 
     useEffect(() => {
-        if (ProductDeleteMutation.isSuccess) {
-            ProductGetAllMutation.refetch()
-            message.success(ProductDeleteMutation.data?.data?.Meta?.Message)
+        if (PurchaseMethodDeleteMutation.isSuccess) {
+            PurchaseMethodGetAllMutation.refetch()
+            message.success(PurchaseMethodDeleteMutation.data?.data?.Meta?.Message)
         }
-        if (ProductDeleteMutation.isError) {
-            message.success(_fetch.getAxiosMessage(ProductDeleteMutation.error))
+        if (PurchaseMethodDeleteMutation.isError) {
+            message.success(_fetch.getAxiosMessage(PurchaseMethodDeleteMutation.error))
         }
         return () => {
-            ProductGetAllMutation.refetch()
+            PurchaseMethodGetAllMutation.refetch()
         }
-    }, [ProductDeleteMutation.isSuccess])
+    }, [PurchaseMethodDeleteMutation.isSuccess])
 
     const getData = (data: any) => {
-        ProductState.getAll(data)
+        PurchaseMethodState.getAll(data)
     }
 
     const onEdit = (id: string) => {
@@ -45,7 +45,7 @@ const ProductIndex = () => {
     }
 
     const onDelete = (id: string) => {
-        ProductDeleteMutation.mutateAsync(id)
+        PurchaseMethodDeleteMutation.mutateAsync(id)
     }
 
     const showModal = () => {
@@ -59,7 +59,7 @@ const ProductIndex = () => {
 
     return (
         <Card
-            title='DATA PRODUK'
+            title='DATA METODE PEMBELIAN'
             bodyStyle={{ padding: "0" }}
             extra={
                 <Tooltip title='Tambah Data'>
@@ -69,17 +69,17 @@ const ProductIndex = () => {
                 </Tooltip>
             }
         >
-            <TableProduct
-                data={ProductState.multiple}
-                onLoading={ProductGetAllMutation.isLoading}
+            <TablePurchaseMethod
+                data={PurchaseMethodState.multiple}
+                onLoading={PurchaseMethodGetAllMutation.isLoading}
                 onEdit={onEdit}
                 onDelete={onDelete}
             />
-            <AddProduct
+            <AddPurchaseMethod
                 modal={isModalAddOpen}
                 onCancel={onCancel}
             />
-            <EditProduct
+            <EditPurchaseMethod
                 id={_id}
                 modal={isModalEditOpen}
                 onCancel={onCancel}
@@ -88,20 +88,20 @@ const ProductIndex = () => {
     )
 }
 
-export default ProductIndex
+export default PurchaseMethodIndex
 
-const AddProduct = (props: {
+const AddPurchaseMethod = (props: {
     modal: boolean;
     onCancel: () => void;
 }) => {
     const [form] = Form.useForm()
-    const addProduct = useAddProduct()
-    const ProductMutation = useProductAll()
+    const addPurchaseMethod = useAddPurchaseMethod()
+    const PurchaseMethodMutation = usePurchaseMethodAll()
     const _fetch = new fetch()
 
     const onSubmit = () => {
         form.validateFields().then(async (values) => {
-            await addProduct.mutateAsync(values)
+            await addPurchaseMethod.mutateAsync(values)
         }).catch((errorInfo) => {
             Object.keys(errorInfo.errorFields).map((error) => {
                 return form.scrollToField(errorInfo.errorFields[error].name[0])
@@ -110,49 +110,48 @@ const AddProduct = (props: {
     };
 
     useEffect(() => {
-        if (addProduct.isSuccess) {
-            message.success(addProduct?.data?.data?.Meta?.Message)
+        if (addPurchaseMethod.isSuccess) {
+            message.success(addPurchaseMethod?.data?.data?.Meta?.Message)
             props.onCancel()
         }
-        if (addProduct.isError) {
-            message.error(_fetch.getAxiosMessage(addProduct.error))
+        if (addPurchaseMethod.isError) {
+            message.error(_fetch.getAxiosMessage(addPurchaseMethod.error))
             props.onCancel()
         }
         return () => {
-            ProductMutation.refetch()
+            PurchaseMethodMutation.refetch()
             form.resetFields()
         }
-    }, [addProduct.isSuccess, addProduct.isError])
+    }, [addPurchaseMethod.isSuccess, addPurchaseMethod.isError])
 
     return (
         <Modal
-            title="TAMBAH PRODUK"
-            width={'75%'}
+            title="TAMBAH METODE PEMBELIAN"
             open={props.modal}
             forceRender={true}
             onCancel={props.onCancel}
             onOk={onSubmit}
         >
-            <ProductForm
+            <PurchaseMethodForm
                 form={form}
             />
         </Modal>
     )
 }
-const EditProduct = (props: {
+const EditPurchaseMethod = (props: {
     id: string;
     modal: boolean;
     onCancel: () => void;
 }) => {
     const [form] = Form.useForm()
-    const ProductGetMutation = useProduct()
-    const editProduct = useUpdateProduct()
-    const ProductMutation = useProductAll()
+    const PurchaseMethodGetMutation = usePurchaseMethod()
+    const editPurchaseMethod = useUpdatePurchaseMethod()
+    const PurchaseMethodMutation = usePurchaseMethodAll()
     const _fetch = new fetch()
 
     const onSubmit = () => {
         form.validateFields().then(async (values) => {
-            await editProduct.mutateAsync({
+            await editPurchaseMethod.mutateAsync({
                 ...values,
                 id: props.id
             })
@@ -165,40 +164,39 @@ const EditProduct = (props: {
 
     useEffect(() => {
         if (props.id) {
-            ProductGetMutation.mutateAsync(props.id)
+            PurchaseMethodGetMutation.mutateAsync(props.id)
         }
     }, [props.id])
 
     useEffect(() => {
-        if (ProductGetMutation.data) {
-            form.setFieldsValue(ProductGetMutation.data?.data?.Data)
+        if (PurchaseMethodGetMutation.data) {
+            form.setFieldsValue(PurchaseMethodGetMutation.data?.data?.Data)
         }
-    }, [ProductGetMutation.data])
+    }, [PurchaseMethodGetMutation.data])
 
     useEffect(() => {
-        if (editProduct.isSuccess) {
-            message.success(editProduct?.data?.data?.Meta?.Message)
+        if (editPurchaseMethod.isSuccess) {
+            message.success(editPurchaseMethod?.data?.data?.Meta?.Message)
             props.onCancel()
         }
-        if (editProduct.isError) {
-            message.error(_fetch.getAxiosMessage(editProduct.error))
+        if (editPurchaseMethod.isError) {
+            message.error(_fetch.getAxiosMessage(editPurchaseMethod.error))
             props.onCancel()
         }
         return () => {
-            ProductMutation.refetch()
+            PurchaseMethodMutation.refetch()
         }
-    }, [editProduct.isSuccess, editProduct.isError])
+    }, [editPurchaseMethod.isSuccess, editPurchaseMethod.isError])
 
     return (
         <Modal
-            title="UBAH PRODUK"
-            width={'75%'}
+            title="UBAH TIPE DP"
             open={props.modal}
             forceRender={true}
             onCancel={props.onCancel}
             onOk={onSubmit}
         >
-            <ProductForm
+            <PurchaseMethodForm
                 form={form}
             />
         </Modal>

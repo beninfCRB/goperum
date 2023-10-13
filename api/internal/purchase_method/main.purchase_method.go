@@ -11,9 +11,9 @@ func PurchaseMethodModule(r *gin.RouterGroup) {
 	service := PurchaseMethodService(repo)
 	controller := PurchaseMethodController(service)
 
-	r.POST("/purchaseMethods", controller.PostPurchaseMethod)
-	r.GET("/purchaseMethods", controller.GetPurchaseMethod)
-	r.GET("/purchaseMethods/:id", controller.GetPurchaseMethodID)
-	r.PATCH("/purchaseMethods/:id", controller.UpdatePurchaseMethod)
-	r.DELETE("/purchaseMethods/:id", controller.DeletePurchaseMethod)
+	r.POST("/purchase-methods", controller.PostPurchaseMethod)
+	r.GET("/purchase-methods", controller.GetPurchaseMethod)
+	r.GET("/purchase-methods/:id", controller.GetPurchaseMethodID)
+	r.PATCH("/purchase-methods/:id", controller.UpdatePurchaseMethod)
+	r.DELETE("/purchase-methods/:id", controller.DeletePurchaseMethod)
 }
