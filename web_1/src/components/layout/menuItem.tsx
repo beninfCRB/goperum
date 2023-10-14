@@ -47,8 +47,9 @@ const MenuItem: FunctionComponent<MenuProps> = (props) => {
                 ...MenuMaster,
                 getItem('Pelanggan', 'customer', <UserOutlined />),
                 getItem('Marketing', 'marketing', <UserOutlined />),
-                getItem('Produk', 'product', <UserOutlined />),
+                getItem('Produk', 'product', <InsertRowAboveOutlined />),
                 getItem('Transaksi', 'transaction', <InsertRowAboveOutlined />),
+                getItem('Pembayaran', 'payment', <InsertRowAboveOutlined />),
             ])
         }
         if (user.role === 'mkt') {
@@ -57,6 +58,7 @@ const MenuItem: FunctionComponent<MenuProps> = (props) => {
                 getItem('Marketing', 'marketing', <UserOutlined />),
                 getItem('Produk', 'product', <InsertRowAboveOutlined />),
                 getItem('Transaksi', 'transaction', <InsertRowAboveOutlined />),
+                getItem('Pembayaran', 'payment', <InsertRowAboveOutlined />),
             ])
         }
     }, [user.role])

@@ -13,12 +13,13 @@ import BankIndex from "../pages/bank";
 import CustomerIndex from "../pages/customer";
 import Dashboard from "../pages/dashboard";
 import MarketingIndex from "../pages/marketing";
+import PaymentIndex from "../pages/payment";
 import PaymentMethodIndex from "../pages/payment-method";
 import ProductIndex from "../pages/product";
 import ProfileIndex from "../pages/profile";
 import PurchaseMethodIndex from "../pages/purchase-method";
 import RoleUserIndex from "../pages/role-user";
-import TransactionIndex from "../pages/area";
+import TransactionIndex from "../pages/transaction";
 import TransactionStatusIndex from "../pages/transaction-status";
 import TypeDPIndex from "../pages/type-dp";
 
@@ -127,6 +128,11 @@ const Pages: routerType[] = [
                 path: "transaction",
                 element: <TransactionIndex />,
                 title: "Transaksi"
+            },
+            {
+                path: "payment",
+                element: <PaymentIndex />,
+                title: "Pembayaran"
             },
         ],
         title: "Verifikasi Email Ulang"

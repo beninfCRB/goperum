@@ -8,6 +8,7 @@ import (
 	"gostartup/internal/customer"
 	"gostartup/internal/marketing"
 	"gostartup/internal/password_reset"
+	"gostartup/internal/payment"
 	"gostartup/internal/payment_method"
 	"gostartup/internal/product"
 	"gostartup/internal/purchase_method"
@@ -74,4 +75,5 @@ func PrivateAPIRoutes(r *gin.RouterGroup) {
 	bank.BankModule(r)
 	purchase_method.PurchaseMethodModule(r)
 	transaction.TransactionModule(r)
+	payment.PaymentModule(r)
 }
