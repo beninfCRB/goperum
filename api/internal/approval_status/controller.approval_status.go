@@ -45,7 +45,17 @@ func (r *controller) PostApprovalStatus(c *gin.Context) {
 }
 
 func (r *controller) GetApprovalStatus(c *gin.Context) {
-	approvalStatus, err := r.useService.FindApprovalStatus()
+	search := c.Query("search")
+
+	var params = make(map[string]interface{})
+
+	if search != "" {
+		params["code"] = "%" + search + "%"
+		params["name"] = "%" + search + "%"
+		params["role_user_id"] = "%" + search + "%"
+	}
+
+	approvalStatus, err := r.useService.FindApprovalStatus(params)
 	if err != nil {
 		response := util.Response("Error to get approval status", http.StatusBadRequest, "error", nil)
 		c.JSON(http.StatusBadRequest, response)

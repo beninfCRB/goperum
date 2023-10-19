@@ -1,0 +1,130 @@
+[GIN-debug] GET    /                         --> gostartup/config/routes.PublicRoutes.func1 (4 handlers)
+[GIN-debug] POST   /api/users                --> gostartup/internal/user.(*useController).RegisterUserPublic-fm (4 handlers)
+[GIN-debug] POST   /api/private/users        --> gostartup/internal/user.(*useController).RegisterUserPrivate-fm (4 handlers)
+[GIN-debug] POST   /api/email_checkers       --> gostartup/internal/user.(*useController).CheckEmailAvailability-fm (4 handlers)
+[GIN-debug] POST   /api/sessions             --> gostartup/internal/user.(*useController).Login-fm (4 handlers)
+[GIN-debug] POST   /api/refresh-token        --> gostartup/internal/user.(*useController).RefreshToken-fm (4 handlers)
+[GIN-debug] POST   /api/logout               --> gostartup/internal/user.(*useController).Logout-fm (4 handlers)
+[GIN-debug] POST   /api/verify-email         --> gostartup/internal/verification_user.(*useController).VerificationUser-fm (4 handlers)
+[GIN-debug] POST   /api/re-verify-email      --> gostartup/internal/user.(*useController).ResendCodeVerification-fm (4 handlers)
+[GIN-debug] POST   /api/forgot-password      --> gostartup/internal/password_reset.(*useController).ForgotPassword-fm (4 handlers)
+[GIN-debug] POST   /api/new-password/:reset_code --> gostartup/internal/password_reset.(*useController).NewPassword-fm (4 handlers)
+[GIN-debug] GET    /api/public/role-users    --> gostartup/internal/role_user.(*controller).GetRoleUser-fm (4 handlers)
+[GIN-debug] POST   /api/avatars              --> gostartup/internal/user.(*useController).UploadAvatar-fm (5 handlers)
+[GIN-debug] POST   /api/users/private        --> gostartup/internal/user.useController.PostUser-fm (5 handlers)
+[GIN-debug] GET    /api/users/private/:id    --> gostartup/internal/user.(*useController).GetUserID-fm (5 handlers)
+[GIN-debug] GET    /api/users/private        --> gostartup/internal/user.(*useController).GetUser-fm (5 handlers)
+[GIN-debug] PATCH  /api/users/private/:id    --> gostartup/internal/user.(*useController).UpdateUser-fm (5 handlers)
+[GIN-debug] POST   /api/role-users           --> gostartup/internal/role_user.(*controller).PostRoleUser-fm (5 handlers)
+[GIN-debug] GET    /api/role-users           --> gostartup/internal/role_user.(*controller).GetRoleUser-fm (5 handlers)
+[GIN-debug] GET    /api/role-users/:id       --> gostartup/internal/role_user.(*controller).GetRoleUserID-fm (5 handlers)
+[GIN-debug] PATCH  /api/role-users/:id       --> gostartup/internal/role_user.(*controller).UpdateRoleUser-fm (5 handlers)
+[GIN-debug] DELETE /api/role-users/:id       --> gostartup/internal/role_user.(*controller).DeleteRoleUser-fm (5 handlers)
+[GIN-debug] GET    /api/role-users/code      --> gostartup/internal/role_user.(*controller).GetRoleUserByCode-fm (5 handlers)
+[GIN-debug] POST   /api/products             --> gostartup/internal/product.(*controller).PostProduct-fm (5 handlers)
+[GIN-debug] GET    /api/products             --> gostartup/internal/product.(*controller).GetProduct-fm (5 handlers)
+[GIN-debug] GET    /api/products/:id         --> gostartup/internal/product.(*controller).GetProductID-fm (5 handlers)
+[GIN-debug] PATCH  /api/products/:id         --> gostartup/internal/product.(*controller).UpdateProduct-fm (5 handlers)
+[GIN-debug] DELETE /api/products/:id         --> gostartup/internal/product.(*controller).DeleteProduct-fm (5 handlers)
+[GIN-debug] POST   /api/customers            --> gostartup/internal/customer.(*controller).PostCustomer-fm (5 handlers)
+[GIN-debug] GET    /api/customers            --> gostartup/internal/customer.(*controller).GetCustomer-fm (5 handlers)
+[GIN-debug] GET    /api/customers/:id        --> gostartup/internal/customer.(*controller).GetCustomerID-fm (5 handlers)
+[GIN-debug] PATCH  /api/customers/:id        --> gostartup/internal/customer.(*controller).UpdateCustomer-fm (5 handlers)
+[GIN-debug] DELETE /api/customers/:id        --> gostartup/internal/customer.(*controller).DeleteCustomer-fm (5 handlers)
+[GIN-debug] GET    /api/customers/user/:userid --> gostartup/internal/customer.(*controller).GetCustomerByUser-fm (5 handlers)
+[GIN-debug] POST   /api/marketings           --> gostartup/internal/marketing.(*controller).PostMarketing-fm (5 handlers)
+[GIN-debug] GET    /api/marketings           --> gostartup/internal/marketing.(*controller).GetMarketing-fm (5 handlers)
+[GIN-debug] GET    /api/marketings/:id       --> gostartup/internal/marketing.(*controller).GetMarketingID-fm (5 handlers)
+[GIN-debug] PATCH  /api/marketings/:id       --> gostartup/internal/marketing.(*controller).UpdateMarketing-fm (5 handlers)
+[GIN-debug] DELETE /api/marketings/:id       --> gostartup/internal/marketing.(*controller).DeleteMarketing-fm (5 handlers)
+[GIN-debug] GET    /api/marketings/user/:userid --> gostartup/internal/marketing.(*controller).GetCustomerByUser-fm (5 handlers)
+[GIN-debug] POST   /api/type-down-payments   --> gostartup/internal/type_down_payment.(*controller).PostTypeDownPayment-fm (5 handlers)
+[GIN-debug] GET    /api/type-down-payments   --> gostartup/internal/type_down_payment.(*controller).GetTypeDownPayment-fm (5 handlers)
+[GIN-debug] GET    /api/type-down-payments/:id --> gostartup/internal/type_down_payment.(*controller).GetTypeDownPaymentID-fm (5 handlers)
+[GIN-debug] PATCH  /api/type-down-payments/:id --> gostartup/internal/type_down_payment.(*controller).UpdateTypeDownPayment-fm (5 handlers)
+[GIN-debug] DELETE /api/type-down-payments/:id --> gostartup/internal/type_down_payment.(*controller).DeleteTypeDownPayment-fm (5 handlers)
+[GIN-debug] POST   /api/transaction-status   --> gostartup/internal/transaction_status.(*controller).PostTransactionStatus-fm (5 handlers)
+[GIN-debug] GET    /api/transaction-status   --> gostartup/internal/transaction_status.(*controller).GetTransactionStatus-fm (5 handlers)
+[GIN-debug] GET    /api/transaction-status/:id --> gostartup/internal/transaction_status.(*controller).GetTransactionStatusID-fm (5 handlers)
+[GIN-debug] PATCH  /api/transaction-status/:id --> gostartup/internal/transaction_status.(*controller).UpdateTransactionStatus-fm (5 handlers)
+[GIN-debug] DELETE /api/transaction-status/:id --> gostartup/internal/transaction_status.(*controller).DeleteTransactionStatus-fm (5 handlers)
+[GIN-debug] POST   /api/approval-status      --> gostartup/internal/approval_status.(*controller).PostApprovalStatus-fm (5 handlers)
+[GIN-debug] GET    /api/approval-status      --> gostartup/internal/approval_status.(*controller).GetApprovalStatus-fm (5 handlers)
+[GIN-debug] GET    /api/approval-status/:id  --> gostartup/internal/approval_status.(*controller).GetApprovalStatusID-fm (5 handlers)
+[GIN-debug] PATCH  /api/approval-status/:id  --> gostartup/internal/approval_status.(*controller).UpdateApprovalStatus-fm (5 handlers)
+[GIN-debug] DELETE /api/approval-status/:id  --> gostartup/internal/approval_status.(*controller).DeleteApprovalStatus-fm (5 handlers)
+[GIN-debug] POST   /api/payment-methods      --> gostartup/internal/payment_method.(*controller).PostPaymentMethod-fm (5 handlers)
+[GIN-debug] GET    /api/payment-methods      --> gostartup/internal/payment_method.(*controller).GetPaymentMethod-fm (5 handlers)
+[GIN-debug] GET    /api/payment-methods/:id  --> gostartup/internal/payment_method.(*controller).GetPaymentMethodID-fm (5 handlers)
+[GIN-debug] PATCH  /api/payment-methods/:id  --> gostartup/internal/payment_method.(*controller).UpdatePaymentMethod-fm (5 handlers)
+[GIN-debug] DELETE /api/payment-methods/:id  --> gostartup/internal/payment_method.(*controller).DeletePaymentMethod-fm (5 handlers)
+[GIN-debug] POST   /api/banks                --> gostartup/internal/bank.(*controller).PostBank-fm (5 handlers)
+[GIN-debug] GET    /api/banks                --> gostartup/internal/bank.(*controller).GetBank-fm (5 handlers)
+[GIN-debug] GET    /api/banks/:id            --> gostartup/internal/bank.(*controller).GetBankID-fm (5 handlers)
+[GIN-debug] PATCH  /api/banks/:id            --> gostartup/internal/bank.(*controller).UpdateBank-fm (5 handlers)
+[GIN-debug] DELETE /api/banks/:id            --> gostartup/internal/bank.(*controller).DeleteBank-fm (5 handlers)
+[GIN-debug] POST   /api/purchase-methods     --> gostartup/internal/purchase_method.(*controller).PostPurchaseMethod-fm (5 handlers)
+[GIN-debug] GET    /api/purchase-methods     --> gostartup/internal/purchase_method.(*controller).GetPurchaseMethod-fm (5 handlers)
+[GIN-debug] GET    /api/purchase-methods/:id --> gostartup/internal/purchase_method.(*controller).GetPurchaseMethodID-fm (5 handlers)
+[GIN-debug] PATCH  /api/purchase-methods/:id --> gostartup/internal/purchase_method.(*controller).UpdatePurchaseMethod-fm (5 handlers)
+[GIN-debug] DELETE /api/purchase-methods/:id --> gostartup/internal/purchase_method.(*controller).DeletePurchaseMethod-fm (5 handlers)
+[GIN-debug] POST   /api/transactions         --> gostartup/internal/transaction.(*controller).PostTransaction-fm (5 handlers)
+[GIN-debug] GET    /api/transactions         --> gostartup/internal/transaction.(*controller).GetTransaction-fm (5 handlers)
+[GIN-debug] GET    /api/transactions/:id     --> gostartup/internal/transaction.(*controller).GetTransactionID-fm (5 handlers)
+[GIN-debug] PATCH  /api/transactions/:id     --> gostartup/internal/transaction.(*controller).UpdateTransaction-fm (5 handlers)
+[GIN-debug] DELETE /api/transactions/:id     --> gostartup/internal/transaction.(*controller).DeleteTransaction-fm (5 handlers)
+[GIN-debug] POST   /api/payments             --> gostartup/internal/payment.(*controller).PostPayment-fm (5 handlers)
+[GIN-debug] GET    /api/payments             --> gostartup/internal/payment.(*controller).GetPayment-fm (5 handlers)
+[GIN-debug] GET    /api/payments/:id         --> gostartup/internal/payment.(*controller).GetPaymentID-fm (5 handlers)
+[GIN-debug] PATCH  /api/payments/:id         --> gostartup/internal/payment.(*controller).UpdatePayment-fm (5 handlers)
+[GIN-debug] DELETE /api/payments/:id         --> gostartup/internal/payment.(*controller).DeletePayment-fm (5 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8000
+::1 - [Thu, 19 Oct 2023 23:43:30 +07] "GET /api/approval-status HTTP/1.1 401 944.8µs "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:43:30 +07] "GET /api/approval-status HTTP/1.1 401 65.5µs "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:43:30 +07] "GET /api/approval-status HTTP/1.1 401 344.7µs "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:43:30 +07] "POST /api/refresh-token HTTP/1.1 200 21.2461ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:43:30 +07] "POST /api/refresh-token HTTP/1.1 200 8.8528ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:43:30 +07] "POST /api/refresh-token HTTP/1.1 200 33.654ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:43:30 +07] "GET /api/approval-status HTTP/1.1 200 27.3352ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:43:30 +07] "GET /api/approval-status HTTP/1.1 200 14.2792ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:43:30 +07] "GET /api/approval-status HTTP/1.1 200 12.5493ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:47:32 +07] "GET /api/role-users HTTP/1.1 200 18.5795ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:47:32 +07] "GET /api/approval-status HTTP/1.1 200 39.5912ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:47:32 +07] "GET /api/approval-status HTTP/1.1 200 17.808ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:47:32 +07] "GET /api/approval-status HTTP/1.1 200 16.3493ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:47:32 +07] "GET /api/approval-status HTTP/1.1 200 12.8264ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:47:32 +07] "GET /api/approval-status HTTP/1.1 200 14.5012ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:47:32 +07] "GET /api/approval-status HTTP/1.1 200 13.388ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:47:55 +07] "GET /api/role-users HTTP/1.1 200 17.2643ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:47:55 +07] "GET /api/approval-status HTTP/1.1 200 23.0733ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:47:55 +07] "GET /api/approval-status HTTP/1.1 200 20.1353ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:47:55 +07] "GET /api/approval-status HTTP/1.1 200 22.5608ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:47:55 +07] "GET /api/approval-status HTTP/1.1 200 20.7404ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:47:55 +07] "GET /api/approval-status HTTP/1.1 200 17.5977ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:47:55 +07] "GET /api/approval-status HTTP/1.1 200 17.0014ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:49:05 +07] "GET /api/role-users HTTP/1.1 200 54.791ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:49:05 +07] "GET /api/approval-status HTTP/1.1 200 62.5448ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:49:05 +07] "GET /api/approval-status HTTP/1.1 200 24.1065ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:49:05 +07] "GET /api/approval-status HTTP/1.1 200 16.1188ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:49:15 +07] "GET /api/role-users HTTP/1.1 200 13.2755ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:49:15 +07] "GET /api/approval-status HTTP/1.1 200 15.9124ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:49:15 +07] "GET /api/approval-status HTTP/1.1 200 19.0111ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:49:15 +07] "GET /api/approval-status HTTP/1.1 200 15.217ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:49:15 +07] "GET /api/approval-status HTTP/1.1 200 15.0814ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:49:15 +07] "GET /api/approval-status HTTP/1.1 200 11.699ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:49:15 +07] "GET /api/approval-status HTTP/1.1 200 12.6704ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:49:16 +07] "GET /api/approval-status HTTP/1.1 200 14.1082ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:49:16 +07] "GET /api/approval-status HTTP/1.1 200 11.854ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:49:41 +07] "GET /api/role-users HTTP/1.1 200 22.5654ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:49:41 +07] "GET /api/approval-status HTTP/1.1 200 51.3834ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:49:41 +07] "GET /api/approval-status HTTP/1.1 200 16.8094ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:49:41 +07] "GET /api/approval-status HTTP/1.1 200 18.8226ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:49:41 +07] "GET /api/approval-status HTTP/1.1 200 18.8344ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:49:41 +07] "GET /api/approval-status HTTP/1.1 200 16.605ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:49:48 +07] "OPTIONS /api/approval-status?0=a&1=y&2=o HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:49:48 +07] "GET /api/approval-status?0=a&1=y&2=o HTTP/1.1 200 22.0982ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:50:01 +07] "GET /api/role-users HTTP/1.1 200 16.7246ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:50:06 +07] "OPTIONS /api/approval-status?0=c&1=o&2=b&3=a HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "
+::1 - [Thu, 19 Oct 2023 23:50:06 +07] "GET /api/approval-status?0=c&1=o&2=b&3=a HTTP/1.1 200 18.3584ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" "

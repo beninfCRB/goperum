@@ -9,7 +9,7 @@ import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 import { useNavigate } from 'react-router-dom'
 import { StorageName } from '../../static/config'
 
-const ForgotPassword = () => {
+const ForgotPasswordIndex = () => {
     const [form] = Form.useForm()
     const { isSuccess, isError, error, isLoading, data: response, mutateAsync } = useForgotPassword()
     const navigate = useNavigate()
@@ -103,4 +103,4 @@ const ForgotPassword = () => {
     )
 }
 
-export default ForgotPassword
+export default ForgotPasswordIndex

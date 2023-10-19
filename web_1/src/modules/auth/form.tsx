@@ -2,6 +2,7 @@ import { MailOutlined, LockOutlined, KeyOutlined } from '@ant-design/icons';
 import { Button, Form, FormInstance, Input } from 'antd'
 import { UserType } from '../profile';
 import { Link } from 'react-router-dom';
+import { SelectRoleUserPublic } from '../role-user';
 
 interface loginFormType {
     form: FormInstance;
@@ -88,7 +89,7 @@ export const FormLogin = (props: loginFormType) => {
     )
 }
 
-export const FormRegister = (props: registerFormType) => {
+export const FormRegisterPublic = (props: registerFormType) => {
     return (
         <Form
             form={props.form}
@@ -165,6 +166,113 @@ export const FormRegister = (props: registerFormType) => {
             >
                 <Input.Password
                     prefix={<LockOutlined className="site-form-item-icon" />}
+                />
+            </Form.Item>
+            <div className='mt-0 text-right'>
+                <Link replace to={'/login'}><small>sudah punya akun?</small></Link>
+            </div>
+
+            <Form.Item className='text-center'>
+                <Button type="primary" htmlType="submit" onClick={props.onSubmit}>
+                    DAFTAR
+                </Button>
+            </Form.Item>
+        </Form>
+    )
+}
+
+export const FormRegisterPrivate = (props: registerFormType) => {
+    return (
+        <Form
+            form={props.form}
+            layout='vertical'
+            name="normal_register"
+            className="login-form box"
+            initialValues={{
+                remember: true,
+            }}
+        >
+            <Form.Item
+                name="name"
+                label='Nama'
+                hasFeedback
+                rules={[
+                    {
+                        required: true,
+                        message: 'Masukan Nama!',
+                    },
+                ]}
+            >
+                <Input placeholder="Nama" />
+            </Form.Item>
+            <Form.Item
+                name="email"
+                label='Email'
+                hasFeedback
+                rules={[
+                    {
+                        type: "email",
+                        required: true,
+                        message: 'Masukan Email!',
+                    },
+                ]}
+            >
+                <Input prefix={<MailOutlined className="site-form-item-icon" />} placeholder="Email" />
+            </Form.Item>
+            <Form.Item
+                name="password"
+                label='Kata Sandi'
+                hasFeedback
+                rules={[
+                    {
+                        required: true,
+                        message: 'Masukan Kata Sandi!',
+                    },
+                ]}
+            >
+                <Input.Password
+                    prefix={<LockOutlined className="site-form-item-icon" />}
+                    type="password"
+                    placeholder="Kata Sandi"
+                />
+            </Form.Item>
+            <Form.Item
+                name="confirm_password"
+                label="Konfirmasi Kata Sandi"
+                dependencies={['password']}
+                hasFeedback
+                rules={[
+                    {
+                        required: true,
+                        message: 'Masukan Konfirmasi Kata Sandi!',
+                    },
+                    ({ getFieldValue }) => ({
+                        validator(_, value) {
+                            if (!value || getFieldValue('password') === value) {
+                                return Promise.resolve();
+                            }
+                            return Promise.reject(new Error('Kata sandi baru yang Anda masukkan tidak cocok!'));
+                        },
+                    }),
+                ]}
+            >
+                <Input.Password
+                    prefix={<LockOutlined className="site-form-item-icon" />}
+                />
+            </Form.Item>
+            <Form.Item
+                name="role_user_id"
+                label='Role'
+                hasFeedback
+                rules={[
+                    {
+                        required: true,
+                        message: 'Masukan Role!',
+                    },
+                ]}
+            >
+                <SelectRoleUserPublic
+                    placeholder="Role"
                 />
             </Form.Item>
             <div className='mt-0 text-right'>

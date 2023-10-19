@@ -6,6 +6,7 @@ import PaymentForm from "../../modules/payment/form"
 import { useAddPayment, usePayment, usePaymentAll, useDeletePayment, useUpdatePayment } from "../../modules/payment"
 import PaymentStore from "../../modules/payment/state"
 import { fetch } from "../../utils/reponse"
+import moment from "moment"
 
 const PaymentIndex = () => {
     const [isModalAddOpen, setIsModalAddOpen] = useState<boolean>(false);
@@ -152,8 +153,6 @@ const EditPayment = (props: {
 
     const onSubmit = () => {
         form.validateFields().then(async (values) => {
-            console.log(props.id);
-
             await editPayment.mutateAsync({
                 ...values,
                 id: props.id
@@ -173,7 +172,10 @@ const EditPayment = (props: {
 
     useEffect(() => {
         if (PaymentGetMutation.data) {
-            form.setFieldsValue(PaymentGetMutation.data?.data?.Data)
+            form.setFieldsValue({
+                ...PaymentGetMutation.data?.data?.Data,
+                confirm_date:moment(PaymentGetMutation.data?.data?.Data)
+            })
         }
     }, [PaymentGetMutation.data])
 

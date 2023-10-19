@@ -2,10 +2,10 @@ import { Form, Spin, message } from 'antd';
 import { useEffect } from 'react'
 import { useRegisterPublic } from '../../modules/auth';
 import { fetch } from '../../utils/reponse';
-import { FormRegister } from '../../modules/auth/form';
+import { FormRegisterPublic } from '../../modules/auth/form';
 import { useNavigate } from 'react-router-dom';
 
-const Register = () => {
+const RegisterCustomerIndex = () => {
     const [form] = Form.useForm()
     const { isError, isSuccess, error, isLoading, mutateAsync } = useRegisterPublic();
     const navigate = useNavigate()
@@ -44,7 +44,7 @@ const Register = () => {
                     <Spin
                         spinning={isLoading}
                     >
-                        <FormRegister
+                        <FormRegisterPublic
                             form={form}
                             onSubmit={onSubmit}
                         />
@@ -55,4 +55,4 @@ const Register = () => {
     )
 }
 
-export default Register
+export default RegisterCustomerIndex

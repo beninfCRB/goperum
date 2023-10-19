@@ -46,7 +46,7 @@ func (r *useController) RegisterUserPublic(c *gin.Context) {
 		return
 	}
 
-	input.RoleID = roleUser.ID
+	input.RoleUserID = roleUser.ID
 
 	err = c.ShouldBindJSON(&input)
 	if err != nil {
@@ -58,7 +58,87 @@ func (r *useController) RegisterUserPublic(c *gin.Context) {
 		return
 	}
 
-	user, err := r.useService.RegisterUser(input)
+	user, err := r.useService.RegisterUserPublic(input)
+	if err != nil {
+		response := util.Response("Register has been failed", http.StatusBadRequest, "error", nil)
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	accessToken, err := r.authService.GenerateAccessToken(user.ID.String())
+	if err != nil {
+		response := util.Response("Register has been failed", http.StatusBadRequest, "error", nil)
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	refreshToken, err := r.authService.GenerateRefreshToken(user.ID.String())
+	if err != nil {
+		response := util.Response("Register has been failed", http.StatusBadRequest, "error", nil)
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	_, err = r.useService.UpdateRefreshToken(user.ID, refreshToken)
+	if err != nil {
+		response := util.Response("Store token has been failed", http.StatusBadRequest, "error", nil)
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	var inputVerification verification_user.VerificationUserInput
+	inputVerification.Email = user.Email
+	inputVerification.VerificationCode = verification_code
+	inputVerification.ExpiredAt = time.Now().Add(5 * time.Minute)
+
+	_, err = r.verificationService.SaveVerificationUser(inputVerification)
+	if err != nil {
+		response := util.Response("Verification code has been failed", http.StatusBadRequest, "error", nil)
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	var firstName = user.Name
+
+	if strings.Contains(firstName, " ") {
+		firstName = strings.Split(firstName, " ")[1]
+	}
+
+	emailData := util.EmailData{
+		URL:       os.Getenv("URL_CLIENT") + "/verify-email",
+		Title:     "verification account",
+		Code:      code,
+		FirstName: firstName,
+		Subject:   "Your account verification code",
+	}
+
+	util.SendEmail(&user, &emailData)
+
+	c.SetCookie("tk_r", refreshToken, 3600*duration, "/", os.Getenv("COOKIE_DOMAIN"), true, true)
+
+	formatter := UserFormat(user, accessToken, refreshToken)
+	response := util.Response("Account has been registered", http.StatusCreated, "success", formatter)
+	c.JSON(http.StatusCreated, response)
+}
+
+func (r *useController) RegisterUserPrivate(c *gin.Context) {
+	var input RegisterUserInput
+	duration, _ := strconv.Atoi(os.Getenv("COOKIE_EXPIRED"))
+
+	code := randstr.String(20)
+	verification_code := util.Encode(code)
+
+	err := c.ShouldBindJSON(&input)
+	if err != nil {
+		errors := util.ErrorValidation(err)
+		errorMessage := gin.H{"errors": errors}
+
+		response := util.Response("Register has been failed", http.StatusUnprocessableEntity, "error", errorMessage)
+		c.JSON(http.StatusUnprocessableEntity, response)
+		return
+	}
+
+	user, err := r.useService.RegisterUserPrivate(input)
 	if err != nil {
 		response := util.Response("Register has been failed", http.StatusBadRequest, "error", nil)
 		c.JSON(http.StatusBadRequest, response)
@@ -435,7 +515,7 @@ func (r useController) PostUser(c *gin.Context) {
 		return
 	}
 
-	user, err := r.useService.RegisterUser(input)
+	user, err := r.useService.RegisterUserPrivate(input)
 	if err != nil {
 		response := util.Response("Add user has been failed", http.StatusBadRequest, "error", nil)
 		c.JSON(http.StatusBadRequest, response)

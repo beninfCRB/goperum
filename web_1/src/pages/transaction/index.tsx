@@ -152,8 +152,6 @@ const EditTransaction = (props: {
 
     const onSubmit = () => {
         form.validateFields().then(async (values) => {
-            console.log(props.id);
-
             await editTransaction.mutateAsync({
                 ...values,
                 id: props.id

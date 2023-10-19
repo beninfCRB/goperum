@@ -28,6 +28,9 @@ import (
 var userModule = user.UserModule()
 var verificatioUserModule = verification_user.VerificationUserModule()
 var passwordResetModule = password_reset.PasswordServiceModule()
+var repo = role_user.RoleUserRepository(database.NewDatabase())
+var service = role_user.RoleUserService(repo)
+var controller = role_user.RoleUserController(service)
 
 func PublicRoutes(r *gin.RouterGroup) {
 	r.GET("/", func(c *gin.Context) {
@@ -39,6 +42,7 @@ func PublicRoutes(r *gin.RouterGroup) {
 
 func PublicAPIRoutes(r *gin.RouterGroup) {
 	r.POST("/users", userModule.RegisterUserPublic)
+	r.POST("/private/users", userModule.RegisterUserPrivate)
 	r.POST("/email_checkers", userModule.CheckEmailAvailability)
 	r.POST("/sessions", userModule.Login)
 	r.POST("/refresh-token", userModule.RefreshToken)
@@ -47,6 +51,7 @@ func PublicAPIRoutes(r *gin.RouterGroup) {
 	r.POST("/re-verify-email", userModule.ResendCodeVerification)
 	r.POST("/forgot-password", passwordResetModule.ForgotPassword)
 	r.POST("/new-password/:reset_code", passwordResetModule.NewPassword)
+	r.GET("/public/role-users", controller.GetRoleUser)
 }
 
 func PrivateAPIRoutes(r *gin.RouterGroup) {

@@ -3,12 +3,13 @@ import MainLayout from "../components/layout/MainLayout";
 import { ProtectedRoute } from "../components/layout/ProtectedRoute";
 import PageNotFound from "../components/layout/pageNotFound";
 import ApprovalStatusIndex from "../pages/approval-status";
-import ForgotPassword from "../pages/auth/forgotPassword";
-import Login from "../pages/auth/login";
-import NewPassword from "../pages/auth/newPassword";
-import Register from "../pages/auth/registerCustomer";
-import ResendVerficationEmail from "../pages/auth/resendVerificationEmail";
-import VerifyEmail from "../pages/auth/verifyEmail";
+import ForgotPasswordIndex from "../pages/auth/forgotPassword";
+import LoginIndex from "../pages/auth/login";
+import NewPasswordIndex from "../pages/auth/newPassword";
+import RegisterCustomerIndex from "../pages/auth/registerCustomer";
+import RegisterPrivateIndex from "../pages/auth/registerPrivate";
+import ResendVerficationEmailIndex from "../pages/auth/resendVerificationEmail";
+import VerifyEmailIndex from "../pages/auth/verifyEmail";
 import BankIndex from "../pages/bank";
 import CustomerIndex from "../pages/customer";
 import Dashboard from "../pages/dashboard";
@@ -28,33 +29,38 @@ const Pages: routerType[] = [
         path: "login",
         element:
             <ProtectedRoute>
-                <Login />
+                <LoginIndex />
             </ProtectedRoute>,
         title: "Login Akun"
     },
     {
         path: "register",
-        element: <Register />,
+        element: <RegisterCustomerIndex />,
+        title: "Register Akun"
+    },
+    {
+        path: "private/register",
+        element: <RegisterPrivateIndex />,
         title: "Register Akun"
     },
     {
         path: "forgot-password",
-        element: <ForgotPassword />,
+        element: <ForgotPasswordIndex />,
         title: "Lupa Kata Sandi"
     },
     {
         path: "new-password/:reset_code",
-        element: <NewPassword />,
+        element: <NewPasswordIndex />,
         title: "Atur Kata Sandi Baru"
     },
     {
         path: "verify-email",
-        element: <VerifyEmail />,
+        element: <VerifyEmailIndex />,
         title: "Verifikasi Email"
     },
     {
         path: "re-verify-email",
-        element: <ResendVerficationEmail />,
+        element: <ResendVerficationEmailIndex />,
         title: "Verifikasi Email Ulang"
     },
     {

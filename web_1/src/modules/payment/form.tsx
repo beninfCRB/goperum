@@ -60,7 +60,7 @@ const PaymentForm = (props: PaymentFormProps) => {
                     >
                         <DatePicker
                             className='w-full'
-                            format={'dd/mm/Y'}
+                            format={'D/M/YYYY'}
                             placeholder='Masukan Tanggal Konfirmasi'
                         />
                     </Form.Item>
@@ -254,10 +254,7 @@ const PaymentForm = (props: PaymentFormProps) => {
                             }
                         ]}
                     >
-                        <InputNumber
-                            className='w-full'
-                            addonBefore='Rp.'
-                            addonAfter='per Bulan'
+                        <Input
                             placeholder='Masukan Prof Pembayaran'
                         />
                     </Form.Item>

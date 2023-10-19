@@ -9,7 +9,7 @@ import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 import { Link } from 'react-router-dom'
 import { StorageName } from '../../static/config'
 
-const ResendVerficationEmail = () => {
+const ResendVerficationEmailIndex = () => {
     const [form] = Form.useForm()
     const { isSuccess, isError, error, isLoading, data: response, mutateAsync } = useReVerifyEmail()
     const navigate = useNavigate()
@@ -106,4 +106,4 @@ const ResendVerficationEmail = () => {
     )
 }
 
-export default ResendVerficationEmail
+export default ResendVerficationEmailIndex

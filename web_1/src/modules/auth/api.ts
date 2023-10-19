@@ -5,6 +5,7 @@ import axiosInstance from "../../utils/interceptor";
 const login = `sessions`
 const logout = `logout`
 const user = `users`
+const userPrivate = `private/users`
 const verifyEmail = `verify-email`
 const forgotPassword = `forgot-password`
 const newPassword = `new-password`
@@ -23,6 +24,11 @@ export const useLogin = () => {
 export const useRegisterPublic = () => {
     return useMutation((values: any) =>
         axiosInstance.post(`${base_url}${user}`, values));
+};
+
+export const useRegisterPrivate = () => {
+    return useMutation((values: any) =>
+        axiosInstance.post(`${base_url}${userPrivate}`, values));
 };
 
 export const useVerifyEmail = () => {

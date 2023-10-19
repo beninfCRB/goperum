@@ -6,7 +6,7 @@ import { fetch } from '../../utils/reponse'
 import { FormVerificationEmail } from '../../modules/auth/form'
 import { StorageName } from '../../static/config'
 
-const VerifyEmail = () => {
+const VerifyEmailIndex = () => {
     const [form] = Form.useForm()
     const { isLoading, isSuccess, isError, error, mutateAsync } = useVerifyEmail()
     const navigate = useNavigate()
@@ -57,4 +57,4 @@ const VerifyEmail = () => {
     )
 }
 
-export default VerifyEmail
+export default VerifyEmailIndex

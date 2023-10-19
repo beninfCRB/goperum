@@ -6,7 +6,7 @@ import { FormNewPassword } from '../../modules/auth/form'
 import { useNewPassword } from '../../modules/auth'
 import { StorageName } from '../../static/config'
 
-const NewPassword = () => {
+const NewPasswordIndex = () => {
     const [form] = Form.useForm()
     const { reset_code } = useParams()
     const { isSuccess, isError, error, isLoading, mutateAsync } = useNewPassword()
@@ -59,4 +59,4 @@ const NewPassword = () => {
     )
 }
 
-export default NewPassword
+export default NewPasswordIndex

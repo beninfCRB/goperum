@@ -9,9 +9,16 @@ export const useAddRoleUser = () => {
         axiosInstance.post(`${base_url}${module}`, formData));
 };
 
-export const useRoleUserAll = () => {
+export const useRoleUserAllPrivate = () => {
     return useQuery('RoleUserData', async () => {
         const response = await axiosInstance.get(`${base_url}${module}`);
+        return response.data.Data
+    });
+};
+
+export const useRoleUserAllPublic = () => {
+    return useQuery('RoleUserData', async () => {
+        const response = await axiosInstance.get(`${base_url}public/${module}`);
         return response.data.Data
     });
 };

@@ -55,7 +55,6 @@ const MenuItem: FunctionComponent<MenuProps> = (props) => {
         if (user.role === 'mkt') {
             setMenu([
                 getItem('Dashboard', 'dashboard', <PieChartOutlined />),
-                getItem('Marketing', 'marketing', <UserOutlined />),
                 getItem('Produk', 'product', <InsertRowAboveOutlined />),
                 getItem('Transaksi', 'transaction', <InsertRowAboveOutlined />),
                 getItem('Pembayaran', 'payment', <InsertRowAboveOutlined />),

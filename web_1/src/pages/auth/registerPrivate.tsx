@@ -1,27 +1,21 @@
-import { useEffect } from 'react';
-import { Form, Spin, message } from 'antd'
-import { useLogin } from '../../modules/auth';
-import { useNavigate } from 'react-router-dom';
+import { Form, Spin, message } from 'antd';
+import { useEffect } from 'react'
+import { useRegisterPrivate } from '../../modules/auth';
 import { fetch } from '../../utils/reponse';
-import { FormLogin } from '../../modules/auth/form';
-import { UserType } from '../../modules/profile';
+import { FormRegisterPrivate } from '../../modules/auth/form';
+import { useNavigate } from 'react-router-dom';
 
-const LoginIndex = () => {
+const RegisterPrivateIndex = () => {
     const [form] = Form.useForm()
-    const { isError, isSuccess, error, isLoading, mutateAsync } = useLogin();
-    const navigate = useNavigate();
-    const user: UserType = JSON.parse(localStorage.getItem('user') as string)
+    const { isError, isSuccess, error, isLoading, mutateAsync } = useRegisterPrivate();
+    const navigate = useNavigate()
     const _fetch = new fetch()
 
     useEffect(() => {
-        if (localStorage.getItem('authorize')) {
-            navigate('/admin/dashboard')
-        }
-    })
-
-    useEffect(() => {
         if (isSuccess) {
-            message.success("Login successfully")
+            form.resetFields()
+            navigate('/verify-email')
+            message.success("Verification code email have been sent, please check email")
         }
         if (isError) {
             message.error(_fetch.getAxiosMessage(error))
@@ -43,16 +37,15 @@ const LoginIndex = () => {
         <div className="min-h-screen flex flex-col items-center justify-center bg-gray-300 bg-[url('assets/image/bg-login.jpeg')] bg-cover bg-center">
             <div className="flex flex-col bg-white shadow-md px-4 sm:px-6 md:px-8 lg:px-10 py-8 rounded-md w-full max-w-xs">
                 <div className="font-medium self-center text-xl sm:text-2xl uppercase text-gray-800 text-center">
-                    SELAMAT DATANG
-                    <p className='text-xs'>silahkan masuk ke akun</p>
+                    REGISTRASI
+                    <p className='text-xs'>silahkan masukan data diri</p>
                 </div>
                 <div className="mt-10">
                     <Spin
                         spinning={isLoading}
                     >
-                        <FormLogin
+                        <FormRegisterPrivate
                             form={form}
-                            user={user}
                             onSubmit={onSubmit}
                         />
                     </Spin>
@@ -62,4 +55,4 @@ const LoginIndex = () => {
     )
 }
 
-export default LoginIndex
+export default RegisterPrivateIndex

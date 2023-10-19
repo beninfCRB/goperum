@@ -3,7 +3,7 @@ import TableRoleUser from "../../modules/role-user/table"
 import { PlusCircleOutlined } from "@ant-design/icons"
 import { useEffect, useState } from "react"
 import RoleUserForm from "../../modules/role-user/form"
-import { useAddRoleUser, useRoleUser, useRoleUserAll, useDeleteRoleUser, useUpdateRoleUser } from "../../modules/role-user"
+import { useAddRoleUser, useRoleUser, useRoleUserAllPrivate, useDeleteRoleUser, useUpdateRoleUser } from "../../modules/role-user"
 import RoleUserStore from "../../modules/role-user/state"
 import { fetch } from "../../utils/reponse"
 
@@ -11,7 +11,7 @@ const RoleUserIndex = () => {
     const [isModalAddOpen, setIsModalAddOpen] = useState<boolean>(false);
     const [isModalEditOpen, setIsModalEditOpen] = useState<boolean>(false);
     const [_id, setId] = useState<string>('')
-    const RoleUserGetAllMutation = useRoleUserAll()
+    const RoleUserGetAllMutation = useRoleUserAllPrivate()
     const RoleUserDeleteMutation = useDeleteRoleUser()
     const RoleUserState = RoleUserStore()
     const _fetch = new fetch()
@@ -96,7 +96,7 @@ const AddRoleUser = (props: {
 }) => {
     const [form] = Form.useForm()
     const addRoleUser = useAddRoleUser()
-    const RoleUserMutation = useRoleUserAll()
+    const RoleUserMutation = useRoleUserAllPrivate()
     const _fetch = new fetch()
 
     const onSubmit = () => {
@@ -146,7 +146,7 @@ const EditRoleUser = (props: {
     const [form] = Form.useForm()
     const RoleUserGetMutation = useRoleUser()
     const editRoleUser = useUpdateRoleUser()
-    const RoleUserMutation = useRoleUserAll()
+    const RoleUserMutation = useRoleUserAllPrivate()
     const _fetch = new fetch()
 
     const onSubmit = () => {

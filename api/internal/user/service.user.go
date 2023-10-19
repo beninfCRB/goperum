@@ -9,7 +9,8 @@ import (
 )
 
 type Service interface {
-	RegisterUser(input RegisterUserInput) (entity.User, error)
+	RegisterUserPublic(input RegisterUserInput) (entity.User, error)
+	RegisterUserPrivate(input RegisterUserInput) (entity.User, error)
 	LoginUser(input LoginUserInput) (entity.User, error)
 	IsEmailAvailable(input CheckEmailInput) (bool, error)
 	SaveAvatar(ID uuid.UUID, fileLocation string) (entity.User, error)
@@ -30,11 +31,42 @@ func UserService(repository Respository) *service {
 	return &service{repository}
 }
 
-func (s *service) RegisterUser(input RegisterUserInput) (entity.User, error) {
+func (s *service) RegisterUserPublic(input RegisterUserInput) (entity.User, error) {
 	user := entity.User{}
 	user.Name = input.Name
 	user.Email = input.Email
-	user.RoleID = input.RoleID
+	user.RoleID = input.RoleUserID
+
+	if input.Password != input.ConfirmPassword {
+		return user, errors.New("password not match")
+	}
+
+	PasswordHash, err := bcrypt.GenerateFromPassword([]byte(input.Password), bcrypt.MinCost)
+	if err != nil {
+		return user, err
+	}
+
+	ConfirmPasswordHash, err := bcrypt.GenerateFromPassword([]byte(input.ConfirmPassword), bcrypt.MinCost)
+	if err != nil {
+		return user, err
+	}
+
+	user.PasswordHash = string(PasswordHash)
+	user.ConfirmPasswordHash = string(ConfirmPasswordHash)
+
+	save, err := s.repository.Save(user)
+	if err != nil {
+		return save, err
+	}
+
+	return save, nil
+}
+
+func (s *service) RegisterUserPrivate(input RegisterUserInput) (entity.User, error) {
+	user := entity.User{}
+	user.Name = input.Name
+	user.Email = input.Email
+	user.RoleID = input.RoleUserID
 
 	if input.Password != input.ConfirmPassword {
 		return user, errors.New("password not match")
@@ -141,7 +173,7 @@ func (s *service) UpdateUser(ID uuid.UUID, input UserInput) (entity.User, error)
 
 	user.Name = input.Name
 	user.Email = input.Email
-	user.RoleID = input.RoleID
+	user.RoleID = input.RoleUserID
 
 	update, err := s.repository.Update(user)
 	if err != nil {

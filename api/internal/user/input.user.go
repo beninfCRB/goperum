@@ -7,13 +7,13 @@ type RegisterUserInput struct {
 	Email           string    `json:"email" binding:"required,email"`
 	Password        string    `json:"password" binding:"required"`
 	ConfirmPassword string    `json:"confirm_password" binding:"required"`
-	RoleID          uuid.UUID `json:"role_id" binding:"required"`
+	RoleUserID      uuid.UUID `json:"role_user_id" binding:"required"`
 }
 
 type UserInput struct {
-	Name   string    `json:"name" binding:"required"`
-	Email  string    `json:"email" binding:"required,email"`
-	RoleID uuid.UUID `json:"role_id" binding:"required"`
+	Name       string    `json:"name" binding:"required"`
+	Email      string    `json:"email" binding:"required,email"`
+	RoleUserID uuid.UUID `json:"role_user_id" binding:"required"`
 }
 
 type LoginUserInput struct {

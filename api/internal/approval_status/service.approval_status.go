@@ -8,7 +8,7 @@ import (
 
 type Service interface {
 	CreateApprovalStatus(input ApprovalStatusInput) (entity.TarnsactionStatus, error)
-	FindApprovalStatus() ([]entity.TarnsactionStatus, error)
+	FindApprovalStatus(params map[string]interface{}) ([]entity.TarnsactionStatus, error)
 	FindOneApprovalStatus(ID uuid.UUID) (entity.TarnsactionStatus, error)
 	UpdateApprovalStatus(ID uuid.UUID, input ApprovalStatusInput) (entity.TarnsactionStatus, error)
 	DeleteApprovalStatus(ID uuid.UUID) (entity.TarnsactionStatus, error)
@@ -46,8 +46,8 @@ func (s *service) FindOneApprovalStatus(ID uuid.UUID) (entity.TarnsactionStatus,
 	return approvalStatus, nil
 }
 
-func (s *service) FindApprovalStatus() ([]entity.TarnsactionStatus, error) {
-	approvalStatus, err := s.repository.FindAll()
+func (s *service) FindApprovalStatus(params map[string]interface{}) ([]entity.TarnsactionStatus, error) {
+	approvalStatus, err := s.repository.FindAll(params)
 	if err != nil {
 		return approvalStatus, err
 	}

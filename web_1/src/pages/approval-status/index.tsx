@@ -1,11 +1,13 @@
-import { Button, Card, Form, Modal, Tooltip, message } from "antd"
+import { Button, Card, Form, Input, Modal, Tooltip, message } from "antd"
 import TableApprovalStatus from "../../modules/approval-status/table"
-import { PlusCircleOutlined } from "@ant-design/icons"
+import { PlusCircleOutlined, RedoOutlined } from "@ant-design/icons"
 import { useEffect, useState } from "react"
 import ApprovalStatusForm from "../../modules/approval-status/form"
 import { useAddApprovalStatus, useApprovalStatus, useApprovalStatusAll, useDeleteApprovalStatus, useUpdateApprovalStatus } from "../../modules/approval-status"
 import ApprovalStatusStore from "../../modules/approval-status/state"
 import { fetch } from "../../utils/reponse"
+import { Search } from "../../components/search"
+import { useSearchParams } from "react-router-dom"
 
 const ApprovalStatusIndex = () => {
     const [isModalAddOpen, setIsModalAddOpen] = useState<boolean>(false);
@@ -14,6 +16,8 @@ const ApprovalStatusIndex = () => {
     const ApprovalStatusGetAllMutation = useApprovalStatusAll()
     const ApprovalStatusDeleteMutation = useDeleteApprovalStatus()
     const ApprovalStatusState = ApprovalStatusStore()
+    const [searchParams] = useSearchParams();
+    const search = searchParams.get('search')
     const _fetch = new fetch()
 
     useEffect(() => {
@@ -24,19 +28,27 @@ const ApprovalStatusIndex = () => {
 
     useEffect(() => {
         if (ApprovalStatusDeleteMutation.isSuccess) {
-            ApprovalStatusGetAllMutation.refetch()
+            fetchData()
             message.success(ApprovalStatusDeleteMutation.data?.data?.Meta?.Message)
         }
         if (ApprovalStatusDeleteMutation.isError) {
             message.success(_fetch.getAxiosMessage(ApprovalStatusDeleteMutation.error))
         }
         return () => {
-            ApprovalStatusGetAllMutation.refetch()
+            fetchData()
         }
     }, [ApprovalStatusDeleteMutation.isSuccess])
 
+    const fetchData = (params?: any) => {
+        ApprovalStatusGetAllMutation.mutateAsync(params)
+    }
+
     const getData = (data: any) => {
         ApprovalStatusState.getAll(data)
+    }
+
+    const onRefresh = () => {
+        fetchData()
     }
 
     const onEdit = (id: string) => {
@@ -57,18 +69,40 @@ const ApprovalStatusIndex = () => {
         isModalEditOpen && setIsModalEditOpen(false)
     }
 
+    const onSearch = (values?: any) => {
+        fetchData(values)
+    }
+
     return (
         <Card
             title='DATA STATUS PERSETUJUAN'
             bodyStyle={{ padding: "0" }}
             extra={
-                <Tooltip title='Tambah Data'>
-                    <Button type="primary" shape="circle" onClick={showModal}>
-                        <PlusCircleOutlined />
-                    </Button>
-                </Tooltip>
+                <div className="flex items-stretch">
+                    <div className="py-4">
+                        <Tooltip title='Tambah Data'>
+                            <Button type="primary" shape="circle" onClick={showModal}>
+                                <PlusCircleOutlined />
+                            </Button>
+                        </Tooltip>
+                    </div>
+                    <div className="py-4 ml-2">
+                        <Tooltip title='Segarkan Data'>
+                            <Button type="default" shape="circle" onClick={onRefresh}>
+                                <RedoOutlined />
+                            </Button>
+                        </Tooltip>
+                    </div>
+                </div>
             }
         >
+            <Search
+                key="ApprovalStatus.SearchComponent"
+                loading={ApprovalStatusGetAllMutation.isLoading}
+                searchText={search as string | undefined}
+                setSearchText={onSearch}
+                fetchFunction={fetchData}
+            />
             <TableApprovalStatus
                 data={ApprovalStatusState.multiple}
                 onLoading={ApprovalStatusGetAllMutation.isLoading}
@@ -119,7 +153,7 @@ const AddApprovalStatus = (props: {
             props.onCancel()
         }
         return () => {
-            ApprovalStatusMutation.refetch()
+            ApprovalStatusMutation.mutateAsync({})
             form.resetFields()
         }
     }, [addApprovalStatus.isSuccess, addApprovalStatus.isError])
@@ -184,7 +218,7 @@ const EditApprovalStatus = (props: {
             props.onCancel()
         }
         return () => {
-            ApprovalStatusMutation.refetch()
+            ApprovalStatusMutation.mutateAsync({})
         }
     }, [editApprovalStatus.isSuccess, editApprovalStatus.isError])
 

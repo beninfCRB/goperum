@@ -1,6 +1,6 @@
 import { Form, FormInstance, Input } from 'antd'
 import { FunctionComponent } from 'react';
-import SelectRoleUser from '../role-user/select';
+import { SelectRoleUser } from '../role-user';
 
 export interface TransactionStatusFormProps {
     form: FormInstance;
