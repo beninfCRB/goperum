@@ -7,6 +7,7 @@ import { useAddPayment, usePayment, usePaymentAll, useDeletePayment, useUpdatePa
 import PaymentStore from "../../modules/payment/state"
 import { fetch } from "../../utils/reponse"
 import moment from "moment"
+import { MODAL } from "../../static/text"
 
 const PaymentIndex = () => {
     const [isModalAddOpen, setIsModalAddOpen] = useState<boolean>(false);
@@ -34,7 +35,10 @@ const PaymentIndex = () => {
         return () => {
             PaymentGetAllMutation.refetch()
         }
-    }, [PaymentDeleteMutation.isSuccess])
+    }, [
+        PaymentDeleteMutation.isSuccess,
+        PaymentDeleteMutation.isError
+    ])
 
     const getData = (data: any) => {
         PaymentState.getAll(data)
@@ -46,7 +50,14 @@ const PaymentIndex = () => {
     }
 
     const onDelete = (id: string) => {
-        PaymentDeleteMutation.mutateAsync(id)
+        Modal.confirm({
+            title: MODAL.MODAL_CONFIRM.IND.DELETE.TITLE,
+            content: MODAL.MODAL_CONFIRM.IND.DELETE.CONTENT,
+            okText: 'Ok',
+            cancelText: 'Cancel',
+            onOk: async () => await PaymentDeleteMutation.mutateAsync(id),
+            onCancel: () => { },
+        })
     }
 
     const showModal = () => {
@@ -174,7 +185,7 @@ const EditPayment = (props: {
         if (PaymentGetMutation.data) {
             form.setFieldsValue({
                 ...PaymentGetMutation.data?.data?.Data,
-                confirm_date:moment(PaymentGetMutation.data?.data?.Data)
+                confirm_date: moment(PaymentGetMutation.data?.data?.Data)
             })
         }
     }, [PaymentGetMutation.data])

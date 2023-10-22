@@ -6,6 +6,7 @@ import TypeDPForm from "../../modules/type-dp/form"
 import { useAddTypeDP, useTypeDP, useTypeDPAll, useDeleteTypeDP, useUpdateTypeDP } from "../../modules/type-dp"
 import TypeDPStore from "../../modules/type-dp/state"
 import { fetch } from "../../utils/reponse"
+import { MODAL } from "../../static/text"
 
 const TypeDPIndex = () => {
     const [isModalAddOpen, setIsModalAddOpen] = useState<boolean>(false);
@@ -33,7 +34,10 @@ const TypeDPIndex = () => {
         return () => {
             TypeDPGetAllMutation.refetch()
         }
-    }, [TypeDPDeleteMutation.isSuccess])
+    }, [
+        TypeDPDeleteMutation.isSuccess,
+        TypeDPDeleteMutation.isError
+    ])
 
     const getData = (data: any) => {
         TypeDPState.getAll(data)
@@ -45,7 +49,14 @@ const TypeDPIndex = () => {
     }
 
     const onDelete = (id: string) => {
-        TypeDPDeleteMutation.mutateAsync(id)
+        Modal.confirm({
+            title: MODAL.MODAL_CONFIRM.IND.DELETE.TITLE,
+            content: MODAL.MODAL_CONFIRM.IND.DELETE.CONTENT,
+            okText: 'Ok',
+            cancelText: 'Cancel',
+            onOk: async () => await TypeDPDeleteMutation.mutateAsync(id),
+            onCancel: () => { },
+        })
     }
 
     const showModal = () => {

@@ -1,8 +1,10 @@
-import { Button, Spin, Table, Tooltip } from 'antd';
+import { Button, Input, Spin, Table, Tooltip } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import { TransactionType } from '.';
-import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import { CloseCircleOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { removeDuplicates } from '../../utils/filterable';
+import { useEffect, useState } from 'react';
+import { get, map } from 'lodash';
 
 export interface tableTransactionProps {
     data: Array<TransactionType>;
@@ -11,7 +13,17 @@ export interface tableTransactionProps {
     onDelete: (id: string) => void;
 }
 
+interface stateTableTransaction {
+    filteredInfo?: any | null;
+    sortedInfo?: any | null;
+    data?: Array<TransactionType>;
+    filtered?: boolean | null;
+    searchText?: string | null;
+};
+
 const TableTransaction = (props: tableTransactionProps) => {
+    const [_state, setState] = useState<stateTableTransaction | null>(null)
+
     const Marketing = props.data.map(({ Marketing }) => {
         return { text: Marketing?.name, value: Marketing?.name }
     })
@@ -121,9 +133,71 @@ const TableTransaction = (props: tableTransactionProps) => {
         },
     ];
 
+    const emitEmpty = () => {
+        setState({
+            data: props.data,
+            searchText: '',
+            filtered: null
+        });
+    };
+
+    const onSearch = (e: any) => {
+        const reg = new RegExp(e.target.value, 'gi');
+        const filteredData = map(_state?.data, (record: any) => {
+            const codeMatch = get(record, 'code').match(reg);
+            const customerMatch = get(record, ['Customer', 'name']).match(reg);
+            const marketingMatch = get(record, ['Marketing', 'name']).match(reg);
+            const productMatch = get(record, ['Product', 'name']).match(reg);
+            const purchasemethodMatch = get(record, ['PurchaseMethod', 'name']).match(reg);
+            const typedownpaymentMatch = get(record, ['TypeDownPayment', 'name']).match(reg);
+            const downpaymentMatch = get(record, 'down_payment').match(reg);
+            const lengthinstallmentsdpMatch = get(record, 'length_installments_dp').match(reg);
+            const monthlyinstallmentsdppMatch = get(record, 'monthly_installments_dp').match(reg);
+            const principalMatch = get(record, 'principal').match(reg);
+            const lengthprincipalMatch = get(record, 'length_principal').match(reg);
+            const monthlyprincipalMatch = get(record, 'monthly_principal').match(reg);
+            const totalbillMatch = get(record, 'total_bill').match(reg);
+            if (!downpaymentMatch && !codeMatch && !customerMatch && !marketingMatch && !productMatch && !purchasemethodMatch && !typedownpaymentMatch && !lengthinstallmentsdpMatch && !monthlyinstallmentsdppMatch && !principalMatch && !lengthprincipalMatch && !monthlyprincipalMatch && !totalbillMatch) {
+                return null;
+            }
+            return record;
+        }).filter((record: any) => !!record);
+
+        setState({
+            searchText: e.target.value,
+            filtered: !!e.target.value,
+            data: e.target.value ? filteredData : _state?.data
+        });
+    };
+
+    useEffect(() => {
+        if (props.data) {
+            setState({
+                data: props.data
+            })
+        }
+    }, [props.data])
+
+    const suffix = _state?.searchText ? (
+        <CloseCircleOutlined onClick={emitEmpty} style={{ color: 'red' }} />
+    ) : null;
+
     return (
         <Spin
             spinning={props.onLoading}>
+            <div className='w-1/3'>
+                <Input.Search
+                    className='mb-2'
+                    size='small'
+                    ref={ele => (_state?.searchText == ele)}
+                    suffix={suffix}
+                    onChange={onSearch}
+                    placeholder='Search'
+                    value={_state?.searchText as string}
+                    onPressEnter={onSearch}
+                    autoFocus
+                />
+            </div>
             <Table
                 className='shadow-2xl'
                 rowKey={'id'}

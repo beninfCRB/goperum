@@ -6,6 +6,7 @@ import PaymentMethodForm from "../../modules/payment-method/form"
 import { useAddPaymentMethod, usePaymentMethod, usePaymentMethodAll, useDeletePaymentMethod, useUpdatePaymentMethod } from "../../modules/payment-method"
 import PaymentMethodStore from "../../modules/payment-method/state"
 import { fetch } from "../../utils/reponse"
+import { MODAL } from "../../static/text"
 
 const PaymentMethodIndex = () => {
     const [isModalAddOpen, setIsModalAddOpen] = useState<boolean>(false);
@@ -33,7 +34,10 @@ const PaymentMethodIndex = () => {
         return () => {
             PaymentMethodGetAllMutation.refetch()
         }
-    }, [PaymentMethodDeleteMutation.isSuccess])
+    }, [
+        PaymentMethodDeleteMutation.isSuccess,
+        PaymentMethodDeleteMutation.isError
+    ])
 
     const getData = (data: any) => {
         PaymentMethodState.getAll(data)
@@ -45,7 +49,14 @@ const PaymentMethodIndex = () => {
     }
 
     const onDelete = (id: string) => {
-        PaymentMethodDeleteMutation.mutateAsync(id)
+        Modal.confirm({
+            title: MODAL.MODAL_CONFIRM.IND.DELETE.TITLE,
+            content: MODAL.MODAL_CONFIRM.IND.DELETE.CONTENT,
+            okText: 'Ok',
+            cancelText: 'Cancel',
+            onOk: async () => await PaymentMethodDeleteMutation.mutateAsync(id),
+            onCancel: () => { },
+        })
     }
 
     const showModal = () => {

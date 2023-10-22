@@ -6,6 +6,7 @@ import BankForm from "../../modules/bank/form"
 import { useAddBank, useBank, useBankAll, useDeleteBank, useUpdateBank } from "../../modules/bank"
 import BankStore from "../../modules/bank/state"
 import { fetch } from "../../utils/reponse"
+import { MODAL } from "../../static/text"
 
 const BankIndex = () => {
     const [isModalAddOpen, setIsModalAddOpen] = useState<boolean>(false);
@@ -33,7 +34,10 @@ const BankIndex = () => {
         return () => {
             BankGetAllMutation.refetch()
         }
-    }, [BankDeleteMutation.isSuccess])
+    }, [
+        BankDeleteMutation.isSuccess,
+        BankDeleteMutation.isError
+    ])
 
     const getData = (data: any) => {
         BankState.getAll(data)
@@ -45,7 +49,14 @@ const BankIndex = () => {
     }
 
     const onDelete = (id: string) => {
-        BankDeleteMutation.mutateAsync(id)
+        Modal.confirm({
+            title: MODAL.MODAL_CONFIRM.IND.DELETE.TITLE,
+            content: MODAL.MODAL_CONFIRM.IND.DELETE.CONTENT,
+            okText: 'Ok',
+            cancelText: 'Cancel',
+            onOk: async () => await BankDeleteMutation.mutateAsync(id),
+            onCancel: () => { },
+        })
     }
 
     const showModal = () => {

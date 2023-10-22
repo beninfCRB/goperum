@@ -11,7 +11,7 @@ import (
 
 type Respository interface {
 	Create(approvalStatus entity.TarnsactionStatus) (entity.TarnsactionStatus, error)
-	FindAll(params map[string]interface{}) ([]entity.TarnsactionStatus, error)
+	FindAll() ([]entity.TarnsactionStatus, error)
 	FindOne(ID uuid.UUID) (entity.TarnsactionStatus, error)
 	Update(approvalStatus entity.TarnsactionStatus) (entity.TarnsactionStatus, error)
 	Delete(approvalStatus entity.TarnsactionStatus) (entity.TarnsactionStatus, error)
@@ -36,9 +36,9 @@ func (r *repository) Create(approvalStatus entity.TarnsactionStatus) (entity.Tar
 	return approvalStatus, err
 }
 
-func (r *repository) FindAll(params map[string]interface{}) ([]entity.TarnsactionStatus, error) {
+func (r *repository) FindAll() ([]entity.TarnsactionStatus, error) {
 	var approvalStatuss []entity.TarnsactionStatus
-	err := r.db.Preload(clause.Associations).Where(params).Find(&approvalStatuss).Error
+	err := r.db.Preload(clause.Associations).Find(&approvalStatuss).Error
 	if err != nil {
 		return approvalStatuss, err
 	}

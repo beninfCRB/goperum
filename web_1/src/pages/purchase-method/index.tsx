@@ -6,6 +6,7 @@ import PurchaseMethodForm from "../../modules/purchase-method/form"
 import { useAddPurchaseMethod, usePurchaseMethod, usePurchaseMethodAll, useDeletePurchaseMethod, useUpdatePurchaseMethod } from "../../modules/purchase-method"
 import PurchaseMethodStore from "../../modules/purchase-method/state"
 import { fetch } from "../../utils/reponse"
+import { MODAL } from "../../static/text"
 
 const PurchaseMethodIndex = () => {
     const [isModalAddOpen, setIsModalAddOpen] = useState<boolean>(false);
@@ -33,7 +34,10 @@ const PurchaseMethodIndex = () => {
         return () => {
             PurchaseMethodGetAllMutation.refetch()
         }
-    }, [PurchaseMethodDeleteMutation.isSuccess])
+    }, [
+        PurchaseMethodDeleteMutation.isSuccess,
+        PurchaseMethodDeleteMutation.isError
+    ])
 
     const getData = (data: any) => {
         PurchaseMethodState.getAll(data)
@@ -45,7 +49,14 @@ const PurchaseMethodIndex = () => {
     }
 
     const onDelete = (id: string) => {
-        PurchaseMethodDeleteMutation.mutateAsync(id)
+        Modal.confirm({
+            title: MODAL.MODAL_CONFIRM.IND.DELETE.TITLE,
+            content: MODAL.MODAL_CONFIRM.IND.DELETE.CONTENT,
+            okText: 'Ok',
+            cancelText: 'Cancel',
+            onOk: async () => await PurchaseMethodDeleteMutation.mutateAsync(id),
+            onCancel: () => { },
+        })
     }
 
     const showModal = () => {

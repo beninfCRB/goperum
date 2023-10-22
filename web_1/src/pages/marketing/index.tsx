@@ -6,6 +6,7 @@ import MarketingForm from "../../modules/marketing/form"
 import { useAddMarketing, useMarketing, useMarketingAll, useDeleteMarketing, useUpdateMarketing } from "../../modules/marketing"
 import MarketingStore from "../../modules/marketing/state"
 import { fetch } from "../../utils/reponse"
+import { MODAL } from "../../static/text"
 
 const MarketingIndex = () => {
     const [isModalAddOpen, setIsModalAddOpen] = useState<boolean>(false);
@@ -33,7 +34,10 @@ const MarketingIndex = () => {
         return () => {
             marketingGetAllMutation.refetch()
         }
-    }, [marketingDeleteMutation.isSuccess])
+    }, [
+        marketingDeleteMutation.isSuccess,
+        marketingDeleteMutation.isError
+    ])
 
     const getData = (data: any) => {
         marketingState.getAll(data)
@@ -45,7 +49,14 @@ const MarketingIndex = () => {
     }
 
     const onDelete = (id: string) => {
-        marketingDeleteMutation.mutateAsync(id)
+        Modal.confirm({
+            title: MODAL.MODAL_CONFIRM.IND.DELETE.TITLE,
+            content: MODAL.MODAL_CONFIRM.IND.DELETE.CONTENT,
+            okText: 'Ok',
+            cancelText: 'Cancel',
+            onOk: async () => await marketingDeleteMutation.mutateAsync(id),
+            onCancel: () => { },
+        })
     }
 
     const showModal = () => {

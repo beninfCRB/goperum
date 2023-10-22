@@ -6,6 +6,7 @@ import ProductForm from "../../modules/product/form"
 import { useAddProduct, useProduct, useProductAll, useDeleteProduct, useUpdateProduct } from "../../modules/product"
 import ProductStore from "../../modules/product/state"
 import { fetch } from "../../utils/reponse"
+import { MODAL } from "../../static/text"
 
 const ProductIndex = () => {
     const [isModalAddOpen, setIsModalAddOpen] = useState<boolean>(false);
@@ -33,7 +34,10 @@ const ProductIndex = () => {
         return () => {
             ProductGetAllMutation.refetch()
         }
-    }, [ProductDeleteMutation.isSuccess])
+    }, [
+        ProductDeleteMutation.isSuccess,
+        ProductDeleteMutation.isError
+    ])
 
     const getData = (data: any) => {
         ProductState.getAll(data)
@@ -45,7 +49,14 @@ const ProductIndex = () => {
     }
 
     const onDelete = (id: string) => {
-        ProductDeleteMutation.mutateAsync(id)
+        Modal.confirm({
+            title: MODAL.MODAL_CONFIRM.IND.DELETE.TITLE,
+            content: MODAL.MODAL_CONFIRM.IND.DELETE.CONTENT,
+            okText: 'Ok',
+            cancelText: 'Cancel',
+            onOk: async () => await ProductDeleteMutation.mutateAsync(id),
+            onCancel: () => { },
+        })
     }
 
     const showModal = () => {

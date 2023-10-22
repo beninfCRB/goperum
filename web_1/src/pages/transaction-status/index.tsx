@@ -6,6 +6,7 @@ import TransactionStatusForm from "../../modules/transaction-status/form"
 import { useAddTransactionStatus, useTransactionStatus, useTransactionStatusAll, useDeleteTransactionStatus, useUpdateTransactionStatus } from "../../modules/transaction-status"
 import TransactionStatusStore from "../../modules/transaction-status/state"
 import { fetch } from "../../utils/reponse"
+import { MODAL } from "../../static/text"
 
 const TransactionStatusIndex = () => {
     const [isModalAddOpen, setIsModalAddOpen] = useState<boolean>(false);
@@ -33,7 +34,10 @@ const TransactionStatusIndex = () => {
         return () => {
             TransactionStatusGetAllMutation.refetch()
         }
-    }, [TransactionStatusDeleteMutation.isSuccess])
+    }, [
+        TransactionStatusDeleteMutation.isSuccess,
+        TransactionStatusDeleteMutation.isError
+    ])
 
     const getData = (data: any) => {
         TransactionStatusState.getAll(data)
@@ -45,7 +49,14 @@ const TransactionStatusIndex = () => {
     }
 
     const onDelete = (id: string) => {
-        TransactionStatusDeleteMutation.mutateAsync(id)
+        Modal.confirm({
+            title: MODAL.MODAL_CONFIRM.IND.DELETE.TITLE,
+            content: MODAL.MODAL_CONFIRM.IND.DELETE.CONTENT,
+            okText: 'Ok',
+            cancelText: 'Cancel',
+            onOk: async () => await TransactionStatusDeleteMutation.mutateAsync(id),
+            onCancel: () => { },
+        })
     }
 
     const showModal = () => {

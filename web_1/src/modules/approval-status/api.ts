@@ -10,8 +10,8 @@ export const useAddApprovalStatus = () => {
 };
 
 export const useApprovalStatusAll = () => {
-    return useMutation(async (params?: any) => {
-        const response = await axiosInstance.get(`${base_url}${module}`, { params: { ...params } });
+    return useQuery('ApprovalStatusData', async () => {
+        const response = await axiosInstance.get(`${base_url}${module}`);
         return response.data.Data
     });
 };

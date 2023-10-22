@@ -1,8 +1,10 @@
-import { Button, Spin, Table, Tooltip } from 'antd';
+import { Button, Input, Spin, Table, Tooltip } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import { ProductType } from '.';
-import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import { CloseCircleOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { removeDuplicates } from '../../utils/filterable';
+import { useEffect, useState } from 'react';
+import { get, map } from 'lodash';
 
 export interface tableProductProps {
     data: Array<ProductType>;
@@ -11,7 +13,17 @@ export interface tableProductProps {
     onDelete: (id: string) => void;
 }
 
+interface stateTableProduct {
+    filteredInfo?: any | null;
+    sortedInfo?: any | null;
+    data?: Array<ProductType>;
+    filtered?: boolean | null;
+    searchText?: string | null;
+};
+
 const TableProduct = (props: tableProductProps) => {
+    const [_state, setState] = useState<stateTableProduct | null>(null)
+
     const name = props.data.map(({ name }) => {
         return { text: name, value: name }
     })
@@ -156,9 +168,67 @@ const TableProduct = (props: tableProductProps) => {
         },
     ];
 
+    const emitEmpty = () => {
+        setState({
+            data: props.data,
+            searchText: '',
+            filtered: null
+        });
+    };
+
+    const onSearch = (e: any) => {
+        const reg = new RegExp(e.target.value, 'gi');
+        const filteredData = map(_state?.data, (record: any) => {
+            const nameMatch = get(record, 'name').match(reg);
+            const modelMatch = get(record, 'model').match(reg);
+            const typeMatch = get(record, 'type').match(reg);
+            const blokMatch = get(record, 'blok').match(reg);
+            const kavlingMatch = get(record, 'kavling').match(reg);
+            const sertifikatMatch = get(record, 'sertifikat').match(reg);
+            const priceMatch = get(record, 'price').match(reg);
+            const descriptionMatch = get(record, 'description').match(reg);
+            const stockMatch = get(record, 'stock').match(reg);
+            if (!nameMatch && !modelMatch && !typeMatch && !blokMatch && !kavlingMatch && !sertifikatMatch && !priceMatch && !descriptionMatch && !stockMatch) {
+                return null;
+            }
+            return record;
+        }).filter((record: any) => !!record);
+
+        setState({
+            searchText: e.target.value,
+            filtered: !!e.target.value,
+            data: e.target.value ? filteredData : _state?.data
+        });
+    };
+
+    useEffect(() => {
+        if (props.data) {
+            setState({
+                data: props.data
+            })
+        }
+    }, [props.data])
+
+    const suffix = _state?.searchText ? (
+        <CloseCircleOutlined onClick={emitEmpty} style={{ color: 'red' }} />
+    ) : null;
+
     return (
         <Spin
             spinning={props.onLoading}>
+            <div className='w-1/3'>
+                <Input.Search
+                    className='mb-2'
+                    size='small'
+                    ref={ele => (_state?.searchText == ele)}
+                    suffix={suffix}
+                    onChange={onSearch}
+                    placeholder='Search'
+                    value={_state?.searchText as string}
+                    onPressEnter={onSearch}
+                    autoFocus
+                />
+            </div>
             <Table
                 className='shadow-2xl'
                 rowKey={'id'}

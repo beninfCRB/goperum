@@ -6,6 +6,7 @@ import TransactionForm from "../../modules/transaction/form"
 import { useAddTransaction, useTransaction, useTransactionAll, useDeleteTransaction, useUpdateTransaction } from "../../modules/transaction"
 import TransactionStore from "../../modules/transaction/state"
 import { fetch } from "../../utils/reponse"
+import { MODAL } from "../../static/text"
 
 const TransactionIndex = () => {
     const [isModalAddOpen, setIsModalAddOpen] = useState<boolean>(false);
@@ -33,7 +34,10 @@ const TransactionIndex = () => {
         return () => {
             TransactionGetAllMutation.refetch()
         }
-    }, [TransactionDeleteMutation.isSuccess])
+    }, [
+        TransactionDeleteMutation.isSuccess,
+        TransactionDeleteMutation.isError
+    ])
 
     const getData = (data: any) => {
         TransactionState.getAll(data)
@@ -45,7 +49,14 @@ const TransactionIndex = () => {
     }
 
     const onDelete = (id: string) => {
-        TransactionDeleteMutation.mutateAsync(id)
+        Modal.confirm({
+            title: MODAL.MODAL_CONFIRM.IND.DELETE.TITLE,
+            content: MODAL.MODAL_CONFIRM.IND.DELETE.CONTENT,
+            okText: 'Ok',
+            cancelText: 'Cancel',
+            onOk: async () => await TransactionDeleteMutation.mutateAsync(id),
+            onCancel: () => { },
+        })
     }
 
     const showModal = () => {

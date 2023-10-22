@@ -1,8 +1,10 @@
-import { Button, Spin, Table, Tooltip } from 'antd';
+import { Button, Input, Spin, Table, Tooltip } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import { PaymentType } from '.';
-import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import { CloseCircleOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { removeDuplicates } from '../../utils/filterable';
+import { useEffect, useState } from 'react';
+import { get, map } from 'lodash';
 
 export interface tablePaymentProps {
     data: Array<PaymentType>;
@@ -11,7 +13,17 @@ export interface tablePaymentProps {
     onDelete: (id: string) => void;
 }
 
+interface stateTablePayment {
+    filteredInfo?: any | null;
+    sortedInfo?: any | null;
+    data?: Array<PaymentType>;
+    filtered?: boolean | null;
+    searchText?: string | null;
+};
+
 const TablePayment = (props: tablePaymentProps) => {
+    const [_state, setState] = useState<stateTablePayment | null>(null)
+
     const Transaction = props.data.map(({ Transaction }) => {
         return { text: Transaction?.code, value: Transaction?.code }
     })
@@ -121,9 +133,70 @@ const TablePayment = (props: tablePaymentProps) => {
         },
     ];
 
+    const emitEmpty = () => {
+        setState({
+            data: props.data,
+            searchText: '',
+            filtered: null
+        });
+    };
+
+    const onSearch = (e: any) => {
+        const reg = new RegExp(e.target.value, 'gi');
+        const filteredData = map(_state?.data, (record: any) => {
+            const codeMatch = get(record, 'code').match(reg);
+            const confirmdateMatch = get(record, 'confirm_date').match(reg);
+            const transactionMatch = get(record, ['Transaction', 'code']).match(reg);
+            const totalpaymentMatch = get(record, 'total_payment').match(reg);
+            const informationMatch = get(record, 'information').match(reg);
+            const approvalstatusMatch = get(record, ['ApprovalStatus', 'name']).match(reg);
+            const paymentmethodMatch = get(record, ['PaymentMethod', 'name']).match(reg);
+            const bankMatch = get(record, ['Bank', 'name']).match(reg);
+            const accountnameMatch = get(record, 'account_name').match(reg);
+            const accountnumberMatch = get(record, 'account_number').match(reg);
+            const accountreceivableMatch = get(record, 'account_receivable').match(reg);
+            const profpaymentMatch = get(record, 'prof_payment').match(reg);
+            if (!confirmdateMatch && !codeMatch && !transactionMatch && !totalpaymentMatch && !informationMatch && !approvalstatusMatch && !paymentmethodMatch && !bankMatch && !accountnameMatch && !accountnumberMatch && !accountreceivableMatch && !profpaymentMatch) {
+                return null;
+            }
+            return record;
+        }).filter((record: any) => !!record);
+
+        setState({
+            searchText: e.target.value,
+            filtered: !!e.target.value,
+            data: e.target.value ? filteredData : _state?.data
+        });
+    };
+
+    useEffect(() => {
+        if (props.data) {
+            setState({
+                data: props.data
+            })
+        }
+    }, [props.data])
+
+    const suffix = _state?.searchText ? (
+        <CloseCircleOutlined onClick={emitEmpty} style={{ color: 'red' }} />
+    ) : null;
+
     return (
         <Spin
             spinning={props.onLoading}>
+            <div className='w-1/3'>
+                <Input.Search
+                    className='mb-2'
+                    size='small'
+                    ref={ele => (_state?.searchText == ele)}
+                    suffix={suffix}
+                    onChange={onSearch}
+                    placeholder='Search'
+                    value={_state?.searchText as string}
+                    onPressEnter={onSearch}
+                    autoFocus
+                />
+            </div>
             <Table
                 className='shadow-2xl'
                 rowKey={'id'}

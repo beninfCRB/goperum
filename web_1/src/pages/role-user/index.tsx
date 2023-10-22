@@ -6,6 +6,7 @@ import RoleUserForm from "../../modules/role-user/form"
 import { useAddRoleUser, useRoleUser, useRoleUserAllPrivate, useDeleteRoleUser, useUpdateRoleUser } from "../../modules/role-user"
 import RoleUserStore from "../../modules/role-user/state"
 import { fetch } from "../../utils/reponse"
+import { MODAL } from "../../static/text"
 
 const RoleUserIndex = () => {
     const [isModalAddOpen, setIsModalAddOpen] = useState<boolean>(false);
@@ -33,7 +34,10 @@ const RoleUserIndex = () => {
         return () => {
             RoleUserGetAllMutation.refetch()
         }
-    }, [RoleUserDeleteMutation.isSuccess])
+    }, [
+        RoleUserDeleteMutation.isSuccess,
+        RoleUserDeleteMutation.isError
+    ])
 
     const getData = (data: any) => {
         RoleUserState.getAll(data)
@@ -45,7 +49,14 @@ const RoleUserIndex = () => {
     }
 
     const onDelete = (id: string) => {
-        RoleUserDeleteMutation.mutateAsync(id)
+        Modal.confirm({
+            title: MODAL.MODAL_CONFIRM.IND.DELETE.TITLE,
+            content: MODAL.MODAL_CONFIRM.IND.DELETE.CONTENT,
+            okText: 'Ok',
+            cancelText: 'Cancel',
+            onOk: async () => await RoleUserDeleteMutation.mutateAsync(id),
+            onCancel: () => { },
+        })
     }
 
     const showModal = () => {

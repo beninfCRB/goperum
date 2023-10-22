@@ -6,6 +6,7 @@ import CustomerForm from "../../modules/customer/form"
 import { useAddCustomer, useCustomer, useCustomerAll, useDeleteCustomer, useUpdateCustomer } from "../../modules/customer"
 import CustomerStore from "../../modules/customer/state"
 import { fetch } from "../../utils/reponse"
+import { MODAL } from "../../static/text"
 
 const CustomerIndex = () => {
     const [isModalAddOpen, setIsModalAddOpen] = useState<boolean>(false);
@@ -33,7 +34,10 @@ const CustomerIndex = () => {
         return () => {
             customerGetAllMutation.refetch()
         }
-    }, [customerDeleteMutation.isSuccess])
+    }, [
+        customerDeleteMutation.isSuccess,
+        customerDeleteMutation.isError
+    ])
 
     const getData = (data: any) => {
         customerState.getAll(data)
@@ -45,7 +49,14 @@ const CustomerIndex = () => {
     }
 
     const onDelete = (id: string) => {
-        customerDeleteMutation.mutateAsync(id)
+        Modal.confirm({
+            title: MODAL.MODAL_CONFIRM.IND.DELETE.TITLE,
+            content: MODAL.MODAL_CONFIRM.IND.DELETE.CONTENT,
+            okText: 'Ok',
+            cancelText: 'Cancel',
+            onOk: async () => await customerDeleteMutation.mutateAsync(id),
+            onCancel: () => { },
+        })
     }
 
     const showModal = () => {

@@ -28,5 +28,38 @@ export const MESSAGE_TEXT = {
                 DELETE: `Delete data failed`
             }
         }
-    }
+    },
+}
+
+export const MODAL = {
+    MODAL_CONFIRM: {
+        ENG: {
+            ADD: {
+                TITLE: 'Add Data',
+                CONTENT: 'Are you sure want to add this data?',
+            },
+            UPDATE: {
+                TITLE: 'Update Data',
+                CONTENT: 'Are you sure want to update this data?',
+            },
+            DELETE: {
+                TITLE: 'Delete Data',
+                CONTENT: 'Are you sure want to delete this data?',
+            },
+        },
+        IND: {
+            ADD: {
+                TITLE: 'Tambah Data',
+                CONTENT: 'Yakin ingin menambahkan data ini?',
+            },
+            UPDATE: {
+                TITLE: 'Update Data',
+                CONTENT: 'Yakin ingin mengupdate data ini?',
+            },
+            DELETE: {
+                TITLE: 'Hapus Data',
+                CONTENT: 'Yakin ingin menghapus data ini?',
+            },
+        },
+    },
 }
