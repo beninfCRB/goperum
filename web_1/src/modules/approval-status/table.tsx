@@ -137,7 +137,7 @@ const TableApprovalStatus = (props: tableApprovalStatusProps) => {
     return (
         <Spin
             spinning={props.onLoading}>
-            <div className='lg:w-1/3 md:w-full'>
+            <div className='w-1/3'>
                 <Input.Search
                     className='mb-2'
                     size="small"

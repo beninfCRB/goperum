@@ -153,7 +153,7 @@ const TableTransactionStatus = (props: tableTransactionStatusProps) => {
                 className='shadow-2xl'
                 rowKey={'id'}
                 columns={columns}
-                dataSource={props.data}
+                dataSource={_state?.data}
                 scroll={{ x: 'max-content' }}
                 bordered
             />
