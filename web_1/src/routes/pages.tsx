@@ -1,7 +1,7 @@
 import { routerType } from ".";
 import MainLayout from "../components/layout/MainLayout";
-import { ProtectedRoute } from "../components/layout/ProtectedRoute";
-import PageNotFound from "../components/layout/pageNotFound";
+import { ProtectedRoute } from "./layout/ProtectedRoute";
+import PageNotFound from "./layout/PageNotFound";
 import ApprovalStatusIndex from "../pages/approval-status";
 import ForgotPasswordIndex from "../pages/auth/forgotPassword";
 import LoginIndex from "../pages/auth/login";
