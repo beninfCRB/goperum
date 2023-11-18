@@ -1,6 +1,6 @@
 import { Button, Card, Form, Modal, Tooltip, message } from "antd"
 import TablePaymentMethod from "../../modules/payment-method/table"
-import { PlusCircleOutlined } from "@ant-design/icons"
+import { PlusCircleOutlined, RedoOutlined } from "@ant-design/icons"
 import { useEffect, useState } from "react"
 import PaymentMethodForm from "../../modules/payment-method/form"
 import { useAddPaymentMethod, usePaymentMethod, usePaymentMethodAll, useDeletePaymentMethod, useUpdatePaymentMethod } from "../../modules/payment-method"
@@ -43,6 +43,10 @@ const PaymentMethodIndex = () => {
         PaymentMethodState.getAll(data)
     }
 
+    const onRefresh = () => {
+        PaymentMethodGetAllMutation.refetch()
+    }
+
     const onEdit = (id: string) => {
         setIsModalEditOpen(true)
         setId(id)
@@ -73,16 +77,27 @@ const PaymentMethodIndex = () => {
             title='DATA METODE PEMBAYARAN'
             bodyStyle={{ padding: "0" }}
             extra={
-                <Tooltip title='Tambah Data'>
-                    <Button type="primary" shape="circle" onClick={showModal}>
-                        <PlusCircleOutlined />
-                    </Button>
-                </Tooltip>
+                <div className="flex items-stretch">
+                    <div className="py-4 ml-1">
+                        <Tooltip title='Tambah Data'>
+                            <Button type="primary" shape="circle" onClick={showModal}>
+                                <PlusCircleOutlined />
+                            </Button>
+                        </Tooltip>
+                    </div>
+                    <div className="py-4 ml-1">
+                        <Tooltip title='Segarkan Data'>
+                            <Button type="default" shape="circle" onClick={onRefresh}>
+                                <RedoOutlined />
+                            </Button>
+                        </Tooltip>
+                    </div>
+                </div>
             }
         >
             <TablePaymentMethod
                 data={PaymentMethodState.multiple}
-                onLoading={PaymentMethodGetAllMutation.isLoading}
+                onLoading={PaymentMethodGetAllMutation.isLoading || PaymentMethodGetAllMutation.isRefetching}
                 onEdit={onEdit}
                 onDelete={onDelete}
             />

@@ -78,14 +78,14 @@ const ApprovalStatusIndex = () => {
             bodyStyle={{ padding: "0" }}
             extra={
                 <div className="flex items-stretch">
-                    <div className="py-4">
+                    <div className="py-4 ml-1">
                         <Tooltip title='Tambah Data'>
                             <Button type="primary" shape="circle" onClick={showModal}>
                                 <PlusCircleOutlined />
                             </Button>
                         </Tooltip>
                     </div>
-                    <div className="py-4 ml-2">
+                    <div className="py-4 ml-1">
                         <Tooltip title='Segarkan Data'>
                             <Button type="default" shape="circle" onClick={onRefresh}>
                                 <RedoOutlined />
@@ -97,7 +97,7 @@ const ApprovalStatusIndex = () => {
         >
             <TableApprovalStatus
                 data={ApprovalStatusState.multiple}
-                onLoading={ApprovalStatusGetAllMutation.isLoading}
+                onLoading={ApprovalStatusGetAllMutation.isLoading || ApprovalStatusGetAllMutation.isRefetching}
                 onEdit={onEdit}
                 onDelete={onDelete}
             />

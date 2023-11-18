@@ -1,6 +1,6 @@
 import { Button, Card, Form, Modal, Tooltip, message } from "antd"
 import TableRoleUser from "../../modules/role-user/table"
-import { PlusCircleOutlined } from "@ant-design/icons"
+import { PlusCircleOutlined, RedoOutlined } from "@ant-design/icons"
 import { useEffect, useState } from "react"
 import RoleUserForm from "../../modules/role-user/form"
 import { useAddRoleUser, useRoleUser, useRoleUserAllPrivate, useDeleteRoleUser, useUpdateRoleUser } from "../../modules/role-user"
@@ -43,6 +43,10 @@ const RoleUserIndex = () => {
         RoleUserState.getAll(data)
     }
 
+    const onRefresh = () =>{
+        RoleUserGetAllMutation.refetch()
+    }
+
     const onEdit = (id: string) => {
         setIsModalEditOpen(true)
         setId(id)
@@ -73,16 +77,27 @@ const RoleUserIndex = () => {
             title='DATA LEVEL PENGGUNA'
             bodyStyle={{ padding: "0" }}
             extra={
-                <Tooltip title='Tambah Data'>
-                    <Button type="primary" shape="circle" onClick={showModal}>
-                        <PlusCircleOutlined />
-                    </Button>
-                </Tooltip>
+                <div className="flex items-stretch">
+                    <div className="py-4 ml-1">
+                        <Tooltip title='Tambah Data'>
+                            <Button type="primary" shape="circle" onClick={showModal}>
+                                <PlusCircleOutlined />
+                            </Button>
+                        </Tooltip>
+                    </div>
+                    <div className="py-4 ml-1">
+                        <Tooltip title='Segarkan Data'>
+                            <Button type="default" shape="circle" onClick={onRefresh}>
+                                <RedoOutlined />
+                            </Button>
+                        </Tooltip>
+                    </div>
+                </div>
             }
         >
             <TableRoleUser
                 data={RoleUserState.multiple}
-                onLoading={RoleUserGetAllMutation.isLoading}
+                onLoading={RoleUserGetAllMutation.isLoading || RoleUserGetAllMutation.isRefetching}
                 onEdit={onEdit}
                 onDelete={onDelete}
             />

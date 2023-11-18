@@ -1,6 +1,6 @@
 import { Button, Card, Form, Modal, Tooltip, message } from "antd"
 import TableBank from "../../modules/bank/table"
-import { PlusCircleOutlined } from "@ant-design/icons"
+import { PlusCircleOutlined, RedoOutlined } from "@ant-design/icons"
 import { useEffect, useState } from "react"
 import BankForm from "../../modules/bank/form"
 import { useAddBank, useBank, useBankAll, useDeleteBank, useUpdateBank } from "../../modules/bank"
@@ -43,6 +43,10 @@ const BankIndex = () => {
         BankState.getAll(data)
     }
 
+    const onRefresh = () => {
+        BankGetAllMutation.refetch()
+    }
+
     const onEdit = (id: string) => {
         setIsModalEditOpen(true)
         setId(id)
@@ -73,16 +77,27 @@ const BankIndex = () => {
             title='DATA BANK'
             bodyStyle={{ padding: "0" }}
             extra={
-                <Tooltip title='Tambah Data'>
-                    <Button type="primary" shape="circle" onClick={showModal}>
-                        <PlusCircleOutlined />
-                    </Button>
-                </Tooltip>
+                <div className="flex items-stretch">
+                    <div className="py-4 ml-1">
+                        <Tooltip title='Tambah Data'>
+                            <Button type="primary" shape="circle" onClick={showModal}>
+                                <PlusCircleOutlined />
+                            </Button>
+                        </Tooltip>
+                    </div>
+                    <div className="py-4 ml-1">
+                        <Tooltip title='Segarkan Data'>
+                            <Button type="default" shape="circle" onClick={onRefresh}>
+                                <RedoOutlined />
+                            </Button>
+                        </Tooltip>
+                    </div>
+                </div>
             }
         >
             <TableBank
                 data={BankState.multiple}
-                onLoading={BankGetAllMutation.isLoading}
+                onLoading={BankGetAllMutation.isLoading || BankGetAllMutation.isRefetching}
                 onEdit={onEdit}
                 onDelete={onDelete}
             />

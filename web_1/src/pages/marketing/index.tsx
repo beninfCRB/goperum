@@ -1,6 +1,6 @@
 import { Button, Card, Form, Modal, Tooltip, message } from "antd"
 import TableMarketing from "../../modules/marketing/table"
-import { PlusCircleOutlined } from "@ant-design/icons"
+import { PlusCircleOutlined, RedoOutlined } from "@ant-design/icons"
 import { useEffect, useState } from "react"
 import MarketingForm from "../../modules/marketing/form"
 import { useAddMarketing, useMarketing, useMarketingAll, useDeleteMarketing, useUpdateMarketing } from "../../modules/marketing"
@@ -43,6 +43,10 @@ const MarketingIndex = () => {
         marketingState.getAll(data)
     }
 
+    const onRefresh = () => {
+        marketingGetAllMutation.refetch()
+    }
+
     const onEdit = (id: string) => {
         setIsModalEditOpen(true)
         setId(id)
@@ -72,17 +76,28 @@ const MarketingIndex = () => {
         <Card
             title='DATA MARKETING'
             bodyStyle={{ padding: "0" }}
-        // extra={
-        //     <Tooltip title='Tambah Data'>
-        //         <Button type="primary" shape="circle" onClick={showModal}>
-        //             <PlusCircleOutlined />
-        //         </Button>
-        //     </Tooltip>
-        // }
+            extra={
+                <div className="flex items-stretch">
+                    {/* <div className="py-4 ml-1">
+                        <Tooltip title='Tambah Data'>
+                            <Button type="primary" shape="circle" onClick={showModal}>
+                                <PlusCircleOutlined />
+                            </Button>
+                        </Tooltip>
+                    </div> */}
+                    <div className="py-4 ml-1">
+                        <Tooltip title='Segarkan Data'>
+                            <Button type="default" shape="circle" onClick={onRefresh}>
+                                <RedoOutlined />
+                            </Button>
+                        </Tooltip>
+                    </div>
+                </div>
+            }
         >
             <TableMarketing
                 data={marketingState.multiple}
-                onLoading={marketingGetAllMutation.isLoading}
+                onLoading={marketingGetAllMutation.isLoading || marketingGetAllMutation.isRefetching}
                 onEdit={onEdit}
                 onDelete={onDelete}
             />

@@ -1,6 +1,6 @@
 import { Button, Card, Form, Modal, Tooltip, message } from "antd"
 import TableTypeDP from "../../modules/type-dp/table"
-import { PlusCircleOutlined } from "@ant-design/icons"
+import { PlusCircleOutlined, RedoOutlined } from "@ant-design/icons"
 import { useEffect, useState } from "react"
 import TypeDPForm from "../../modules/type-dp/form"
 import { useAddTypeDP, useTypeDP, useTypeDPAll, useDeleteTypeDP, useUpdateTypeDP } from "../../modules/type-dp"
@@ -43,6 +43,10 @@ const TypeDPIndex = () => {
         TypeDPState.getAll(data)
     }
 
+    const onRefresh = () => {
+        TypeDPGetAllMutation.refetch()
+    }
+
     const onEdit = (id: string) => {
         setIsModalEditOpen(true)
         setId(id)
@@ -73,16 +77,27 @@ const TypeDPIndex = () => {
             title='DATA TIPE DP'
             bodyStyle={{ padding: "0" }}
             extra={
-                <Tooltip title='Tambah Data'>
-                    <Button type="primary" shape="circle" onClick={showModal}>
-                        <PlusCircleOutlined />
-                    </Button>
-                </Tooltip>
+                <div className="flex items-stretch">
+                    <div className="py-4 ml-1">
+                        <Tooltip title='Tambah Data'>
+                            <Button type="primary" shape="circle" onClick={showModal}>
+                                <PlusCircleOutlined />
+                            </Button>
+                        </Tooltip>
+                    </div>
+                    <div className="py-4 ml-1">
+                        <Tooltip title='Segarkan Data'>
+                            <Button type="default" shape="circle" onClick={onRefresh}>
+                                <RedoOutlined />
+                            </Button>
+                        </Tooltip>
+                    </div>
+                </div>
             }
         >
             <TableTypeDP
                 data={TypeDPState.multiple}
-                onLoading={TypeDPGetAllMutation.isLoading}
+                onLoading={TypeDPGetAllMutation.isLoading || TypeDPGetAllMutation.isRefetching}
                 onEdit={onEdit}
                 onDelete={onDelete}
             />

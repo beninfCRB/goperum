@@ -1,6 +1,6 @@
 import { Button, Card, Form, Modal, Tooltip, message } from "antd"
 import TablePayment from "../../modules/payment/table"
-import { PlusCircleOutlined } from "@ant-design/icons"
+import { PlusCircleOutlined, RedoOutlined } from "@ant-design/icons"
 import { useEffect, useState } from "react"
 import PaymentForm from "../../modules/payment/form"
 import { useAddPayment, usePayment, usePaymentAll, useDeletePayment, useUpdatePayment } from "../../modules/payment"
@@ -44,6 +44,10 @@ const PaymentIndex = () => {
         PaymentState.getAll(data)
     }
 
+    const onRefresh = () => {
+        PaymentGetAllMutation.refetch()
+    }
+
     const onEdit = (id: string) => {
         setIsModalEditOpen(true)
         setId(id)
@@ -74,16 +78,27 @@ const PaymentIndex = () => {
             title='DATA PEMBAYARAN'
             bodyStyle={{ padding: "0" }}
             extra={
-                <Tooltip title='Tambah Data'>
-                    <Button type="primary" shape="circle" onClick={showModal}>
-                        <PlusCircleOutlined />
-                    </Button>
-                </Tooltip>
+                <div className="flex items-stretch">
+                    <div className="py-4 ml-1">
+                        <Tooltip title='Tambah Data'>
+                            <Button type="primary" shape="circle" onClick={showModal}>
+                                <PlusCircleOutlined />
+                            </Button>
+                        </Tooltip>
+                    </div>
+                    <div className="py-4 ml-1">
+                        <Tooltip title='Segarkan Data'>
+                            <Button type="default" shape="circle" onClick={onRefresh}>
+                                <RedoOutlined />
+                            </Button>
+                        </Tooltip>
+                    </div>
+                </div>
             }
         >
             <TablePayment
                 data={PaymentState.multiple}
-                onLoading={PaymentGetAllMutation.isLoading}
+                onLoading={PaymentGetAllMutation.isLoading || PaymentGetAllMutation.isRefetching}
                 onEdit={onEdit}
                 onDelete={onDelete}
             />

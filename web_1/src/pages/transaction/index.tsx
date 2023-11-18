@@ -1,6 +1,6 @@
 import { Button, Card, Form, Modal, Tooltip, message } from "antd"
 import TableTransaction from "../../modules/transaction/table"
-import { PlusCircleOutlined } from "@ant-design/icons"
+import { PlusCircleOutlined, RedoOutlined } from "@ant-design/icons"
 import { useEffect, useState } from "react"
 import TransactionForm from "../../modules/transaction/form"
 import { useAddTransaction, useTransaction, useTransactionAll, useDeleteTransaction, useUpdateTransaction } from "../../modules/transaction"
@@ -43,6 +43,10 @@ const TransactionIndex = () => {
         TransactionState.getAll(data)
     }
 
+    const onRefresh = () => {
+        TransactionGetAllMutation.refetch()
+    }
+
     const onEdit = (id: string) => {
         setIsModalEditOpen(true)
         setId(id)
@@ -73,16 +77,27 @@ const TransactionIndex = () => {
             title='DATA TRANSAKSI'
             bodyStyle={{ padding: "0" }}
             extra={
-                <Tooltip title='Tambah Data'>
-                    <Button type="primary" shape="circle" onClick={showModal}>
-                        <PlusCircleOutlined />
-                    </Button>
-                </Tooltip>
+                <div className="flex items-stretch">
+                    <div className="py-4 ml-1">
+                        <Tooltip title='Tambah Data'>
+                            <Button type="primary" shape="circle" onClick={showModal}>
+                                <PlusCircleOutlined />
+                            </Button>
+                        </Tooltip>
+                    </div>
+                    <div className="py-4 ml-1">
+                        <Tooltip title='Segarkan Data'>
+                            <Button type="default" shape="circle" onClick={onRefresh}>
+                                <RedoOutlined />
+                            </Button>
+                        </Tooltip>
+                    </div>
+                </div>
             }
         >
             <TableTransaction
                 data={TransactionState.multiple}
-                onLoading={TransactionGetAllMutation.isLoading}
+                onLoading={TransactionGetAllMutation.isLoading || TransactionGetAllMutation.isRefetching}
                 onEdit={onEdit}
                 onDelete={onDelete}
             />

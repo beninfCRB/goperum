@@ -1,6 +1,6 @@
 import { Button, Card, Form, Modal, Tooltip, message } from "antd"
 import TablePurchaseMethod from "../../modules/purchase-method/table"
-import { PlusCircleOutlined } from "@ant-design/icons"
+import { PlusCircleOutlined, RedoOutlined } from "@ant-design/icons"
 import { useEffect, useState } from "react"
 import PurchaseMethodForm from "../../modules/purchase-method/form"
 import { useAddPurchaseMethod, usePurchaseMethod, usePurchaseMethodAll, useDeletePurchaseMethod, useUpdatePurchaseMethod } from "../../modules/purchase-method"
@@ -43,6 +43,10 @@ const PurchaseMethodIndex = () => {
         PurchaseMethodState.getAll(data)
     }
 
+    const onRefresh = () =>{
+        PurchaseMethodGetAllMutation.refetch()
+    }
+
     const onEdit = (id: string) => {
         setIsModalEditOpen(true)
         setId(id)
@@ -73,16 +77,27 @@ const PurchaseMethodIndex = () => {
             title='DATA METODE PEMBELIAN'
             bodyStyle={{ padding: "0" }}
             extra={
-                <Tooltip title='Tambah Data'>
-                    <Button type="primary" shape="circle" onClick={showModal}>
-                        <PlusCircleOutlined />
-                    </Button>
-                </Tooltip>
+                <div className="flex items-stretch">
+                    <div className="py-4 ml-1">
+                        <Tooltip title='Tambah Data'>
+                            <Button type="primary" shape="circle" onClick={showModal}>
+                                <PlusCircleOutlined />
+                            </Button>
+                        </Tooltip>
+                    </div>
+                    <div className="py-4 ml-1">
+                        <Tooltip title='Segarkan Data'>
+                            <Button type="default" shape="circle" onClick={onRefresh}>
+                                <RedoOutlined />
+                            </Button>
+                        </Tooltip>
+                    </div>
+                </div>
             }
         >
             <TablePurchaseMethod
                 data={PurchaseMethodState.multiple}
-                onLoading={PurchaseMethodGetAllMutation.isLoading}
+                onLoading={PurchaseMethodGetAllMutation.isLoading || PurchaseMethodGetAllMutation.isRefetching}
                 onEdit={onEdit}
                 onDelete={onDelete}
             />

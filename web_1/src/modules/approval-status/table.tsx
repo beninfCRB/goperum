@@ -104,8 +104,8 @@ const TableApprovalStatus = (props: tableApprovalStatusProps) => {
     };
 
     const onSearch = (e: any) => {
-        const reg = new RegExp(e.target.value, "gi");
-        const filteredData = map(_state?.data, (record: any) => {
+        let reg = new RegExp(e.target.value, "gi");
+        let filteredData = map(_state?.data, (record: any) => {
             const codeMatch = get(record, "code").match(reg);
             const nameMatch = get(record, "name").match(reg);
             const roleMatch = get(record, ["RoleUser", "name"]).match(reg);
@@ -125,7 +125,11 @@ const TableApprovalStatus = (props: tableApprovalStatusProps) => {
     useEffect(() => {
         if (props.data) {
             setState({
-                data: props.data
+                filteredInfo: null,
+                sortedInfo: null,
+                data: props.data,
+                filtered: false,
+                searchText: ""
             })
         }
     }, [props.data])
@@ -141,7 +145,7 @@ const TableApprovalStatus = (props: tableApprovalStatusProps) => {
                 <Input.Search
                     className='mb-2'
                     size="small"
-                    ref={ele => (_state?.searchText == ele)}
+                    ref={ele => (_state?.searchText == ele?.focus())}
                     suffix={suffix}
                     onChange={onSearch}
                     placeholder="Search"
