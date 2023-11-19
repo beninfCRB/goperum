@@ -31,7 +31,7 @@ const MenuItem: FunctionComponent<MenuProps> = (props) => {
     }
 
     const MenuMaster = [
-        getItem('Master', 'sub1', <FolderOutlined />, [
+        getItem('Master', 'admin', <FolderOutlined />, [
             getItem('Bank', 'bank', <InsertRowAboveOutlined />),
             getItem('Tipe DP', 'type-dp', <InsertRowAboveOutlined />),
             getItem('Metode Pembelian', 'purchase-method', <InsertRowAboveOutlined />),
@@ -63,6 +63,7 @@ const MenuItem: FunctionComponent<MenuProps> = (props) => {
             ])
         }
         if (user.role === 'user') {
+            setCurrent('product')
             setMenu([
                 getItem('Produk', 'product', <InsertRowAboveOutlined />),
             ])
@@ -78,6 +79,7 @@ const MenuItem: FunctionComponent<MenuProps> = (props) => {
         <Menu
             theme="light"
             mode="inline"
+            defaultSelectedKeys={[current]}
             selectedKeys={[current]}
             onClick={onClick}
             items={_menu}
