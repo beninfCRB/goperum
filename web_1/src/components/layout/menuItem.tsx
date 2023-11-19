@@ -30,9 +30,6 @@ const MenuItem: FunctionComponent<MenuProps> = (props) => {
         };
     }
 
-    console.log(current);
-
-
     const MenuMaster = [
         getItem('Master', 'sub1', <FolderOutlined />, [
             getItem('Bank', 'bank', <InsertRowAboveOutlined />),
@@ -76,6 +73,7 @@ const MenuItem: FunctionComponent<MenuProps> = (props) => {
         navigate(e.key)
         setCurrent(e.key)
     };
+
     return (
         <Menu
             theme="light"
