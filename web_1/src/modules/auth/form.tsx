@@ -1,12 +1,10 @@
 import { MailOutlined, LockOutlined, KeyOutlined } from '@ant-design/icons';
 import { Button, Form, FormInstance, Input } from 'antd'
-import { UserType } from '../profile';
 import { Link } from 'react-router-dom';
-import { SelectRoleUserPublic } from '../role-user';
+import { SelectRoleUserPublic } from '../private/role-user';
 
 interface loginFormType {
     form: FormInstance;
-    user: UserType;
     onSubmit: () => void;
 }
 

@@ -5,7 +5,7 @@ import { useState, FunctionComponent } from 'react'
 import logo from "../../assets/react.svg";
 import { useLogout } from '../../modules/auth';
 import { Link, useNavigate } from 'react-router-dom';
-import { UserType } from '../../modules/profile';
+import { UserType } from '../../modules/private/profile';
 import { base_url } from '../../static/config';
 
 export interface navbarProps {

@@ -1,25 +1,27 @@
 import { PieChartOutlined, FolderOutlined, UserOutlined, InsertRowAboveOutlined } from '@ant-design/icons';
 import { Menu, MenuProps } from 'antd'
-import { FunctionComponent, useEffect, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
 const MenuItem: FunctionComponent<MenuProps> = (props) => {
+    const [current, setCurrent] = useState<string>('dashboard');
     const user = JSON.parse(localStorage.getItem("user") as string)
     const navigate = useNavigate();
     const [_menu, setMenu] = useState<Array<{
         label: React.ReactNode,
         key: React.Key,
         icon?: React.ReactNode,
-        children?: MenuItem[]
+        children?: MenuItem[],
     }>>()
 
     function getItem(
         label: React.ReactNode,
         key: React.Key,
         icon?: React.ReactNode,
-        children?: MenuItem[],) {
+        children?: MenuItem[],
+    ) {
         return {
             key,
             icon,
@@ -27,6 +29,9 @@ const MenuItem: FunctionComponent<MenuProps> = (props) => {
             label,
         };
     }
+
+    console.log(current);
+
 
     const MenuMaster = [
         getItem('Master', 'sub1', <FolderOutlined />, [
@@ -60,16 +65,23 @@ const MenuItem: FunctionComponent<MenuProps> = (props) => {
                 getItem('Pembayaran', 'payment', <InsertRowAboveOutlined />),
             ])
         }
+        if (user.role === 'user') {
+            setMenu([
+                getItem('Produk', 'product', <InsertRowAboveOutlined />),
+            ])
+        }
     }, [user.role])
 
+    const onClick: MenuProps['onClick'] = (e) => {
+        navigate(e.key)
+        setCurrent(e.key)
+    };
     return (
         <Menu
             theme="light"
             mode="inline"
-            defaultSelectedKeys={['dashboard']}
-            onClick={({ key }) => {
-                navigate(key)
-            }}
+            selectedKeys={[current]}
+            onClick={onClick}
             items={_menu}
         />
     )

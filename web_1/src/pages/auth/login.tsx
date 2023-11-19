@@ -4,18 +4,20 @@ import { useLogin } from '../../modules/auth';
 import { useNavigate } from 'react-router-dom';
 import { fetch } from '../../utils/reponse';
 import { FormLogin } from '../../modules/auth/form';
-import { UserType } from '../../modules/profile';
 
 const LoginIndex = () => {
     const [form] = Form.useForm()
     const { isError, isSuccess, error, isLoading, mutateAsync } = useLogin();
     const navigate = useNavigate();
-    const user: UserType = JSON.parse(localStorage.getItem('user') as string)
+    const user = JSON.parse(localStorage.getItem('user') as string)
     const _fetch = new fetch()
 
     useEffect(() => {
-        if (localStorage.getItem('authorize')) {
+        if (localStorage.getItem('authorize') && user.role !== 'user') {
             navigate('/admin/dashboard')
+        }
+        if (localStorage.getItem('authorize') && user.role === 'user') {
+            navigate('/user/product')
         }
     })
 
@@ -52,7 +54,6 @@ const LoginIndex = () => {
                     >
                         <FormLogin
                             form={form}
-                            user={user}
                             onSubmit={onSubmit}
                         />
                     </Spin>
