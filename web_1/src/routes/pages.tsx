@@ -17,13 +17,14 @@ import MarketingIndex from "../pages/private/marketing";
 import PaymentIndex from "../pages/private/payment";
 import PaymentMethodIndex from "../pages/private/payment-method";
 import ProductIndex from "../pages/private/product";
-import ProfileIndex from "../pages/private/profile";
+import ProfileIndex from "../pages/profile";
 import PurchaseMethodIndex from "../pages/private/purchase-method";
 import RoleUserIndex from "../pages/private/role-user";
 import TransactionIndex from "../pages/private/transaction";
 import TransactionStatusIndex from "../pages/private/transaction-status";
 import TypeDPIndex from "../pages/private/type-dp";
 import UserProductIndex from "../pages/public/product";
+import AboutIndex from "../pages/public/about";
 
 const Pages: routerType[] = [
     {
@@ -151,12 +152,27 @@ const Pages: routerType[] = [
         </ProtectedRoute>,
         children: [
             {
-                path: "product",
+                path: "profile",
+                element: <ProfileIndex />,
+                title: "Profile Akun"
+            },
+            {
+                path: "user-product",
                 element: <UserProductIndex />,
                 title: "Daftar Produk"
-            }
+            },
+            {
+                path: "about",
+                element: <AboutIndex />,
+                title: "Tentang Perusahaan"
+            },
         ],
         title: 'Verifikasi Email Ulang'
+    },
+    {
+        path: '/',
+        element: <UserProductIndex />,
+        title: 'Home'
     },
     {
         path: "*",

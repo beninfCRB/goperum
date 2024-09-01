@@ -2,11 +2,12 @@ import { PieChartOutlined, FolderOutlined, UserOutlined, InsertRowAboveOutlined 
 import { Menu, MenuProps } from 'antd'
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import MenuStore from '../../modules/menu/state';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
 const MenuItem: FunctionComponent<MenuProps> = (props) => {
-    const [current, setCurrent] = useState<string>('dashboard');
+    const { menu, setSelectedMenu } = MenuStore()
     const user = JSON.parse(localStorage.getItem("user") as string)
     const navigate = useNavigate();
     const [_menu, setMenu] = useState<Array<{
@@ -63,24 +64,25 @@ const MenuItem: FunctionComponent<MenuProps> = (props) => {
             ])
         }
         if (user.role === 'user') {
-            setCurrent('product')
+            setSelectedMenu('user-product')
             setMenu([
-                getItem('Produk', 'product', <InsertRowAboveOutlined />),
+                getItem('Produk', 'user-product', <InsertRowAboveOutlined />),
+                getItem('Tentang Perusahaan', 'about', <InsertRowAboveOutlined />),
             ])
         }
     }, [user.role])
 
     const onClick: MenuProps['onClick'] = (e) => {
         navigate(e.key)
-        setCurrent(e.key)
+        setSelectedMenu(e.key)
     };
 
     return (
         <Menu
             theme="light"
             mode="inline"
-            defaultSelectedKeys={[current]}
-            selectedKeys={[current]}
+            defaultSelectedKeys={[menu as string]}
+            selectedKeys={[menu as string]}
             onClick={onClick}
             items={_menu}
         />

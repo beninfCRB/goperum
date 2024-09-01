@@ -17,7 +17,7 @@ const LoginIndex = () => {
             navigate('/admin/dashboard')
         }
         if (localStorage.getItem('authorize') && user.role === 'user') {
-            navigate('/user/product')
+            navigate('/user/user-product')
         }
     })
 

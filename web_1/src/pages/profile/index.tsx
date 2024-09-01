@@ -1,17 +1,17 @@
 import { Card, Col, Form, Modal, Row, message } from "antd"
 import { useEffect, useState } from "react"
-import DescriptionProfile from "../../../modules/private/profile/description"
-import UserStore from "../../../modules/private/profile/state"
-import { useUser } from "../../../modules/private/profile"
-import { CustomerType, useAddCustomer, useCustomerAll, useCustomerByUser, useUpdateCustomer } from "../../../modules/private/customer"
-import CustomerStore from "../../../modules/private/customer/state"
-import DescriptionCustomer from "../../../modules/private/customer/description"
-import CustomerForm from "../../../modules/private/customer/form"
-import { fetch } from "../../../utils/reponse"
-import { MarketingType, useAddMarketing, useMarketingAll, useMarketingByUser, useUpdateMarketing } from "../../../modules/private/marketing"
-import MarketingStore from "../../../modules/private/marketing/state"
-import MarketingForm from "../../../modules/private/marketing/form"
-import DescriptionMarketing from "../../../modules/private/marketing/description"
+import DescriptionProfile from "../../modules/profile/description"
+import UserStore from "../../modules/profile/state"
+import { useUser } from "../../modules/profile"
+import { CustomerType, useAddCustomer, useCustomerAll, useCustomerByUser, useUpdateCustomer } from "../../modules/private/customer"
+import CustomerStore from "../../modules/private/customer/state"
+import DescriptionCustomer from "../../modules/private/customer/description"
+import CustomerForm from "../../modules/private/customer/form"
+import { fetch } from "../../utils/reponse"
+import { MarketingType, useAddMarketing, useMarketingAll, useMarketingByUser, useUpdateMarketing } from "../../modules/private/marketing"
+import MarketingStore from "../../modules/private/marketing/state"
+import MarketingForm from "../../modules/private/marketing/form"
+import DescriptionMarketing from "../../modules/private/marketing/description"
 
 const ProfileIndex = () => {
     const locale = JSON.parse(localStorage.getItem("user") as string)
@@ -151,11 +151,13 @@ const MarketingInfo = (props: {
                     <AddMarketing
                         modal={isModalAddOpen}
                         onCancel={onCancel}
+                        setReload={props.onReload}
                     />
                     <EditMarketing
                         data={storeMarketing.single}
                         modal={isModalEditOpen}
                         onCancel={onCancel}
+                        setReload={props.onReload}
                     />
                 </Col>
             </Row>
@@ -166,6 +168,7 @@ const MarketingInfo = (props: {
 const AddMarketing = (props: {
     modal: boolean;
     onCancel: () => void;
+    setReload: (v: boolean) => void
 }) => {
     const [form] = Form.useForm()
     const addMarketing = useAddMarketing()
@@ -194,6 +197,7 @@ const AddMarketing = (props: {
         return () => {
             marketingMutation.refetch()
             form.resetFields()
+            props.setReload(false)
         }
     }, [addMarketing.isSuccess, addMarketing.isError])
 
@@ -215,6 +219,7 @@ const EditMarketing = (props: {
     data: MarketingType;
     modal: boolean;
     onCancel: () => void;
+    setReload: (v: boolean) => void
 }) => {
     const [form] = Form.useForm()
     const editMarketing = useUpdateMarketing()
@@ -249,6 +254,7 @@ const EditMarketing = (props: {
             props.onCancel()
         }
         return () => {
+            props.setReload(false)
         }
     }, [editMarketing.isSuccess, editMarketing.isError])
 
@@ -330,11 +336,13 @@ const CustomerInfo = (props: {
                     <AddCustomer
                         modal={isModalAddOpen}
                         onCancel={onCancel}
+                        setReload={props.onReload}
                     />
                     <EditCustomer
                         data={storeCustomer.single}
                         modal={isModalEditOpen}
                         onCancel={onCancel}
+                        setReload={props.onReload}
                     />
                 </Col>
             </Row>
@@ -345,6 +353,7 @@ const CustomerInfo = (props: {
 const AddCustomer = (props: {
     modal: boolean;
     onCancel: () => void;
+    setReload: (v: boolean) => void
 }) => {
     const [form] = Form.useForm()
     const addCustomer = useAddCustomer()
@@ -373,6 +382,7 @@ const AddCustomer = (props: {
         return () => {
             customerMutation.refetch()
             form.resetFields()
+            props.setReload(false)
         }
     }, [addCustomer.isSuccess, addCustomer.isError])
 
@@ -394,6 +404,7 @@ const EditCustomer = (props: {
     data: CustomerType;
     modal: boolean;
     onCancel: () => void;
+    setReload: (v: boolean) => void
 }) => {
     const [form] = Form.useForm()
     const editCustomer = useUpdateCustomer()
@@ -428,6 +439,7 @@ const EditCustomer = (props: {
             props.onCancel()
         }
         return () => {
+            props.setReload(false)
         }
     }, [editCustomer.isSuccess, editCustomer.isError])
 

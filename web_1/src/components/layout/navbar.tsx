@@ -5,8 +5,8 @@ import { useState, FunctionComponent } from 'react'
 import logo from "../../assets/react.svg";
 import { useLogout } from '../../modules/auth';
 import { Link, useNavigate } from 'react-router-dom';
-import { UserType } from '../../modules/private/profile';
 import { base_url } from '../../static/config';
+import MenuStore from '../../modules/menu/state';
 
 export interface navbarProps {
     menu: JSX.Element
@@ -14,8 +14,9 @@ export interface navbarProps {
 
 const Navbar: FunctionComponent<navbarProps> = (props) => {
     const [visible, setVisible] = useState<boolean>(false);
+    const { setSelectedMenu } = MenuStore()
     const navigate = useNavigate()
-    const user: UserType = JSON.parse(localStorage.getItem("user") as string)
+    const user = JSON.parse(localStorage.getItem("user") as string)
 
     const onLogout = () => {
         useLogout()
@@ -27,7 +28,7 @@ const Navbar: FunctionComponent<navbarProps> = (props) => {
         {
             key: '1',
             label: (
-                <Link to={'/admin/profile'}>
+                <Link to={'profile'} onClick={() => setSelectedMenu('profile')}>
                     <UserOutlined /> Profile
                 </Link>
             ),

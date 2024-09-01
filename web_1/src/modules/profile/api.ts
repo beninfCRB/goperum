@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "react-query";
-import { base_url } from "../../../static/config";
-import axiosInstance from "../../../utils/interceptor";
+import { base_url } from "../../static/config";
+import axiosInstance from "../../utils/interceptor";
 
 const module = `users`
 

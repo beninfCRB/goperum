@@ -10,9 +10,9 @@ export interface FlexProductProps {
 
 const FlexProduct: FunctionComponent<FlexProductProps> = (props) => {
     const span = {
-        xs: 24,
-        sm: 24,
-        md: 24,
+        xs: 12,
+        sm: 12,
+        md: 12,
         lg: 8
     };
 
@@ -24,7 +24,7 @@ const FlexProduct: FunctionComponent<FlexProductProps> = (props) => {
                 props.data.length > 0 ?
                     props.data.map((value, index) => (
                         <Col {...span} key={index}>
-                            <Card hoverable bodyStyle={{ padding: 0, overflow: 'hidden' }} loading={props.onLoading} className='p-4 shadow-2xl'>
+                            <Card hoverable bodyStyle={{ padding: 0, overflow: 'hidden' }} loading={props.onLoading} className='p-4 shadow-2xl hover:bg-slate-400'>
                                 <img
                                     className='max-w-full rounded-3xl'
                                     alt="avatar"

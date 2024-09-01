@@ -1,4 +1,4 @@
-import { RoleUserType } from "../role-user";
+import { RoleUserType } from "../private/role-user";
 
 export interface UserType {
     id?: string,
