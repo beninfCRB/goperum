@@ -32,6 +32,7 @@ func main() {
 
 	r.Use(middleware.CORS(middleware.CORSOptions{
 		Origin: os.Getenv("URL_CLIENT"),
+		// Origin: "*",
 	}))
 
 	//routes

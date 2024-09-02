@@ -72,7 +72,6 @@ const ProfileIndex = () => {
         )
     }
 
-
     return (
         <>
             {locale.role === 'user' && <ViewCustomer />}

@@ -52,6 +52,7 @@ func PublicAPIRoutes(r *gin.RouterGroup) {
 	r.POST("/forgot-password", passwordResetModule.ForgotPassword)
 	r.POST("/new-password/:reset_code", passwordResetModule.NewPassword)
 	r.GET("/public/role-users", controller.GetRoleUser)
+	product.ProductModulePublic(r)
 }
 
 func PrivateAPIRoutes(r *gin.RouterGroup) {
