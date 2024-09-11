@@ -1,6 +1,8 @@
 package product
 
 import (
+	"mime/multipart"
+
 	"github.com/google/uuid"
 )
 
@@ -9,15 +11,16 @@ type ProductParamId struct {
 }
 
 type ProductInput struct {
-	Name        string  `json:"name" binding:"required"`
-	Model       string  `json:"model" binding:"required"`
-	Type        string  `json:"type" binding:"required"`
-	Blok        string  `json:"blok" binding:"required"`
-	Kavling     string  `json:"kavling" binding:"required"`
-	Sertifikat  string  `json:"sertifikat" binding:"required"`
-	Price       float64 `json:"price" binding:"required"`
-	Description string  `json:"description" binding:"required"`
-	Stock       float64 `json:"stock" binding:"required"`
+	Name        string                `form:"name" binding:"required"`
+	Model       string                `form:"model" binding:"required"`
+	Type        string                `form:"type" binding:"required"`
+	Blok        string                `form:"blok" binding:"required"`
+	Kavling     string                `form:"kavling" binding:"required"`
+	Sertifikat  string                `form:"sertifikat" binding:"required"`
+	Price       float64               `form:"price" binding:"required"`
+	Description string                `form:"description" binding:"required"`
+	Stock       float64               `form:"stock" binding:"required"`
+	Image       *multipart.FileHeader `form:"image" binding:"required"`
 	CreatedBy   uuid.UUID
 	UpdatedBy   uuid.UUID
 }

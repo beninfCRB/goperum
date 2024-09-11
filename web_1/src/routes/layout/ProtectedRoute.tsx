@@ -5,16 +5,16 @@ export const ProtectedRoute = ({ children }: { children: JSX.Element | JSX.Eleme
     const locale = JSON.parse(localStorage.getItem("user") as string);
     const location = useLocation();
 
-    if (!token && location.pathname !== '/login') {
+    if (!token && !locale && location.pathname !== '/login') {
         return <Navigate replace={true} to="/login" />;
     }
 
-    if (token && location.pathname === 'login') {
-        if (locale.role !== 'user') {
+    if (token && locale && location.pathname === 'login') {
+        if (locale.role === 'admin') {
             return <Navigate replace={true} to={'admin/dashboard'} />
         }
         if (locale.role === 'user') {
-            return <Navigate replace={true} to={'user/product'} />
+            return <Navigate replace={true} to={'user/user-product'} />
         }
     }
 

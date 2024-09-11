@@ -8,6 +8,7 @@ const Router = () => {
     const [progress, setProgress] = useState(false)
     const [prevLoc, setPrevLoc] = useState("")
     const location = useLocation()
+    const locale = JSON.parse(localStorage.getItem("user") as string)
 
     useEffect(() => {
         setPrevLoc(location.pathname)

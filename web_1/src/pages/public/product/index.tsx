@@ -16,7 +16,6 @@ const UserProductIndex = () => {
     }, [ProductGetAllMutation.data])
 
     const getData = (data: any) => {
-        console.log("🚀 ~ getData ~ data:", data)
         ProductState.getAll(data)
     }
 

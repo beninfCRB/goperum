@@ -13,4 +13,5 @@ type Product struct {
 	Price       float64 `gorm:"type:float(12)" json:"price"`
 	Description string  `gorm:"type:text" json:"description"`
 	Stock       float64 `gorm:"type:float(12)" json:"stock"`
+	Image       string  `gorm:"type:text" json:"image"`
 }

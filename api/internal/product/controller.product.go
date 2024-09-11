@@ -1,9 +1,12 @@
 package product
 
 import (
+	"fmt"
 	"gostartup/config/database/entity"
 	"gostartup/pkg/util"
 	"net/http"
+	"os"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
@@ -19,6 +22,7 @@ func ProductController(productService Service) *controller {
 
 func (r *controller) PostProduct(c *gin.Context) {
 	var input ProductInput
+	file := input.Image
 	input.CreatedBy = entity.AutoGenereteUserBy(c)
 	input.UpdatedBy = entity.AutoGenereteUserBy(c)
 
@@ -30,6 +34,17 @@ func (r *controller) PostProduct(c *gin.Context) {
 		response := util.Response("Add product has been failed", http.StatusUnprocessableEntity, "error", errorMessage)
 		c.JSON(http.StatusUnprocessableEntity, response)
 		return
+	}
+
+	if file != nil {
+		currentTime := time.Now().String()
+		path := fmt.Sprintf("%s%s-%s", os.Getenv("PATH_UPLOAD"), currentTime, file.Filename)
+		err = c.SaveUploadedFile(file, path)
+		if err != nil {
+			response := util.Response("Add Image", http.StatusBadRequest, "error", nil)
+			c.JSON(http.StatusBadRequest, response)
+			return
+		}
 	}
 
 	product, err := r.useService.CreateProduct(input)
@@ -69,6 +84,7 @@ func (r *controller) GetProductID(c *gin.Context) {
 
 func (r *controller) UpdateProduct(c *gin.Context) {
 	var input ProductInput
+	file := input.Image
 	ID := uuid.MustParse(c.Param("id"))
 	input.UpdatedBy = entity.AutoGenereteUserBy(c)
 
@@ -80,6 +96,23 @@ func (r *controller) UpdateProduct(c *gin.Context) {
 		response := util.Response("Update product has been failed", http.StatusUnprocessableEntity, "error", errorMessage)
 		c.JSON(http.StatusUnprocessableEntity, response)
 		return
+	}
+
+	if file != nil {
+		fileOld, _ := r.useService.FindOneProduct(ID)
+
+		if fileOld.Image != "" {
+			os.Remove(fileOld.Image)
+		}
+
+		currentTime := time.Now().String()
+		path := fmt.Sprintf("%s%s-%s", os.Getenv("PATH_UPLOAD"), currentTime, file.Filename)
+		err = c.SaveUploadedFile(file, path)
+		if err != nil {
+			response := util.Response("Add Image", http.StatusBadRequest, "error", nil)
+			c.JSON(http.StatusBadRequest, response)
+			return
+		}
 	}
 
 	product, err := r.useService.UpdateProduct(ID, input)

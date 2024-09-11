@@ -6,7 +6,7 @@ import MenuStore from '../../modules/menu/state';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
-const MenuItem: FunctionComponent<MenuProps> = (props) => {
+const MenuItem: FunctionComponent<MenuProps> = () => {
     const { menu, setSelectedMenu } = MenuStore()
     const user = JSON.parse(localStorage.getItem("user") as string)
     const navigate = useNavigate();

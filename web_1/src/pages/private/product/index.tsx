@@ -3,7 +3,7 @@ import TableProduct from "../../../modules/private/product/table"
 import { PlusCircleOutlined, RedoOutlined } from "@ant-design/icons"
 import { useEffect, useState } from "react"
 import ProductForm from "../../../modules/private/product/form"
-import { useAddProduct, useProduct, useProductAll, useDeleteProduct, useUpdateProduct } from "../../../modules/private/product"
+import { useAddProduct, useProduct, useProductAll, useDeleteProduct, useUpdateProduct, ProductType } from "../../../modules/private/product"
 import ProductStore from "../../../modules/private/product/state"
 import { fetch } from "../../../utils/reponse"
 import { MODAL } from "../../../static/text"
@@ -124,10 +124,15 @@ const AddProduct = (props: {
     const addProduct = useAddProduct()
     const ProductMutation = useProductAll()
     const _fetch = new fetch()
+    const formData = new FormData()
 
     const onSubmit = () => {
         form.validateFields().then(async (values) => {
-            await addProduct.mutateAsync(values)
+            Object.keys(values).map((key) => {
+                formData.append(key, values[key])
+            })
+
+            await addProduct.mutateAsync(formData)
         }).catch((errorInfo) => {
             Object.keys(errorInfo.errorFields).map((error) => {
                 return form.scrollToField(errorInfo.errorFields[error].name[0])
@@ -161,6 +166,7 @@ const AddProduct = (props: {
         >
             <ProductForm
                 form={form}
+                formData={formData}
             />
         </Modal>
     )
@@ -175,13 +181,16 @@ const EditProduct = (props: {
     const editProduct = useUpdateProduct()
     const ProductMutation = useProductAll()
     const _fetch = new fetch()
+    const formData = new FormData()
 
     const onSubmit = () => {
         form.validateFields().then(async (values) => {
-            await editProduct.mutateAsync({
-                ...values,
-                id: props.id
+            formData.append('id', props.id)
+            Object.keys(values).map((key) => {
+                formData.append(key, values[key])
             })
+
+            await editProduct.mutateAsync({ id: props.id, formData })
         }).catch((errorInfo) => {
             Object.keys(errorInfo.errorFields).map((error) => {
                 return form.scrollToField(errorInfo.errorFields[error].name[0])
@@ -226,6 +235,7 @@ const EditProduct = (props: {
         >
             <ProductForm
                 form={form}
+                formData={formData}
             />
         </Modal>
     )

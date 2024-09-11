@@ -26,6 +26,7 @@ func main() {
 		&entity.Transaction{},
 		&entity.PurchaseMethod{},
 		&entity.Payment{},
+		&entity.ProductImage{},
 	)
 
 	if mg != nil {

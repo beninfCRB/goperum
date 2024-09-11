@@ -1,8 +1,10 @@
 import { Col, Form, FormInstance, Input, InputNumber, Row } from 'antd'
 import { FunctionComponent } from 'react';
+import UploadFile from '../../../components/upload';
 
 export interface ProductFormProps {
     form: FormInstance;
+    formData: FormData;
 }
 
 const ProductForm: FunctionComponent<ProductFormProps> = (props) => {
@@ -195,6 +197,27 @@ const ProductForm: FunctionComponent<ProductFormProps> = (props) => {
                         <Input.TextArea
                             rows={3}
                             placeholder='Masukan Deskripsi'
+                        />
+                    </Form.Item>
+                </Col>
+                <Col
+                    {...span}
+                >
+                    <Form.Item
+                        label='Gambar'
+                        name={'image'}
+                        hasFeedback
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Masukan Gambar'
+                            }
+                        ]}
+                    >
+                        <UploadFile
+                            name='image'
+                            form={props.form}
+                            formData={props.formData}
                         />
                     </Form.Item>
                 </Col>

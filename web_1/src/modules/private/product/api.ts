@@ -22,8 +22,8 @@ export const useProduct = () => {
 };
 
 export const useUpdateProduct = () => {
-    return useMutation((formData: any) =>
-        axiosInstance.patch(`${base_url}${module}/${formData?.id}`, formData));
+    return useMutation((value: { id: string, formData: any }) =>
+        axiosInstance.patch(`${base_url}${module}/${value?.id}`, value.formData));
 };
 
 export const useDeleteProduct = () => {
