@@ -1,12 +1,12 @@
-import { Button, Card, Form, Modal, Tooltip, message } from "antd"
-import TableProduct from "../../../modules/private/product/table"
 import { PlusCircleOutlined, RedoOutlined } from "@ant-design/icons"
+import { Button, Card, Form, Modal, Tooltip, message } from "antd"
 import { useEffect, useState } from "react"
+import { useAddProduct, useDeleteProduct, useProduct, useProductAll, useUpdateProduct } from "../../../modules/private/product"
 import ProductForm from "../../../modules/private/product/form"
-import { useAddProduct, useProduct, useProductAll, useDeleteProduct, useUpdateProduct, ProductType } from "../../../modules/private/product"
 import ProductStore from "../../../modules/private/product/state"
-import { fetch } from "../../../utils/reponse"
+import TableProduct from "../../../modules/private/product/table"
 import { MODAL } from "../../../static/text"
+import { fetch } from "../../../utils/reponse"
 
 const ProductIndex = () => {
     const [isModalAddOpen, setIsModalAddOpen] = useState<boolean>(false);
@@ -185,7 +185,6 @@ const EditProduct = (props: {
 
     const onSubmit = () => {
         form.validateFields().then(async (values) => {
-            formData.append('id', props.id)
             Object.keys(values).map((key) => {
                 formData.append(key, values[key])
             })

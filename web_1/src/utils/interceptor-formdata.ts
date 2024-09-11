@@ -2,14 +2,14 @@ import axios from 'axios';
 import AuthStore from '../modules/auth/state';
 import { base_url } from '../static/config';
 
-const axiosInstance = axios.create({
+const axiosInstanceFormData = axios.create({
     baseURL: base_url,
     headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'multipart/form-data'
     },
 });
 
-axiosInstance.interceptors.request.use(
+axiosInstanceFormData.interceptors.request.use(
     (config) => {
         const accessToken = localStorage.getItem('authorize');
         // config.withCredentials = true;
@@ -23,7 +23,7 @@ axiosInstance.interceptors.request.use(
     }
 );
 
-axiosInstance.interceptors.response.use(
+axiosInstanceFormData.interceptors.response.use(
     (response) => response,
     async (error) => {
         const originalRequest = error.config;
@@ -34,7 +34,7 @@ axiosInstance.interceptors.response.use(
         ) {
             originalRequest._retry = true;
             try {
-                const response = await axiosInstance.post('/refresh-token');
+                const response = await axiosInstanceFormData.post('/refresh-token');
 
                 const accessToken = response.data.Data;
 
@@ -42,7 +42,7 @@ axiosInstance.interceptors.response.use(
 
                 originalRequest.headers['Authorization'] = `Bearer ${accessToken}`;
 
-                return axiosInstance(originalRequest);
+                return axiosInstanceFormData(originalRequest);
             } catch (refreshError) {
                 localStorage.removeItem('authorize')
                 AuthStore.getState().isAuthenticated = false
@@ -53,4 +53,4 @@ axiosInstance.interceptors.response.use(
     }
 );
 
-export default axiosInstance;
+export default axiosInstanceFormData

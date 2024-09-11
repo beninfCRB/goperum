@@ -26,7 +26,7 @@ func (r *controller) PostProduct(c *gin.Context) {
 	input.CreatedBy = entity.AutoGenereteUserBy(c)
 	input.UpdatedBy = entity.AutoGenereteUserBy(c)
 
-	err := c.ShouldBindJSON(&input)
+	err := c.ShouldBind(&input)
 	if err != nil {
 		errors := util.ErrorValidation(err)
 		errorMessage := gin.H{"errors": errors}
@@ -88,7 +88,7 @@ func (r *controller) UpdateProduct(c *gin.Context) {
 	ID := uuid.MustParse(c.Param("id"))
 	input.UpdatedBy = entity.AutoGenereteUserBy(c)
 
-	err := c.ShouldBindJSON(&input)
+	err := c.ShouldBind(&input)
 	if err != nil {
 		errors := util.ErrorValidation(err)
 		errorMessage := gin.H{"errors": errors}
@@ -98,11 +98,13 @@ func (r *controller) UpdateProduct(c *gin.Context) {
 		return
 	}
 
+	fmt.Println(&input)
+
 	if file != nil {
 		fileOld, _ := r.useService.FindOneProduct(ID)
 
 		if fileOld.Image != "" {
-			os.Remove(fileOld.Image)
+			os.Remove(fmt.Sprintf("%s%s", os.Getenv("PATH_UPLOAD"), fileOld.Image))
 		}
 
 		currentTime := time.Now().String()

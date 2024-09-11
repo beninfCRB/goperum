@@ -11,14 +11,12 @@ interface UploadFileProps {
 const UploadFile: FunctionComponent<UploadFileProps> = ({ ...props }) => {
     const [file, setFile] = useState<File | null>(null)
 
-    console.log('props.name=====>', props.name);
-
-
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files?.length > 0) {
-            props.formData.append(props.name, new File([e.target.files[0] as Blob], props.name, { type: e.target.files[0].type }))
-            props.form.setFieldValue(props.name, e.target.files[0].name)
-            setFile(e.target.files[0])
+            const file = e.target.files[0];
+            props.formData.append(props.name, file);
+            props.form.setFieldValue(props.name, file.name);
+            setFile(file);
         }
     };
 

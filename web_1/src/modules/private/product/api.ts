@@ -1,32 +1,32 @@
 import { useMutation, useQuery } from "react-query";
 import { base_url } from "../../../static/config";
-import axiosInstance from "../../../utils/interceptor";
+import axiosInstanceFormData from "../../../utils/interceptor-formdata";
 
 const module = `products`
 
 export const useAddProduct = () => {
     return useMutation((formData: any) =>
-        axiosInstance.post(`${base_url}${module}`, formData));
+        axiosInstanceFormData.post(`${base_url}${module}`, formData));
 };
 
 export const useProductAll = () => {
     return useQuery('ProductData', async () => {
-        const response = await axiosInstance.get(`${base_url}${module}`);
+        const response = await axiosInstanceFormData.get(`${base_url}${module}`);
         return response.data.Data
     });
 };
 
 export const useProduct = () => {
     return useMutation((id: string) =>
-        axiosInstance.get(`${base_url}${module}/${id}`));
+        axiosInstanceFormData.get(`${base_url}${module}/${id}`));
 };
 
 export const useUpdateProduct = () => {
     return useMutation((value: { id: string, formData: any }) =>
-        axiosInstance.patch(`${base_url}${module}/${value?.id}`, value.formData));
+        axiosInstanceFormData.patch(`${base_url}${module}/${value?.id}`, value.formData));
 };
 
 export const useDeleteProduct = () => {
     return useMutation((id: string) =>
-        axiosInstance.delete(`${base_url}${module}/${id}`));
+        axiosInstanceFormData.delete(`${base_url}${module}/${id}`));
 };
