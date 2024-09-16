@@ -6,6 +6,8 @@ interface UploadFileProps {
     name: string
     form: FormInstance
     formData: FormData
+    reset: boolean
+    blob?: File
 }
 
 const UploadFile: FunctionComponent<UploadFileProps> = ({ ...props }) => {
@@ -21,13 +23,29 @@ const UploadFile: FunctionComponent<UploadFileProps> = ({ ...props }) => {
     };
 
     useEffect(() => {
-        if (!props.form.getFieldValue(props.name)) {
-            setFile(null)
-        } else {
+        setFile(null)
+    }, [])
+
+    useEffect(() => {
+        if (props.form.getFieldValue(props.name)) {
             const src = `${urlStaticImage}${props.form.getFieldValue(props.name)}`
             setFile(new File([src], props.form.getFieldValue(props.name)))
+        } else {
+            setFile(null)
         }
     }, [props.form])
+
+    useEffect(() => {
+        if (props.reset) {
+            setFile(null)
+        }
+    }, [props.reset])
+
+    useEffect(() => {
+        if (props.blob) {
+            setFile(new File([props.blob], props.blob.arrayBuffer.name))
+        }
+    }, [props.blob])
 
     return (
         <div className='flex flex-col w-full gap-4'>

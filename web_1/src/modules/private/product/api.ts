@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "react-query";
-import { base_url } from "../../../static/config";
+import { base_url, url_file } from "../../../static/config";
 import axiosInstanceFormData from "../../../utils/interceptor-formdata";
 
 const module = `products`
@@ -29,4 +29,9 @@ export const useUpdateProduct = () => {
 export const useDeleteProduct = () => {
     return useMutation((id: string) =>
         axiosInstanceFormData.delete(`${base_url}${module}/${id}`));
+};
+
+export const useProductImage = () => {
+    return useMutation((id: string) =>
+        axiosInstanceFormData.get(`${base_url}${module}/stream/${id}`));
 };

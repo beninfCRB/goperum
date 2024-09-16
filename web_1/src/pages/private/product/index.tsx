@@ -1,11 +1,12 @@
 import { PlusCircleOutlined, RedoOutlined } from "@ant-design/icons"
 import { Button, Card, Form, Modal, Tooltip, message } from "antd"
 import { useEffect, useState } from "react"
-import { useAddProduct, useDeleteProduct, useProduct, useProductAll, useUpdateProduct } from "../../../modules/private/product"
+import { useAddProduct, useDeleteProduct, useProduct, useProductAll, useProductImage, useUpdateProduct } from "../../../modules/private/product"
 import ProductForm from "../../../modules/private/product/form"
 import ProductStore from "../../../modules/private/product/state"
 import TableProduct from "../../../modules/private/product/table"
 import { MODAL } from "../../../static/text"
+import { binaryToBlob, binaryToFile } from "../../../utils/binaryToFile"
 import { fetch } from "../../../utils/reponse"
 
 const ProductIndex = () => {
@@ -125,6 +126,7 @@ const AddProduct = (props: {
     const ProductMutation = useProductAll()
     const _fetch = new fetch()
     const formData = new FormData()
+    const [resetFile, setReset] = useState<boolean>(false)
 
     const onSubmit = () => {
         form.validateFields().then(async (values) => {
@@ -143,10 +145,12 @@ const AddProduct = (props: {
     useEffect(() => {
         if (addProduct.isSuccess) {
             message.success(addProduct?.data?.data?.Meta?.Message)
+            setReset(true)
             props.onCancel()
         }
         if (addProduct.isError) {
             message.error(_fetch.getAxiosMessage(addProduct.error))
+            setReset(true)
             props.onCancel()
         }
         return () => {
@@ -167,6 +171,7 @@ const AddProduct = (props: {
             <ProductForm
                 form={form}
                 formData={formData}
+                reset={resetFile}
             />
         </Modal>
     )
@@ -180,13 +185,17 @@ const EditProduct = (props: {
     const ProductGetMutation = useProduct()
     const editProduct = useUpdateProduct()
     const ProductMutation = useProductAll()
+    const ProductImageMutation = useProductImage()
     const _fetch = new fetch()
     const formData = new FormData()
+    const [resetFile, setReset] = useState<boolean>(false)
 
     const onSubmit = () => {
         form.validateFields().then(async (values) => {
             Object.keys(values).map((key) => {
-                formData.append(key, values[key])
+                if (key !== 'image') {
+                    formData.append(key, values[key])
+                }
             })
 
             await editProduct.mutateAsync({ id: props.id, formData })
@@ -200,8 +209,15 @@ const EditProduct = (props: {
     useEffect(() => {
         if (props.id) {
             ProductGetMutation.mutateAsync(props.id)
+            ProductImageMutation.mutateAsync(props.id)
         }
     }, [props.id])
+
+    console.log('file===>', typeof ProductImageMutation.data?.data);
+    console.log('file===>', ProductImageMutation.data?.data);
+    console.log('file===>', typeof ProductImageMutation.data);
+    console.log('file===>', ProductImageMutation.data);
+
 
     useEffect(() => {
         if (ProductGetMutation.data) {
@@ -212,10 +228,12 @@ const EditProduct = (props: {
     useEffect(() => {
         if (editProduct.isSuccess) {
             message.success(editProduct?.data?.data?.Meta?.Message)
+            setReset(true)
             props.onCancel()
         }
         if (editProduct.isError) {
             message.error(_fetch.getAxiosMessage(editProduct.error))
+            setReset(true)
             props.onCancel()
         }
         return () => {
@@ -235,6 +253,8 @@ const EditProduct = (props: {
             <ProductForm
                 form={form}
                 formData={formData}
+                reset={resetFile}
+                Blob={ProductImageMutation.data?.data}
             />
         </Modal>
     )

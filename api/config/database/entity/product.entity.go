@@ -1,6 +1,8 @@
 package entity
 
-import "gostartup/config/database"
+import (
+	"gostartup/config/database"
+)
 
 type Product struct {
 	database.Base

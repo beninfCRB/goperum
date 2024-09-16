@@ -33,6 +33,7 @@ func (s *service) CreateProduct(input ProductInput) (entity.Product, error) {
 	product.Price = input.Price
 	product.Description = input.Description
 	product.Stock = input.Stock
+	product.Image = input.Path
 	product.CreatedBy = input.CreatedBy
 	product.UpdatedBy = input.UpdatedBy
 
@@ -76,6 +77,7 @@ func (s *service) UpdateProduct(ID uuid.UUID, input ProductInput) (entity.Produc
 	product.Price = input.Price
 	product.Description = input.Description
 	product.Stock = input.Stock
+	product.Image = input.Path
 	product.UpdatedBy = input.UpdatedBy
 
 	update, err := s.repository.Update(product)

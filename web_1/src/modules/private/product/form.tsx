@@ -5,6 +5,8 @@ import UploadFile from '../../../components/upload';
 export interface ProductFormProps {
     form: FormInstance;
     formData: FormData;
+    reset: boolean;
+    Blob?: File
 }
 
 const ProductForm: FunctionComponent<ProductFormProps> = (props) => {
@@ -14,6 +16,7 @@ const ProductForm: FunctionComponent<ProductFormProps> = (props) => {
         md: 24,
         lg: 12
     }
+
 
     return (
         <Form
@@ -218,6 +221,8 @@ const ProductForm: FunctionComponent<ProductFormProps> = (props) => {
                             name='image'
                             form={props.form}
                             formData={props.formData}
+                            reset={props.reset}
+                            blob={props.Blob}
                         />
                     </Form.Item>
                 </Col>

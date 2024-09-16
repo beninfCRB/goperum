@@ -16,6 +16,7 @@ func ProductModule(r *gin.RouterGroup) {
 	r.GET("/products/:id", controller.GetProductID)
 	r.PATCH("/products/:id", controller.UpdateProduct)
 	r.DELETE("/products/:id", controller.DeleteProduct)
+	r.GET("/products/stream/:id", controller.GetImage)
 }
 
 func ProductModulePublic(r *gin.RouterGroup) {

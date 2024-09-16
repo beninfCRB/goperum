@@ -1,6 +1,7 @@
 package route
 
 import (
+	"fmt"
 	"gostartup/config/database"
 	"gostartup/internal/approval_status"
 	"gostartup/internal/auth"
@@ -37,6 +38,19 @@ func PublicRoutes(r *gin.RouterGroup) {
 		c.HTML(http.StatusOK, "index.html", gin.H{
 			"title": os.Getenv("APP_NAME"),
 		})
+	})
+	r.GET("/:filename", func(c *gin.Context) {
+		filename := c.Param("filename")
+		filePath := fmt.Sprintf("%s%s", os.Getenv("PATH_UPLOAD"), filename)
+		fileInfo, err := os.Stat(filePath)
+		if err != nil {
+			c.JSON(http.StatusNotFound, gin.H{"error": "File not found"})
+			return
+		}
+		c.Header("Content-Disposition", fmt.Sprintf("attachment; filename=%s", filename))
+		c.Header("Content-Type", "image/jpeg")
+		c.Header("Content-Length", fmt.Sprintf("%d", fileInfo.Size()))
+		c.File(filePath)
 	})
 }
 

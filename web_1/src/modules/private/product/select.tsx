@@ -29,7 +29,7 @@ const SelectProduct: FunctionComponent<SelectProductType> = (props) => {
             {...props}
         >
             {
-                multiple.map((item, index) => {
+                multiple?.map((item, index) => {
                     return (
                         <SelectItem.Option key={index} value={item.id}>
                             {item.name}

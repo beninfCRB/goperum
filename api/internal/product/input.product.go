@@ -20,7 +20,8 @@ type ProductInput struct {
 	Price       float64               `form:"price" binding:"required"`
 	Description string                `form:"description" binding:"required"`
 	Stock       float64               `form:"stock" binding:"required"`
-	Image       *multipart.FileHeader `form:"image" binding:"required"`
+	Image       *multipart.FileHeader `form:"image"`
+	Path        string
 	CreatedBy   uuid.UUID
 	UpdatedBy   uuid.UUID
 }

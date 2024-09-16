@@ -12,7 +12,7 @@ const axiosInstanceFormData = axios.create({
 axiosInstanceFormData.interceptors.request.use(
     (config) => {
         const accessToken = localStorage.getItem('authorize');
-        // config.withCredentials = true;
+        config.withCredentials = true;
         if (accessToken) {
             config.headers['Authorization'] = `Bearer ${accessToken}`;
         }
@@ -46,6 +46,7 @@ axiosInstanceFormData.interceptors.response.use(
             } catch (refreshError) {
                 localStorage.removeItem('authorize')
                 AuthStore.getState().isAuthenticated = false
+                window.location.replace('/login')
             }
         }
 

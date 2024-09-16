@@ -1,0 +1,268 @@
+[GIN-debug] GET    /                         --> gostartup/config/routes.PublicRoutes.func1 (4 handlers)
+[GIN-debug] GET    /:filename                --> gostartup/config/routes.PublicRoutes.func2 (4 handlers)
+[GIN-debug] POST   /api/users                --> gostartup/internal/user.(*useController).RegisterUserPublic-fm (4 handlers)
+[GIN-debug] POST   /api/private/users        --> gostartup/internal/user.(*useController).RegisterUserPrivate-fm (4 handlers)
+[GIN-debug] POST   /api/email_checkers       --> gostartup/internal/user.(*useController).CheckEmailAvailability-fm (4 handlers)
+[GIN-debug] POST   /api/sessions             --> gostartup/internal/user.(*useController).Login-fm (4 handlers)
+[GIN-debug] POST   /api/refresh-token        --> gostartup/internal/user.(*useController).RefreshToken-fm (4 handlers)
+[GIN-debug] POST   /api/logout               --> gostartup/internal/user.(*useController).Logout-fm (4 handlers)
+[GIN-debug] POST   /api/verify-email         --> gostartup/internal/verification_user.(*useController).VerificationUser-fm (4 handlers)
+[GIN-debug] POST   /api/re-verify-email      --> gostartup/internal/user.(*useController).ResendCodeVerification-fm (4 handlers)
+[GIN-debug] POST   /api/forgot-password      --> gostartup/internal/password_reset.(*useController).ForgotPassword-fm (4 handlers)
+[GIN-debug] POST   /api/new-password/:reset_code --> gostartup/internal/password_reset.(*useController).NewPassword-fm (4 handlers)
+[GIN-debug] GET    /api/public/role-users    --> gostartup/internal/role_user.(*controller).GetRoleUser-fm (4 handlers)
+[GIN-debug] POST   /api/public/products      --> gostartup/internal/product.(*controller).PostProduct-fm (4 handlers)
+[GIN-debug] GET    /api/public/products      --> gostartup/internal/product.(*controller).GetProduct-fm (4 handlers)
+[GIN-debug] GET    /api/public/products/:id  --> gostartup/internal/product.(*controller).GetProductID-fm (4 handlers)
+[GIN-debug] PATCH  /api/public/products/:id  --> gostartup/internal/product.(*controller).UpdateProduct-fm (4 handlers)
+[GIN-debug] DELETE /api/public/products/:id  --> gostartup/internal/product.(*controller).DeleteProduct-fm (4 handlers)
+[GIN-debug] POST   /api/avatars              --> gostartup/internal/user.(*useController).UploadAvatar-fm (5 handlers)
+[GIN-debug] POST   /api/users/private        --> gostartup/internal/user.useController.PostUser-fm (5 handlers)
+[GIN-debug] GET    /api/users/private/:id    --> gostartup/internal/user.(*useController).GetUserID-fm (5 handlers)
+[GIN-debug] GET    /api/users/private        --> gostartup/internal/user.(*useController).GetUser-fm (5 handlers)
+[GIN-debug] PATCH  /api/users/private/:id    --> gostartup/internal/user.(*useController).UpdateUser-fm (5 handlers)
+[GIN-debug] POST   /api/role-users           --> gostartup/internal/role_user.(*controller).PostRoleUser-fm (5 handlers)
+[GIN-debug] GET    /api/role-users           --> gostartup/internal/role_user.(*controller).GetRoleUser-fm (5 handlers)
+[GIN-debug] GET    /api/role-users/:id       --> gostartup/internal/role_user.(*controller).GetRoleUserID-fm (5 handlers)
+[GIN-debug] PATCH  /api/role-users/:id       --> gostartup/internal/role_user.(*controller).UpdateRoleUser-fm (5 handlers)
+[GIN-debug] DELETE /api/role-users/:id       --> gostartup/internal/role_user.(*controller).DeleteRoleUser-fm (5 handlers)
+[GIN-debug] GET    /api/role-users/code      --> gostartup/internal/role_user.(*controller).GetRoleUserByCode-fm (5 handlers)
+[GIN-debug] POST   /api/products             --> gostartup/internal/product.(*controller).PostProduct-fm (5 handlers)
+[GIN-debug] GET    /api/products             --> gostartup/internal/product.(*controller).GetProduct-fm (5 handlers)
+[GIN-debug] GET    /api/products/:id         --> gostartup/internal/product.(*controller).GetProductID-fm (5 handlers)
+[GIN-debug] PATCH  /api/products/:id         --> gostartup/internal/product.(*controller).UpdateProduct-fm (5 handlers)
+[GIN-debug] DELETE /api/products/:id         --> gostartup/internal/product.(*controller).DeleteProduct-fm (5 handlers)
+[GIN-debug] GET    /api/products/stream/:id  --> gostartup/internal/product.(*controller).GetImage-fm (5 handlers)
+[GIN-debug] POST   /api/customers            --> gostartup/internal/customer.(*controller).PostCustomer-fm (5 handlers)
+[GIN-debug] GET    /api/customers            --> gostartup/internal/customer.(*controller).GetCustomer-fm (5 handlers)
+[GIN-debug] GET    /api/customers/:id        --> gostartup/internal/customer.(*controller).GetCustomerID-fm (5 handlers)
+[GIN-debug] PATCH  /api/customers/:id        --> gostartup/internal/customer.(*controller).UpdateCustomer-fm (5 handlers)
+[GIN-debug] DELETE /api/customers/:id        --> gostartup/internal/customer.(*controller).DeleteCustomer-fm (5 handlers)
+[GIN-debug] GET    /api/customers/user/:userid --> gostartup/internal/customer.(*controller).GetCustomerByUser-fm (5 handlers)
+[GIN-debug] POST   /api/marketings           --> gostartup/internal/marketing.(*controller).PostMarketing-fm (5 handlers)
+[GIN-debug] GET    /api/marketings           --> gostartup/internal/marketing.(*controller).GetMarketing-fm (5 handlers)
+[GIN-debug] GET    /api/marketings/:id       --> gostartup/internal/marketing.(*controller).GetMarketingID-fm (5 handlers)
+[GIN-debug] PATCH  /api/marketings/:id       --> gostartup/internal/marketing.(*controller).UpdateMarketing-fm (5 handlers)
+[GIN-debug] DELETE /api/marketings/:id       --> gostartup/internal/marketing.(*controller).DeleteMarketing-fm (5 handlers)
+[GIN-debug] GET    /api/marketings/user/:userid --> gostartup/internal/marketing.(*controller).GetCustomerByUser-fm (5 handlers)
+[GIN-debug] POST   /api/type-down-payments   --> gostartup/internal/type_down_payment.(*controller).PostTypeDownPayment-fm (5 handlers)
+[GIN-debug] GET    /api/type-down-payments   --> gostartup/internal/type_down_payment.(*controller).GetTypeDownPayment-fm (5 handlers)
+[GIN-debug] GET    /api/type-down-payments/:id --> gostartup/internal/type_down_payment.(*controller).GetTypeDownPaymentID-fm (5 handlers)
+[GIN-debug] PATCH  /api/type-down-payments/:id --> gostartup/internal/type_down_payment.(*controller).UpdateTypeDownPayment-fm (5 handlers)
+[GIN-debug] DELETE /api/type-down-payments/:id --> gostartup/internal/type_down_payment.(*controller).DeleteTypeDownPayment-fm (5 handlers)
+[GIN-debug] POST   /api/transaction-status   --> gostartup/internal/transaction_status.(*controller).PostTransactionStatus-fm (5 handlers)
+[GIN-debug] GET    /api/transaction-status   --> gostartup/internal/transaction_status.(*controller).GetTransactionStatus-fm (5 handlers)
+[GIN-debug] GET    /api/transaction-status/:id --> gostartup/internal/transaction_status.(*controller).GetTransactionStatusID-fm (5 handlers)
+[GIN-debug] PATCH  /api/transaction-status/:id --> gostartup/internal/transaction_status.(*controller).UpdateTransactionStatus-fm (5 handlers)
+[GIN-debug] DELETE /api/transaction-status/:id --> gostartup/internal/transaction_status.(*controller).DeleteTransactionStatus-fm (5 handlers)
+[GIN-debug] POST   /api/approval-status      --> gostartup/internal/approval_status.(*controller).PostApprovalStatus-fm (5 handlers)
+[GIN-debug] GET    /api/approval-status      --> gostartup/internal/approval_status.(*controller).GetApprovalStatus-fm (5 handlers)
+[GIN-debug] GET    /api/approval-status/:id  --> gostartup/internal/approval_status.(*controller).GetApprovalStatusID-fm (5 handlers)
+[GIN-debug] PATCH  /api/approval-status/:id  --> gostartup/internal/approval_status.(*controller).UpdateApprovalStatus-fm (5 handlers)
+[GIN-debug] DELETE /api/approval-status/:id  --> gostartup/internal/approval_status.(*controller).DeleteApprovalStatus-fm (5 handlers)
+[GIN-debug] POST   /api/payment-methods      --> gostartup/internal/payment_method.(*controller).PostPaymentMethod-fm (5 handlers)
+[GIN-debug] GET    /api/payment-methods      --> gostartup/internal/payment_method.(*controller).GetPaymentMethod-fm (5 handlers)
+[GIN-debug] GET    /api/payment-methods/:id  --> gostartup/internal/payment_method.(*controller).GetPaymentMethodID-fm (5 handlers)
+[GIN-debug] PATCH  /api/payment-methods/:id  --> gostartup/internal/payment_method.(*controller).UpdatePaymentMethod-fm (5 handlers)
+[GIN-debug] DELETE /api/payment-methods/:id  --> gostartup/internal/payment_method.(*controller).DeletePaymentMethod-fm (5 handlers)
+[GIN-debug] POST   /api/banks                --> gostartup/internal/bank.(*controller).PostBank-fm (5 handlers)
+[GIN-debug] GET    /api/banks                --> gostartup/internal/bank.(*controller).GetBank-fm (5 handlers)
+[GIN-debug] GET    /api/banks/:id            --> gostartup/internal/bank.(*controller).GetBankID-fm (5 handlers)
+[GIN-debug] PATCH  /api/banks/:id            --> gostartup/internal/bank.(*controller).UpdateBank-fm (5 handlers)
+[GIN-debug] DELETE /api/banks/:id            --> gostartup/internal/bank.(*controller).DeleteBank-fm (5 handlers)
+[GIN-debug] POST   /api/purchase-methods     --> gostartup/internal/purchase_method.(*controller).PostPurchaseMethod-fm (5 handlers)
+[GIN-debug] GET    /api/purchase-methods     --> gostartup/internal/purchase_method.(*controller).GetPurchaseMethod-fm (5 handlers)
+[GIN-debug] GET    /api/purchase-methods/:id --> gostartup/internal/purchase_method.(*controller).GetPurchaseMethodID-fm (5 handlers)
+[GIN-debug] PATCH  /api/purchase-methods/:id --> gostartup/internal/purchase_method.(*controller).UpdatePurchaseMethod-fm (5 handlers)
+[GIN-debug] DELETE /api/purchase-methods/:id --> gostartup/internal/purchase_method.(*controller).DeletePurchaseMethod-fm (5 handlers)
+[GIN-debug] POST   /api/transactions         --> gostartup/internal/transaction.(*controller).PostTransaction-fm (5 handlers)
+[GIN-debug] GET    /api/transactions         --> gostartup/internal/transaction.(*controller).GetTransaction-fm (5 handlers)
+[GIN-debug] GET    /api/transactions/:id     --> gostartup/internal/transaction.(*controller).GetTransactionID-fm (5 handlers)
+[GIN-debug] PATCH  /api/transactions/:id     --> gostartup/internal/transaction.(*controller).UpdateTransaction-fm (5 handlers)
+[GIN-debug] DELETE /api/transactions/:id     --> gostartup/internal/transaction.(*controller).DeleteTransaction-fm (5 handlers)
+[GIN-debug] POST   /api/payments             --> gostartup/internal/payment.(*controller).PostPayment-fm (5 handlers)
+[GIN-debug] GET    /api/payments             --> gostartup/internal/payment.(*controller).GetPayment-fm (5 handlers)
+[GIN-debug] GET    /api/payments/:id         --> gostartup/internal/payment.(*controller).GetPaymentID-fm (5 handlers)
+[GIN-debug] PATCH  /api/payments/:id         --> gostartup/internal/payment.(*controller).UpdatePayment-fm (5 handlers)
+[GIN-debug] DELETE /api/payments/:id         --> gostartup/internal/payment.(*controller).DeletePayment-fm (5 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :5000
+::1 - [Sat, 14 Sep 2024 09:50:04 +07] "OPTIONS /api/public/products HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:20 +07] "OPTIONS /api/public/products HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:22 +07] "OPTIONS /api/public/products HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:26 +07] "OPTIONS /api/public/products HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:28 +07] "OPTIONS /api/public/products HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:29 +07] "OPTIONS /api/public/products HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:31 +07] "OPTIONS /api/public/products HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:42 +07] "OPTIONS /api/public/products HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:43 +07] "OPTIONS /api/public/products HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:45 +07] "OPTIONS /api/public/products HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:47 +07] "OPTIONS /api/public/products HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:48 +07] "OPTIONS /api/public/products HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:49 +07] "OPTIONS /api/public/products HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:53 +07] "OPTIONS /api/customers HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:53 +07] "OPTIONS /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:53 +07] "OPTIONS /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:53 +07] "OPTIONS /api/users/private/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:53 +07] "OPTIONS /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 53.9µs "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:53 +07] "OPTIONS /api/users/private/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:53 +07] "OPTIONS /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:53 +07] "OPTIONS /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:53 +07] "OPTIONS /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:54 +07] "OPTIONS /api/customers HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:56 +07] "OPTIONS /api/customers HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:57 +07] "OPTIONS /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:57 +07] "OPTIONS /api/users/private/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:57 +07] "OPTIONS /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:57 +07] "OPTIONS /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:57 +07] "OPTIONS /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:57 +07] "OPTIONS /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:57 +07] "OPTIONS /api/users/private/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:57 +07] "OPTIONS /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:57 +07] "OPTIONS /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:57 +07] "OPTIONS /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:57 +07] "OPTIONS /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:57 +07] "OPTIONS /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:59 +07] "OPTIONS /api/customers HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:59 +07] "OPTIONS /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:59 +07] "OPTIONS /api/users/private/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:59 +07] "OPTIONS /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:59 +07] "OPTIONS /api/users/private/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 759.9µs "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:59 +07] "OPTIONS /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:59 +07] "OPTIONS /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:59 +07] "OPTIONS /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:58:59 +07] "OPTIONS /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:59:00 +07] "OPTIONS /api/customers HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:59:02 +07] "OPTIONS /api/customers HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:59:05 +07] "OPTIONS /api/logout HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:59:06 +07] "OPTIONS /api/customers HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:59:09 +07] "OPTIONS /api/sessions HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:59:17 +07] "OPTIONS /api/sessions HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:59:43 +07] "OPTIONS /api/sessions HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:59:56 +07] "OPTIONS /api/public/products HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 09:59:56 +07] "GET /api/public/products HTTP/1.1 200 6.1776ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 10:00:03 +07] "GET /api/public/products HTTP/1.1 200 1.0441ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 10:00:06 +07] "POST /api/logout HTTP/1.1 200 15.7577ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 10:00:10 +07] "OPTIONS /api/sessions HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 10:00:10 +07] "POST /api/sessions HTTP/1.1 200 18.7602ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 10:00:27 +07] "OPTIONS /api/sessions HTTP/1.1 200 0s "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:00:27 +07] "POST /api/sessions HTTP/1.1 200 18.3353ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:00:28 +07] "OPTIONS /api/public/products HTTP/1.1 200 0s "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:00:28 +07] "GET /api/public/products HTTP/1.1 200 1.3918ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:01 +07] "GET /api/public/products HTTP/1.1 200 1.5306ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:04 +07] "GET /api/public/products HTTP/1.1 200 1.5705ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:07 +07] "OPTIONS /api/customers HTTP/1.1 200 0s "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:07 +07] "GET /api/customers HTTP/1.1 401 1.0502ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:07 +07] "OPTIONS /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 0s "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:07 +07] "OPTIONS /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 0s "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:07 +07] "OPTIONS /api/users/private/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 0s "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:07 +07] "GET /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 401 0s "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:07 +07] "OPTIONS /api/users/private/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 0s "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:07 +07] "GET /api/users/private/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 401 316.2µs "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:07 +07] "GET /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 401 0s "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:07 +07] "GET /api/users/private/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 401 595.4µs "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:07 +07] "GET /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 401 0s "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:07 +07] "GET /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 401 1.1016ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:07 +07] "OPTIONS /api/refresh-token HTTP/1.1 200 0s "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:07 +07] "POST /api/refresh-token HTTP/1.1 200 3.3631ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:07 +07] "POST /api/refresh-token HTTP/1.1 200 4.1957ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:07 +07] "POST /api/refresh-token HTTP/1.1 200 11.0296ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:07 +07] "POST /api/refresh-token HTTP/1.1 200 7.9078ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:07 +07] "POST /api/refresh-token HTTP/1.1 200 11.2499ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:07 +07] "POST /api/refresh-token HTTP/1.1 200 12.9107ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:07 +07] "POST /api/refresh-token HTTP/1.1 200 15.9461ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:07 +07] "GET /api/customers HTTP/1.1 200 15.5236ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:07 +07] "GET /api/users/private/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 9.9046ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:07 +07] "GET /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 14.8713ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:07 +07] "GET /api/users/private/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 6.3331ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:07 +07] "GET /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 6.3043ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:07 +07] "GET /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 5.6076ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:07 +07] "GET /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 6.5484ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:07 +07] "GET /api/customers HTTP/1.1 200 5.7607ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:07 +07] "GET /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 8.9371ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:07 +07] "GET /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 7.6278ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:07 +07] "GET /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 4.7688ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:07 +07] "GET /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 6.1283ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:07 +07] "GET /api/customers HTTP/1.1 200 5.4874ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:11 +07] "GET /api/customers HTTP/1.1 200 5.4857ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:11 +07] "GET /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 5.7299ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:11 +07] "GET /api/users/private/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 5.8571ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:11 +07] "GET /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 5.0088ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:11 +07] "GET /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 6.0655ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:11 +07] "GET /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 4.7968ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:11 +07] "GET /api/users/private/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 5.0517ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:11 +07] "GET /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 5.2047ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:11 +07] "GET /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 8.4185ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:11 +07] "GET /api/customers HTTP/1.1 200 4.9427ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:11 +07] "GET /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 6.4898ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:11 +07] "GET /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 6.6223ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:11 +07] "GET /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 6.0219ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:11 +07] "GET /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 6.2558ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:11 +07] "GET /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 4.181ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:11 +07] "GET /api/customers/user/704b31c2-2e82-489e-b5b1-847af585cd8a HTTP/1.1 200 6.3588ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:11 +07] "GET /api/customers HTTP/1.1 200 4.6313ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 10:16:14 +07] "GET /api/public/products HTTP/1.1 200 1.0119ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 11:07:52 +07] "GET /api/public/products HTTP/1.1 200 1.1186ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 17:49:29 +07] "OPTIONS /api/public/products HTTP/1.1 200 0s "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 17:49:29 +07] "GET /api/public/products HTTP/1.1 200 5.5265ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 17:49:30 +07] "GET /api/public/products HTTP/1.1 200 854.8µs "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 17:49:33 +07] "GET /api/public/products HTTP/1.1 200 4.0272ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 17:49:35 +07] "GET /api/public/products HTTP/1.1 200 948.8µs "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 17:49:40 +07] "OPTIONS /api/products HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 17:49:40 +07] "GET /api/products HTTP/1.1 401 529.7µs "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 17:49:40 +07] "OPTIONS /api/refresh-token HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 17:49:41 +07] "GET /api/products HTTP/1.1 401 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 17:49:43 +07] "GET /api/products HTTP/1.1 401 1.4125ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 17:49:47 +07] "GET /api/products HTTP/1.1 401 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 17:49:47 +07] "GET /api/public/products HTTP/1.1 200 1.221ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 17:49:53 +07] "GET /api/public/products HTTP/1.1 200 776.1µs "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 17:49:57 +07] "GET /api/public/products HTTP/1.1 200 5.3626ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sat, 14 Sep 2024 17:50:03 +07] "OPTIONS /api/sessions HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 17:50:03 +07] "POST /api/sessions HTTP/1.1 200 24.3628ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 17:50:04 +07] "OPTIONS /api/marketings HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 17:50:04 +07] "GET /api/marketings HTTP/1.1 200 9.8213ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 17:50:05 +07] "GET /api/marketings HTTP/1.1 200 4.8855ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 17:50:05 +07] "GET /api/products HTTP/1.1 200 5.9606ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 17:50:06 +07] "OPTIONS /api/customers HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 17:50:06 +07] "OPTIONS /api/purchase-methods HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 17:50:06 +07] "OPTIONS /api/type-down-payments HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 17:50:06 +07] "GET /api/products HTTP/1.1 200 5.0655ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 17:50:06 +07] "OPTIONS /api/transactions HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 17:50:06 +07] "GET /api/marketings HTTP/1.1 200 7.0302ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 17:50:06 +07] "GET /api/customers HTTP/1.1 200 7.892ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 17:50:06 +07] "GET /api/type-down-payments HTTP/1.1 200 10.2633ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 17:50:06 +07] "GET /api/purchase-methods HTTP/1.1 200 7.4875ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 17:50:06 +07] "GET /api/transactions HTTP/1.1 200 8.407ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 17:50:08 +07] "OPTIONS /api/users/private/e33b94dc-f0de-4f91-9a8b-f3c5d97d3e75 HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 17:50:08 +07] "OPTIONS /api/users/private/e33b94dc-f0de-4f91-9a8b-f3c5d97d3e75 HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 17:50:08 +07] "GET /api/transactions HTTP/1.1 200 4.8735ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 17:50:08 +07] "GET /api/users/private/e33b94dc-f0de-4f91-9a8b-f3c5d97d3e75 HTTP/1.1 200 4.8897ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 17:50:08 +07] "GET /api/users/private/e33b94dc-f0de-4f91-9a8b-f3c5d97d3e75 HTTP/1.1 200 5.4924ms "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sat, 14 Sep 2024 17:51:05 +07] "GET /api/public/products HTTP/1.1 200 952.4µs "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sun, 15 Sep 2024 19:15:11 +07] "OPTIONS /api/public/products HTTP/1.1 200 0s "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sun, 15 Sep 2024 19:15:11 +07] "GET /api/public/products HTTP/1.1 200 1.5683ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sun, 15 Sep 2024 19:15:12 +07] "GET /api/public/products HTTP/1.1 200 665.2µs "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sun, 15 Sep 2024 19:15:13 +07] "GET /api/public/products HTTP/1.1 200 792.1µs "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sun, 15 Sep 2024 19:35:49 +07] "GET /api/public/products HTTP/1.1 200 2.7094ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sun, 15 Sep 2024 19:35:53 +07] "GET /api/public/products HTTP/1.1 200 1.2287ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sun, 15 Sep 2024 19:36:11 +07] "GET /api/public/products HTTP/1.1 200 1.5747ms "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sun, 15 Sep 2024 19:52:04 +07] "OPTIONS /api/users/private/e33b94dc-f0de-4f91-9a8b-f3c5d97d3e75 HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sun, 15 Sep 2024 19:52:04 +07] "OPTIONS /api/users/private/e33b94dc-f0de-4f91-9a8b-f3c5d97d3e75 HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sun, 15 Sep 2024 19:52:04 +07] "GET /api/users/private/e33b94dc-f0de-4f91-9a8b-f3c5d97d3e75 HTTP/1.1 401 513.5µs "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sun, 15 Sep 2024 19:52:04 +07] "GET /api/users/private/e33b94dc-f0de-4f91-9a8b-f3c5d97d3e75 HTTP/1.1 401 709.8µs "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sun, 15 Sep 2024 19:52:04 +07] "OPTIONS /api/refresh-token HTTP/1.1 200 0s "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" "
+::1 - [Sun, 15 Sep 2024 19:54:05 +07] "OPTIONS /api/public/products HTTP/1.1 200 0s "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sun, 15 Sep 2024 19:54:06 +07] "OPTIONS /api/public/products HTTP/1.1 200 0s "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sun, 15 Sep 2024 19:54:08 +07] "OPTIONS /api/public/products HTTP/1.1 200 0s "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sun, 15 Sep 2024 19:54:12 +07] "OPTIONS /api/public/products HTTP/1.1 200 0s "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sun, 15 Sep 2024 19:54:14 +07] "OPTIONS /api/public/products HTTP/1.1 200 0s "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sun, 15 Sep 2024 19:54:15 +07] "OPTIONS /api/public/products HTTP/1.1 200 0s "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sun, 15 Sep 2024 19:54:17 +07] "OPTIONS /api/public/products HTTP/1.1 200 0s "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sun, 15 Sep 2024 19:55:27 +07] "OPTIONS /api/public/products HTTP/1.1 200 0s "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1" "
+::1 - [Sun, 15 Sep 2024 19:55:45 +07] "OPTIONS /api/public/products HTTP/1.1 200 0s "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Mobile Safari/537.36" "
+::1 - [Sun, 15 Sep 2024 19:55:47 +07] "OPTIONS /api/public/products HTTP/1.1 200 0s "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Mobile Safari/537.36" "
+::1 - [Sun, 15 Sep 2024 19:55:49 +07] "OPTIONS /api/public/products HTTP/1.1 200 0s "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Mobile Safari/537.36" "
+::1 - [Sun, 15 Sep 2024 19:55:52 +07] "OPTIONS /api/public/products HTTP/1.1 200 0s "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Mobile Safari/537.36" "
+::1 - [Sun, 15 Sep 2024 19:55:53 +07] "OPTIONS /api/public/products HTTP/1.1 200 0s "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Mobile Safari/537.36" "
+::1 - [Sun, 15 Sep 2024 19:55:55 +07] "OPTIONS /api/public/products HTTP/1.1 200 0s "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Mobile Safari/537.36" "

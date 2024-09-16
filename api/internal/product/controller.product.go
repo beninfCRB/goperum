@@ -6,6 +6,7 @@ import (
 	"gostartup/pkg/util"
 	"net/http"
 	"os"
+	"strconv"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -22,7 +23,7 @@ func ProductController(productService Service) *controller {
 
 func (r *controller) PostProduct(c *gin.Context) {
 	var input ProductInput
-	file := input.Image
+	file, _ := c.FormFile("image")
 	input.CreatedBy = entity.AutoGenereteUserBy(c)
 	input.UpdatedBy = entity.AutoGenereteUserBy(c)
 
@@ -37,14 +38,8 @@ func (r *controller) PostProduct(c *gin.Context) {
 	}
 
 	if file != nil {
-		currentTime := time.Now().String()
-		path := fmt.Sprintf("%s%s-%s", os.Getenv("PATH_UPLOAD"), currentTime, file.Filename)
-		err = c.SaveUploadedFile(file, path)
-		if err != nil {
-			response := util.Response("Add Image", http.StatusBadRequest, "error", nil)
-			c.JSON(http.StatusBadRequest, response)
-			return
-		}
+		path := util.UploadFile(file, "", "product", c)
+		input.Path = path
 	}
 
 	product, err := r.useService.CreateProduct(input)
@@ -84,7 +79,7 @@ func (r *controller) GetProductID(c *gin.Context) {
 
 func (r *controller) UpdateProduct(c *gin.Context) {
 	var input ProductInput
-	file := input.Image
+	file, _ := c.FormFile("image")
 	ID := uuid.MustParse(c.Param("id"))
 	input.UpdatedBy = entity.AutoGenereteUserBy(c)
 
@@ -98,23 +93,10 @@ func (r *controller) UpdateProduct(c *gin.Context) {
 		return
 	}
 
-	fmt.Println(&input)
-
 	if file != nil {
 		fileOld, _ := r.useService.FindOneProduct(ID)
-
-		if fileOld.Image != "" {
-			os.Remove(fmt.Sprintf("%s%s", os.Getenv("PATH_UPLOAD"), fileOld.Image))
-		}
-
-		currentTime := time.Now().String()
-		path := fmt.Sprintf("%s%s-%s", os.Getenv("PATH_UPLOAD"), currentTime, file.Filename)
-		err = c.SaveUploadedFile(file, path)
-		if err != nil {
-			response := util.Response("Add Image", http.StatusBadRequest, "error", nil)
-			c.JSON(http.StatusBadRequest, response)
-			return
-		}
+		path := util.UploadFile(file, fileOld.Image, "product", c)
+		input.Path = path
 	}
 
 	product, err := r.useService.UpdateProduct(ID, input)
@@ -139,4 +121,40 @@ func (r *controller) DeleteProduct(c *gin.Context) {
 	}
 	response := util.Response("Delete product", http.StatusOK, "success", product)
 	c.JSON(http.StatusOK, response)
+}
+
+func (r *controller) GetImage(c *gin.Context) {
+	ID := uuid.MustParse(c.Param("id"))
+
+	product, err := r.useService.FindOneProduct(ID)
+	if err != nil {
+		response := util.Response("Error to get product", http.StatusBadRequest, "error", nil)
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+
+	// Open the file
+	file, err := os.Open(product.Image)
+	if err != nil {
+		c.String(http.StatusNotFound, "File not found")
+		return
+	}
+	defer file.Close()
+
+	// Get the file information to determine its size
+	fileInfo, err := file.Stat()
+	if err != nil {
+		c.String(http.StatusInternalServerError, "Error retrieving file information")
+		return
+	}
+
+	// Set headers to inform the browser it's an image file
+	c.Header("Content-Length", fmt.Sprintf("%d", fileInfo.Size()))
+	c.Header("Content-Disposition", fmt.Sprintf("attachment; filename=%s%s-%s", strconv.Itoa(int(time.Now().Unix())), ID, ".jpg"))
+	c.Header("Content-Type", "image/jpeg")
+	// Stream the file to the client
+	c.File(file.Name())
+
+	// Clean up the temporary file after streaming it
+	defer os.Remove(file.Name())
 }

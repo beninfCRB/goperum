@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { ProductType } from '.';
 
 export interface ProductState {
-    single: ProductType,
+    single?: ProductType,
     multiple: Array<ProductType>,
     getAll: (data: Array<ProductType>) => void,
     getOne: (data: ProductType) => void,
@@ -12,7 +12,7 @@ export interface ProductState {
 }
 
 const ProductStore = create<ProductState>((set) => ({
-    single: {},
+    single: undefined,
     multiple: [],
     getAll: (data) => set({
         multiple: data
